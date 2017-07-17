@@ -489,7 +489,7 @@ Location: /api/datasets/{datasetid}/variables/{variableid}/
 The "select_categories" function allows you to form a multiple response array from a categorical array, or alter the "selected" categories in an existing multiple response array. It takes two arguments:
 
 * A reference to a categorical or categorical_array variable
-* A list of the category ids to mark as "selected"
+* A list of the category ids or category names to mark as "selected"
 
 Given a variable such as:
 
