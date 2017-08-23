@@ -69,6 +69,7 @@ crGET("https://app.crunch.io/api/datasets/")
             "owner_id": "https://app.crunch.io/api/users/685722/",
             "start_date": "2286",
             "end_date": null,
+            "streaming": "no",
             "creation_time": "1986-11-26T12:05:00",
             "modification_time": "1986-11-26T12:05:00",
             "current_editor": "https://app.crunch.io/api/users/ff9443/",
@@ -93,6 +94,7 @@ crGET("https://app.crunch.io/api/datasets/")
             "owner_id": "https://app.crunch.io/api/users/af432c/",
             "start_date": "2285-10-03",
             "end_date": "2285-10-20",
+            "streaming": "no",
             "creation_time": "1982-06-04T09:16:23.231045",
             "modification_time": "1982-06-04T09:16:23.231045",
             "current_editor": null,
@@ -118,11 +120,12 @@ archived | bool | false | Whether the dataset is "archived" or active
 permissions | object | `{"edit": false}` | Authorizations on this dataset; see [Permissions](#permissions)
 owner_id | URL |  | URL of the user entity of the dataset's owner
 owner_name | string | "" | That user's name, for display
-size | object | `{"rows": null, "columns": null}` | Dimensions of the dataset
+size | object | `{"rows": 0, "columns": 0, "unfiltered_rows": 0}` | Dimensions of the dataset
 creation_time | ISO-8601 string |  | Datetime at which the dataset was created in Crunch
 modification_time | ISO-8601 string | | Datetime of the last modification for this dataset globally
 start_date | ISO-8601 string |  | Date/time for which the data in the dataset corresponds
 end_date | ISO-8601 string |  | End date/time of the dataset's data, defining a start_date:end_date range
+streaming | string | Possible values "no", "finished" and "streaming" to enable/disable streaming
 current_editor | URL or null | | URL of the user entity that is currently editing the dataset, or `null` if there is no current editor
 current_editor_name | string or null | | That user's name, for display
 is_published | boolean | true | Indicates if the dataset is published to viewers or not
@@ -303,6 +306,7 @@ owner | URL | Provide a project URL to set the owner to that project; if omitted
 notes | string | Blank if omitted. Optional notes for the dataset
 start_date | date | ISO-8601 formatted date with day resolution
 end_date | date | ISO-8601 formatted date with day resolution
+streaming | string | Only "streaming", "finished" and "no" available values to define if a dataset will accept streaming data or not
 is_published | boolean | If false, only project editors will have access to this dataset
 weight_variables | array | Contains aliases of weight variables to start this dataset with; variables must be numeric type. 
 table | object | Metadata definition for the variables in the dataset
@@ -409,10 +413,11 @@ archived | bool | false | Whether the dataset is "archived" or active
 permissions | object | `{"edit": false}` | Authorizations on this dataset; see [Permissions](#permissions)
 owner_id | URL |  | URL of the user entity of the dataset's owner
 owner_name | string | "" | That user's name, for display
-size | object | `{"rows": null, "columns": null}` | Dimensions of the dataset
+size | object | `{"rows": 0, "unfiltered_rows", "columns": 0}` | Dimensions of the dataset
 creation_time | ISO-8601 string |  | Datetime at which the dataset was created in Crunch
 start_date | ISO-8601 string |  | Date/time for which the data in the dataset corresponds
 end_date | ISO-8601 string |  | End date/time of the dataset's data, defining a start_date:end_date range
+streaming | string | Possible values are "no", "finished" and "streaming" to determine if a dataset is streamed or not
 current_editor | URL or null | | URL of the user entity that is currently editing the dataset, or `null` if there is no current editor
 current_editor_name | string or null | | That user's name, for display
 maintainer | URL | The URL of the dataset maintainer. Will always point to a user
@@ -686,96 +691,102 @@ Refer to the options described on the table above for the `csv` format to change
 
 
 ##### Match
-`GET /datasets/match{?datasets={id}&datasets={id}[&datasets={id}]+`
+
+The match endpoint provides a list of matches indicating which variables match amongst the datasets provided.  To use it,
+send a post request representing an ordered list of datasets you would like to match. Include the "minimum_matches"
+parameter in your graph if you would like to limit the output of the matches based on the number of datasets matching.
+The default minim_matches is 2. Currently, only alias is utilized to match the variables to one another. 
+
+The result of a match endpoint request can be one of two things. If the same match has been completed previously, the
+api with return a 201 status code and a Location header to the existing results. Otherwise, the endpoint will return 
+a 202 status code, with a Progress result that provides status information as the match is completed. Either request will 
+result in the location header being set to the URI for staticly generated comparison result that can be accessed with the 
+match is completed.
+
+The results are a Shoji Entity with an attribute `matches`. The matches are listed by order of the
+number of variables matched. Each variable inside the matches will contain the dataset, the variable id and the confidence
+that the variable matches the others in the list. The order of the variables inside the matches returned will match
+ the order of the datasets provided. The first variable will also contain some additional information
+to allow previewing a match. To retrieve complete details about all the matching variables the endpoints
+listed in `metadata` field can be called, those provide all the matching metadata chunked by groups of matches.
+
+
+```http
+POST /datasets/match/ HTTP/1.1
+```
+```json
+{
+    "element": "shoji:entity",
+    "body":  {
+        "datasets": [
+            "http://app.crunch.io/api/datasets/8274bf/",
+            "http://app.crunch.io/api/datasets/699a33/",
+            "http://app.crunch.io/api/datasets/8274bf/",
+            "http://app.crunch.io/api/datasets/699a33/"                   
+        ],
+         "minimum_matches": 3
+    }
+}
+```
+
+Response:
+
+```http
+201 Created
+Host: app.crunch.io
+Location: http://app.crunch.io/api/datasets/matches/394d9e/
+```
+
+```http
+GET /api/datasets/matches/394d9e/
+```
 
 ```json
-
 {
-  "self": "http://local.crunch.io/api/datasets/match/?datasets=http://app.crunch.io/api/datasets/26df3c304/&datasets=http://app.crunch.io/api/datasets/3e03136be/", 
-  "value": {
-    "graph": [
-      {
-        "datasets": [
-          {
-            "archived": false, 
-            "description": "", 
-            "end_date": null, 
-            "labels": null, 
-            "creation_time": "2017-06-29T01:49:30.831000", 
-            "start_date": null, 
-            "modification_time": "2017-06-29T01:49:30.774000", 
-            "self": "http://app.crunch.io/api/datasets/26df3c304/", 
-            "projects": [], 
-            "name": "test_datasets_match_1"
-          }, 
-          {
-            "archived": false, 
-            "description": "", 
-            "end_date": null, 
-            "labels": null, 
-            "creation_time": "2017-06-29T01:49:32.261000", 
-            "start_date": null, 
-            "modification_time": "2017-06-29T01:49:32.207000", 
-            "id": "28b773839ac747bb834b8b4713f77c06", 
-            "projects": [], 
-            "name": "test_datasets_match_2"
-          }
+
+    "element": "shoji:order",
+    "self": "http://app.crunch.io:50976/api/datasets/match/3c7df5/", 
+    "body": {
+        "matches": [
+            [
+                {
+                    "alias": "SomeVariable", 
+                    "confidence": 1, 
+                    "name": "Some Variable", 
+                    "variable": "521b5c014e1e474fa5173d95000bd6e9", 
+                    "desc": "This is some variable", 
+                    "dataset": "8274bfb842d645728a49634414b999c4"
+                }, 
+                {
+                    "variable": "3fa1d3358888474eb949ae586e80f9a4", 
+                    "confidence": 1, 
+                    "dataset": "699a3315c3f347d4923257380938f9b9"
+                }
+            ],
+            [
+                {
+                    "alias": "AnotherVariableThatHasMatches", 
+                    "confidence": 1, 
+                    "name": "Another Variable", 
+                    "variable": "234e8e76d0e1a32667ab33bc30a9900", 
+                    "desc": "This is another variable", 
+                    "dataset": "8274bfb842d645728a49634414b999c4"
+                }, 
+                {
+                    "variable": "9373729ac990b009e0a90dca99092789", 
+                    "confidence": 1, 
+                    "dataset": "699a3315c3f347d4923257380938f9b9"
+                }
+            ],
+            ...
+        ], 
+        "metadata": [
+            "http://app.crunch.io/api/datasets/match/3c7df5/0-500/"
         ]
-      }, 
-      {
-        "variables": [
-          {
-            "description": "Numeric variable with value labels", 
-            "category_names": [
-              "red", 
-              "green", 
-              "blue", 
-              "4", 
-              "8", 
-              "9", 
-              "No Data"
-            ], 
-            "id": "000000", 
-            "alias": "x", 
-            "group_names": null, 
-            "dataset": "http://app.crunch.io/api/datasets/26df3c304/", 
-            "variable_type": "categorical", 
-            "name": "x"
-          }, 
-          {
-            "alias": "y", 
-            "description": "Date variable", 
-            "dataset": "http://app.crunch.io/api/datasets/26df3c304/", 
-            "group_names": null, 
-            "variable_type": "datetime", 
-            "id": "000001", 
-            "name": "y"
-          }, 
-          {
-            "alias": "z", 
-            "description": "Numberic variable with missing value range", 
-            "dataset": "http://app.crunch.io/api/datasets/26df3c304/", 
-            "group_names": null, 
-            "variable_type": "numeric", 
-            "id": "000002", 
-            "name": "z"
-          }
-        ]
-      }
-    ]
-  }, 
-  "element": "shoji:order"
+    }
 }
 
 ```
-
-The matches endpoint returns a Shoji order with two groups.  
-
-that defines all of the variables that match between the first dataset provided, and the
-rest of them.  If the dataset doesn't have any variables that match, it is not included in the "datasets" group in the order.  For now,
-this endpoint returns the metadata for the datasets and the first dataset's variables if it matches in the other datasets.
-Only variable aliases are compared to determine a match at this time.  More sophisticated variable matching is planned for future releases. 
-
 
 
 ##### Summary
@@ -840,9 +851,48 @@ PATCH the "expression" attribute to modify. An empty "expression" object, like
  
 ##### Stream
 
+###### Stream lock
+
+When a dataset is configured to receive streaming data, the /stream/ endpoint
+will accept POST requests to append new rows to the streaming queue.
+
+A dataset is able to receive streaming data while its `streaming` attribute is 
+set to `streaming`.
+
+While a dataset is receiving streams, any other kind of append is disabled 
+returning 409 if attempted. Only streaming data is allowed.
+
+The following operations are forbidden on a dataset while it is accepting
+streaming rows in order to protect the schema.
+
+ * Deleting public non derived variables
+ * Casting variables (Includes changing resolution on datetime variables)
+ * Changing variable aliases
+ * Deleting categories from categorical variables
+ * Changing ID of category IDs
+ * Removing subvariables from arrays
+
+To change the streaming configuration of the dataset, PATCH the entity's 
+`streaming` attribute to either `finished` or `no` according to the following 
+table:
+
+Value | Allows schema changes | Accepts streaming rows | Next state
+------|-----------------------|------------------------|------------
+`streaming` | No | Yes | `finished`
+`finished` | No | No | `no`
+`no` | Yes | No | - 
+
+Note that the only allowed sequence of states for the  `streaming` attribute
+is `streaming` -> `finished` -> `no`. It cannot be set in any other sequence.
+
+
+###### Sending rows
+
 `/datasets/{id}/stream/`
 
 Stream allows for sending data to a dataset as it is gathered.
+
+GET on this resource returns a Shoji Entity with two attributes in its body:
 
 ```json
 {
@@ -855,14 +905,20 @@ Stream allows for sending data to a dataset as it is gathered.
     }
 }
 ```
-
-GET on this resource returns a Shoji Entity with two attributes in its body:
-
-
 Attribute | Description
 --------|------------
 pending_messages | The number of messages the stream has that have yet to be appended to the dataset (note: a message might contain more than one row, each POST that is made to `/datasets/{id}/stream/` will result in a single message).
 received_messages | The total number of messages that this stream has received.
+
+POST to this endpoint to add rows. The payload should be a multi line string
+where each line contains a json representation of objects indicating the
+value for each variable keyed by **alias**.
+
+```
+{"alias1": 1, "alias2": "value", "alias3": 0}
+{"alias1": 99, "alias2": "other", "alias3": 2}
+{"alias1": 10, "alias2": "empty", "alias3": 1}
+```
 
 ##### Settings
 

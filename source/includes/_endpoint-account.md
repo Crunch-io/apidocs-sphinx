@@ -53,7 +53,7 @@ GET /account/
 }
 ```
 
-##### Applications
+#### Applications
 
 ```http
 GET /account/applications/
@@ -87,9 +87,9 @@ If the requested subdomain is unavailable or invalid, the server will return a 4
       "subdomain": "mycompany",
       "palette": {
           "brand": {
-                "system": "#FFAABB", // Color of links, interactable things
-                "data": "#G4EEBB", // Titles and such
-                "warning": "#BAA5E7"
+                "primary": "#FFAABB", // Color of links, interactable things
+                "secondary": "#G4EEBB", // Titles and such
+                "message": "#BAA5E7"
             }
       },
       "manifest": {}
@@ -101,7 +101,7 @@ Attributes `name` and `subdomain` are required; `palette` and `manifest` are opt
 app (see below).
 
 
-#### Application entity
+##### Application entity
 
 ```http
 GET /account/applications/app_id/
@@ -123,9 +123,9 @@ the configured application.
         },
         "palette": {
             "brand": {
-                "system": "#FFAABB", // Color of links, interactable things
-                "data": "#G4EEBB", // Titles and such
-                "warning": "#BAA5E7"
+                "primary": "#FFAABB", // Color of links, interactable things
+                "secondary": "#G4EEBB", // Titles and such
+                "message": "#BAA5E7"
             }
         },
         "manifest": {}
@@ -143,12 +143,12 @@ Attribute | Type | Description
 ----------|------|----------------
 name      | string| Name of the configured application on the given subdomain
 logo      | object| Contains two attributes, `large`, `small` and `favicon`, with different resolution company logos
-palette   | object| Contains three colors, `system`, `data` and `warning`, under the `brand` attribute to theme the web app
+palette   | object| Contains three colors, `primary`, `secondary` and `message`, under the `brand` attribute to theme the web app
 manifest  | object| Optional, contains further client configurations
 
 
 
-#### Change application logo
+##### Change application logo
 
 ```http
 POST /account/applications/app_id/logo/
@@ -357,6 +357,7 @@ GET /account/datasets/
             "owner_id": "https://app.crunch.io/api/users/685722/",
             "start_date": "2286",
             "end_date": null,
+            "streaming": "no",
             "creation_time": "1986-11-26T12:05:00",
             "modification_time": "1986-11-26T12:05:00",
             "current_editor": "https://app.crunch.io/api/users/ff9443/",
@@ -376,6 +377,7 @@ GET /account/datasets/
             "owner_id": "https://app.crunch.io/api/users/af432c/",
             "start_date": "2285-10-03",
             "end_date": "2285-10-20",
+            "streaming": "no",
             "creation_time": "1982-06-04T09:16:23.231045",
             "modification_time": "1982-06-04T09:16:23.231045",
             "current_editor": null,
@@ -441,3 +443,55 @@ GET /account/teams/
   }
 }
 ```
+
+### Account Collaborators
+
+An account collaborator is a Crunch.io user that is not a member of your account
+and has access to some/any of your account's datasets.
+
+Account admins can visit the account's collaborators catalog to view the list
+of all collaborators for all datasets of the account.
+
+```http
+GET /account/collaborators/
+```
+
+This catalog lists all the users that are not members of the account that have
+access to any of the account's datasets, projects or teams.
+
+Each element in the catalog tuple links to the user's entity endpoint and 
+has the name and email attribute.
+
+```json
+{
+  "element": "shoji:catalog",
+  "index": {
+        "https://app.crunch.io/api/users/cc9161/": {
+          "name": "John doe",
+          "email": "user1@example.com",
+          "active": true,
+        },
+        "https://app.crunch.io/api/users/a598c7/": {
+          "name": "John notdoe",
+          "email": "user2@example.com",
+          "active": true,
+        }
+  }
+}
+```
+
+#### Collaborators order
+
+```http
+GET /account/collaborators/order/
+```
+
+It is possible to group collaborators using a Shoji order.
+
+It is possible to PATCH the `graph` attribute with a standard shoji order payload
+indicating the groups and collaborators (user URLs) for each group.
+
+#### Collaborators datasets
+
+The full list of datasets a collaborator has access to is available through
+its user's entity endpoint by following the `visible_datasets` catalog.
