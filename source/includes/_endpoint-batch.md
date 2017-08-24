@@ -232,7 +232,9 @@ Currently, this endpoint will provide an expression that will exclude the
 troubling variables from the append.
 
  * Exclude different arrays that may share subvariables by alias. 
-This is currently not allowed and would reject the append operation.
+ * Exclude variables with matching aliases but different types.
+ 
+Those are currently not allowed and would reject the append operation.
 
 To use this endpoint, the client needs to provide a list of variables they wish
 to line up together as a list of lists.
@@ -297,8 +299,13 @@ POST /datasets/align/
 }
 ```
 
-The response will be a `shoji:view` containing the `where` expression used for
-each dataset:
+
+The response will be a 202 with a Progress resource in it; 
+poll that URL for updates on the completion and follow `Location` once it completed.
+See [Progress](#progress).
+
+On completion the align response will be a `shoji:view` containing the
+`where` expression used for each dataset:
 
 ```json
 {
