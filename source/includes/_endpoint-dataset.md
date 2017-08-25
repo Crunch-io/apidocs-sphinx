@@ -563,6 +563,21 @@ All the URLs will refer to entities on the source dataset.
 }
 ```
 
+It is possible to copy information only for one user from another dataset,
+the payload will need the extra `user` key. It can contain either a user URL
+or a user email:
+
+
+```json
+{
+  "element": "shoji:entity",
+  "body": {
+    "copy_from": "https://app.crunch.io/api/datasets/1234/",
+    "user": "https://app.crunch.io/api/users/abcd/"
+  }
+}
+```
+
 
 #### DELETE
 
