@@ -1,25 +1,26 @@
 #! /bin/bash
+set -ev
 
-set -e
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+    bundle install
+    rake build
 
-function main {
-    if [ "$TRAVIS_BRANCH" != "master" ]; then
-        echo "Stop: we only publish the master branch"
-        exit 0
+    if [ "$TRAVIS_BRANCH" = "master" ]; then
+        git clone --branch gh-pages https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git ./OUTPUT
+    else
+        git clone --branch gh-pages https://${GH_TOKEN}@github.com/Crunch-io/crunchy.git ./OUTPUT
+        cd OUTPUT
+        mkdir -p apidocs
+        mv ../build .
+        cd apidocs
     fi
 
-    echo "Building..."
-    rake build
-    echo "Checking out gh-pages..."
-    git checkout gh-pages
-    git reset --hard
-    echo "Moving built artifiacts..."
     rm -rf fonts
     rm -rf javascripts
     rm -rf images
     rm -rf stylesheets
     rm -rf examples
-    mv build/* .
+    mv ../build/* .
     git add fonts
     git add javascripts
     git add images
@@ -27,9 +28,7 @@ function main {
     git add examples
     git add index.html
     echo "Committing them..."
-    git commit -m "Updating gh-pages" || true
+    git commit -m "Updating apidocs site (build ${TRAVIS_BUILD_NUMBER})" || true
     echo "Push!"
-    git push --quiet origin gh-pages > /dev/null 2>&1 || true
-}
-
-main
+    git push --quiet origin gh-pages || true
+fi
