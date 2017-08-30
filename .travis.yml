@@ -1,16 +1,13 @@
 branches:
   only:
   - master
+  - dev
 sudo: false
 language: ruby
 cache: bundler
 install:
-- git clone https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
-- cd $TRAVIS_REPO_SLUG
-- git checkout -qf $TRAVIS_BRANCH
 - git config user.email "systems+crunchbot@crunch.io"
 - git config user.name "Crunchbot"
-- bundle install
 script:
 - ./build.sh
 env:
