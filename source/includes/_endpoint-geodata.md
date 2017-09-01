@@ -92,7 +92,7 @@ resources. For other formats, users may supply relevant metadata for the geodatu
 - <https://app.crunch.io/api/geodata/8f9f5fed101042c4815d2dd1fd248cec/>
   **World** –
   `properties` include ISO3166 `name` as well as ISO3166-1 Alpha-3 `abbrev`
-- <https://app.crunch.io/api/geodata/2b64724ce81c41c9bdc2436fb0bf6026/>
+- <https://app.crunch.io/api/geodata/d878d8471090417fa361536733e5f176/>
   **UK Regions** –
   `properties.EER13NM` matches a YouGov stylization of United Kingdom region names.
 
