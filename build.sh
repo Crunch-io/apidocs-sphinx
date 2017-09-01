@@ -7,6 +7,7 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
 
     if [ "$TRAVIS_BRANCH" = "master" ]; then
         git clone --branch gh-pages https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git ./OUTPUT
+        cd OUTPUT
     else
         git clone --branch gh-pages https://${GH_TOKEN}@github.com/Crunch-io/crunchy.git ./OUTPUT
         cd OUTPUT
