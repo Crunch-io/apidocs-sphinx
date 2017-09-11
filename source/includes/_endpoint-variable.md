@@ -207,7 +207,7 @@ A POST to this resource must be a Shoji Entity with the following "body" attribu
  * If "type" is "multiple_response" or "categorical_array": **subvariables**: an array of URLs of variables to be "bound" together to form the array variable
  * If "type" is "multiple_response" or "categorical_array": **subreferences**: an object keyed by each of the subvariable URLs where each value contains partial variable definitions, which will be created as categorical subvariables of the array. If included, the array definition must include "categories", which are shared among the subvariables.
  * If type is "multiple_response", the definition may include **selected_categories**: an array of category names present in the subvariables. This will mark the specified category or categories as the "selected" response in the multiple response variable. If no "selected_categories" array is provided, the new variable will use any categories already flagged as "selected": true. If no such category exists, the response will return a 400 status.
- * If "type" is "datetime": **resolution**: a string, such as "Y", "M", "D", "h", "m", "s", "ms", that indicates the unit size of the datetime data.
+ * If "type" is "datetime": **resolution**: a string, such as "Y", "Q", "M", "W", "D", "h", "m", "s", "ms", that indicates the unit size of the datetime data.
 
 See [Variable Definitions](#variable-definitions) for more details and examples of valid attributes, and
 [Feature Guide: Arrays](#array-variables) for more information on the various cases for creating
@@ -581,6 +581,8 @@ A POST to this resource, with a JSON request body of {"cast_as": type}, will alt
    * D: Day
    * h: Hour
    * m: Minutes
+   * s: Seconds
+   * ms: Milliseconds 
  * From Text: Need to include a `format` key containing a valid strftime string to format with.
  * From Categorical: Need to include a `format` key containing a valid strftime string to format with.
 
