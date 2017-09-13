@@ -18,11 +18,13 @@ q                          | String      | query string
 f                          | Json Object | used to filter the output of the search (see below)
 limit                      | Integer     | limit the number of dataset results returned by the api to less than this amount (default: 10)
 offset                     | Integer     | offset into the search index to start gathering results from pre-filter
-max_variables_per_dataset  | Integer     | limit the number of variables that match to this number (default: 1000, max: 1000)
+max_variables_per_dataset  | Integer     | limit the number of variables that match to this number (default: 100, max: 100) (deprecated, use variable_limit)
 embedded_variables         | Boolean     | embed the results within the dataset results (this will become the default in the future)
 projection                 | Json Object | used to limit the fields that should be returned in the search results. ID is always provided.
 scope                      | Json Object | used to limit the fields that the search should look at.
 grouping                   | String      | One of ``datasets`` or ``variables``. Tells if search results should be grouped by datasets or variables.
+variable_limit             | Integer     | Limit the number of variables returned per dataset to this value, (default: 100, max: 100)
+variable_offset            | Integer     | Offset into the variables returned per dataset, default 0
 
 <aside class="notice">
 By default there are only 10 datasets returned.  Inside the response you will find a `totals.datasets` that
