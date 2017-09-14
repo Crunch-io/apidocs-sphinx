@@ -36,11 +36,15 @@ POST a Dataset Entity to the datasets catalog. See the documentation for [POST /
 #### 2. Upload the file
 
 ```http
+
 POST /sources/ HTTP/1.1
-Content-Type: text/csv
 Content-Length: 8874357
+Content-Type: multipart/form-data; boundary=df5b17ff463a4cb3aa61cf02224c7303
+
+--df5b17ff463a4cb3aa61cf02224c7303
 Content-Disposition: form-data; name="uploaded_file"; filename="my.csv"
-...
+Content-Type: text/csv
+
 "case_id","q1","q2"
 234375,3,"sometimes"
 234376,2,"always"
@@ -60,6 +64,7 @@ POST /datasets/{dataset_id}/batches/ HTTP/1.1
 Content-Type: application/json
 ...
 {
+    "element": "shoji:entity",
     "body": {
         "source": "/sources/{source_id}/"
     }
