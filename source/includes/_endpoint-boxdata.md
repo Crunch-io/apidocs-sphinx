@@ -151,9 +151,12 @@ To customize a CrunchBox’s color scheme, you may include an optional `palette`
 {"display_settings": {
     "minBaseSize": {"value": 50},
     "palette": {
-        "brand": ["#111111", "#222222", "#333333"],
+        "brand": {
+            "primary": "#111111",
+            "secondary": "#222222",
+            "messages": "#333333"
+        },
         "static_colors": ["#444444", "#555555", "#666666"],
-        "base": ["#777777", "#888888", "#999999"],
         "category_lookup": {
             "category name": "#aaaaaa",
             "another category:": "bbbbbb"
@@ -164,7 +167,7 @@ To customize a CrunchBox’s color scheme, you may include an optional `palette`
 
 ##### Brand
 
-The CrunchBox interface uses three colors, in order. By default, these are Crunch brand colors of green, blue, and purple. These are used, for example, as the background colors at the top of the interface and the color of the filter selector.
+The CrunchBox interface uses three colors, named Primary, Secondary, and Messages. By default, these are Crunch brand colors of green, blue, and purple. These are used, for example, as the background colors at the top of the interface and the color of the filter selector.
 
 ##### Static colors
 
