@@ -753,6 +753,42 @@ Returns a numeric variable with row 0 based indices. It takes no arguments.
 }
 ```
 
+
+#### remap_missing
+
+Given a text, numeric or datetime variable. return a new variable of the
+same type with its missing values mapped to new codes
+
+```json
+{
+  "function": "remap_missing",
+  "args": [
+    {"variable": "varid"},
+    {"value": [
+        {
+            "reason": "Combined 1 and 2",
+            "code": 1,
+            "mapped_codes": [1, 2]
+        },
+        {
+            "reason": "Only 3",
+            "code": 2,
+            "mapped_codes": [3]
+        },
+        {
+            "reason": "No Data",
+            "code": -1,
+            "mapped_codes": [-1]
+        }
+    ]}
+  ]
+}
+```
+
+The example above will return a copy of the variable with id `varid` with the
+new `missing_reasons` grouping and mapping following the original codes.
+
+
 ### Integrating variables
 
 "Integrating" a variable means to remove its derived properties and turn it into
