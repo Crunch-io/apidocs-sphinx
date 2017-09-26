@@ -66,9 +66,10 @@ Parameter         | Type             | Description
 dataset_ids       | array of strings | limit results to particular dataset_ids or urls (user must have read access to that dataset)
 team              | string           | url or id of the team to limit results (user must have read access to the team)
 project           | string           | url or id of the project to limit results (user must have access to the project)
+organization      | string           | if you are the owner for a given organization, you can filter all of the search results pertaining to the datasets in your organization.
 user              | string           | url or id of the user that has read access to the datasets to limit results (user must match with the provided one)
 owner             | string           | url or id of the dataset owner to limit results
-label             | String           | The dataset must be in a folder or subfolder with the given name.
+label             | string           | The dataset must be in a folder or subfolder with the given name.
 start_date        | array of strings | array of `[begin, end]` range of values in ISO8601 format. Provide same for exact matching.
 end_date          | array of strings | array of `[begin, end]` range of values in ISO8601 format. Provide same for exact matching.
 modification_time | array of strings | array of `[begin, end]` range of values in ISO8601 format. Provide same for exact matching.
