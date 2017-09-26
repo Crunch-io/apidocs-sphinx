@@ -4,7 +4,9 @@ There are several ways to build a Crunch dataset. The most appropriate method fo
 
 ### Import from a data file
 
-In some cases, you already have a file sitting on your computer which has source data, in a format like CSV or SPSS. You can upload these to Crunch and then attach them to datasets by following these steps.
+In some cases, you already have a file sitting on your computer which has source data, in CSV or SPSS
+format (or a Zip file containing a single file in CSV or SPSS format). You can upload these to Crunch and
+then attach them to datasets by following these steps.
 
 #### 1. Create a Dataset entity
 
