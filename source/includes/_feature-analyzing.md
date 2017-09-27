@@ -390,7 +390,7 @@ In a saved analysis the transforms are an array in `display_settings` with the s
                 "name": "Third response"
             }],
             "insertions": [
-                {"anchor": "fee7", "name": "Feet", "combine": ["f00t", "fee7"]}
+                {"anchor": "fee7", "name": "Feet", "function": {"combine": ["f00t", "fee7"]}}
             ]
         }
     }
