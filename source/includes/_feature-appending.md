@@ -17,11 +17,11 @@ Then you decide to upload another CSV of new rows. What will happen?
 
 When you POST to create the second Batch, the service will: 1) match up the new A with the old A and cast the new strings to existing categories by name, and 2) fill column D for you with B * C for each new row.
 
-However, from time to time, the new source has significant differences: a new variable, a renamed variable, and other changes. When you attach the first Source to a Dataset, there is nothing with which to conflict. But a subsequent POST to batches/ may result in a conflict if the new source cannot be confidently reconciled with the existing data. Even though you get a 201 Created response for the new batch resource, it will have a status of "conflict".
+However, from time to time, the new source has significant differences: a new variable, a renamed variable, and other changes. When you append the first Source to a Dataset, there is nothing with which to conflict. But a subsequent POST to batches/ may result in a conflict if the new source cannot be confidently reconciled with the existing data. Even though you get a 201 Created response for the new batch resource, it will have a status of "conflict".
 
 ### Reporting and Resolving Conflicts
 
-When you attach a Source to an existing Dataset, the system attempts to match up the new data with the old. If the source's schema can be automatically aligned with the target Dataset, the new rows from the Batch are appended. When things go wrong, however, the Batch can be inspected to see what conflicted with the target (or vice-versa, in some cases!).
+When you append a Source to an existing Dataset, the system attempts to match up the new data with the old. If the source's schema can be automatically aligned with the target Dataset, the new rows from the Batch are appended. When things go wrong, however, the Batch can be inspected to see what conflicted with the target (or vice-versa, in some cases!).
 
 GET the new Batch:
 
