@@ -129,13 +129,16 @@ The variables IDs must match those of the target dataset since their types will 
 
 ##### Append Failures
 
-In case of failures while appending the batch, the dataset will be automatically reverted
-back to the state it was before the append and the batch is automatically deleted.
+For single appends, if a batch fails, the dataset will be automatically reverted
+back to the state it was before the append; the batch is automatically deleted.
+
+When multiple appends are performed in immediate succession, it's not efficient
+to checkpoint the state of each one. In this case, only the first append is
+rolled back on failure.
 
 #### Checking if an append will cause problems
 
 `/datasets/{id}/batches/compare/`
-
 
 An append cannot proceed if there are any conditions in the involved datasets
 that will cause ambiguous situations. If such datasets were to be appended
