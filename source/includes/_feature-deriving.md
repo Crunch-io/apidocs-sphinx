@@ -815,3 +815,31 @@ PATCH /api/dataset/abc/variables/123/
 Will effectively integrate the variable and make its `derivation` attribute 
 contain `null` from now in. Note that it is only possible to set the `derived`
 attribute to `false` and never to `true`.
+
+#### Creating unlinked derivations
+
+It is possible to create a material copy, or one off copy of a variable or an
+expression of it.
+
+To create such variables, proceed normally creating a derived variable with
+the derivation expression, but also include `derived: false` attribute to it.
+So the variable will be created with the values of the expression but will be
+unlinked from the original variable.
+
+
+```http
+POST /api/dataset/abc/variables/
+```
+
+```json
+{
+  "element": "shoji:entity",
+  "body": {
+    "derivation": {
+      "function": "copy_variable",
+      "args": [{"variable": "https://app.crunch.io/api/datasets/abc/variables/123/"}]
+    },
+    "derived": false
+  }
+}
+```
