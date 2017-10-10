@@ -59,7 +59,7 @@ Location: /sources/{source_id}/
 POST the file to the sources catalog.
 
 **Note** that if the file is large (>100 megabytes), you should consider
-uploading it do a file-sharing service, like Dropbox.
+uploading it to a file-sharing service, like Dropbox.
 
 To import from a URL (rather than a local file), use a JSON body with a `location` property giving the URL.
 
