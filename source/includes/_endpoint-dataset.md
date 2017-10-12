@@ -886,6 +886,9 @@ streaming rows in order to protect the schema.
  * Deleting categories from categorical variables
  * Changing ID of category IDs
  * Removing subvariables from arrays
+ * Merging forks
+ * Reverting to savepoints
+ * Modifying the Primary Key, once it has been set
 
 To change the streaming configuration of the dataset, PATCH the entity's 
 `streaming` attribute to either `streaming`, `finished` or `no` according
