@@ -24,7 +24,8 @@ the user, as well as public decks shared with all users of the dataset.
           "id": "4fa25",
           "is_public": false,
           "owner_id": "https://app.crunch.io/api/users/abcd3/",
-          "owner_name": "Real Person"
+          "owner_name": "Real Person",
+          "team": null
         },
         "https://app.crunch.io/api/datasets/cc9161/decks/2b53e/": {
           "name": "Default deck",
@@ -32,7 +33,8 @@ the user, as well as public decks shared with all users of the dataset.
           "id": "2b53e",
           "is_public": true,
           "owner_id": "https://app.crunch.io/api/users/4cba5/",
-          "owner_name": "Other Person"
+          "owner_name": "Other Person",
+          "team": "https://app.crunch.io/api/teams/58acf7/"
         }
     },
     "order": "https://app.crunch.io/api/datasets/223fd4/decks/order/"
@@ -50,6 +52,7 @@ id | string | Global unique identifier for this deck
 is_public | boolean | Indicates whether this is a public deck or not
 owner_id | url | Points to the owner of this deck
 owner_name | string | Name of the owner of the deck (referred by `owner_id`)
+team | url | If the deck is shared through a team, it will point to it. `null` by default
 
 To determine if a deck belongs to the current user, check the `owner_id` attribute.
 
@@ -64,7 +67,8 @@ POST a shoji:entity to create a new deck for this dataset. The only required bod
     "body": {
         "name": "my new deck",
         "description": "This deck will contain analyses for a variable",
-        "is_public": false
+        "is_public": false,
+        "team": "https://app.crunch.io/api/teams/58acf7/"
     }
 }
 ```
@@ -82,6 +86,7 @@ Name | Type | required | Description
 name | string | Yes | Human-friendly string identifier
 description | string | No | Optional longer string with additional notes
 is_public | boolean | No | If `true`, all users with view access to this dataset will be able to read and export this deck and its analyses; if `false`, the default value, the deck remains private for the current user only.
+team | url | No | If set means that all members of this team will have read-only access to this deck. Else private or dataset-public.
 
 
 #### PATCH
@@ -108,7 +113,9 @@ The following attributes are editable via PATCHing this resource:
  * description
  * is_public
 
-For decks that the current user owns, "name", "description", and "is_public" are editable. Users with edit permissions on the dataset may edit "name" and "description" of public decks, but they cannot edit "is_public" unless they own the deck. Other deck attributes are not editable and will respond with 400 status if the request tries to change them.
+For decks that the current user owns, "name", "description" and "is_public" are editable. 
+Only the deck owner can edit the mentioned attributes on a deck even if the deck is public. 
+Other deck attributes are not editable and will respond with 400 status if the request tries to change them.
 
 On success, the server will reply with a 204 response.
 
@@ -131,7 +138,8 @@ GET a deck entity resource to return a shoji:entity with all of its attributes:
         "description": "Explanation about the deck",
         "is_public": false,
         "owner_id": "https://app.crunch.io/api/users/abcd3/",
-        "owner_name": "Real Person"
+        "owner_name": "Real Person",
+        "team": "https://app.crunch.io/api/teams/58acf7/"
     }
 }
 ```
@@ -145,6 +153,7 @@ description | string | Longer annotations for this deck
 is_public | boolean | Indicates whether this is a public deck or not
 owner_id | url | Points to the owner of this deck
 owner_name | string | Name of the owner of the deck (referred by `owner_id`)
+team | url | If the deck is shared through a team, it will point to it. `null` by default
 
 #### PATCH
 
@@ -160,7 +169,8 @@ if the request is invalid.
         "name": "Presentation deck",
         "id": "223fd4",
         "creation_time": "1987-10-15T11:45:00",
-        "description": "Explanation about the deck"
+        "description": "Explanation about the deck",
+        "team": "https://app.crunch.io/api/teams/58acf7/"
     }
 }
 ```
@@ -168,7 +178,8 @@ if the request is invalid.
 HTTP/1.1 204 No Content
 ```
 
-As with the catalog, for decks that the current user owns, "name", "description", and "is_public" are editable. Users with edit permissions on the dataset may edit "name" and "description" of public decks, but they cannot edit "is_public" unless they own the deck. Other deck attributes are not editable.
+For deck entities that the current user owns, "name", "description", "teams" and "is_public" are editable. 
+Other deck attributes are not editable.
 
 #### DELETE
 
