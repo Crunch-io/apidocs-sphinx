@@ -27,12 +27,16 @@ Content-Type: application/json
     "description": "List of all the teams where the current user is member",
     "index": {
         "https://app.crunch.io/api/teams/d07edb/": {
-            "owner": "https://app.crunch.io/api/users/41c69d/",
-            "name": "The A-Team"
+            "name": "The A-Team",
+            "permissions": {
+              "team_admin": true
+            }
         },
         "https://app.crunch.io/api/teams/67fe89/": {
-            "owner": "https://app.crunch.io/api/users/41c69d/",
-            "name": "Palo Alto Data Science"
+            "name": "Palo Alto Data Science",
+            "permissions": {
+              "team_admin": false
+            }
         }
     }
 }
@@ -46,7 +50,7 @@ names(teams)
 
 #### POST
 
-To create a new team, POST a Shoji Entity with a team "name" in the body. No other attributes are required, and you will be automatically assigned as the "owner". 
+To create a new team, POST a Shoji Entity with a team "name" in the body. No other attributes are required, and you will be automatically assigned as a "team_admin". 
 
 ```http
 POST /teams/ HTTP/1.1
@@ -100,7 +104,8 @@ Content-Type: application/json
     "self": "https://app.crunch.io/api/teams/d07edb/",
     "description": "Details for a specific team",
     "body": {
-        "owner": "https://app.crunch.io/api/users/41c69d/",
+        "creator": "https://app.crunch.io/api/users/41c69d/",
+        "id": "d07edb",
         "name": "The A-Team"
     },
     "catalogs": {
@@ -119,10 +124,12 @@ self(a.team)
 ## [1] "https://app.crunch.io/api/teams/d07edb/"
 ```
 
-A GET request on a team entity URL returns the same "name" and "owner" attributes as shown in the team catalog, as well as references to the "datasets" and "members" catalogs corresponding to the team. Authorization is required: if the requesting user is not a member of the team, a 404 response will result.
+A GET request on a team entity URL returns the same "name", "id" and "creator" attributes as shown in the team catalog, as well as references to the "datasets" and "members" catalogs corresponding to the team. 
+Authorization is required: if the requesting user is not a member of the team, a 404 response will result.
 
 #### PATCH
-Team names are editable by PATCHing the team entity. Authorization is required: only the team owner may edit the team's name; other team members will receive a 403 response on PATCH.
+Team names are editable by PATCHing the team entity. 
+Authorization is required: only team members with "team_admin" permission may edit the team's name; other team members will receive a 403 response on PATCH.
 
 ```http
 PATCH /teams/03df2a/ HTTP/1.1
@@ -170,13 +177,13 @@ Content-Type: application/json
         "https://app.crunch.io/api/users/47193a/": {
             "name": "B. A. Baracus",
             "permissions": {
-                "manage_members": false
+                "team_admin": false
             }
         },
         "https://app.crunch.io/api/users/41c69d/": {
             "name": "Hannibal",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         }
     }
@@ -196,11 +203,11 @@ permissions | object | Attributes governing the user's authorization on the team
 
 Supported `permissions`, all boolean, include:
 
-* **manage_members**: Whether the user may add or remove users from the team, as well as modify the permissions of users on the team; i.e., PATCH the member catalog. Default is False, except for the team owner.
+* **team_admin**: Allows add/remove and manage the members and permissions of a team as well modify and delete the team in question. Defaults as `false`.
 
 #### PATCH
 
-Authorization is required: team members who do not have the "manage_members" permission and who attempt to PATCH the member catalog will receive a 403 response. As with the team entity, non-members will receive 404 on attempted PATCH.
+Authorization is required: team members who do not have the "team_admin" permission and who attempt to PATCH the member catalog will receive a 403 response. As with the team entity, non-members will receive 404 on attempted PATCH.
 
 PATCH a partial Shoji Catalog to add users to the team, to modify permissions of members already on the team, and to remove team members. The examples below illustrate each of those actions separately, but all can be done together in a single PATCH request, in fact. 
 
@@ -217,13 +224,13 @@ Content-Type: application/json
     "index": {
         "https://app.crunch.io/api/users/47193a/": {
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         },
         "https://app.crunch.io/api/users/e3211a/": {},
         "templeton.peck@army.gov": {
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         }
     },
@@ -234,9 +241,9 @@ Content-Type: application/json
 204 No Content
 ```
 
-If the index object keys correspond to users that already appear in the member catalog, their permissions will be updated with the corresponding value. In this example, user `47193a`, B. A. Baracus, has been given the `manage_members` permission.
+If the index object keys correspond to users that already appear in the member catalog, their permissions will be updated with the corresponding value. In this example, user `47193a`, B. A. Baracus, has been given the `team_admin` permission.
 
-If the index object keys do not correspond to users already found in the member catalog, the indicated users will be added to the team. And, if the indicated user, as specified by email address, does not yet exist, they will be invited to Crunch and added to the team. In this example, we added existing user `e3211a`, implicitly with `manage_members` set to False, to the team, and we also added "templeton.peck@army.gov", who did not previously have a Crunch account. 
+If the index object keys do not correspond to users already found in the member catalog, the indicated users will be added to the team. And, if the indicated user, as specified by email address, does not yet exist, they will be invited to Crunch and added to the team. In this example, we added existing user `e3211a`, implicitly with `team_admin` set to False, to the team, and we also added "templeton.peck@army.gov", who did not previously have a Crunch account. 
 
 If "send_notification" was included and true in the request, new-to-Crunch users will receive a notification email informing them that they have been invited to Crunch. New users, unless they have an OAuth provider specified, will need to set a password, and the client application should send a URL template that directs them to a place where they can set that password. To do so, include a "url_base" attribute in the payload, a URL template with a `${token}` variable into which the server will insert the password-setting token. For the Crunch web application, this template is `https://app.crunch.io/password/change/${token}/`.
 
@@ -258,25 +265,25 @@ Content-Type: application/json
         "https://app.crunch.io/api/users/47193a/": {
             "name": "B. A. Baracus",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         },
         "https://app.crunch.io/api/users/41c69d/": {
             "name": "Hannibal",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         },
         "https://app.crunch.io/api/users/e3211a/": {
             "name": "Howling Mad Murdock",
             "permissions": {
-                "manage_members": false
+                "team_admin": false
             }
         },
         "https://app.crunch.io/api/users/89eb3a/": {
             "name": "templeton.peck@army.gov",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         }
     }
@@ -320,19 +327,19 @@ Content-Type: application/json
         "https://app.crunch.io/api/users/47193a/": {
             "name": "B. A. Baracus",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         },
         "https://app.crunch.io/api/users/41c69d/": {
             "name": "Hannibal",
             "permissions": {
-                "manage_members": true
+                "team_admin": true
             }
         },
         "https://app.crunch.io/api/users/89eb3a/": {
             "name": "templeton.peck@army.gov",
             "permissions": {
-                "manage_members": false
+                "team_admin": false
             }
         }
     }
