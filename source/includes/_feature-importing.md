@@ -58,6 +58,20 @@ Location: /sources/{source_id}/
 
 POST the file to the sources catalog.
 
+**Note** that if the file is large (>100 megabytes), you should consider
+uploading it to a file-sharing service, like Dropbox.
+
+To import from a URL (rather than a local file), use a JSON body with a `location` property giving the URL.
+
+```http
+
+POST /sources/ HTTP/1.1
+Content-Length: 71
+Content-Type: application/json
+
+{"location": "https://www.dropbox.com/s/znpoawnhg0rdzhw/iris.csv?dl=1"}
+```
+
 
 #### 3. Add the Source to the Dataset
 
