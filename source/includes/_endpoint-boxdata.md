@@ -93,7 +93,7 @@ creation_time | string | A timestamp of the date when this CrunchBox was created
 
 #### POST catalog
 
-Use POST to create a new datasource for crunchbox.  Note that new boxdata is only created when there is a new
+Use POST to create a new datasource for CrunchBox.  Note that new boxdata is only created when there is a new
  combination of where and filter data.  If the same variables and filteres are indicated by the POST data,
  the existing combination will result in a modification of metadata associated with the cube data.  This is to keep
  avoid recomputing analysis needlessly.
