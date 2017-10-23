@@ -17,7 +17,8 @@
             "is_public": false,
             "owner_id": "/api/users/b055/",
             "name": "Basic Demographics",
-            "id": "7ab1e"
+            "id": "7ab1e",
+            "team": "/api/teams/56789/"
         }
     }
 }
@@ -34,7 +35,10 @@ POST a Shoji Entity to this catalog to create a new multitable definition.
 Entities must include a `name` and `template`; the [template](#template-query) 
 must contain a series of objects with a `query` and optionally 
 [`transform`](#transforming-analyses-for-presentation). If omitted, `is_public` 
-defaults to `false`. A successful POST yields a 201 response
+defaults to `false`. In similar fashion, `team` will default to `null` unless
+a specific team URL is provided.
+
+A successful POST yields a 201 response
 that will contain a Location header with the URL of the newly created multitable.
 
 All users with access to the dataset can create personal multitable definitions; 
@@ -50,7 +54,7 @@ permissions allow it.
 
 Multitable copying requires that all the variables present in the `template`
 of the origin multitable exist on the target dataset and that they all have
-the same type.
+the same type. Copied multitables will be private by default.
 
 POST a shoji entity to the catalog with indicating the URL of the multitable
 to copy:
@@ -100,7 +104,8 @@ There are no elements of the catalog that can be changed via PATCH.
             }]
         }],
         "is_public": false,
-        "id": "7ab1e"
+        "id": "7ab1e",
+        "team": "/api/teams/56789/"
     }
 }
 ```
@@ -109,7 +114,7 @@ GET on this resource returns a Shoji entity containing the requested multitable 
 
 #### PATCH
 
-PATCH the entity to edit its `name`, `template`, or `is_public` attributes. Successful PATCH requests
+PATCH the entity to edit its `name`, `template`, `team` or `is_public` attributes. Successful PATCH requests
 return 204 status. As with the POSTing new entities to the catalog, only the dataset's current editor can alter `is_public`.
 
 The `template` attribute must contain a valid multitable definition.
