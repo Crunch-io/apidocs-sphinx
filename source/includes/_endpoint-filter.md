@@ -14,7 +14,8 @@ This index contains two kinds of filters: public and private, denoted by the `is
     "name": "My filter",
     "is_public": true,
     "id": "1442ea",
-    "owner_id": "https://app.crunch.io/api/users/4152de/"
+    "owner_id": "https://app.crunch.io/api/users/4152de/",
+    "team": "https://app.crunch.io/api/teams/680abc/"
 }
 ```
 
@@ -35,22 +36,27 @@ GET this resource to return a Shoji Entity containing the requested filter.
 
 ```json
 {
-	"element": "shoji:entity",
-	"self": "https://app.crunch.io/api/datasets/ac64ef/filters/1442ea/",
-	"body": {
+    "element": "shoji:entity",
+    "self": "https://app.crunch.io/api/datasets/ac64ef/filters/1442ea/",
+    "body": {
         "id": "1442ea",
         "name": "My filter",
         "is_public": true,
         "expression": {},
         "last_update": "2015-12-31",
-        "creation_time": "2015-11-12T12:34:56"
+        "creation_time": "2015-11-12T12:34:56",
+        "team": "https://app.crunch.io/api/teams/680abc/"
     }
 }
 ```
 
-PATCH an entity to edit its `expression`, `name`, or `is_public` attributes. Successful PATCH requests return 204 status. As with the POSTing new entities to the catalog, only the dataset's current editor can alter `is_public`.
+PATCH an entity to edit its `expression`, `name`, `team` or `is_public` attributes. 
+Successful PATCH requests return 204 status. As with the POSTing new entities to the catalog, only the dataset's current editor can alter a filter.
 
 The `expression` attribute must contain a valid Crunch filter expression.
+
+The `team` attribute will point to the team this filter is shared with, in case
+it isn't shared with any teams, it will default to `null`.
 
 <!-- Discuss valid crunch filter expressions -->
 
