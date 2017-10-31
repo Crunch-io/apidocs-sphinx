@@ -279,7 +279,7 @@ Default is `false`.
 
 ##### private
 
-If `true`, the variable will not show in the common variable catalog; instead, it will be included in the personal variables catalog. 
+If `true`, the variable will not show in the common variable catalog; instead, it will be included in the personal variables catalog.
 
 ##### missing_reasons
 
@@ -458,19 +458,18 @@ to compose an expression.
 
 ##### Frame Functions
 
-    * `page` Return the given frame, limited/offset by the given values.
-    * `select` Return a Frame of results from the given map of variables.
-    * `sheet` Return the given frame, limited/offset in the number of variables.
-    * `dependents` Return the given frame with only dependents of the given variable.
-    * `deselect` Return a frame NOT including the indicated variables.
-    * `adapt` Return the given frame adapted to the given to_key.
-    * `join` Return a JoinedFrame from the given list of subframes.
-    * `find` Return a Frame with those variables which match the given criteria.
-    * `flatten` Return a frame including all variables, plus all subvariables at dotted ids.
+   * `page` Return the given frame, limited/offset by the given values.
+   * `select` Return a Frame of results from the given map of variables.
+   * `sheet` Return the given frame, limited/offset in the number of variables.
+   * `dependents` Return the given frame with only dependents of the given variable.
+   * `deselect` Return a frame NOT including the indicated variables.
+   * `adapt` Return the given frame adapted to the given to_key.
+   * `join` Return a JoinedFrame from the given list of subframes.
+   * `find` Return a Frame with those variables which match the given criteria.
+   * `flatten` Return a frame including all variables, plus all subvariables at dotted ids.
 
 ###### Examples
 
-* **select**: Receives an argument which is a map expression in the following shape:
 ```json
 
 {
@@ -485,15 +484,15 @@ to compose an expression.
 
 }
 ```
+
+* **select**: Receives an argument which is a map expression in the following shape:
+
+
 Where `destination id` is the ID that the mapped variable will have on the
 resulting frame by selecting only the `source frame id` variables from the
 frame where this function is applied on.
 
-* **deselect**: Same as `select` but will exclude the variable ids mentioned
-from the source frame. On this usage the `destination id` part of the `map`
-argument are disregarded.
 ```json
-
 {
   "function": "deselect",
   "args": [{
@@ -506,6 +505,10 @@ argument are disregarded.
 
 }
 ```
+
+* **deselect**: Same as `select` but will exclude the variable ids mentioned
+from the source frame. On this usage the `destination id` part of the `map`
+argument are disregarded.
 
 ##### Measures Functions
 
