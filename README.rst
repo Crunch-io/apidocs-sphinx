@@ -11,3 +11,5 @@ Building the docs::
     virtualenv env
     source env/bin/activate
     pip -r requirements.txt
+    cd source
+    make html
