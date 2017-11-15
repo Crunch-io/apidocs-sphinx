@@ -3,8 +3,32 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Crunch.io API Docs's documentation!
-==============================================
+Crunch.io API Docs
+==================
+
+.. image:: images/logo.png
+    :alt: Crunch.io
+    :align: right
+
+Introduction
+------------
+
+Crunch exposes a REST API for third parties, and indeed its own UI, to
+manage datasets. This API is also used by the Python_ and R_ libraries. This
+User Guide is for developers who are writing applications on top of the
+Crunch REST API, with or without those language bindings. It describes the
+existing interfaces for the current version and attempts to provide context
+and examples to guide development.
+
+.. _Python: https://github.com/Crunch-io/pycrunch
+.. _R: https://github.com/Crunch-io/rcrunch
+
+The documents are organized in three overlapping scopes: a :doc:`feature
+guide <feature-guide>`, which provide higher-level vignettes that illustrate
+key features; an :doc:`endpoint reference <endpoint-reference>`, which
+describes individual URIs in detail; and an :doc:`object reference
+<object-reference>`, which defines the building blocks of the Crunch
+platform, such as values, columns, types, variables, and datasets.
 
 .. toctree::
    :maxdepth: 2
