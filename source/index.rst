@@ -10,9 +10,6 @@ Crunch.io API Docs
     :alt: Crunch.io
     :align: right
 
-Introduction
-------------
-
 Crunch exposes a REST API for third parties, and indeed its own UI, to
 manage datasets. This API is also used by the Python_ and R_ libraries. This
 User Guide is for developers who are writing applications on top of the
@@ -24,21 +21,17 @@ and examples to guide development.
 .. _R: https://github.com/Crunch-io/rcrunch
 
 The documents are organized in three overlapping scopes: a :doc:`feature
-guide <feature-guide>`, which provide higher-level vignettes that illustrate
-key features; an :doc:`endpoint reference <endpoint-reference>`, which
-describes individual URIs in detail; and an :doc:`object reference
-<object-reference>`, which defines the building blocks of the Crunch
-platform, such as values, columns, types, variables, and datasets.
+guide <feature-guide/index>`, which provide higher-level vignettes that
+illustrate key features; an :doc:`endpoint reference
+<endpoint-reference/index>`, which describes individual URIs in detail; and
+an :doc:`object reference <object-reference/index>`, which defines the
+building blocks of the Crunch platform, such as values, columns, types,
+variables, and datasets.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   feature-guide/index
+   endpoint-reference/index
+   object-reference/index
