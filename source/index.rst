@@ -6,10 +6,6 @@
 Crunch.io API Docs
 ==================
 
-.. image:: images/logo.png
-    :alt: Crunch.io
-    :align: right
-
 Crunch exposes a REST API for third parties, and indeed its own UI, to
 manage datasets. This API is also used by the Python_ and R_ libraries. This
 User Guide is for developers who are writing applications on top of the

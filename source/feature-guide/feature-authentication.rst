@@ -41,9 +41,6 @@ Authentication
     # The above command will perform a login and save the login cookie to a file called 'cookie-jar'.
     # After this, you can access the endpoint via `curl' commands (POST, GET, PATCH), as long as the '-b cookie-jar' flag is present.  Note, -b not -c.  -c saves cookies, -b submits cookies from the existing file. It is good practice to delete this file when you are done.
 
-    Replace "fake.user@example.com" and "password" with your email and
-    password, respectively.
-
 Nearly all interactions with the Crunch API need to be authenticated.
 The standard password authentication method involves POSTing credentials
 and receiving a cookie back, which should be included in subsequent
@@ -54,17 +51,9 @@ subsequent request.
 
 Failure will return 401 Unauthorized.
 
-.. raw:: html
-
-   <aside class="notice">
-
-::
+.. note::
 
     Replace "fake.user@example.com" and "password" with your email and password, respectively. Refer to the password policy below for more information.
-
-.. raw:: html
-
-   </aside>
 
 Crunch also supports OAuth 2.0/OpenID Connect. See `the public endpoint
 reference <#public>`__ for more on how to authenticate with OAuth.
