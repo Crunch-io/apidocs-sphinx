@@ -28,612 +28,623 @@ finished, the server will 302 redirect to the destination for download.
 If there have been changes on the dataset attributes, a new tab book
 will be generated regardless of the status of any other pending exports.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/a598c7/multitables/7ab1e/tabbook/ HTTP/1.1
+      POST /api/datasets/a598c7/multitables/7ab1e/tabbook/ HTTP/1.1
+
 
 --------------
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    HTTP/1.1 202 Accepted
-    Location: https://s3-url/filename.xlsx
+      HTTP/1.1 202 Accepted
+      Location: https://s3-url/filename.xlsx
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:view",
-        "self": "https://app.crunch.io/api/datasets/a598c7/multitables/{id}/tabbook/",
-        "value": "https://app.crunch.io/api/progress/5be83a/"
-    }
+      {
+          "element": "shoji:view",
+          "self": "https://app.crunch.io/api/datasets/a598c7/multitables/{id}/tabbook/",
+          "value": "https://app.crunch.io/api/progress/5be83a/"
+      }
+
 
 Alternatively, you can request a JSON output for your tab book by adding
 an Accept request header.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/a598c7/multitables/7ab1e/tabbook/ HTTP/1.1
-    Accept: application/json
+      POST /api/datasets/a598c7/multitables/7ab1e/tabbook/ HTTP/1.1
+      Accept: application/json
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "meta": {
-            "dataset": {
-                "name": "weighted_simple_alltypes",
-                "notes": ""
-            },
-            "layout": "many_sheets",
-            "sheets": [
-                {
-                    "display_settings": {
-                        "countsOrPercents": {
-                            "value": "percent"
-                        },
-                        "currentTab": {
-                            "value": 0
-                        },
-                        "decimalPlaces": {
-                            "value": 0
-                        },
-                        "percentageDirection": {
-                            "value": "colPct"
-                        },
-                        "showEmpty": {
-                            "value": false
-                        },
-                        "showNotes": {
-                            "value": false
-                        },
-                        "slicesOrGroups": {
-                            "value": "groups"
-                        },
-                        "valuesAreMeans": {
-                            "value": false
-                        },
-                        "vizType": {
-                            "value": "table"
-                        }
-                    },
-                    "filters": null,
-                    "name": "x",
-                    "weight": "z"
-                },
-                ... (one entry for each sheet)  
-            ],
-            "template": [
-                {
-                    "query": [
-                        {
-                            "args": [
-                                {
-                                    "variable": "000002"
-                                }
-                            ],
-                            "function": "bin"
-                        }
-                    ]
-                },
-                {
-                    "query": [
-                        {
-                            "args": [
-                                {
-                                    "variable": "00000a"
-                                },
-                                {
-                                    "value": null
-                                }
-                            ],
-                            "function": "rollup"
-                        }
-                    ]
-                }
-            ]
-        },
-        "sheets": [
-            {
-                "result": [
-                    {
-                        "result": {
-                            "counts": [
-                                1,
-                                1,
-                                1,
-                                1,
-                                1,
-                                1,
-                                0
-                            ],
-                            "dimensions": [
-                                {
-                                    "derived": false,
-                                    "references": {
-                                        "alias": "x",
-                                        "description": "Numeric variable with value labels",
-                                        "name": "x"
-                                    },
-                                    "type": {
-                                        "categories": [
-                                            {
-                                                "id": 1,
-                                                "missing": false,
-                                                "name": "red",
-                                                "numeric_value": 1
-                                            },
-                                            {
-                                                "id": 2,
-                                                "missing": false,
-                                                "name": "green",
-                                                "numeric_value": 2
-                                            },
-                                            {
-                                                "id": 3,
-                                                "missing": false,
-                                                "name": "blue",
-                                                "numeric_value": 3
-                                            },
-                                            {
-                                                "id": 4,
-                                                "missing": false,
-                                                "name": "4",
-                                                "numeric_value": 4
-                                            },
-                                            {
-                                                "id": 8,
-                                                "missing": true,
-                                                "name": "8",
-                                                "numeric_value": 8
-                                            },
-                                            {
-                                                "id": 9,
-                                                "missing": false,
-                                                "name": "9",
-                                                "numeric_value": 9
-                                            },
-                                            {
-                                                "id": -1,
-                                                "missing": true,
-                                                "name": "No Data",
-                                                "numeric_value": null
-                                            }
-                                        ],
-                                        "class": "categorical",
-                                        "ordinal": false
-                                    }
-                                }
-                            ],
-                            "measures": {
-                                "count": {
-                                    "data": [
-                                        0.0,
-                                        0.0,
-                                        1.234,
-                                        0.0,
-                                        3.14159,
-                                        0.0,
-                                        0.0
-                                    ],
-                                    "metadata": {
-                                        "derived": true,
-                                        "references": {},
-                                        "type": {
-                                            "class": "numeric",
-                                            "integer": false,
-                                            "missing_reasons": {
-                                                "No Data": -1
-                                            },
-                                            "missing_rules": {}
-                                        }
-                                    },
-                                    "n_missing": 5
-                                }
-                            },
-                            "n": 6
-                        }
-                    },
-                    {
-                        "result": {
-                            "counts": [
-                                1,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                1,
-                                1,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0
-                            ],
-                            "dimensions": [
-                                {
-                                    "derived": false,
-                                    "references": {
-                                        "alias": "x",
-                                        "description": "Numeric variable with value labels",
-                                        "name": "x"
-                                    },
-                                    "type": {
-                                        "categories": [
-                                            {
-                                                "id": 1,
-                                                "missing": false,
-                                                "name": "red",
-                                                "numeric_value": 1
-                                            },
-                                            {
-                                                "id": 2,
-                                                "missing": false,
-                                                "name": "green",
-                                                "numeric_value": 2
-                                            },
-                                            {
-                                                "id": 3,
-                                                "missing": false,
-                                                "name": "blue",
-                                                "numeric_value": 3
-                                            },
-                                            {
-                                                "id": 4,
-                                                "missing": false,
-                                                "name": "4",
-                                                "numeric_value": 4
-                                            },
-                                            {
-                                                "id": 8,
-                                                "missing": true,
-                                                "name": "8",
-                                                "numeric_value": 8
-                                            },
-                                            {
-                                                "id": 9,
-                                                "missing": false,
-                                                "name": "9",
-                                                "numeric_value": 9
-                                            },
-                                            {
-                                                "id": -1,
-                                                "missing": true,
-                                                "name": "No Data",
-                                                "numeric_value": null
-                                            }
-                                        ],
-                                        "class": "categorical",
-                                        "ordinal": false
-                                    }
-                                },
-                                {
-                                    "derived": true,
-                                    "references": {
-                                        "alias": "z",
-                                        "description": "Numberic variable with missing value range",
-                                        "name": "z"
-                                    },
-                                    "type": {
-                                        "class": "enum",
-                                        "elements": [
-                                            {
-                                                "id": -1,
-                                                "missing": true,
-                                                "value": {
-                                                    "?": -1
-                                                }
-                                            },
-                                            {
-                                                "id": 1,
-                                                "missing": false,
-                                                "value": [
-                                                    1.0,
-                                                    1.5
-                                                ]
-                                            },
-                                            {
-                                                "id": 2,
-                                                "missing": false,
-                                                "value": [
-                                                    1.5,
-                                                    2.0
-                                                ]
-                                            },
-                                            {
-                                                "id": 3,
-                                                "missing": false,
-                                                "value": [
-                                                    2.0,
-                                                    2.5
-                                                ]
-                                            },
-                                            {
-                                                "id": 4,
-                                                "missing": false,
-                                                "value": [
-                                                    2.5,
-                                                    3.0
-                                                ]
-                                            },
-                                            {
-                                                "id": 5,
-                                                "missing": false,
-                                                "value": [
-                                                    3.0,
-                                                    3.5
-                                                ]
-                                            }
-                                        ],
-                                        "subtype": {
-                                            "class": "numeric",
-                                            "missing_reasons": {
-                                                "No Data": -1
-                                            },
-                                            "missing_rules": {}
-                                        }
-                                    }
-                                }
-                            ],
-                            "measures": {
-                                "count": {
-                                    "data": [
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        1.234,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        3.14159,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0
-                                    ],
-                                    "metadata": {
-                                        "derived": true,
-                                        "references": {},
-                                        "type": {
-                                            "class": "numeric",
-                                            "integer": false,
-                                            "missing_reasons": {
-                                                "No Data": -1
-                                            },
-                                            "missing_rules": {}
-                                        }
-                                    },
-                                    "n_missing": 5
-                                }
-                            },
-                            "n": 6
-                        }
-                    },
-                    {
-                        "result": {
-                            "counts": [
-                                1,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                1,
-                                0,
-                                0,
-                                0
-                            ],
-                            "dimensions": [
-                                {
-                                    "derived": false,
-                                    "references": {
-                                        "alias": "x",
-                                        "description": "Numeric variable with value labels",
-                                        "name": "x"
-                                    },
-                                    "type": {
-                                        "categories": [
-                                            {
-                                                "id": 1,
-                                                "missing": false,
-                                                "name": "red",
-                                                "numeric_value": 1
-                                            },
-                                            {
-                                                "id": 2,
-                                                "missing": false,
-                                                "name": "green",
-                                                "numeric_value": 2
-                                            },
-                                            {
-                                                "id": 3,
-                                                "missing": false,
-                                                "name": "blue",
-                                                "numeric_value": 3
-                                            },
-                                            {
-                                                "id": 4,
-                                                "missing": false,
-                                                "name": "4",
-                                                "numeric_value": 4
-                                            },
-                                            {
-                                                "id": 8,
-                                                "missing": true,
-                                                "name": "8",
-                                                "numeric_value": 8
-                                            },
-                                            {
-                                                "id": 9,
-                                                "missing": false,
-                                                "name": "9",
-                                                "numeric_value": 9
-                                            },
-                                            {
-                                                "id": -1,
-                                                "missing": true,
-                                                "name": "No Data",
-                                                "numeric_value": null
-                                            }
-                                        ],
-                                        "class": "categorical",
-                                        "ordinal": false
-                                    }
-                                },
-                                {
-                                    "derived": true,
-                                    "references": {
-                                        "alias": "date",
-                                        "description": null,
-                                        "name": "date"
-                                    },
-                                    "type": {
-                                        "class": "enum",
-                                        "elements": [
-                                            {
-                                                "id": 0,
-                                                "missing": false,
-                                                "value": "2014-11"
-                                            },
-                                            {
-                                                "id": 1,
-                                                "missing": false,
-                                                "value": "2014-12"
-                                            },
-                                            {
-                                                "id": 2,
-                                                "missing": false,
-                                                "value": "2015-01"
-                                            }
-                                        ],
-                                        "subtype": {
-                                            "class": "datetime",
-                                            "missing_reasons": {
-                                                "No Data": -1
-                                            },
-                                            "missing_rules": {},
-                                            "resolution": "M"
-                                        }
-                                    }
-                                }
-                            ],
-                            "measures": {
-                                "count": {
-                                    "data": [
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        1.234,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        3.14159,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0,
-                                        0.0
-                                    ],
-                                    "metadata": {
-                                        "derived": true,
-                                        "references": {},
-                                        "type": {
-                                            "class": "numeric",
-                                            "integer": false,
-                                            "missing_reasons": {
-                                                "No Data": -1
-                                            },
-                                            "missing_rules": {}
-                                        }
-                                    },
-                                    "n_missing": 5
-                                }
-                            },
-                            "n": 6
-                        }
-                    }
-                ]
-            },
-            ... (one entry for each sheet)
-        ]
-    }
+      {
+          "meta": {
+              "dataset": {
+                  "name": "weighted_simple_alltypes",
+                  "notes": ""
+              },
+              "layout": "many_sheets",
+              "sheets": [
+                  {
+                      "display_settings": {
+                          "countsOrPercents": {
+                              "value": "percent"
+                          },
+                          "currentTab": {
+                              "value": 0
+                          },
+                          "decimalPlaces": {
+                              "value": 0
+                          },
+                          "percentageDirection": {
+                              "value": "colPct"
+                          },
+                          "showEmpty": {
+                              "value": false
+                          },
+                          "showNotes": {
+                              "value": false
+                          },
+                          "slicesOrGroups": {
+                              "value": "groups"
+                          },
+                          "valuesAreMeans": {
+                              "value": false
+                          },
+                          "vizType": {
+                              "value": "table"
+                          }
+                      },
+                      "filters": null,
+                      "name": "x",
+                      "weight": "z"
+                  },
+                  ... (one entry for each sheet)
+              ],
+              "template": [
+                  {
+                      "query": [
+                          {
+                              "args": [
+                                  {
+                                      "variable": "000002"
+                                  }
+                              ],
+                              "function": "bin"
+                          }
+                      ]
+                  },
+                  {
+                      "query": [
+                          {
+                              "args": [
+                                  {
+                                      "variable": "00000a"
+                                  },
+                                  {
+                                      "value": null
+                                  }
+                              ],
+                              "function": "rollup"
+                          }
+                      ]
+                  }
+              ]
+          },
+          "sheets": [
+              {
+                  "result": [
+                      {
+                          "result": {
+                              "counts": [
+                                  1,
+                                  1,
+                                  1,
+                                  1,
+                                  1,
+                                  1,
+                                  0
+                              ],
+                              "dimensions": [
+                                  {
+                                      "derived": false,
+                                      "references": {
+                                          "alias": "x",
+                                          "description": "Numeric variable with value labels",
+                                          "name": "x"
+                                      },
+                                      "type": {
+                                          "categories": [
+                                              {
+                                                  "id": 1,
+                                                  "missing": false,
+                                                  "name": "red",
+                                                  "numeric_value": 1
+                                              },
+                                              {
+                                                  "id": 2,
+                                                  "missing": false,
+                                                  "name": "green",
+                                                  "numeric_value": 2
+                                              },
+                                              {
+                                                  "id": 3,
+                                                  "missing": false,
+                                                  "name": "blue",
+                                                  "numeric_value": 3
+                                              },
+                                              {
+                                                  "id": 4,
+                                                  "missing": false,
+                                                  "name": "4",
+                                                  "numeric_value": 4
+                                              },
+                                              {
+                                                  "id": 8,
+                                                  "missing": true,
+                                                  "name": "8",
+                                                  "numeric_value": 8
+                                              },
+                                              {
+                                                  "id": 9,
+                                                  "missing": false,
+                                                  "name": "9",
+                                                  "numeric_value": 9
+                                              },
+                                              {
+                                                  "id": -1,
+                                                  "missing": true,
+                                                  "name": "No Data",
+                                                  "numeric_value": null
+                                              }
+                                          ],
+                                          "class": "categorical",
+                                          "ordinal": false
+                                      }
+                                  }
+                              ],
+                              "measures": {
+                                  "count": {
+                                      "data": [
+                                          0.0,
+                                          0.0,
+                                          1.234,
+                                          0.0,
+                                          3.14159,
+                                          0.0,
+                                          0.0
+                                      ],
+                                      "metadata": {
+                                          "derived": true,
+                                          "references": {},
+                                          "type": {
+                                              "class": "numeric",
+                                              "integer": false,
+                                              "missing_reasons": {
+                                                  "No Data": -1
+                                              },
+                                              "missing_rules": {}
+                                          }
+                                      },
+                                      "n_missing": 5
+                                  }
+                              },
+                              "n": 6
+                          }
+                      },
+                      {
+                          "result": {
+                              "counts": [
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0
+                              ],
+                              "dimensions": [
+                                  {
+                                      "derived": false,
+                                      "references": {
+                                          "alias": "x",
+                                          "description": "Numeric variable with value labels",
+                                          "name": "x"
+                                      },
+                                      "type": {
+                                          "categories": [
+                                              {
+                                                  "id": 1,
+                                                  "missing": false,
+                                                  "name": "red",
+                                                  "numeric_value": 1
+                                              },
+                                              {
+                                                  "id": 2,
+                                                  "missing": false,
+                                                  "name": "green",
+                                                  "numeric_value": 2
+                                              },
+                                              {
+                                                  "id": 3,
+                                                  "missing": false,
+                                                  "name": "blue",
+                                                  "numeric_value": 3
+                                              },
+                                              {
+                                                  "id": 4,
+                                                  "missing": false,
+                                                  "name": "4",
+                                                  "numeric_value": 4
+                                              },
+                                              {
+                                                  "id": 8,
+                                                  "missing": true,
+                                                  "name": "8",
+                                                  "numeric_value": 8
+                                              },
+                                              {
+                                                  "id": 9,
+                                                  "missing": false,
+                                                  "name": "9",
+                                                  "numeric_value": 9
+                                              },
+                                              {
+                                                  "id": -1,
+                                                  "missing": true,
+                                                  "name": "No Data",
+                                                  "numeric_value": null
+                                              }
+                                          ],
+                                          "class": "categorical",
+                                          "ordinal": false
+                                      }
+                                  },
+                                  {
+                                      "derived": true,
+                                      "references": {
+                                          "alias": "z",
+                                          "description": "Numberic variable with missing value range",
+                                          "name": "z"
+                                      },
+                                      "type": {
+                                          "class": "enum",
+                                          "elements": [
+                                              {
+                                                  "id": -1,
+                                                  "missing": true,
+                                                  "value": {
+                                                      "?": -1
+                                                  }
+                                              },
+                                              {
+                                                  "id": 1,
+                                                  "missing": false,
+                                                  "value": [
+                                                      1.0,
+                                                      1.5
+                                                  ]
+                                              },
+                                              {
+                                                  "id": 2,
+                                                  "missing": false,
+                                                  "value": [
+                                                      1.5,
+                                                      2.0
+                                                  ]
+                                              },
+                                              {
+                                                  "id": 3,
+                                                  "missing": false,
+                                                  "value": [
+                                                      2.0,
+                                                      2.5
+                                                  ]
+                                              },
+                                              {
+                                                  "id": 4,
+                                                  "missing": false,
+                                                  "value": [
+                                                      2.5,
+                                                      3.0
+                                                  ]
+                                              },
+                                              {
+                                                  "id": 5,
+                                                  "missing": false,
+                                                  "value": [
+                                                      3.0,
+                                                      3.5
+                                                  ]
+                                              }
+                                          ],
+                                          "subtype": {
+                                              "class": "numeric",
+                                              "missing_reasons": {
+                                                  "No Data": -1
+                                              },
+                                              "missing_rules": {}
+                                          }
+                                      }
+                                  }
+                              ],
+                              "measures": {
+                                  "count": {
+                                      "data": [
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          1.234,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          3.14159,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0
+                                      ],
+                                      "metadata": {
+                                          "derived": true,
+                                          "references": {},
+                                          "type": {
+                                              "class": "numeric",
+                                              "integer": false,
+                                              "missing_reasons": {
+                                                  "No Data": -1
+                                              },
+                                              "missing_rules": {}
+                                          }
+                                      },
+                                      "n_missing": 5
+                                  }
+                              },
+                              "n": 6
+                          }
+                      },
+                      {
+                          "result": {
+                              "counts": [
+                                  1,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  1,
+                                  0,
+                                  0,
+                                  0
+                              ],
+                              "dimensions": [
+                                  {
+                                      "derived": false,
+                                      "references": {
+                                          "alias": "x",
+                                          "description": "Numeric variable with value labels",
+                                          "name": "x"
+                                      },
+                                      "type": {
+                                          "categories": [
+                                              {
+                                                  "id": 1,
+                                                  "missing": false,
+                                                  "name": "red",
+                                                  "numeric_value": 1
+                                              },
+                                              {
+                                                  "id": 2,
+                                                  "missing": false,
+                                                  "name": "green",
+                                                  "numeric_value": 2
+                                              },
+                                              {
+                                                  "id": 3,
+                                                  "missing": false,
+                                                  "name": "blue",
+                                                  "numeric_value": 3
+                                              },
+                                              {
+                                                  "id": 4,
+                                                  "missing": false,
+                                                  "name": "4",
+                                                  "numeric_value": 4
+                                              },
+                                              {
+                                                  "id": 8,
+                                                  "missing": true,
+                                                  "name": "8",
+                                                  "numeric_value": 8
+                                              },
+                                              {
+                                                  "id": 9,
+                                                  "missing": false,
+                                                  "name": "9",
+                                                  "numeric_value": 9
+                                              },
+                                              {
+                                                  "id": -1,
+                                                  "missing": true,
+                                                  "name": "No Data",
+                                                  "numeric_value": null
+                                              }
+                                          ],
+                                          "class": "categorical",
+                                          "ordinal": false
+                                      }
+                                  },
+                                  {
+                                      "derived": true,
+                                      "references": {
+                                          "alias": "date",
+                                          "description": null,
+                                          "name": "date"
+                                      },
+                                      "type": {
+                                          "class": "enum",
+                                          "elements": [
+                                              {
+                                                  "id": 0,
+                                                  "missing": false,
+                                                  "value": "2014-11"
+                                              },
+                                              {
+                                                  "id": 1,
+                                                  "missing": false,
+                                                  "value": "2014-12"
+                                              },
+                                              {
+                                                  "id": 2,
+                                                  "missing": false,
+                                                  "value": "2015-01"
+                                              }
+                                          ],
+                                          "subtype": {
+                                              "class": "datetime",
+                                              "missing_reasons": {
+                                                  "No Data": -1
+                                              },
+                                              "missing_rules": {},
+                                              "resolution": "M"
+                                          }
+                                      }
+                                  }
+                              ],
+                              "measures": {
+                                  "count": {
+                                      "data": [
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          1.234,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          3.14159,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0,
+                                          0.0
+                                      ],
+                                      "metadata": {
+                                          "derived": true,
+                                          "references": {},
+                                          "type": {
+                                              "class": "numeric",
+                                              "integer": false,
+                                              "missing_reasons": {
+                                                  "No Data": -1
+                                              },
+                                              "missing_rules": {}
+                                          }
+                                      },
+                                      "n_missing": 5
+                                  }
+                              },
+                              "n": 6
+                          }
+                      }
+                  ]
+              },
+              ... (one entry for each sheet)
+          ]
+      }
+
 
 POST body parameters
 ^^^^^^^^^^^^^^^^^^^^

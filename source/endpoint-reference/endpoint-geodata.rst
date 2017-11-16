@@ -17,21 +17,24 @@ CDN. GET the catalog https://app.crunch.io/api/geodata/ for an index of
 available geographies, each of which then includes a location to
 download the actual geojson or topojson.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/geodata/",
-        "index": {
-            "https://app.crunch.io/api/geodata/7ae898e210b04a9a8992314452c6677b/": {
-                "description": "use properties.name or properties.postal-code",
-                "created": "2016-07-08T16:33:44.601000+00:00",
-                "name": "US States GeoJSON Name + Postal Code",
-                "location": "https://s.crunch.io/geodata/leafletjs/us-states.geojson",
-                "id": "7ae898e210b04a9a8992314452c6677b"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/geodata/",
+          "index": {
+              "https://app.crunch.io/api/geodata/7ae898e210b04a9a8992314452c6677b/": {
+                  "description": "use properties.name or properties.postal-code",
+                  "created": "2016-07-08T16:33:44.601000+00:00",
+                  "name": "US States GeoJSON Name + Postal Code",
+                  "location": "https://s.crunch.io/geodata/leafletjs/us-states.geojson",
+                  "id": "7ae898e210b04a9a8992314452c6677b"
+              }
+          }
+      }
+
 
 The geodata catalog tuples contain the following keys:
 
@@ -115,34 +118,37 @@ and aggregates across features of geojson and topojson resources. For
 other formats, users may supply relevant metadata for the geodatum
 resource.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/geodata/7ae898e210b04a9a8992314452c6677b/",
-        "body": {
-            "description": "use properties.name or properties.postal-code",
-            "created": "2016-07-08T16:33:44.601000+00:00",
-            "name": "US States GeoJSON Name + Postal Code",
-            "location": "https://s.crunch.io/geodata/leafletjs/us-states.geojson",
-            "id": "7ae898e210b04a9a8992314452c6677b",
-            "metadata": {
-                "status": "success",
-                "properties": {
-                    "postal-code": [
-                        "AL",
-                        "AK",
-                        "AZ", "etc."
-                    ],
-                    "name": [
-                        "Alabama",
-                        "Arkansas",
-                        "Alaska", "etcetera"
-                    ]
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/geodata/7ae898e210b04a9a8992314452c6677b/",
+          "body": {
+              "description": "use properties.name or properties.postal-code",
+              "created": "2016-07-08T16:33:44.601000+00:00",
+              "name": "US States GeoJSON Name + Postal Code",
+              "location": "https://s.crunch.io/geodata/leafletjs/us-states.geojson",
+              "id": "7ae898e210b04a9a8992314452c6677b",
+              "metadata": {
+                  "status": "success",
+                  "properties": {
+                      "postal-code": [
+                          "AL",
+                          "AK",
+                          "AZ", "etc."
+                      ],
+                      "name": [
+                          "Alabama",
+                          "Arkansas",
+                          "Alaska", "etcetera"
+                      ]
+                  }
+              }
+          }
+      }
+
 
 Geodata for common applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,29 +196,31 @@ The lists of properties returned in the metadata are correlated, such
 that if a feature in your geodata is missing a given property, it will
 return null.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    >>> import pycrunch
-    >>> site = pycrunch.connect("me@mycompany.com", "yourpassword", "https://app.crunch.io/api/")
-    >>> geodata = self.site.geodata.create(as_entity({'name': 'test_geojson',
-                                                      'location': 'https://s.crunch.io/geodata/leafletjs/us-states.geojson',
-                                                      'description': '',
-                                                      'format': 'geojson'}))
-    >>> geodata.body.metadata
-    pycrunch.elements.JSONObject(**{
-        "postal-code": [
-            "AL", 
-            "AK", 
-            "AZ", 
-            "AK", 
-            "CA", ...],
-        "name": [
-            "Alabama", 
-            "Alaska", 
-            "Arizona", 
-            "Arkansas", 
-            "California", ...]})
-            
+      >>> import pycrunch
+      >>> site = pycrunch.connect("me@mycompany.com", "yourpassword", "https://app.crunch.io/api/")
+      >>> geodata = self.site.geodata.create(as_entity({'name': 'test_geojson',
+                                                        'location': 'https://s.crunch.io/geodata/leafletjs/us-states.geojson',
+                                                        'description': '',
+                                                        'format': 'geojson'}))
+      >>> geodata.body.metadata
+      pycrunch.elements.JSONObject(**{
+          "postal-code": [
+              "AL",
+              "AK",
+              "AZ",
+              "AK",
+              "CA", ...],
+          "name": [
+              "Alabama",
+              "Alaska",
+              "Arizona",
+              "Arkansas",
+              "California", ...]})
+
 
 Modifying your public Geodata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -225,15 +233,18 @@ Crunch provides. If you modify the location of the geodatum and do not
 provide a metadata parameter in the patch, Crunch will automatically
 extract metadata as long as the location is publicly accessible.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    >>> import pycrunch
-    >>> site = pycrunch.connect("me@mycompany.com", "yourpassword", "https://app.crunch.io/api/")
-    >>> entity = site.geodata.index['<geodatum_url>'].entity
-    >>> entity.patch({'description': 'US States'})
-    >>> entity.refresh()
-    >>> entity.body.description
-    US States
+      >>> import pycrunch
+      >>> site = pycrunch.connect("me@mycompany.com", "yourpassword", "https://app.crunch.io/api/")
+      >>> entity = site.geodata.index['<geodatum_url>'].entity
+      >>> entity.patch({'description': 'US States'})
+      >>> entity.refresh()
+      >>> entity.body.description
+      US States
+
 
 Associating Variables with Geodata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,10 +254,3 @@ with metadata at creation) as follows, where ``feature_key`` is key
 defined for each Feature in the geojson/topojson that matches the
 relevant field on the variable at hand (generally category ``name``\ s).
 
-.. code:: json
-
-    {"view": { "geodata": [
-            {"geodatum": "<uri>",
-             "feature_key": "properties.name"}
-        ]}
-    }

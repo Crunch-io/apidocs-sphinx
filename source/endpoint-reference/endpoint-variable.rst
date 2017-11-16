@@ -152,56 +152,59 @@ The catalog has two optional query parameters:
 With the relative flag enabled, the variable catalog looks something
 like this:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/5ee0a0/variables/",
-        "orders": {
-            "hier": "https://app.crunch.io/api/datasets/5330a0/variables/hier/",
-            "personal": "https://app.crunch.io/api/datasets/5330a0/variables/personal/",
-            "weights": "https://app.crunch.io/api/datasets/5ee0a0/variables/weights/"
-        },
-        "specification": "https://app.crunch.io/api/specifications/variables/",
-        "description": "List of Variables of this dataset",
-        "index": {
-            "a77d9f/": {
-                "name": "Birth Year",
-                "derived": false,
-                "discarded": false,
-                "alias": "birthyear",
-                "type": "numeric",
-                "id": "a77d9f",
-                "notes": "",
-                "description": "In what year were you born?"
-            },
-            "9e4c84/": {
-                "name": "Comments",
-                "derived": false,
-                "discarded": false,
-                "alias": "qccomments",
-                "type": "text",
-                "id": "9e4c84",
-                "notes": "Global notes about this variable.",
-                "description": "Do you have any comments on your experience of taking this survey (optional)?"
-            },
-            "aad4ad/": {
-                "subvariables_catalog": "aad4ad/subvariables/",
-                "name": "An Array",
-                "derived": true,
-                "discarded": false,
-                "alias": "arrayvar",
-                "subvariables": [
-                    "439dcf/",
-                    "1c99ea/"
-                ],
-                "notes": "All variable types can have notes",
-                "type": "categorical_array",
-                "id": "aad4ad",
-                "description": ""
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/5ee0a0/variables/",
+          "orders": {
+              "hier": "https://app.crunch.io/api/datasets/5330a0/variables/hier/",
+              "personal": "https://app.crunch.io/api/datasets/5330a0/variables/personal/",
+              "weights": "https://app.crunch.io/api/datasets/5ee0a0/variables/weights/"
+          },
+          "specification": "https://app.crunch.io/api/specifications/variables/",
+          "description": "List of Variables of this dataset",
+          "index": {
+              "a77d9f/": {
+                  "name": "Birth Year",
+                  "derived": false,
+                  "discarded": false,
+                  "alias": "birthyear",
+                  "type": "numeric",
+                  "id": "a77d9f",
+                  "notes": "",
+                  "description": "In what year were you born?"
+              },
+              "9e4c84/": {
+                  "name": "Comments",
+                  "derived": false,
+                  "discarded": false,
+                  "alias": "qccomments",
+                  "type": "text",
+                  "id": "9e4c84",
+                  "notes": "Global notes about this variable.",
+                  "description": "Do you have any comments on your experience of taking this survey (optional)?"
+              },
+              "aad4ad/": {
+                  "subvariables_catalog": "aad4ad/subvariables/",
+                  "name": "An Array",
+                  "derived": true,
+                  "discarded": false,
+                  "alias": "arrayvar",
+                  "subvariables": [
+                      "439dcf/",
+                      "1c99ea/"
+                  ],
+                  "notes": "All variable types can have notes",
+                  "type": "categorical_array",
+                  "id": "aad4ad",
+                  "description": ""
+              }
+          }
+      }
+
 
 PATCH catalog
 ^^^^^^^^^^^^^
@@ -240,71 +243,77 @@ response. Creating variables is allowed only by POST to the catalog,
 while deleting variables is accomplished via a DELETE on the variable
 entity.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "index": {
-            "9e4c84/": {
-                "discarded": true
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "index": {
+              "9e4c84/": {
+                  "discarded": true
+              }
+          }
+      }
+
 
 PATCHing this payload on the above catalog will return a 204 status. A
 subsequent GET of the catalog returns the following response; note the
 change in line 24.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/5ee0a0/variables/",
-        "orders": {
-            "hier": "https://app.crunch.io/api/datasets/5330a0/variables/hier/",
-            "personal": "https://app.crunch.io/api/datasets/5330a0/variables/personal/",
-            "weights": "https://app.crunch.io/api/datasets/5ee0a0/variables/weights/"
-        },
-        "specification": "https://app.crunch.io/api/specifications/variables/",
-        "description": "List of Variables of this dataset",
-        "index": {
-            "a77d9f/": {
-                "name": "Birth Year",
-                "derived": false,
-                "discarded": false,
-                "alias": "birthyear",
-                "type": "numeric",
-                "id": "a77d9f",
-                "notes": "",
-                "description": "In what year were you born?"
-            },
-            "9e4c84/": {
-                "name": "Comments",
-                "derived": false,
-                "discarded": true,
-                "alias": "qccomments",
-                "type": "text",
-                "id": "9e4c84",
-                "notes": "Global notes about this variable.",
-                "description": "Do you have any comments on your experience of taking this survey (optional)?"
-            },
-            "aad4ad/": {
-                "subvariables_catalog": "aad4ad/subvariables/",
-                "name": "An Array",
-                "derived": true,
-                "discarded": false,
-                "alias": "arrayvar",
-                "subvariables": [
-                    "439dcf/",
-                    "1c99ea/"
-                ],
-                "notes": "All variable types can have notes",
-                "type": "categorical_array",
-                "id": "aad4ad",
-                "description": ""
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/5ee0a0/variables/",
+          "orders": {
+              "hier": "https://app.crunch.io/api/datasets/5330a0/variables/hier/",
+              "personal": "https://app.crunch.io/api/datasets/5330a0/variables/personal/",
+              "weights": "https://app.crunch.io/api/datasets/5ee0a0/variables/weights/"
+          },
+          "specification": "https://app.crunch.io/api/specifications/variables/",
+          "description": "List of Variables of this dataset",
+          "index": {
+              "a77d9f/": {
+                  "name": "Birth Year",
+                  "derived": false,
+                  "discarded": false,
+                  "alias": "birthyear",
+                  "type": "numeric",
+                  "id": "a77d9f",
+                  "notes": "",
+                  "description": "In what year were you born?"
+              },
+              "9e4c84/": {
+                  "name": "Comments",
+                  "derived": false,
+                  "discarded": true,
+                  "alias": "qccomments",
+                  "type": "text",
+                  "id": "9e4c84",
+                  "notes": "Global notes about this variable.",
+                  "description": "Do you have any comments on your experience of taking this survey (optional)?"
+              },
+              "aad4ad/": {
+                  "subvariables_catalog": "aad4ad/subvariables/",
+                  "name": "An Array",
+                  "derived": true,
+                  "discarded": false,
+                  "alias": "arrayvar",
+                  "subvariables": [
+                      "439dcf/",
+                      "1c99ea/"
+                  ],
+                  "notes": "All variable types can have notes",
+                  "type": "categorical_array",
+                  "id": "aad4ad",
+                  "description": ""
+              }
+          }
+      }
+
 
 POST catalog
 ^^^^^^^^^^^^
@@ -469,11 +478,14 @@ Only numeric variables are allowed to be used as weight. If a variable
 of another type is included in the list, the server will abort and
 return a 409 response.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "graph": ["https://app.crunch.io/api/datasets/42d0a3/variables/42229f"]
-    }
+      {
+        "graph": ["https://app.crunch.io/api/datasets/42d0a3/variables/42229f"]
+      }
+
 
 .. raw:: html
 
@@ -891,32 +903,35 @@ Variable "id" and "dataset\_id" are immutable.
 
 Example:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "subvariables": [
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0008/",
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0007/",
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0009/"
-      ],
-      "subreferences": {
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0008/": {
-          "alias": "subvar_2",
-          "name": "v2_new_name",
-          "description": null
-        },
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0007/": {
-          "alias": "subvar_1_new_name",
-          "name": "v1_new_name",
-          "description": null
-        },
-        "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0009/": {
-          "alias": "subvar_3",
-          "name": "subvar_3",
-          "description": "new description"
+      {
+        "subvariables": [
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0008/",
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0007/",
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0009/"
+        ],
+        "subreferences": {
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0008/": {
+            "alias": "subvar_2",
+            "name": "v2_new_name",
+            "description": null
+          },
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0007/": {
+            "alias": "subvar_1_new_name",
+            "name": "v1_new_name",
+            "description": null
+          },
+          "http://app.crunch.io/api/datasets/d4db9831e08a4922b054e49b47a0045c/variables/00000c/subvariables/0009/": {
+            "alias": "subvar_3",
+            "name": "subvar_3",
+            "description": "new description"
+          }
         }
       }
-    }
+
 
 POST
 ^^^^
@@ -948,32 +963,35 @@ For example, given a numeric variable with data [1, 2, 3, 4, 5, 4, {"?":
 -1}, 3, 5, {"?": -1}, 4, 3], a successful GET with no exclusions,
 filters, or weights returns:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "count": 12,
-        "valid_count": 10,
-        "fivenum": [
-            ["0", 1.0],
-            ["0.25", 3.0],
-            ["0.5", 3.5],
-            ["0.75", 4.0],
-            ["1", 5.0],
-        ],
-        "missing_count": 2,
-        "min": 1.0,
-        "median": 3.5,
-        "histogram": [
-            {"at": 1.5, "bins": [1.0, 2.0], "value": 1},
-            {"at": 2.5, "bins": [2.0, 3.0], "value": 1},
-            {"at": 3.5, "bins": [3.0, 4.0], "value": 3},
-            {"at": 4.5, "bins": [4.0, 5.0], "value": 5}
-        ],
-        "stddev": 1.2649110640673518,
-        "max": 5.0,
-        "mean": 3.4,
-        "missing_frequencies": [{"count": 2, "value": "No Data"}],
-    }
+      {
+          "count": 12,
+          "valid_count": 10,
+          "fivenum": [
+              ["0", 1.0],
+              ["0.25", 3.0],
+              ["0.5", 3.5],
+              ["0.75", 4.0],
+              ["1", 5.0],
+          ],
+          "missing_count": 2,
+          "min": 1.0,
+          "median": 3.5,
+          "histogram": [
+              {"at": 1.5, "bins": [1.0, 2.0], "value": 1},
+              {"at": 2.5, "bins": [2.0, 3.0], "value": 1},
+              {"at": 3.5, "bins": [3.0, 4.0], "value": 3},
+              {"at": 4.5, "bins": [4.0, 5.0], "value": 5}
+          ],
+          "stddev": 1.2649110640673518,
+          "max": 5.0,
+          "mean": 3.4,
+          "missing_frequencies": [{"count": 2, "value": "No Data"}],
+      }
+
 
 numeric
 ^^^^^^^
@@ -1154,14 +1172,17 @@ one of the following forms:
 
 Example:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    [
-      {
-        "Invalid": {"value": 0},
-        "Sarai doesn't know how to use a calculator :(": {"range": [1000, null], "inclusive": [true, false]}
-      }
-    ]
+      [
+        {
+          "Invalid": {"value": 0},
+          "Sarai doesn't know how to use a calculator :(": {"range": [1000, null], "inclusive": [true, false]}
+        }
+      ]
+
 
 .. raw:: html
 

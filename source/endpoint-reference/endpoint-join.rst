@@ -29,18 +29,21 @@ have a principal dataset which is a survey, with a respondent\_id
 variable as a unique key. If you join a separate demographic dataset
 that has a unique column of the same respondent ids, you might see:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/837498a/joins/",
-        "index": {
-            "https://app.crunch.io/api/datasets/837498a/joins/demo/": {
-                "left_key": "https://app.crunch.io/api/datasets/837498a/variables/1ef71d/",
-                "right_key": "https://app.crunch.io/api/datasets/de3095/variables/19471d/"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/837498a/joins/",
+          "index": {
+              "https://app.crunch.io/api/datasets/837498a/joins/demo/": {
+                  "left_key": "https://app.crunch.io/api/datasets/837498a/variables/1ef71d/",
+                  "right_key": "https://app.crunch.io/api/datasets/de3095/variables/19471d/"
+              }
+          }
+      }
+
 
 A PATCH to this resource may add joins (by including new index members),
 alter existing joins (by replacing existing index members), or deleting

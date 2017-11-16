@@ -231,9 +231,12 @@ endpoint
 
 Grouping by datasets:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /search/?q={query}&f={filter}&limit={limit}&offset={offset}&projection={projection}&grouping=datasets  HTTP/1.1
+      GET /search/?q={query}&f={filter}&limit={limit}&offset={offset}&projection={projection}&grouping=datasets  HTTP/1.1
+
 
 \`\`\` import pycrunch site = pycrunch.connect("me@mycompany.com",
 "yourpassword", "https://app.crunch.io/api/") results =
@@ -242,170 +245,79 @@ datasets\_found = results['groups'][0]['datasets']
 variables\_by\_dataset = {k, v.get('variables', []) for k, v in
 datasets\_found.iteritems()}
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-       "element": "shoji:view",
-        "self": "https://app.crunch.io/api/search/?q=blue&grouping=datasets",
-        "description": "Returns a view with relevant search information",
-        "value": {
-            "groups": [
-                {
-                    "group": "Search Results",
-                    "datasets": {
-                        "https://app.crunch.io/api/datasets/173b4eec13f542588b9b0a9cbcd764c9/": {
-                            "labels": [],
-                            "name": "econ_few_columns_0",
-                            "description": ""
-                        },
-                        "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/": {
-                            "labels": [],
-                            "name": "simple_alltypes",
-                            "description": ""
-                        }
-                    },
-                    "variables": {
-                        "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/variables/000000/": {
-                            "dataset_labels": [],
-                            "users": [
-                                "00002"
-                            ],
-                            "alias": "x",
-                            "dataset_end_date": null,
-                            "category_names": [
-                                "red",
-                                "green",
-                                "blue",
-                                "4",
-                                "8",
-                                "9",
-                                "No Data"
-                            ],
-                            "dataset_start_date": null,
-                            "name": "x",
-                            "dataset_description": "",
-                            "dataset_archived": false,
-                            "group_names": null,
-                            "dataset": "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/",
-                            "dataset_id": "bb987b45a5b04caba10dec4dad7b37a8",
-                            "dataset_created_time": null,
-                            "subvar_names": [],
-                            "dataset_name": "export test 94",
-                            "description": "Numeric variable with value labels"
-                        }
-                    },
-                    "variable_count": 14,
-                    "totals": {
-                        "variables": 4,
-                        "datasets": 2
-                    }
-                }
-            ]
-        }
-    }
+      {
+         "element": "shoji:view",
+          "self": "https://app.crunch.io/api/search/?q=blue&grouping=datasets",
+          "description": "Returns a view with relevant search information",
+          "value": {
+              "groups": [
+                  {
+                      "group": "Search Results",
+                      "datasets": {
+                          "https://app.crunch.io/api/datasets/173b4eec13f542588b9b0a9cbcd764c9/": {
+                              "labels": [],
+                              "name": "econ_few_columns_0",
+                              "description": ""
+                          },
+                          "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/": {
+                              "labels": [],
+                              "name": "simple_alltypes",
+                              "description": ""
+                          }
+                      },
+                      "variables": {
+                          "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/variables/000000/": {
+                              "dataset_labels": [],
+                              "users": [
+                                  "00002"
+                              ],
+                              "alias": "x",
+                              "dataset_end_date": null,
+                              "category_names": [
+                                  "red",
+                                  "green",
+                                  "blue",
+                                  "4",
+                                  "8",
+                                  "9",
+                                  "No Data"
+                              ],
+                              "dataset_start_date": null,
+                              "name": "x",
+                              "dataset_description": "",
+                              "dataset_archived": false,
+                              "group_names": null,
+                              "dataset": "https://app.crunch.io/api/datasets/4473ab4ee84b40b2a7cd5cab4548d584/",
+                              "dataset_id": "bb987b45a5b04caba10dec4dad7b37a8",
+                              "dataset_created_time": null,
+                              "subvar_names": [],
+                              "dataset_name": "export test 94",
+                              "description": "Numeric variable with value labels"
+                          }
+                      },
+                      "variable_count": 14,
+                      "totals": {
+                          "variables": 4,
+                          "datasets": 2
+                      }
+                  }
+              ]
+          }
+      }
+
 
 Search results are limited to 1000 variables per dataset.
 
 Grouping by variables:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /search/?q={query}&f={filter}&limit={limit}&offset={offset}&grouping=variables  HTTP/1.1
+      GET /search/?q={query}&f={filter}&limit={limit}&offset={offset}&grouping=variables  HTTP/1.1
 
-.. code:: json
 
-    {
-     "element": "shoji:view",
-     "self": "https://app.crunch.io/api/search/?q=Atchafalaya&grouping=variables", 
-     "description": "Returns a view with relevant search information", 
-     "value": {
-      "groups": [{
-          "group":"Search Results",
-          "totals":{
-            "variables":2,
-            "datasets":2
-          },
-          "buckets":{
-            "Qk9XX0FGX05hbWU":[
-              "http://app.crunch.io:29668/api/datasets/825b87ff955049128b9d48b614abbe99/variables/000008/",
-              "http://app.crunch.io:29668/api/datasets/fcd37212fe0d4b8eb8804ffb7ccb933d/variables/000008/"
-            ]
-          },
-          "order":[
-            "http://app.crunch.io:29668/api/datasets/825b87ff955049128b9d48b614abbe99/variables/000008/",
-            "http://app.crunch.io:29668/api/datasets/fcd37212fe0d4b8eb8804ffb7ccb933d/variables/000008/"
-          ],
-          "variables":{
-            "http://app.crunch.io:29668/api/datasets/fcd37212fe0d4b8eb8804ffb7ccb933d/variables/000008/":{
-              "alias":"BOW_AF_Name",
-              "category_names":[
-                "East Cote Blanche Bay",
-                "Atchafalaya Bay, Delta, Gulf waters",
-                "Barataria Bay",
-                "Bayou Grand Caillou",
-                "Bayou du Large",
-                "Bays Gardene, Black, American and Crabe",
-                "Calcasieu Lake",
-                "Calcasieu River and Ship Channel",
-                "California Bay and Breton Sound",
-                "Grid 12",
-                "..."
-              ],
-              "bucket":"Qk9XX0FGX05hbWU",
-              "name":"BOW_AF_Name",
-              "dataset":"http://app.crunch.io:29668/api/datasets/fcd37212fe0d4b8eb8804ffb7ccb933d/"
-            },
-            "http://app.crunch.io:29668/api/datasets/825b87ff955049128b9d48b614abbe99/variables/000008/":{
-              "alias":"BOW_AF_Name",
-              "category_names":[
-                "East Cote Blanche Bay",
-                "Atchafalaya Bay, Delta, Gulf waters",
-                "Barataria Bay",
-                "Bayou Grand Caillou",
-                "Bayou du Large",
-                "Bays Gardene, Black, American and Crabe",
-                "Calcasieu Lake",
-                "Calcasieu River and Ship Channel",
-                "California Bay and Breton Sound",
-                "Grid 12",
-                "..."
-              ],
-              "bucket":"Qk9XX0FGX05hbWU",
-              "name":"BOW_AF_Name",
-              "dataset":"http://app.crunch.io:29668/api/datasets/825b87ff955049128b9d48b614abbe99/"
-            }
-          },
-          "datasets":{
-            "http://app.crunch.io:29668/api/datasets/fcd37212fe0d4b8eb8804ffb7ccb933d/":{
-              "modification_time":"2017-06-22T17:00:36.571000",
-              "archived":false,
-              "description":"",
-              "end_date":null,
-              "name":"test_variable_search_matching_2",
-              "labels":null,
-              "creation_time":"2017-06-22T17:00:37.024000",
-              "id":"fcd37212fe0d4b8eb8804ffb7ccb933d",
-              "projects":[
-
-              ],
-              "start_date":null
-            },
-            "http://app.crunch.io:29668/api/datasets/825b87ff955049128b9d48b614abbe99/":{
-              "modification_time":"2017-06-22T17:00:34.681000",
-              "archived":false,
-              "description":"",
-              "end_date":null,
-              "name":"test_variable_search_matching_1",
-              "labels":null,
-              "creation_time":"2017-06-22T17:00:35.151000",
-              "id":"825b87ff955049128b9d48b614abbe99",
-              "projects":[
-
-              ],
-              "start_date":null
-            }
-          }
-        }
-      ]
-     }
-    }

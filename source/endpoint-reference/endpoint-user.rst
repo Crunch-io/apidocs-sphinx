@@ -115,14 +115,17 @@ The new owner must also be part of the same account and should have
 
 ``POST /users/{id}/expropriate/``
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-        "owner": "http://app.crunch.io/api/users/123abc/"
+      {
+        "element": "shoji:entity",
+        "body": {
+          "owner": "http://app.crunch.io/api/users/123abc/"
+        }
       }
-    }
+
 
 The new owner provided can be a user URL or a user email. ##### User
 Datasets
@@ -144,38 +147,41 @@ Returns a Shoji catalog listing all the datasets (archived or not) that
 a any user has access to, either via direct share, via team access or
 project membership.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "https://app.crunch.io/api/datasets/wsx345/": {
-            "name": "survey data",
-            "last_access_time": "2017-02-25",
-            "access_type": {
-                "teams": ["https://app.crunch.io/api/teams/abx/"],
-                "project": "https://app.crunch.io/api/projects/qwe/",
-                "direct": true
-            },
-            "permissions": {
-              "edit": true,
-              "view": true,
-              "change_permissions": true
-            }
-        },
-        "https://app.crunch.io/api/datasets/a2c4b2/": {
-            "name": "responses dataset",
-            "last_access_time": "2016-11-09",
-            "access_type": {
-                "teams": [],
-                "project": null,
-                "direct": true
-            },
-            "permissions": {
-              "edit": false,
-              "view": true,
-              "change_permissions": false
-            }
-        }
-    }
+      {
+          "https://app.crunch.io/api/datasets/wsx345/": {
+              "name": "survey data",
+              "last_access_time": "2017-02-25",
+              "access_type": {
+                  "teams": ["https://app.crunch.io/api/teams/abx/"],
+                  "project": "https://app.crunch.io/api/projects/qwe/",
+                  "direct": true
+              },
+              "permissions": {
+                "edit": true,
+                "view": true,
+                "change_permissions": true
+              }
+          },
+          "https://app.crunch.io/api/datasets/a2c4b2/": {
+              "name": "responses dataset",
+              "last_access_time": "2016-11-09",
+              "access_type": {
+                  "teams": [],
+                  "project": null,
+                  "direct": true
+              },
+              "permissions": {
+                "edit": false,
+                "view": true,
+                "change_permissions": false
+              }
+          }
+      }
+
 
 The tuples contain information of the type of access the user has to
 each dataset via the ``access_type`` attribute. It includes:

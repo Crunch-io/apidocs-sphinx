@@ -29,14 +29,17 @@ For example, if "3ffd45" is a categorical variable with three categories
 (one of which is "No Data": -1), then the following dimension
 expressions:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "dimensions": [
-            {"variable": "datasets/ab8832/variables/3ffd45/"},
-            {"function": "+", "args": [{"variable": "datasets/ab8832/variables/2098f1/"}, {"value": 5}]}
-        ]
-    }
+      {
+          "dimensions": [
+              {"variable": "datasets/ab8832/variables/3ffd45/"},
+              {"function": "+", "args": [{"variable": "datasets/ab8832/variables/2098f1/"}, {"value": 5}]}
+          ]
+      }
+
 
 ...would form a result cube with two dimensions: one using the
 categories of variable "3ffd45", and one using the distinct values of
@@ -94,18 +97,24 @@ request multiple functions over the same dimensions (such as
 “cube\_mean” and “cube\_stddev”) or more commonly just one (like
 “cube\_count”). For example:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {"measures": {"count": {"function": "cube_count", "args": []}}}
+      {"measures": {"count": {"function": "cube_count", "args": []}}}
+
 
 or:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-        {"measures": {
-            "mean": {"function": "cube_mean", "args": [{"variable": "datasets/1/variables/3"}]},
-            "stddev": {"function": "cube_stddev", "args": [{"variable": "datasets/1/variables/3/"}]}
-        }}
+      {"measures": {
+          "mean": {"function": "cube_mean", "args": [{"variable": "datasets/1/variables/3"}]},
+          "stddev": {"function": "cube_stddev", "args": [{"variable": "datasets/1/variables/3/"}]}
+      }}
+
 
 When applied to the dimensions we defined above, this second example
 might fill the table thusly for the "mean" measure:
@@ -133,20 +142,23 @@ mean of a categorical variable's "numeric\_value" attributes, cast the
 variable to the "numeric" type class before including it as the cube
 argument:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {"measures": {
-        "mean": {
-            "function": "cube_mean",
-            "args": [{
-                "function": "cast",
-                "args": [
-                    {"variable": "datasets/1/variables/3"},
-                    {"class": "numeric"}
-                ]
-            }]
-        }
-    }}
+      {"measures": {
+          "mean": {
+              "function": "cube_mean",
+              "args": [{
+                  "function": "cast",
+                  "args": [
+                      {"variable": "datasets/1/variables/3"},
+                      {"class": "numeric"}
+                  ]
+              }]
+          }
+      }}
+
 
 Comparisons
 ~~~~~~~~~~~
@@ -162,15 +174,18 @@ which defines the base analyses, and another which defines the overlay.
 For example, if we have an analysis over two categorical variables
 "88dd88" and "ee4455":
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "dimensions": [
-            {"variable": "../variables/88dd88/"},
-            {"variable": "../variables/ee4455/"}
-        ],
-        "measures": {"count": {"function": "cube_count", "args": []}}
-    }
+      {
+          "dimensions": [
+              {"variable": "../variables/88dd88/"},
+              {"variable": "../variables/ee4455/"}
+          ],
+          "measures": {"count": {"function": "cube_count", "args": []}}
+      }
+
 
 then we might obtain a cube with the following output:
 
@@ -203,15 +218,18 @@ we need to define a comparison. First, we need to define the "bases":
 the cube(s) to which our comparison applies, which in our case is just
 the above cube:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "name": "My benchmark",
-        "bases": [{
-            "dimensions": [{"variable": "88dd88"}],
-            "measures": {"count": {"function": "cube_count", "args": []}}
-        }]
-    }
+      {
+          "name": "My benchmark",
+          "bases": [{
+              "dimensions": [{"variable": "88dd88"}],
+              "measures": {"count": {"function": "cube_count", "args": []}}
+          }]
+      }
+
 
 Notice, however, that we've left out the second dimension. This means
 that this comparison will be available for any analysis where "88dd88"
@@ -224,19 +242,22 @@ Then, we need to define target data. We are supplying these in a
 hand-generated way, so our measure is simply a static column instead of
 a function:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "overlay": {
-            "dimensions": [{"variable": "88dd88"}],
-            "measures": {
-                "count": {
-                    "column": [20, 70, 10],
-                    "type": {"function": "typeof", "args": [{"variable": "88dd88"}]}
-                }
-            }
-        }
-    }
+      {
+          "overlay": {
+              "dimensions": [{"variable": "88dd88"}],
+              "measures": {
+                  "count": {
+                      "column": [20, 70, 10],
+                      "type": {"function": "typeof", "args": [{"variable": "88dd88"}]}
+                  }
+              }
+          }
+      }
+
 
 Note that our overlay has to have a dimension, too. In this case, we
 simply re-use variable "88dd88" as the dimension. This ensures that our
@@ -250,61 +271,62 @@ the Endpoint Reference for details.
 Multitables
 ~~~~~~~~~~~
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET datasets/{id}/multitables/ HTTP/1.1
+      GET datasets/{id}/multitables/ HTTP/1.1
 
-    200 OK
-    {
-        "element": "shoji:catalog",
-        "index": {
-            "1/": {"name": "Major demographics"},
-            "2/": {"name": "Political tendencies"}
-        }
-    }
+      200 OK
+      {
+          "element": "shoji:catalog",
+          "index": {
+              "1/": {"name": "Major demographics"},
+              "2/": {"name": "Political tendencies"}
+          }
+      }
 
-.. code:: http
+      POST datasets/{id}/multitables/ HTTP/1.1
 
-    POST datasets/{id}/multitables/ HTTP/1.1
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Geographical indicators",
+              "template": [
+                  {
+                      "query": [
+                          {
+                              "variable": "../variables/de85b32/"
+                          }
+                      ]
+                  },
+                  {
+                      "query": [
+                          {
+                              "variable": "../variables/398620f/"
+                          }
+                      ]
+                  },
+                  {
+                      "query": [
+                          {
+                              "function": "bin",
+                              "args": [
+                                  {
+                                      "variable": "../variables/398620f/"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ],
+              "is_public": false
+          }
+      }
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Geographical indicators",
-            "template": [
-                {
-                    "query": [
-                        {
-                            "variable": "../variables/de85b32/"
-                        }
-                    ]
-                },
-                {
-                    "query": [
-                        {
-                            "variable": "../variables/398620f/"
-                        }
-                    ]
-                },
-                {
-                    "query": [
-                        {
-                            "function": "bin",
-                            "args": [
-                                {
-                                    "variable": "../variables/398620f/"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "is_public": false
-        }
-    }
+      201 Created
+      Location: datasets/{id}/multitables/3/
 
-    201 Created
-    Location: datasets/{id}/multitables/3/
 
 Analyses as described above are truly multidimensional; when you add
 another variable, the resulting cube obtains another dimension.
@@ -332,44 +354,47 @@ fragment: this will be later inserted after some function of a row
 variable to form the `dimension <#dimensions>`__ of a result. Each
 template dimension can currently only be a function of one variable.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET datasets/{id}/multitable/3/ HTTP/1.1
+      GET datasets/{id}/multitable/3/ HTTP/1.1
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Geographical indicators",
-            "template": [
-                {
-                    "query": [
-                        {
-                            "variable": "../variables/de85b32/"
-                        }
-                    ]
-                },
-                {
-                    "query": [
-                        {
-                            "variable": "../variables/398620f/"
-                        }
-                    ]
-                },
-                {
-                    "query": [
-                        {
-                            "function": "bin",
-                            "args": [
-                                {
-                                    "variable": "../variables/398620f/"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Geographical indicators",
+              "template": [
+                  {
+                      "query": [
+                          {
+                              "variable": "../variables/de85b32/"
+                          }
+                      ]
+                  },
+                  {
+                      "query": [
+                          {
+                              "variable": "../variables/398620f/"
+                          }
+                      ]
+                  },
+                  {
+                      "query": [
+                          {
+                              "function": "bin",
+                              "args": [
+                                  {
+                                      "variable": "../variables/398620f/"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ]
+          }
+      }
+
 
 Each multi-table template may be a list of variable references and other
 information used to construct the dimension and transform its output.
@@ -471,16 +496,19 @@ A ``transform`` with object members can do lots of things. Suppose we
 want to put *Element C* first, hide the *Don’t know*, and more compactly
 represent the result as just *C, A, B*:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "transform": {"categories": [
-            {"id": 2, "name": "C"},
-            {"id": 0, "name": "A"},
-            {"id": 1, "name": "B"},
-            {"id": 3, "hide": true}
-        ]}
-    }
+      {
+          "transform": {"categories": [
+              {"id": 2, "name": "C"},
+              {"id": 0, "name": "A"},
+              {"id": 1, "name": "B"},
+              {"id": 3, "hide": true}
+          ]}
+      }
+
 
 Example transform in a saved analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -490,41 +518,44 @@ with the same extents output dimensions (as well as, of course, the
 query used to generate them). This syntax makes a univariate table of a
 multiple response variable and re-orders the result.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "query": {
-            "dimensions": [
-                {
-                    "function": "selections",
-                    "args": [{"variable": "../variables/398620f/"}]
-                },
-                {"variable": "../variables/398620f/"}
-            ],
-            "measures": {
-                "count": {"function": "cube_count", "args": []}
-            }
-        },
-        "display_settings": {
-            "transform": {
-                "categories": [{
-                    "id": "f007",
-                    "value": "My preferred first item"
-                },
-                {
-                    "id": "fee7",
-                    "value": "The zeroth response"
-                },
-                {
-                    "id": "c001",
-                    "name": "Third response"
-                }],
-                "insertions": [
-                    {"anchor": "fee7", "name": "Feet", "function": {"combine": ["f00t", "fee7"]}}
-                ]
-            }
-        }
-    }
+      {
+          "query": {
+              "dimensions": [
+                  {
+                      "function": "selections",
+                      "args": [{"variable": "../variables/398620f/"}]
+                  },
+                  {"variable": "../variables/398620f/"}
+              ],
+              "measures": {
+                  "count": {"function": "cube_count", "args": []}
+              }
+          },
+          "display_settings": {
+              "transform": {
+                  "categories": [{
+                      "id": "f007",
+                      "value": "My preferred first item"
+                  },
+                  {
+                      "id": "fee7",
+                      "value": "The zeroth response"
+                  },
+                  {
+                      "id": "c001",
+                      "name": "Third response"
+                  }],
+                  "insertions": [
+                      {"anchor": "fee7", "name": "Feet", "function": {"combine": ["f00t", "fee7"]}}
+                  ]
+              }
+          }
+      }
+
 
 Example transform in a multitable template
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -532,29 +563,32 @@ Example transform in a multitable template
 In a multitable, the ``transform`` is part of each dimension definition
 object in the ``template`` array.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "template": [
-            {
-                "query": [
-                    {"variable": "A"}
-                ],
-                "transform": [{}, {}]
-            },
-            {
-                "query": [
-                    {
-                        "function": "rollup",
-                        "args": [
-                            {"value": "M"},
-                            {"variable": "B"}
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+      {
+          "template": [
+              {
+                  "query": [
+                      {"variable": "A"}
+                  ],
+                  "transform": [{}, {}]
+              },
+              {
+                  "query": [
+                      {
+                          "function": "rollup",
+                          "args": [
+                              {"value": "M"},
+                              {"variable": "B"}
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+
 
 More complex multitable templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -568,124 +602,54 @@ the overview variables’ ``query``, producing one output cube for each
 one as "variable x". For example, to cross each of the above 3 variables
 against another variable "449b421":
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "each",
-        "args": [
-            {
-                "value": "x"
-            },
-            [
-                {
-                    "variable": "de85b32"
-                },
-                {
-                    "variable": "398620f"
-                },
-                {
-                    "variable": "c116a77"
-                }
-            ]
-        ],
-        "block": {
-            "function": "cube",
-            "args": [
-                [
-                    {
-                        "variable": "449b421"
-                    },
-                    {
-                        "variable": "x"
-                    }
-                ],
-                {
-                    "map": {
-                        "count": {
-                            "function": "cube_count",
-                            "args": []
-                        }
-                    }
-                },
-                {
-                    "value": null
-                }
-            ]
-        }
-    }
+      {
+          "function": "each",
+          "args": [
+              {
+                  "value": "x"
+              },
+              [
+                  {
+                      "variable": "de85b32"
+                  },
+                  {
+                      "variable": "398620f"
+                  },
+                  {
+                      "variable": "c116a77"
+                  }
+              ]
+          ],
+          "block": {
+              "function": "cube",
+              "args": [
+                  [
+                      {
+                          "variable": "449b421"
+                      },
+                      {
+                          "variable": "x"
+                      }
+                  ],
+                  {
+                      "map": {
+                          "count": {
+                              "function": "cube_count",
+                              "args": []
+                          }
+                      }
+                  },
+                  {
+                      "value": null
+                  }
+              ]
+          }
+      }
+
 
 The result will be an array of output cubes:
 
-.. code:: json
-
-    {
-        "element": "shoji:view",
-        "value": [
-            {
-                "query": {},
-                "result": {
-                    "element": "crunch:cube",
-                    "dimensions": [
-                        {
-                            "references": "449b421",
-                            "type": "etc."
-                        },
-                        {
-                            "references": "de85b32",
-                            "type": "etc."
-                        }
-                    ],
-                    "measures": {
-                        "count": {
-                            "function": "cube_count",
-                            "args": []
-                        }
-                    }
-                }
-            },
-            {
-                "query": {},
-                "result": {
-                    "element": "crunch:cube",
-                    "dimensions": [
-                        {
-                            "references": "449b421",
-                            "type": "etc."
-                        },
-                        {
-                            "references": "398620f",
-                            "type": "etc."
-                        }
-                    ],
-                    "measures": {
-                        "count": {
-                            "function": "cube_count",
-                            "args": []
-                        }
-                    }
-                }
-            },
-            {
-                "query": {},
-                "result": {
-                    "element": "crunch:cube",
-                    "dimensions": [
-                        {
-                            "references": "449b421",
-                            "type": "etc."
-                        },
-                        {
-                            "references": "c116a77",
-                            "type": "etc."
-                        }
-                    ],
-                    "measures": {
-                        "count": {
-                            "function": "cube_count",
-                            "args": []
-                        }
-                    }
-                }
-            }
-        ]
-    }

@@ -14,17 +14,20 @@ batches present in the Dataset. Each tuple in the index includes a
 "status" member, which may be one of "analyzing", "conflict", "error",
 "importing", "imported", or "appended".
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "...datasets/837498a/batches/",
-        "index": {
-            "0/": {"status": "appended"},
-            "2/": {"status": "error"},
-            "3/": {"status": "importing"}
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "...datasets/837498a/batches/",
+          "index": {
+              "0/": {"status": "appended"},
+              "2/": {"status": "error"},
+              "3/": {"status": "importing"}
+          }
+      }
+
 
 POST
 ^^^^
@@ -59,14 +62,17 @@ To append a Dataset, POST a Shoji Entity with a dataset URL. You must
 have at least view (read) permissions on this dataset. Internally, this
 action will create a Source entity pointing to that dataset.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-          "dataset": "<url>"
+      {
+        "element": "shoji:entity",
+        "body": {
+            "dataset": "<url>"
+        }
       }
-    }
+
 
 The variables from the incoming dataset to be included by default will
 depend on the current user's permissions. Those with edit permissions on
@@ -79,23 +85,26 @@ To append only certain variables from the incoming dataset, include an
 functions <#frame-functions>`__ for how to compose the ``where``
 expression.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-          "dataset": "<url>",
-          "where": {
-              "function":"select",
-              "args": [
-                    {"map":
-                        {"000001": {"variable": "<url>"},
-                         "000002": {"variable": "<url>"}}
-                    }
-              ]
-          }
+      {
+        "element": "shoji:entity",
+        "body": {
+            "dataset": "<url>",
+            "where": {
+                "function":"select",
+                "args": [
+                      {"map":
+                          {"000001": {"variable": "<url>"},
+                           "000002": {"variable": "<url>"}}
+                      }
+                ]
+            }
+        }
       }
-    }
+
 
 Users with edit permissions on the incoming dataset can select hidden
 variables to be included, but viewers cannot. Editors and viewers can
@@ -104,30 +113,33 @@ however both specify their personal variables to be included.
 To select a subset of rows to append, include an ``filter`` attribute in
 the entity body, containing a Crunch filter expression.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-          "dataset": "<url>",
-          "where": {
-              "function":"select",
-              "args": [
-                    {"map":
-                        {"000001": {"variable": "<url>"},
-                         "000002": {"variable": "<url>"}}
-                    }
-              ]
-          },
-          "filter": {
-              "function":"<",
-              "args": [
-                    {"variable": "<url>"},
-                    {"value": "<value>"}
-              ]
-          }  
+      {
+        "element": "shoji:entity",
+        "body": {
+            "dataset": "<url>",
+            "where": {
+                "function":"select",
+                "args": [
+                      {"map":
+                          {"000001": {"variable": "<url>"},
+                           "000002": {"variable": "<url>"}}
+                      }
+                ]
+            },
+            "filter": {
+                "function":"<",
+                "args": [
+                      {"variable": "<url>"},
+                      {"value": "<value>"}
+                ]
+            }
+        }
       }
-    }
+
 
 Appending a source
 ''''''''''''''''''
@@ -136,14 +148,17 @@ POST a Shoji Entity with a Source URL. The user must have permission to
 view the Source entity. Use Source appending to send data in CSV format
 that matches the schema of the Dataset.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-          "source": "<url>"
+      {
+        "element": "shoji:entity",
+        "body": {
+            "source": "<url>"
+        }
       }
-    }
+
 
 Appending a Crunch Table
 ''''''''''''''''''''''''
@@ -154,17 +169,20 @@ target dataset's variable types. This action will create a new Source
 entity, its name and description will match those provided on the JSON
 response, if not provided they'll default to empty string.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "crunch:table",
-        "name": "<optional string>",
-        "description": "<optional string>",
-        "data": {
-          "var_url_1": [1, 2, 3, ...],
-          "var_url_2": ["a", "b", ...]
-        }
-    }
+      {
+        "element": "crunch:table",
+          "name": "<optional string>",
+          "description": "<optional string>",
+          "data": {
+            "var_url_1": [1, 2, 3, ...],
+            "var_url_2": ["a", "b", ...]
+          }
+      }
+
 
 Append Failures
 '''''''''''''''
@@ -205,22 +223,26 @@ conflicts, described below, or an empty body.
 -  ``union`` expresses problems on the combined variables(metadata) of
    the final dataset after append.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
+      {
+          "union": {...},
+          "current": {...},
+          "incoming": {...}
+      }
 
-    {
-        "union": {...},
-        "current": {...},
-        "incoming": {...}
-    }
 
 A successful response will not contain any of the keys returning an
 empty object.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
+      {}
 
-    {}
 
 The possible keys in the conflicts and verifications made are:
 
@@ -266,26 +288,28 @@ Those are currently not allowed and would reject the append operation.
 To use this endpoint, the client needs to provide a list of variables
 they wish to line up together as a list of lists.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-
-    [
       [
-        {"variable": "http://app.crunch.io/api/datasets/abc/variables/123/"},
-        {"variable": "http://app.crunch.io/api/datasets/def/variables/234/"},
-        {"variable": "http://app.crunch.io/api/datasets/hij/variables/345/"}
-      ],
-      [
-        {"variable": "http://app.crunch.io/api/datasets/abc/variables/678/"},
-        {"variable": "http://app.crunch.io/api/datasets/def/variables/789/"},
-        {"variable": "http://app.crunch.io/api/datasets/hij/variables/890/"}
-      ],
-      [
-        {"variable": "http://app.crunch.io/api/datasets/abc/variables/1ab/"},
-        {"variable": "http://app.crunch.io/api/datasets/def/variables/ab2/"},
-        {"variable": "http://app.crunch.io/api/datasets/hij/variables/b23/"}
+        [
+          {"variable": "http://app.crunch.io/api/datasets/abc/variables/123/"},
+          {"variable": "http://app.crunch.io/api/datasets/def/variables/234/"},
+          {"variable": "http://app.crunch.io/api/datasets/hij/variables/345/"}
+        ],
+        [
+          {"variable": "http://app.crunch.io/api/datasets/abc/variables/678/"},
+          {"variable": "http://app.crunch.io/api/datasets/def/variables/789/"},
+          {"variable": "http://app.crunch.io/api/datasets/hij/variables/890/"}
+        ],
+        [
+          {"variable": "http://app.crunch.io/api/datasets/abc/variables/1ab/"},
+          {"variable": "http://app.crunch.io/api/datasets/def/variables/ab2/"},
+          {"variable": "http://app.crunch.io/api/datasets/hij/variables/b23/"}
+        ]
       ]
-    ]
+
 
 The example above indicates that the client wishes to line up three
 variables from three datasets as indicated by the groups.
@@ -298,33 +322,37 @@ as a ``where`` parameter on the append ``/batches/`` endpoint.
 The payload needs to be sent as JSON encoded ``variables`` POST
 parameter:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/align/
+      POST /datasets/align/
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-    "element": "shoji:entity",
-    "body": {
-        "variables": [
-          [
-            {"variable": "http://app.crunch.io/api/datasets/abc/variables/123/"},
-            {"variable": "http://app.crunch.io/api/datasets/def/variables/234/"},
-            {"variable": "http://app.crunch.io/api/datasets/hij/variables/345/"}
-          ],
-          [
-            {"variable": "http://app.crunch.io/api/datasets/abc/variables/678/"},
-            {"variable": "http://app.crunch.io/api/datasets/def/variables/789/"},
-            {"variable": "http://app.crunch.io/api/datasets/hij/variables/890/"}
-          ],
-          [
-            {"variable": "http://app.crunch.io/api/datasets/abc/variables/1ab/"},
-            {"variable": "http://app.crunch.io/api/datasets/def/variables/ab2/"},
-            {"variable": "http://app.crunch.io/api/datasets/hij/variables/b23/"}
-          ]
-        ]}
-    }
+      {
+      "element": "shoji:entity",
+      "body": {
+          "variables": [
+            [
+              {"variable": "http://app.crunch.io/api/datasets/abc/variables/123/"},
+              {"variable": "http://app.crunch.io/api/datasets/def/variables/234/"},
+              {"variable": "http://app.crunch.io/api/datasets/hij/variables/345/"}
+            ],
+            [
+              {"variable": "http://app.crunch.io/api/datasets/abc/variables/678/"},
+              {"variable": "http://app.crunch.io/api/datasets/def/variables/789/"},
+              {"variable": "http://app.crunch.io/api/datasets/hij/variables/890/"}
+            ],
+            [
+              {"variable": "http://app.crunch.io/api/datasets/abc/variables/1ab/"},
+              {"variable": "http://app.crunch.io/api/datasets/def/variables/ab2/"},
+              {"variable": "http://app.crunch.io/api/datasets/hij/variables/b23/"}
+            ]
+          ]}
+      }
+
 
 The response will be a 202 with a Progress resource in it; poll that URL
 for updates on the completion and follow ``Location`` once it completed.
@@ -333,25 +361,28 @@ See `Progress <#progress>`__.
 On completion the align response will be a ``shoji:view`` containing the
 ``where`` expression used for each dataset:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:view",
-      "value": {
-        "abc": {"function": "select", "args": [{"map": {
-          "678": {"variable": "678"},
-          "1ab": {"variable": "1ab"}
-        }}]},
-        "def": {"function": "select", "args": [{"map": {
-          "789": {"variable": "789"},
-          "ab2": {"variable": "ab2"}
-        }}]},
-        "hij": {"function": "select", "args": [{"map": {
-          "890": {"variable": "890"},
-          "b23": {"variable": "b23"}
-        }}]}
+      {
+        "element": "shoji:view",
+        "value": {
+          "abc": {"function": "select", "args": [{"map": {
+            "678": {"variable": "678"},
+            "1ab": {"variable": "1ab"}
+          }}]},
+          "def": {"function": "select", "args": [{"map": {
+            "789": {"variable": "789"},
+            "ab2": {"variable": "ab2"}
+          }}]},
+          "hij": {"function": "select", "args": [{"map": {
+            "890": {"variable": "890"},
+            "b23": {"variable": "b23"}
+          }}]}
+        }
       }
-    }
+
 
 Following the example above, in the case that the first group could not
 be appended because conflicts between their variables, it will be
@@ -360,56 +391,64 @@ excluded from the final expressions.
 Later, using the expressions obtained, it is possible to append all the
 datasets to a new one without conflicts.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/abd/batches/
+      POST /datasets/abd/batches/
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-          "dataset": "http://app.crunch.io/api/datasets/abc/",
-          "where": {"function": "select", "args": [{"map": {
-              "678": {"variable": "678"},
-              "1ab": {"variable": "1ab"}
-            }}]}
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+            "dataset": "http://app.crunch.io/api/datasets/abc/",
+            "where": {"function": "select", "args": [{"map": {
+                "678": {"variable": "678"},
+                "1ab": {"variable": "1ab"}
+              }}]}
+          }
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    POST /datasets/abd/batches/
+      POST /datasets/abd/batches/
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-          "dataset": "http://app.crunch.io/api/datasets/def/",
-          "where": {"function": "select", "args": [{"map": {
-              "789": {"variable": "789"},
-              "ab2": {"variable": "ab2"}
-            }}]}
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+            "dataset": "http://app.crunch.io/api/datasets/def/",
+            "where": {"function": "select", "args": [{"map": {
+                "789": {"variable": "789"},
+                "ab2": {"variable": "ab2"}
+              }}]}
+          }
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    POST /datasets/abd/batches/
+      POST /datasets/abd/batches/
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-          "dataset": "http://app.crunch.io/api/datasets/hij/",
-          "where": {"function": "select", "args": [{"map": {
-              "890": {"variable": "890"},
-              "b23": {"variable": "b23"}
-            }}]}
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+            "dataset": "http://app.crunch.io/api/datasets/hij/",
+            "where": {"function": "select", "args": [{"map": {
+                "890": {"variable": "890"},
+                "b23": {"variable": "b23"}
+              }}]}
+          }
+      }
+
 
 Entity
 ~~~~~~
@@ -419,21 +458,24 @@ Entity
 A GET on this resource returns a Shoji Entity describing the batch, and
 a link to its Crunch Table (see next).
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "conflicts": {},
-        "source_children": {},
-        "target_children": {},
-        "source_columns": 3500,
-        "source_rows": 235490,
-        "target_columns": 3499,
-        "target_rows": 120000,
-        "error": "",
-        "progress": 100.0,
-        "source": "<url>",
-        "status": "appended"
-    }
+      {
+          "conflicts": {},
+          "source_children": {},
+          "target_children": {},
+          "source_columns": 3500,
+          "source_rows": 235490,
+          "target_columns": 3499,
+          "target_rows": 120000,
+          "error": "",
+          "progress": 100.0,
+          "source": "<url>",
+          "status": "appended"
+      }
+
 
 The conflicts object
 ^^^^^^^^^^^^^^^^^^^^
@@ -445,23 +487,26 @@ the object will contain conflict information keyed by id of the variable
 in the target dataset. The conflict data for each variable follows this
 shape:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "metadata": {
-            "name": "<string>",
-            "alias": "<string>",
-            "type": "<string>",
-            "categories": [{}]
-        },
-        "source_id": "<id of the matching variable in the source frame",
-        "source_metadata": {
-            "name, etc": "as above"
-        },
-        "conflicts": [{
-            "message": "<string>"
-        }]
-    }
+      {
+          "metadata": {
+              "name": "<string>",
+              "alias": "<string>",
+              "type": "<string>",
+              "categories": [{}]
+          },
+          "source_id": "<id of the matching variable in the source frame",
+          "source_metadata": {
+              "name, etc": "as above"
+          },
+          "conflicts": [{
+              "message": "<string>"
+          }]
+      }
+
 
 Each conflict has four attributes: ``metadata`` about the variable on
 the target dataset (unless it is a variable that only exists on the

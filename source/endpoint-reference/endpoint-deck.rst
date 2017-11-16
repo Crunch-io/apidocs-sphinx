@@ -19,33 +19,36 @@ available for this dataset for the current user. This includes decks
 created by the user, as well as public decks shared with all users of
 the dataset.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/223fd4/decks/",
-        "index": {
-            "https://app.crunch.io/api/datasets/cc9161/decks/4fa25/": {
-              "name": "my new deck",
-              "creation_time": "1986-11-26T12:05:00",
-              "id": "4fa25",
-              "is_public": false,
-              "owner_id": "https://app.crunch.io/api/users/abcd3/",
-              "owner_name": "Real Person",
-              "team": null
-            },
-            "https://app.crunch.io/api/datasets/cc9161/decks/2b53e/": {
-              "name": "Default deck",
-              "creation_time": "1987-10-15T11:45:00",
-              "id": "2b53e",
-              "is_public": true,
-              "owner_id": "https://app.crunch.io/api/users/4cba5/",
-              "owner_name": "Other Person",
-              "team": "https://app.crunch.io/api/teams/58acf7/"
-            }
-        },
-        "order": "https://app.crunch.io/api/datasets/223fd4/decks/order/"
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/223fd4/decks/",
+          "index": {
+              "https://app.crunch.io/api/datasets/cc9161/decks/4fa25/": {
+                "name": "my new deck",
+                "creation_time": "1986-11-26T12:05:00",
+                "id": "4fa25",
+                "is_public": false,
+                "owner_id": "https://app.crunch.io/api/users/abcd3/",
+                "owner_name": "Real Person",
+                "team": null
+              },
+              "https://app.crunch.io/api/datasets/cc9161/decks/2b53e/": {
+                "name": "Default deck",
+                "creation_time": "1987-10-15T11:45:00",
+                "id": "2b53e",
+                "is_public": true,
+                "owner_id": "https://app.crunch.io/api/users/4cba5/",
+                "owner_name": "Other Person",
+                "team": "https://app.crunch.io/api/teams/58acf7/"
+              }
+          },
+          "order": "https://app.crunch.io/api/datasets/223fd4/decks/order/"
+      }
+
 
 The decks catalog tuples contain the following keys:
 
@@ -102,23 +105,27 @@ POST
 POST a shoji:entity to create a new deck for this dataset. The only
 required body attribute is "name"; other attributes are optional.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/223fd4/decks/",
-        "body": {
-            "name": "my new deck",
-            "description": "This deck will contain analyses for a variable",
-            "is_public": false,
-            "team": "https://app.crunch.io/api/teams/58acf7/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/223fd4/decks/",
+          "body": {
+              "name": "my new deck",
+              "description": "This deck will contain analyses for a variable",
+              "is_public": false,
+              "team": "https://app.crunch.io/api/teams/58acf7/"
+          }
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    HTTP/1.1 201 Created
-    Location: https://app.crunch.io/api/datasets/223fd4/decks/2b3c5e/
+      HTTP/1.1 201 Created
+      Location: https://app.crunch.io/api/datasets/223fd4/decks/2b3c5e/
+
 
 The ``shoji:entity`` POSTed accepts the following keys
 
@@ -140,18 +147,21 @@ PATCH
 It is possible to bulk-edit many decks at once by PATCHing a
 shoji:catalog to the decks' catalog.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "index": {
-            "https://app.crunch.io/api/datasets/cc9161/decks/4fa25/": {
-              "name": "Renamed deck",
-              "is_public": true
-            }
-        },
-        "order": "https://app.crunch.io/api/datasets/223fd4/decks/order/"
-    }
+      {
+          "element": "shoji:catalog",
+          "index": {
+              "https://app.crunch.io/api/datasets/cc9161/decks/4fa25/": {
+                "name": "Renamed deck",
+                "is_public": true
+              }
+          },
+          "order": "https://app.crunch.io/api/datasets/223fd4/decks/order/"
+      }
+
 
 The following attributes are editable via PATCHing this resource:
 
@@ -178,22 +188,25 @@ GET
 GET a deck entity resource to return a shoji:entity with all of its
 attributes:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/",
-        "body": {
-            "name": "Presentation deck",
-            "id": "223fd4",
-            "creation_time": "1987-10-15T11:45:00",
-            "description": "Explanation about the deck",
-            "is_public": false,
-            "owner_id": "https://app.crunch.io/api/users/abcd3/",
-            "owner_name": "Real Person",
-            "team": "https://app.crunch.io/api/teams/58acf7/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/",
+          "body": {
+              "name": "Presentation deck",
+              "id": "223fd4",
+              "creation_time": "1987-10-15T11:45:00",
+              "description": "Explanation about the deck",
+              "is_public": false,
+              "owner_id": "https://app.crunch.io/api/users/abcd3/",
+              "owner_name": "Real Person",
+              "team": "https://app.crunch.io/api/teams/58acf7/"
+          }
+      }
+
 
 +-------+-------+--------------+
 | Name  | Type  | Description  |
@@ -250,23 +263,27 @@ PATCH
 To edit a deck, PATCH it with a shoji:entity. The server will return a
 204 response on success or 400 if the request is invalid.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/",
-        "body": {
-            "name": "Presentation deck",
-            "id": "223fd4",
-            "creation_time": "1987-10-15T11:45:00",
-            "description": "Explanation about the deck",
-            "team": "https://app.crunch.io/api/teams/58acf7/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/",
+          "body": {
+              "name": "Presentation deck",
+              "id": "223fd4",
+              "creation_time": "1987-10-15T11:45:00",
+              "description": "Explanation about the deck",
+              "team": "https://app.crunch.io/api/teams/58acf7/"
+          }
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    HTTP/1.1 204 No Content
+      HTTP/1.1 204 No Content
+
 
 For deck entities that the current user owns, "name", "description",
 "teams" and "is\_public" are editable. Other deck attributes are not
@@ -295,17 +312,20 @@ GET
 
 Returns a `Shoji Order <#shoji-order>`__ response.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:order",
-      "self": "https://app.crunch.io/api/datasets/223fd4/decks/order/",
-      "graph": [
-        "https://app.crunch.io/api/datasets/223fd4/decks/1/",
-        "https://app.crunch.io/api/datasets/223fd4/decks/2/",
-        "https://app.crunch.io/api/datasets/223fd4/decks/3/"
-      ]
-    }
+      {
+        "element": "shoji:order",
+        "self": "https://app.crunch.io/api/datasets/223fd4/decks/order/",
+        "graph": [
+          "https://app.crunch.io/api/datasets/223fd4/decks/1/",
+          "https://app.crunch.io/api/datasets/223fd4/decks/2/",
+          "https://app.crunch.io/api/datasets/223fd4/decks/3/"
+        ]
+      }
+
 
 PATCH
 ^^^^^
@@ -317,16 +337,19 @@ If the PATCH payload contains only a subset of available decks, those
 decks not referenced will be appended at the bottom of the top level
 graph in arbitrary order.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:order",
-      "self": "https://app.crunch.io/api/datasets/223fd4/decks/order/",
-      "graph": [
-        "https://app.crunch.io/api/datasets/223fd4/decks/1/",
-        "https://app.crunch.io/api/datasets/223fd4/decks/3/"
-      ]
-    }
+      {
+        "element": "shoji:order",
+        "self": "https://app.crunch.io/api/datasets/223fd4/decks/order/",
+        "graph": [
+          "https://app.crunch.io/api/datasets/223fd4/decks/1/",
+          "https://app.crunch.io/api/datasets/223fd4/decks/3/"
+        ]
+      }
+
 
 Including invalid URLs, such as URLs of decks that are not present in
 the catalog, will return a 400 response from the server.
@@ -350,36 +373,38 @@ GET
 
 Returns a ``shoji:catalog`` with the slides for this deck.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/123/decks/123/slides/",
+          "orders": {
+              "flat": "https://app.crunch.io/api/datasets/123/decks/123/slides/flat/"
+          },
+          "specification": "https://app.crunch.io/api/specifications/slides/",
+          "description": "A catalog of the Slides in this Deck",
+          "index": {
+              "https://app.crunch.io/api/datasets/123/decks/123/slides/123/": {
+                  "analysis_url": "https://app.crunch.io/api/datasets/123/decks/123/slides/123/analyses/123/",
+                  "subtitle": "z",
+                  "display": {
+                      "value": "table"
+                  },
+                  "title": "slide 1"
+              },
+              "https://app.crunch.io/api/datasets/123/decks/123/slides/456/": {
+                  "analysis_url": "https://app.crunch.io/api/datasets/123/decks/123/slides/456/",
+                  "subtitle": "",
+                  "display": {
+                      "value": "table"
+                  },
+                  "title": "slide 2"
+              }
+          }
+      }
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/123/decks/123/slides/",
-        "orders": {
-            "flat": "https://app.crunch.io/api/datasets/123/decks/123/slides/flat/"
-        },
-        "specification": "https://app.crunch.io/api/specifications/slides/",
-        "description": "A catalog of the Slides in this Deck",
-        "index": {
-            "https://app.crunch.io/api/datasets/123/decks/123/slides/123/": {
-                "analysis_url": "https://app.crunch.io/api/datasets/123/decks/123/slides/123/analyses/123/",
-                "subtitle": "z",
-                "display": {
-                    "value": "table"
-                },
-                "title": "slide 1"
-            },
-            "https://app.crunch.io/api/datasets/123/decks/123/slides/456/": {
-                "analysis_url": "https://app.crunch.io/api/datasets/123/decks/123/slides/456/",
-                "subtitle": "",
-                "display": {
-                    "value": "table"
-                },
-                "title": "slide 2"
-            }
-        }
-    }
 
 Each tuple on the slides catalog contains the following keys:
 
@@ -423,24 +448,27 @@ On success, the server returns a 201 response with a Location header
 containing the URL of the newly created slide entity with its first
 analysis.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "title": "New slide",
-      "subtitle": "Variable A and B",
-      "analyses": [
-        {
-          "query": {},
-          "query_environment": {},
-          "display_settings": {}
-        },
-        {
-          "query": {},
-          "query_environment": {},
-          "display_settings": {}
-        }
-      ]
-    }
+      {
+        "title": "New slide",
+        "subtitle": "Variable A and B",
+        "analyses": [
+          {
+            "query": {},
+            "query_environment": {},
+            "display_settings": {}
+          },
+          {
+            "query": {},
+            "query_environment": {},
+            "display_settings": {}
+          }
+        ]
+      }
+
 
 On each analysis, only a ``query`` field is required to create a new
 slide; other attributes are optional.
@@ -502,15 +530,18 @@ It is possible to create slides with one single initial analysis by
 POSTing an analysis body directly to the slides catalog. It will create
 a slide automatically with the new analysis on it:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "title": "New slide",
-      "subtitle": "Variable A and B",
-      "query": {},
-      "query_environment": {},
-      "display_settings": {}
-    }
+      {
+        "title": "New slide",
+        "subtitle": "Variable A and B",
+        "query": {},
+        "query_environment": {},
+        "display_settings": {}
+      }
+
 
 PATCH
 ^^^^^
@@ -542,26 +573,29 @@ analysis.
 GET
 ^^^
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "/api/datasets/123/decks/123/slides/123/",
-        "catalogs": {
-            "analyses": "/api/datasets/123/decks/123/slides/123/analyses/"
-        },
-        "description": "Returns the detail information for a given slide",
-        "body": {
-            "deck_id": "123",
-            "subtitle": "z",
-            "title": "slide 1",
-            "analysis_url": "/api/datasets/123/decks/123/slides/123/analyses/123/",
-            "display": {
-                "value": "table"
-            },
-            "id": "123"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "/api/datasets/123/decks/123/slides/123/",
+          "catalogs": {
+              "analyses": "/api/datasets/123/decks/123/slides/123/analyses/"
+          },
+          "description": "Returns the detail information for a given slide",
+          "body": {
+              "deck_id": "123",
+              "subtitle": "z",
+              "title": "slide 1",
+              "analysis_url": "/api/datasets/123/decks/123/slides/123/analyses/123/",
+              "display": {
+                  "value": "table"
+              },
+              "id": "123"
+          }
+      }
+
 
 DELETE
 ^^^^^^
@@ -594,17 +628,20 @@ GET
 
 Returns the list of all the slides in the deck.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:order",
-        "self": "/api/datasets/123/decks/123/slides/flat/",
-        "description": "Order of the slides on this deck",
-        "graph": [
-            "/api/datasets/123/decks/123/slides/123/",
-            "/api/datasets/123/decks/123/slides/456/"
-        ]
-    }
+      {
+          "element": "shoji:order",
+          "self": "/api/datasets/123/decks/123/slides/flat/",
+          "description": "Order of the slides on this deck",
+          "graph": [
+              "/api/datasets/123/decks/123/slides/123/",
+              "/api/datasets/123/decks/123/slides/456/"
+          ]
+      }
+
 
 PATCH
 ^^^^^
@@ -616,17 +653,20 @@ To make changes to the order, a client should PATCH the full
 Any slide not mentioned on the payload will be added at the end of the
 graph in arbitrary order.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:order",
-        "self": "/api/datasets/123/decks/123/slides/flat/",
-        "description": "Order of the slides on this deck",
-        "graph": [
-            "/api/datasets/123/decks/123/slides/123/",
-            "/api/datasets/123/decks/123/slides/456/"
-        ]
-    }
+      {
+          "element": "shoji:order",
+          "self": "/api/datasets/123/decks/123/slides/flat/",
+          "description": "Order of the slides on this deck",
+          "graph": [
+              "/api/datasets/123/decks/123/slides/123/",
+              "/api/datasets/123/decks/123/slides/456/"
+          ]
+      }
+
 
 This is a flat order: grouping or nesting is not allowed. PATCHing with
 a nested order will generate a 400 response.
@@ -654,38 +694,41 @@ POST
 To create multiple analyses on a slide, clients should POST analyses to
 the slide's analyses catalog.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "query": {
-            "dimensions" : [],
-            "measures": {}
-        },
-        "query_environment": {
-            "filter": [
-                {"filter": "<url>"},
-                {"function": "expression", "args": [], "name": "(Optional)"}
-            ],
-            "weight": "url"
-        },
-        "display_settings": {
-            "decimalPlaces": {
-                "value": 0
-            },
-            "percentageDirection": {
-                "value": "colPct"
-            },
-            "vizType": {
-                "value": "table"
-            },
-            "countsOrPercents": {
-                "value": "percent"
-            },
-            "uiView": {
-                "value": "expanded"
-            }
-        }
-    }
+      {
+          "query": {
+              "dimensions" : [],
+              "measures": {}
+          },
+          "query_environment": {
+              "filter": [
+                  {"filter": "<url>"},
+                  {"function": "expression", "args": [], "name": "(Optional)"}
+              ],
+              "weight": "url"
+          },
+          "display_settings": {
+              "decimalPlaces": {
+                  "value": 0
+              },
+              "percentageDirection": {
+                  "value": "colPct"
+              },
+              "vizType": {
+                  "value": "table"
+              },
+              "countsOrPercents": {
+                  "value": "percent"
+              },
+              "uiView": {
+                  "value": "expanded"
+              }
+          }
+      }
+
 
 The server will return a 201 response with the new slide created. In
 case of invalid analysis attributes, a 400 response will be returned
@@ -698,12 +741,15 @@ It is possible to delete many analyses at once from the catalog sending
 ``null`` as their tuple. It is not possible to delete all the analysis
 from a slide. For that it is necessary to delete the slide itself.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "/api/datasets/123/decks/123/slides/123/analyses/1/": null,
-        "/api/datasets/123/decks/123/slides/123/analyses/2/": {}
-    }
+      {
+          "/api/datasets/123/decks/123/slides/123/analyses/1/": null,
+          "/api/datasets/123/decks/123/slides/123/analyses/2/": {}
+      }
+
 
 A 204 response will be returned on success.
 
@@ -746,38 +792,41 @@ uses are shown here, but other clients are free to store other
 attributes as they see fit. Display settings should be objects with a
 ``value`` member.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "query": {
-            "dimensions" : [],
-            "measures": {}
-        },
-        "query_environment": {
-            "filter": [
-                {"filter": "<url>"},
-                {"function": "expression", "args": [], "name": "(Optional)"}
-            ],
-            "weight": "url"
-        },
-        "display_settings": {
-            "decimalPlaces": {
-                "value": 0
-            },
-            "percentageDirection": {
-                "value": "colPct"
-            },
-            "vizType": {
-                "value": "table"
-            },
-            "countsOrPercents": {
-                "value": "percent"
-            },
-            "uiView": {
-                "value": "expanded"
-            }
-        }
-    }
+      {
+          "query": {
+              "dimensions" : [],
+              "measures": {}
+          },
+          "query_environment": {
+              "filter": [
+                  {"filter": "<url>"},
+                  {"function": "expression", "args": [], "name": "(Optional)"}
+              ],
+              "weight": "url"
+          },
+          "display_settings": {
+              "decimalPlaces": {
+                  "value": 0
+              },
+              "percentageDirection": {
+                  "value": "colPct"
+              },
+              "vizType": {
+                  "value": "table"
+              },
+              "countsOrPercents": {
+                  "value": "percent"
+              },
+              "uiView": {
+                  "value": "expanded"
+              }
+          }
+      }
+
 
 +--------+----------------+
 | Name   | Description    |

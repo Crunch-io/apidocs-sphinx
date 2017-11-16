@@ -34,26 +34,29 @@ A GET request on ``/public/config/`` return a Shoji Entity with the
 subdomain's available configurations, if any; if none exists, the body
 will be empty.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Your Company",
-            "logo": {
-                "small": "https://s.crunch.io/logos/yours_small.png",
-                "large": "https://s.crunch.io/logos/yours_large.png"
-            },
-            "palette": {
-                "brand": {
-                    "primary": "#FFAABB",
-                    "secondary": "#G4EEBB",
-                    "message": "#BAA5E7"
-                }
-            },
-            "manifest": {}
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Your Company",
+              "logo": {
+                  "small": "https://s.crunch.io/logos/yours_small.png",
+                  "large": "https://s.crunch.io/logos/yours_large.png"
+              },
+              "palette": {
+                  "brand": {
+                      "primary": "#FFAABB",
+                      "secondary": "#G4EEBB",
+                      "message": "#BAA5E7"
+                  }
+              },
+              "manifest": {}
+          }
+      }
+
 
 CrunchBox
 ~~~~~~~~~
@@ -70,9 +73,12 @@ share page, complete with the meta data utilized by social sharing
 platform crawlers in constructing a share-preview. Among this metadata
 is a url to a preview image of the rendered CrunchBox.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /crunchbox/share/ HTTP/1.1
+      GET /crunchbox/share/ HTTP/1.1
+
 
 Required parameters for this endpoint:
 
@@ -144,9 +150,12 @@ before a request for the image data.
 
 This endpoint returns no data.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /crunchbox/preview/ HTTP/1.1
+      POST /crunchbox/preview/ HTTP/1.1
+
 
 +-------------+---------+----------------+
 | Parameter   | Type    | Description    |

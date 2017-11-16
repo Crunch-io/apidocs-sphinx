@@ -10,20 +10,24 @@ and not yet completed.
 GET
 ^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /progress/{id}/ HTTP/1.1
+      GET /progress/{id}/ HTTP/1.1
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:view",
-        "self": "https:/app.crunch.io/api/progress/{id}/",
-        "value": {
-            "progress": 22,
-            "message": "exported 2 variables"
-        }
-    }
+      {
+          "element": "shoji:view",
+          "self": "https:/app.crunch.io/api/progress/{id}/",
+          "value": {
+              "progress": 22,
+              "message": "exported 2 variables"
+          }
+      }
+
 
 ``GET`` on a Progress view returns a Shoji View containing information
 about the status of the indicated process. The "progress" attribute

@@ -86,32 +86,35 @@ Catalog tuples contain the following keys:
 
 The catalog looks something like this:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/5ee0a0/comparisons/",
-        "specification": "https://app.crunch.io/api/specifications/comparisons/",
-        "description": "List of the comparisons for this dataset",
-        "index": {
-            "491fe3/": {
-                "name": "All actors",
-                "bases": [{
-                    "dimensions": [{"variable": "../variables/0f7378/"}, {"variable": "../variables/8451cb/"}],
-                    "measures": {"count": {"function": "cube_count", "args": []}}
-                }],
-                "cube": "491fe3/cube/"
-            },
-            "9942ce/": {
-                "name": "Awareness: sector average",
-                "bases": [{
-                    "dimensions": [{"variable": "../variables/bf31fc/"}],
-                    "measures": {"count": {"function": "cube_count", "args": []}}
-                }],
-                "cube": "9942ce/cube/"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/5ee0a0/comparisons/",
+          "specification": "https://app.crunch.io/api/specifications/comparisons/",
+          "description": "List of the comparisons for this dataset",
+          "index": {
+              "491fe3/": {
+                  "name": "All actors",
+                  "bases": [{
+                      "dimensions": [{"variable": "../variables/0f7378/"}, {"variable": "../variables/8451cb/"}],
+                      "measures": {"count": {"function": "cube_count", "args": []}}
+                  }],
+                  "cube": "491fe3/cube/"
+              },
+              "9942ce/": {
+                  "name": "Awareness: sector average",
+                  "bases": [{
+                      "dimensions": [{"variable": "../variables/bf31fc/"}],
+                      "measures": {"count": {"function": "cube_count", "args": []}}
+                  }],
+                  "cube": "9942ce/cube/"
+              }
+          }
+      }
+
 
 PATCH catalog
 ^^^^^^^^^^^^^

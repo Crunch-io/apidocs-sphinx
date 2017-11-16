@@ -84,64 +84,67 @@ Catalog tuples contain the following keys:
 |       |       | was created  |
 +-------+-------+--------------+
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/",
-        "index": {
-            "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/44a4d477d70c85da4b8298677e527ad8/": {
-                "user_id": "00002",
-                "footer": "This is for the footer",
-                "notes": "just a couple of variables",
-                "title": "z and str",
-                "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
-                "header": "This is for the header",
-                "creation_time": "2017-03-14T00:13:42.024000+00:00",
-                "filters": {
-                    "function": "identify",
-                    "args": [
-                        {
-                            "filter": [
-                                "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
-                                "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
-                            ]
-                        }
-                    ]
-                },
-                "where": {
-                    "function": "identify",
-                    "args": [
-                        {
-                            "id": [
-                                "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
-                                "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
-                            ]
-                        }
-                    ]
-                },
-                "id": "44a4d477d70c85da4b8298677e527ad8"
-            },
-            "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/75ff1d67ed698e0986f1c1c3daebf9a2/": {
-                "user_id": "00002",
-                "title": "xz",
-                "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
-                "filters": null,
-                "creation_time": "2017-03-14T00:13:42.024000+00:00",
-                "where": {
-                    "function": "identify",
-                    "args": [
-                        {
-                            "id": [
-                                "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000000/"
-                            ]
-                        }
-                    ]
-                },
-                "id": "75ff1d67ed698e0986f1c1c3daebf9a2"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/",
+          "index": {
+              "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/44a4d477d70c85da4b8298677e527ad8/": {
+                  "user_id": "00002",
+                  "footer": "This is for the footer",
+                  "notes": "just a couple of variables",
+                  "title": "z and str",
+                  "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+                  "header": "This is for the header",
+                  "creation_time": "2017-03-14T00:13:42.024000+00:00",
+                  "filters": {
+                      "function": "identify",
+                      "args": [
+                          {
+                              "filter": [
+                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
+                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
+                              ]
+                          }
+                      ]
+                  },
+                  "where": {
+                      "function": "identify",
+                      "args": [
+                          {
+                              "id": [
+                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
+                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
+                              ]
+                          }
+                      ]
+                  },
+                  "id": "44a4d477d70c85da4b8298677e527ad8"
+              },
+              "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/75ff1d67ed698e0986f1c1c3daebf9a2/": {
+                  "user_id": "00002",
+                  "title": "xz",
+                  "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+                  "filters": null,
+                  "creation_time": "2017-03-14T00:13:42.024000+00:00",
+                  "where": {
+                      "function": "identify",
+                      "args": [
+                          {
+                              "id": [
+                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000000/"
+                              ]
+                          }
+                      ]
+                  },
+                  "id": "75ff1d67ed698e0986f1c1c3daebf9a2"
+              }
+          }
+      }
+
 
 POST catalog
 ^^^^^^^^^^^^
@@ -176,32 +179,34 @@ attributes:
 | display\_settings   | Options to customize how it looks and behaves                   |
 +---------------------+-----------------------------------------------------------------+
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
+      {
+          "element": "shoji:entity",
+          "body": {
+              "where": {
+                  "function": "select",
+                  "args": [{
+                      "map": {
+                        "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/"},
+                        "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"}
+                      }
+                  }]
+              },
+              "filters": [
+                {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/"},
+                {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"}
+              ],
+              "force": false,
+              "title": "z and str",
+              "notes": "just a couple of variables",
+              "header": "This is for the header",
+              "footer": "This is for the footer"
+          }
+      }
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "where": {
-                "function": "select",
-                "args": [{
-                    "map": {
-                      "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/"},
-                      "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"}
-                    }
-                }]
-            },
-            "filters": [
-              {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/"},
-              {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"}
-            ],
-            "force": false,
-            "title": "z and str",
-            "notes": "just a couple of variables",
-            "header": "This is for the header",
-            "footer": "This is for the footer"
-        }
-    }
 
 Display Settings
 ^^^^^^^^^^^^^^^^
@@ -217,23 +222,26 @@ To customize a CrunchBox’s color scheme, you may include an optional
 request to create or edit the boxdata. There are four types of
 customization available.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {"display_settings": {
-        "minBaseSize": {"value": 50},
-        "palette": {
-            "brand": {
-                "primary": "#111111",
-                "secondary": "#222222",
-                "messages": "#333333"
-            },
-            "static_colors": ["#444444", "#555555", "#666666"],
-            "category_lookup": {
-                "category name": "#aaaaaa",
-                "another category:": "bbbbbb"
-            }
-        }
-    }}
+      {"display_settings": {
+          "minBaseSize": {"value": 50},
+          "palette": {
+              "brand": {
+                  "primary": "#111111",
+                  "secondary": "#222222",
+                  "messages": "#333333"
+              },
+              "static_colors": ["#444444", "#555555", "#666666"],
+              "category_lookup": {
+                  "category name": "#aaaaaa",
+                  "another category:": "bbbbbb"
+              }
+          }
+      }}
+
 
 Brand
 '''''
@@ -292,39 +300,42 @@ GET
 
 Returns the body of the boxdata entity
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "user_id": "00002",
-        "footer": "This is for the footer",
-        "notes": "just a couple of variables",
-        "title": "z and str",
-        "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
-        "header": "This is for the header",
-        "filters": {
-            "function": "identify",
-            "args": [
-                {
-                    "filter": [
-                        "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
-                        "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
-                    ]
-                }
-            ]
-        },
-        "where": {
-            "function": "identify",
-            "args": [
-                {
-                    "id": [
-                        "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
-                        "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
-                    ]
-                }
-            ]
-        },
-        "id": "44a4d477d70c85da4b8298677e527ad8"
-    }
+      {
+          "user_id": "00002",
+          "footer": "This is for the footer",
+          "notes": "just a couple of variables",
+          "title": "z and str",
+          "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+          "header": "This is for the header",
+          "filters": {
+              "function": "identify",
+              "args": [
+                  {
+                      "filter": [
+                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
+                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
+                      ]
+                  }
+              ]
+          },
+          "where": {
+              "function": "identify",
+              "args": [
+                  {
+                      "id": [
+                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
+                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
+                      ]
+                  }
+              ]
+          },
+          "id": "44a4d477d70c85da4b8298677e527ad8"
+      }
+
 
 DELETE
 ^^^^^^

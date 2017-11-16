@@ -1,45 +1,49 @@
 Authentication
 --------------
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/public/login/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    Content-Length: 67
+      POST /api/public/login/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      Content-Length: 67
 
-    {
-        "email": "fake.user@example.com",
-        "password": "password"
-    }
+      {
+          "email": "fake.user@example.com",
+          "password": "password"
+      }
 
-.. code:: http
+      HTTP/1.1 204 No Content
+      Set-Cookie: token=dac20c82c79a514d572b4f5d7e11cb53; Domain=.crunch.io; Max-Age=31536000; Path=/
+      Vary: Cookie, Accept-Encoding
 
-    HTTP/1.1 204 No Content
-    Set-Cookie: token=dac20c82c79a514d572b4f5d7e11cb53; Domain=.crunch.io; Max-Age=31536000; Path=/
-    Vary: Cookie, Accept-Encoding
+   --R
+   .. code:: r
 
-.. code:: r
+      library(crunch)
+      login("fake.user@example.com", "password")
+      # See ?login for options, including how to store your credentials
+      # in your .Rprofile
 
-    library(crunch)
-    login("fake.user@example.com", "password")
-    # See ?login for options, including how to store your credentials
-    # in your .Rprofile
+   --Python
+   .. code:: python
 
-.. code:: python
+      import pycrunch
 
-    import pycrunch
+   --Shell
+   .. code:: shell
 
-.. code:: shell
+      curl -c cookie-jar
+          -X POST
+          -d '{"email": "fake.user@example.com", "password": "password"}'
+          -H "Content-type: application/json"
+          https://app.crunch.io/api/public/login/
 
-    curl -c cookie-jar
-        -X POST
-        -d '{"email": "fake.user@example.com", "password": "password"}'
-        -H "Content-type: application/json"
-        https://app.crunch.io/api/public/login/
+      # The above command will perform a login and save the login cookie to a file called 'cookie-jar'.
+      # After this, you can access the endpoint via `curl' commands (POST, GET, PATCH), as long as the '-b cookie-jar' flag is present.  Note, -b not -c.  -c saves cookies, -b submits cookies from the existing file. It is good practice to delete this file when you are done.
 
-    # The above command will perform a login and save the login cookie to a file called 'cookie-jar'.
-    # After this, you can access the endpoint via `curl' commands (POST, GET, PATCH), as long as the '-b cookie-jar' flag is present.  Note, -b not -c.  -c saves cookies, -b submits cookies from the existing file. It is good practice to delete this file when you are done.
 
 Nearly all interactions with the Crunch API need to be authenticated.
 The standard password authentication method involves POSTing credentials

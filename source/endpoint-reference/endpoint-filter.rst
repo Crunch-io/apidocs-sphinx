@@ -15,15 +15,18 @@ the authenticated user, and they cannot be accessed by other users.
 Public filters are available to all users who are authorized to view the
 dataset.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "name": "My filter",
-        "is_public": true,
-        "id": "1442ea",
-        "owner_id": "https://app.crunch.io/api/users/4152de/",
-        "team": "https://app.crunch.io/api/teams/680abc/"
-    }
+      {
+          "name": "My filter",
+          "is_public": true,
+          "id": "1442ea",
+          "owner_id": "https://app.crunch.io/api/users/4152de/",
+          "team": "https://app.crunch.io/api/teams/680abc/"
+      }
+
 
 The only tuple attribute editable via PATCHing the catalog is the
 "name". A 204 response indicates a successful PATCH. Attempting to PATCH
@@ -47,21 +50,24 @@ Entity
 GET this resource to return a Shoji Entity containing the requested
 filter.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/ac64ef/filters/1442ea/",
-        "body": {
-            "id": "1442ea",
-            "name": "My filter",
-            "is_public": true,
-            "expression": {},
-            "last_update": "2015-12-31",
-            "creation_time": "2015-11-12T12:34:56",
-            "team": "https://app.crunch.io/api/teams/680abc/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/ac64ef/filters/1442ea/",
+          "body": {
+              "id": "1442ea",
+              "name": "My filter",
+              "is_public": true,
+              "expression": {},
+              "last_update": "2015-12-31",
+              "creation_time": "2015-11-12T12:34:56",
+              "team": "https://app.crunch.io/api/teams/680abc/"
+          }
+      }
+
 
 PATCH an entity to edit its ``expression``, ``name``, ``team`` or
 ``is_public`` attributes. Successful PATCH requests return 204 status.
@@ -89,16 +95,19 @@ Applied filters
 
 A Shoji order containing the filters applied by the current user.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:order",
-        "self": "http://app.crunch.io/api/datasets/ac64ef/filters/applied/",
-        "graph": [
-            "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/",
-            "http://app.crunch.io/api/datasets/ac64ef/filters/0ac6e1/",
-        ]
-    }
+      {
+          "element": "shoji:order",
+          "self": "http://app.crunch.io/api/datasets/ac64ef/filters/applied/",
+          "graph": [
+              "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/",
+              "http://app.crunch.io/api/datasets/ac64ef/filters/0ac6e1/",
+          ]
+      }
+
 
 PUT the applied endpoint to change the which filters are applied for
 other operations. The graph parameter indicates which filters are
@@ -111,16 +120,19 @@ Filter Order
 
 A Shoji order containing the persisted filter order.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:order",
-        "self": "http://app.crunch.io/api/datasets/ac64ef/filters/order/",
-        "graph": [
-            "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/",
-            "http://app.crunch.io/api/datasets/ac64ef/filters/0ac6e1/",
-        ]
-    }
+      {
+          "element": "shoji:order",
+          "self": "http://app.crunch.io/api/datasets/ac64ef/filters/order/",
+          "graph": [
+              "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/",
+              "http://app.crunch.io/api/datasets/ac64ef/filters/0ac6e1/",
+          ]
+      }
+
 
 PATCH the order to change the order of the filters. The graph parameter
 indicates the order. Private filters are not included in the order. Any
@@ -138,67 +150,81 @@ expression or a filter URL.
 To filter using a filter URL using JSON pass in an object as the
 ``filter`` parameter:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "filter": "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/"
-    }
+      {
+          "filter": "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/"
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    GET /datasets/id/summary/?filter=%7B%22filter%22%3A%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F%22%7D HTTP/1.1
+      GET /datasets/id/summary/?filter=%7B%22filter%22%3A%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F%22%7D HTTP/1.1
+
 
 It is also possible to send straight filter URLs without a JSON
 wrapping:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /datasets/id/summary/?filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F HTTP/1.1
+      GET /datasets/id/summary/?filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F HTTP/1.1
+
 
 Or multiple filters that will be ANDed together
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /datasets/id/summary/?filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F&filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F HTTP/1.1
+      GET /datasets/id/summary/?filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F&filter=http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F HTTP/1.1
+
 
 To filter using a filter expression, pass a Crunch filter expression as
 the ``filter`` parameter, like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-        {
-            "function": "==",
-            "args": [
-                {"variable": "http://app.crunch.io/api/datasets/ac64ef/variables/aae3c2/"},
-                {"value": 1}
-            ]
-        }
+      {
+          "function": "==",
+          "args": [
+              {"variable": "http://app.crunch.io/api/datasets/ac64ef/variables/aae3c2/"},
+              {"value": 1}
+          ]
+      }
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    GET /datasets/id/summary/?filter=%7B%22function%22%3A%22%3D%3D%22%2C%22args%22%3A%5B%7B%22variable%22%3A%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Fvariables%2Faae3c2%2F%22%7D%2C%7B%22value%22%3A1%7D%5D%7D HTTP/1.1
+      GET /datasets/id/summary/?filter=%7B%22function%22%3A%22%3D%3D%22%2C%22args%22%3A%5B%7B%22variable%22%3A%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Fvariables%2Faae3c2%2F%22%7D%2C%7B%22value%22%3A1%7D%5D%7D HTTP/1.1
+
 
 Filter expressions can be combined with filter URLs to make reference to
 other filters, like so:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-        {
-            "function": "and",
-            "args": [
-                {
-                    "filter": "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/"
-                },
-               {
-                    "function": "==",
-                    "args": [
-                        {"variable": "http://app.crunch.io/api/datasets/ac64ef/variables/aae3c2/"},
-                        {"value": 1}
-                    ]
-                }
-            ]
-        }    
+      {
+          "function": "and",
+          "args": [
+              {
+                  "filter": "http://app.crunch.io/api/datasets/ac64ef/filters/28ef72/"
+              },
+             {
+                  "function": "==",
+                  "args": [
+                      {"variable": "http://app.crunch.io/api/datasets/ac64ef/variables/aae3c2/"},
+                      {"value": 1}
+                  ]
+              }
+          ]
+      }
 
-.. code:: http
 
-    GET /datasets/id/summary/?filter=%7B%22function%22%3A+%22and%22%2C+%22args%22%3A+%5B%7B%22filter%22%3A+%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Ffilters%2F28ef72%2F%22%7D%2C+%7B%22function%22%3A+%22%3D%3D%22%2C+%22args%22%3A+%5B%7B%22variable%22%3A+%22http%3A%2F%2Fapp.crunch.io%2Fapi%2Fdatasets%2Fac64ef%2Fvariables%2Faae3c2%2F%22%7D%2C+%7B%22value%22%3A+1%7D%5D%7D%5D%7D HTTP/1.1

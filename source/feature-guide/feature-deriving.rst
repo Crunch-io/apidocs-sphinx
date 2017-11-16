@@ -34,135 +34,141 @@ The "combine\_categories" function takes two arguments:
 
 Given a variable such as:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
-        "body": {
-            "name": "Education",
-            "alias": "educ",
-            "type": "categorical",
-            "categories": [
-                {
-                    "numeric_value": null,
-                    "missing": true,
-                    "id": -1,
-                    "name": "No Data"
-                },
-                {
-                    "numeric_value": 1,
-                    "missing": false,
-                    "id": 1,
-                    "name": "No HS"
-                },
-                {
-                    "numeric_value": 2,
-                    "missing": false,
-                    "id": 2,
-                    "name": "High school graduate"
-                },
-                {
-                    "numeric_value": 3,
-                    "missing": false,
-                    "id": 3,
-                    "name": "Some college"
-                },
-                {
-                    "numeric_value": 4,
-                    "missing": false,
-                    "id": 4,
-                    "name": "2-year"
-                },
-                {
-                    "numeric_value": 5,
-                    "missing": false,
-                    "id": 5,
-                    "name": "4-year"
-                },
-                {
-                    "numeric_value": 6,
-                    "missing": false,
-                    "id": 6,
-                    "name": "Post-grad"
-                },
-                {
-                    "numeric_value": 8,
-                    "missing": true,
-                    "id": 8,
-                    "name": "Skipped"
-                },
-                {
-                    "numeric_value": 9,
-                    "missing": true,
-                    "id": 9,
-                    "name": "Not Asked"
-                }
-            ],
-            "description": "Education"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
+          "body": {
+              "name": "Education",
+              "alias": "educ",
+              "type": "categorical",
+              "categories": [
+                  {
+                      "numeric_value": null,
+                      "missing": true,
+                      "id": -1,
+                      "name": "No Data"
+                  },
+                  {
+                      "numeric_value": 1,
+                      "missing": false,
+                      "id": 1,
+                      "name": "No HS"
+                  },
+                  {
+                      "numeric_value": 2,
+                      "missing": false,
+                      "id": 2,
+                      "name": "High school graduate"
+                  },
+                  {
+                      "numeric_value": 3,
+                      "missing": false,
+                      "id": 3,
+                      "name": "Some college"
+                  },
+                  {
+                      "numeric_value": 4,
+                      "missing": false,
+                      "id": 4,
+                      "name": "2-year"
+                  },
+                  {
+                      "numeric_value": 5,
+                      "missing": false,
+                      "id": 5,
+                      "name": "4-year"
+                  },
+                  {
+                      "numeric_value": 6,
+                      "missing": false,
+                      "id": 6,
+                      "name": "Post-grad"
+                  },
+                  {
+                      "numeric_value": 8,
+                      "missing": true,
+                      "id": 8,
+                      "name": "Skipped"
+                  },
+                  {
+                      "numeric_value": 9,
+                      "missing": true,
+                      "id": 9,
+                      "name": "Not Asked"
+                  }
+              ],
+              "description": "Education"
+          }
+      }
+
 
 POST'ing to the private variables catalog a Shoji Entity containing a
 ZCL function like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Education (3 category)",
-            "description": "Combined from six-category education",
-            "alias": "educ3",
-            "derivation": {
-                "function": "combine_categories",
-                "args": [
-                    {
-                        "variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"
-                    },
-                    {
-                        "value": [
-                            {
-                                "name": "High school or less",
-                                "numeric_value": null,
-                                "id": 1,
-                                "missing": false,
-                                "combined_ids": [1, 2]
-                            },
-                            {
-                                "name": "Some college",
-                                "numeric_value": null,
-                                "id": 2,
-                                "missing": false,
-                                "combined_ids": [3, 4]
-                            },
-                            {
-                                "name": "4-year college or more",
-                                "numeric_value": null,
-                                "id": 3,
-                                "missing": false,
-                                "combined_ids": [5, 6]
-                            },
-                            {
-                                "name": "Missing",
-                                "numeric_value": null,
-                                "id": 4,
-                                "missing": true,
-                                "combined_ids": [8, 9]
-                            },
-                            {
-                                "name": "No data",
-                                "numeric_value": null,
-                                "id": -1,
-                                "missing": true,
-                                "combined_ids": [-1]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Education (3 category)",
+              "description": "Combined from six-category education",
+              "alias": "educ3",
+              "derivation": {
+                  "function": "combine_categories",
+                  "args": [
+                      {
+                          "variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"
+                      },
+                      {
+                          "value": [
+                              {
+                                  "name": "High school or less",
+                                  "numeric_value": null,
+                                  "id": 1,
+                                  "missing": false,
+                                  "combined_ids": [1, 2]
+                              },
+                              {
+                                  "name": "Some college",
+                                  "numeric_value": null,
+                                  "id": 2,
+                                  "missing": false,
+                                  "combined_ids": [3, 4]
+                              },
+                              {
+                                  "name": "4-year college or more",
+                                  "numeric_value": null,
+                                  "id": 3,
+                                  "missing": false,
+                                  "combined_ids": [5, 6]
+                              },
+                              {
+                                  "name": "Missing",
+                                  "numeric_value": null,
+                                  "id": 4,
+                                  "missing": true,
+                                  "combined_ids": [8, 9]
+                              },
+                              {
+                                  "name": "No data",
+                                  "numeric_value": null,
+                                  "id": -1,
+                                  "missing": true,
+                                  "combined_ids": [-1]
+                              }
+                          ]
+                      }
+                  ]
+              }
+          }
+      }
+
 
 results in a private categorical variable with three valid categories.
 
@@ -181,106 +187,112 @@ categories.
 
 Given a variable such as:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/455288/variables/3c2e57/",
-        "body": {
-            "name": "Aided awareness",
-            "alias": "aided",
-            "subvariables": [
-                "../870a2d/",
-                "../a8b0eb/",
-                "../dc444f/",
-                "../8e6279/",
-                "../f775ab/",
-                "../6405c2/"
-            ],
-            "type": "multiple_response",
-            "categories": [
-                {
-                    "numeric_value": 1,
-                    "selected": true,
-                    "id": 1,
-                    "name": "Selected",
-                    "missing": false
-                },
-                {
-                    "numeric_value": 2,
-                    "id": 2,
-                    "name": "Not selected",
-                    "missing": false
-                },
-                {
-                    "numeric_value": 8,
-                    "id": 3,
-                    "name": "Skipped",
-                    "missing": true
-                },
-                {
-                    "numeric_value": 9,
-                    "id": 4,
-                    "name": "Not asked",
-                    "missing": true
-                },
-                {
-                    "numeric_value": null,
-                    "id": -1,
-                    "name": "No data",
-                    "missing": true
-                }
-            ],
-            "description": "Which of the following coffee brands do you recognize? Check all that apply."
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/455288/variables/3c2e57/",
+          "body": {
+              "name": "Aided awareness",
+              "alias": "aided",
+              "subvariables": [
+                  "../870a2d/",
+                  "../a8b0eb/",
+                  "../dc444f/",
+                  "../8e6279/",
+                  "../f775ab/",
+                  "../6405c2/"
+              ],
+              "type": "multiple_response",
+              "categories": [
+                  {
+                      "numeric_value": 1,
+                      "selected": true,
+                      "id": 1,
+                      "name": "Selected",
+                      "missing": false
+                  },
+                  {
+                      "numeric_value": 2,
+                      "id": 2,
+                      "name": "Not selected",
+                      "missing": false
+                  },
+                  {
+                      "numeric_value": 8,
+                      "id": 3,
+                      "name": "Skipped",
+                      "missing": true
+                  },
+                  {
+                      "numeric_value": 9,
+                      "id": 4,
+                      "name": "Not asked",
+                      "missing": true
+                  },
+                  {
+                      "numeric_value": null,
+                      "id": -1,
+                      "name": "No data",
+                      "missing": true
+                  }
+              ],
+              "description": "Which of the following coffee brands do you recognize? Check all that apply."
+          }
+      }
+
 
 POSTing to the variables catalog a Shoji Entity containing a ZCL
 function like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Aided awareness by region",
-            "description": "Combined from aided brand awareness",
-            "alias": "aided_region",
-            "derivation": {
-                "function": "combine_responses",
-                "args": [
-                    {
-                        "variable": "https://app.crunch.io/api/datasets/455288/variables/3c2e57/"
-                    },
-                    {
-                        "value": [
-                            {
-                                "name": "San Francisco",
-                                "combined_ids": [
-                                    "../870a2d/",
-                                    "../a8b0eb/",
-                                    "../dc444f/"
-                                ]
-                            },
-                            {
-                                "name": "Portland",
-                                "combined_ids": [
-                                    "../8e6279/",
-                                    "../f775ab/"
-                                ]
-                            },
-                            {
-                                "name": "Chicago",
-                                "combined_ids": [
-                                    "../6405c2/"
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Aided awareness by region",
+              "description": "Combined from aided brand awareness",
+              "alias": "aided_region",
+              "derivation": {
+                  "function": "combine_responses",
+                  "args": [
+                      {
+                          "variable": "https://app.crunch.io/api/datasets/455288/variables/3c2e57/"
+                      },
+                      {
+                          "value": [
+                              {
+                                  "name": "San Francisco",
+                                  "combined_ids": [
+                                      "../870a2d/",
+                                      "../a8b0eb/",
+                                      "../dc444f/"
+                                  ]
+                              },
+                              {
+                                  "name": "Portland",
+                                  "combined_ids": [
+                                      "../8e6279/",
+                                      "../f775ab/"
+                                  ]
+                              },
+                              {
+                                  "name": "Chicago",
+                                  "combined_ids": [
+                                      "../6405c2/"
+                                  ]
+                              }
+                          ]
+                      }
+                  ]
+              }
+          }
+      }
+
 
 results in a multiple response variable with three responses. The
 "selected" state of the responses in the derived variable is an "OR" of
@@ -300,50 +312,53 @@ include an extra value for the case when none of the boolean expressions
 match; if not provided, it defaults to the system "No Data" missing
 value.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Market segmentation",
-            "description": "Super-scientific classification of people",
-            "alias": "segments",
-            "derivation": {
-                "function": "case",
-                "args": [
-                    {
-                        "column": [1, 2, 3, 4],
-                        "type": {
-                            "value": {
-                                "class": "categorical",
-                                "categories": [
-                                    {"id": 3, "name": "Hipsters", "numeric_value": null, "missing": false},
-                                    {"id": 1, "name": "Techies", "numeric_value": null, "missing": false},
-                                    {"id": 2, "name": "Yuppies", "numeric_value": null, "missing": false},
-                                    {"id": 4, "name": "Other", "numeric_value": null, "missing": true}
-                                ]
-                            }
-                        }
-                    },
-                    {
-                        "function": "and",
-                        "args": [
-                            {"function": "in", "args": [{"variable": "55fc29/"}, {"value": [5, 6]}]},
-                            {"function": "<=", "args": [{"variable": "673dde/"}, {"value": 30}]}
-                        ]
-                    },
-                    {
-                        "function": "and",
-                        "args": [
-                            {"function": "in", "args": [{"variable": "889dc3/"}, {"value": [4, 5, 6]}]},
-                            {"function": ">", "args": [{"variable": "673dde/"}, {"value": 40}]}
-                        ]
-                    },
-                    {"function": "==", "args": [{"variable": "13cbf4/"}, {"value": 1}]}
-                ]
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Market segmentation",
+              "description": "Super-scientific classification of people",
+              "alias": "segments",
+              "derivation": {
+                  "function": "case",
+                  "args": [
+                      {
+                          "column": [1, 2, 3, 4],
+                          "type": {
+                              "value": {
+                                  "class": "categorical",
+                                  "categories": [
+                                      {"id": 3, "name": "Hipsters", "numeric_value": null, "missing": false},
+                                      {"id": 1, "name": "Techies", "numeric_value": null, "missing": false},
+                                      {"id": 2, "name": "Yuppies", "numeric_value": null, "missing": false},
+                                      {"id": 4, "name": "Other", "numeric_value": null, "missing": true}
+                                  ]
+                              }
+                          }
+                      },
+                      {
+                          "function": "and",
+                          "args": [
+                              {"function": "in", "args": [{"variable": "55fc29/"}, {"value": [5, 6]}]},
+                              {"function": "<=", "args": [{"variable": "673dde/"}, {"value": 30}]}
+                          ]
+                      },
+                      {
+                          "function": "and",
+                          "args": [
+                              {"function": "in", "args": [{"variable": "889dc3/"}, {"value": [4, 5, 6]}]},
+                              {"function": ">", "args": [{"variable": "673dde/"}, {"value": 40}]}
+                          ]
+                      },
+                      {"function": "==", "args": [{"variable": "13cbf4/"}, {"value": 1}]}
+                  ]
+              }
+          }
+      }
+
 
 Making ad hoc arrays
 ~~~~~~~~~~~~~~~~~~~~
@@ -366,119 +381,122 @@ particular name and alias for the subvariable, if not specified, the
 same name from the original will be used and the alias will be padded to
 ensure uniqueness.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "CA3": {
-        "name": "cat array 3", 
-        "derivation": {
-          "function": "array", 
-          "args": [
-            {
-              "function": "select", 
-              "args": [
-                {
-                  "map": {
-                    "var1": {
-                      "variable": "ca2-subvar-2", 
-                      "references": {
-                        "alias": "subvar2", 
-                        "name": "Subvar 2"
-                      }
-                    }, 
-                    "var0": {
-                      "variable": "ca1-subvar-1", 
-                      "references": {
-                        "alias": "subvar1", 
-                        "name": "Subvar 1"
+      {
+        "CA3": {
+          "name": "cat array 3",
+          "derivation": {
+            "function": "array",
+            "args": [
+              {
+                "function": "select",
+                "args": [
+                  {
+                    "map": {
+                      "var1": {
+                        "variable": "ca2-subvar-2",
+                        "references": {
+                          "alias": "subvar2",
+                          "name": "Subvar 2"
+                        }
+                      },
+                      "var0": {
+                        "variable": "ca1-subvar-1",
+                        "references": {
+                          "alias": "subvar1",
+                          "name": "Subvar 1"
+                        }
                       }
                     }
+                  },
+                  {
+                    "value": [
+                      "var1",
+                      "var0"
+                    ]
                   }
-                }, 
-                {
-                  "value": [
-                    "var1", 
-                    "var0"
-                  ]
-                }
-              ]
+                ]
+              }
+            ]
+          }
+        },
+        "CA2": {
+          "subvariables": [
+            {
+              "alias": "ca2-subvar-1",
+              "name": "ca2-subvar-1"
+            },
+            {
+              "alias": "ca2-subvar-2",
+              "name": "ca2-subvar-2"
+            }
+          ],
+          "type": "categorical_array",
+          "name": "cat array 2",
+          "categories": [
+            {
+              "numeric_value": null,
+              "missing": false,
+              "id": 1,
+              "name": "yes"
+            },
+            {
+              "numeric_value": null,
+              "missing": false,
+              "id": 2,
+              "name": "no"
+            },
+            {
+              "numeric_value": null,
+              "missing": true,
+              "id": -1,
+              "name": "No Data"
+            }
+          ]
+        },
+        "CA1": {
+          "subvariables": [
+            {
+              "alias": "ca1-subvar-1",
+              "name": "ca1-subvar-1"
+            },
+            {
+              "alias": "ca1-subvar-2",
+              "name": "ca1-subvar-2"
+            },
+            {
+              "alias": "ca1-subvar-3",
+              "name": "ca1-subvar-3"
+            }
+          ],
+          "type": "categorical_array",
+          "name": "cat array 1",
+          "categories": [
+            {
+              "numeric_value": null,
+              "missing": false,
+              "id": 1,
+              "name": "yes"
+            },
+            {
+              "numeric_value": null,
+              "missing": false,
+              "id": 2,
+              "name": "no"
+            },
+            {
+              "numeric_value": null,
+              "missing": true,
+              "id": -1,
+              "name": "No Data"
             }
           ]
         }
-      }, 
-      "CA2": {
-        "subvariables": [
-          {
-            "alias": "ca2-subvar-1", 
-            "name": "ca2-subvar-1"
-          }, 
-          {
-            "alias": "ca2-subvar-2", 
-            "name": "ca2-subvar-2"
-          }
-        ], 
-        "type": "categorical_array", 
-        "name": "cat array 2", 
-        "categories": [
-          {
-            "numeric_value": null, 
-            "missing": false, 
-            "id": 1, 
-            "name": "yes"
-          }, 
-          {
-            "numeric_value": null, 
-            "missing": false, 
-            "id": 2, 
-            "name": "no"
-          }, 
-          {
-            "numeric_value": null, 
-            "missing": true, 
-            "id": -1, 
-            "name": "No Data"
-          }
-        ]
-      }, 
-      "CA1": {
-        "subvariables": [
-          {
-            "alias": "ca1-subvar-1", 
-            "name": "ca1-subvar-1"
-          }, 
-          {
-            "alias": "ca1-subvar-2", 
-            "name": "ca1-subvar-2"
-          }, 
-          {
-            "alias": "ca1-subvar-3", 
-            "name": "ca1-subvar-3"
-          }
-        ], 
-        "type": "categorical_array", 
-        "name": "cat array 1", 
-        "categories": [
-          {
-            "numeric_value": null, 
-            "missing": false, 
-            "id": 1, 
-            "name": "yes"
-          }, 
-          {
-            "numeric_value": null, 
-            "missing": false, 
-            "id": 2, 
-            "name": "no"
-          }, 
-          {
-            "numeric_value": null, 
-            "missing": true, 
-            "id": -1, 
-            "name": "No Data"
-          }
-        ]
       }
-    }
+
 
 On the above example, the array ``CA3`` uses the array function and uses
 subvariables ``ca1-subvar-1`` and ``ca2-subvar-2`` from ``CA1`` and
@@ -514,25 +532,28 @@ properties of the weight variable, with an "derivation" member
 indicating to use the "rake" function, which takes arguments containing
 an array of variable targets:
 
-.. code:: shell
+.. language_specific::
+   --Shell
+   .. code:: shell
 
-    POST /api/datasets/{datasetid}/variables/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 739
-    {
-        "name": "weight",
-        "description": "my raked weight",
-        "derivation": {
-            "function": "rake",
-            "args": [{
-                "variable": variabl1.id,
-                "targets": [[1, 0.491], [2, 0.509]]
-            }]
-        }
-    }
-    ---------
-    201 Created
-    Location: /api/datasets/{datasetid}/variables/{variableid}/
+      POST /api/datasets/{datasetid}/variables/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 739
+      {
+          "name": "weight",
+          "description": "my raked weight",
+          "derivation": {
+              "function": "rake",
+              "args": [{
+                  "variable": variabl1.id,
+                  "targets": [[1, 0.491], [2, 0.509]]
+              }]
+          }
+      }
+      ---------
+      201 Created
+      Location: /api/datasets/{datasetid}/variables/{variableid}/
+
 
 Multiple Response Views
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -546,53 +567,59 @@ existing multiple response array. It takes two arguments:
 
 Given a variable such as:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
-        "body": {
-            "name": "Cola",
-            "alias": "cola",
-            "type": "categorical",
-            "categories": [
-                {"id": -1, "name": "No Data", "numeric_value": null, "missing": true},
-                {"id": 0, "name": "Never", "numeric_value": null, "missing": false},
-                {"id": 1, "name": "Sometimes", "numeric_value": null, "missing": false},
-                {"id": 2, "name": "Frequently", "numeric_value": null, "missing": false},
-                {"id": 3, "name": "Always", "numeric_value": null, "missing": false}
-            ],
-            "subvariables": ["0001", "0002", "0003"],
-            "references": {
-                "subreferences": {
-                    "0003": {"alias": "Coke"},
-                    "0002": {"alias": "Pepsi"},
-                    "0001": {"alias": "RC"}
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
+          "body": {
+              "name": "Cola",
+              "alias": "cola",
+              "type": "categorical",
+              "categories": [
+                  {"id": -1, "name": "No Data", "numeric_value": null, "missing": true},
+                  {"id": 0, "name": "Never", "numeric_value": null, "missing": false},
+                  {"id": 1, "name": "Sometimes", "numeric_value": null, "missing": false},
+                  {"id": 2, "name": "Frequently", "numeric_value": null, "missing": false},
+                  {"id": 3, "name": "Always", "numeric_value": null, "missing": false}
+              ],
+              "subvariables": ["0001", "0002", "0003"],
+              "references": {
+                  "subreferences": {
+                      "0003": {"alias": "Coke"},
+                      "0002": {"alias": "Pepsi"},
+                      "0001": {"alias": "RC"}
+                  }
+              }
+          }
+      }
+
 
 POST'ing to the private variables catalog a Shoji Entity containing a
 ZCL function like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Cola likes",
-            "description": "Cola preferences",
-            "alias": "cola_likes",
-            "derivation": {
-                "function": "select_categories",
-                "args": [
-                    {"variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"},
-                    {"value": [2, 3]}
-                ]
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Cola likes",
+              "description": "Cola preferences",
+              "alias": "cola_likes",
+              "derivation": {
+                  "function": "select_categories",
+                  "args": [
+                      {"variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"},
+                      {"value": [2, 3]}
+                  ]
+              }
+          }
+      }
+
 
 ...results in a private multiple\_response variable where the
 "Frequently" and "Always" categories are selected.
@@ -611,42 +638,48 @@ categories (positive, negative, and neutral). It takes one parameter:
 
 Given a variable such as:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
-        "body": {
-            "name": "Zest",
-            "alias": "zest",
-            "type": "text",
-            "values": [
-                "Zest is best",
-                "Zest I can take it or leave it",
-                "Zest is the worst"
-            ]
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/",
+          "body": {
+              "name": "Zest",
+              "alias": "zest",
+              "type": "text",
+              "values": [
+                  "Zest is best",
+                  "Zest I can take it or leave it",
+                  "Zest is the worst"
+              ]
+          }
+      }
+
 
 ``POST``\ ing to the private variables catalog a Shoji Entity containing
 a ZCL function like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Zesty Sentiment",
-            "description": "Customer sentiment about Zest",
-            "alias": "zest_sentiment",
-            "derivation": {
-                "function": "sentiment",
-                "args": [
-                    {"variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"}
-                ]
-            }
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Zesty Sentiment",
+              "description": "Customer sentiment about Zest",
+              "alias": "zest_sentiment",
+              "derivation": {
+                  "function": "sentiment",
+                  "args": [
+                      {"variable": "https://app.crunch.io/api/datasets/3ad42c/variables/0000f5/"}
+                  ]
+              }
+          }
+      }
+
 
 Will result in a new categorical variable, where for each row the text
 variable is classified as “Negative”, “Neutral”, or “Positive” using the
@@ -673,15 +706,18 @@ will take two numeric variables as their arguments.
 
 The usage is as follows for all operators:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "+",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/def/"}
-        ]
-    }
+      {
+          "function": "+",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/def/"}
+          ]
+      }
+
 
 bin
 ^^^
@@ -692,27 +728,33 @@ category represents a bin of the numeric values.
 Each category on the new variable is annotated with a "boundaries"
 member that contains the lower/upper bound of each bin.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "bin",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
-        ]
-    }
+      {
+          "function": "bin",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
+          ]
+      }
+
 
 Optionally it is possible to pass a second argument indicating the
 desired bin size to use instead of allowing the API to decide them.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "bin",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
-            {'value': 100}
-        ]
-    }
+      {
+          "function": "bin",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
+              {'value': 100}
+          ]
+      }
+
 
 case
 ^^^^
@@ -728,15 +770,18 @@ Returns a new variable with its type and values casted. Not applicable
 on arrays or date variable; use `Date Functions <#Date-Functions>`__ to
 work with date variables.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "cast",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
-            {"value": "numeric"}
-        ]
-    }
+      {
+          "function": "cast",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
+              {"value": "numeric"}
+          ]
+      }
+
 
 The allowed output variable types are:
 
@@ -751,23 +796,26 @@ To cast to categorical type, the second argument ``value`` should not be
 a name string (``numeric``, ``text``) but a type definition indicating a
 ``class`` and ``categories`` as follow:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "cast",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
-            {"value": {
-                    "class": "categorical",
-                    "categories": [
-                        {"id": 1, "name": "one", "missing": false, "numeric_value": null},
-                        {"id": 2, "name": "two", "missing": false, "numeric_value": null},
-                        {"id": -1, "name": "No Data", "missing": true, "numeric_value": null},
-                    ]
-                }
-            }
-        ]
-    }
+      {
+          "function": "cast",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"},
+              {"value": {
+                      "class": "categorical",
+                      "categories": [
+                          {"id": 1, "name": "one", "missing": false, "numeric_value": null},
+                          {"id": 2, "name": "two", "missing": false, "numeric_value": null},
+                          {"id": -1, "name": "No Data", "missing": true, "numeric_value": null},
+                      ]
+                  }
+              }
+          ]
+      }
+
 
 To change the type of a variable a client should POST to the
 ``/variable/:id/cast/`` endpoint. See `Convert type <#Convert-type>`__
@@ -779,14 +827,17 @@ char\_length
 Returns a numeric variable containing the text length of each value.
 Only applicable on text variables.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "char_length",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
-        ]
-    }
+      {
+          "function": "char_length",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
+          ]
+      }
+
 
 copy\_variable
 ^^^^^^^^^^^^^^
@@ -794,14 +845,17 @@ copy\_variable
 Returns a shallow copy of the indicated variable maintaining type and
 data.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "copy_variable",
-        "args": [
-            {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
-        ]
-    }
+      {
+          "function": "copy_variable",
+          "args": [
+              {"variable": "https://app.crunch.io/api/datasets/123/variables/abc/"}
+          ]
+      }
+
 
 Changes on the data of the original variable will be reflected on this
 copy.
@@ -825,12 +879,15 @@ row
 Returns a numeric variable with row 0 based indices. It takes no
 arguments.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "function": "row",
-        "args": []
-    }
+      {
+          "function": "row",
+          "args": []
+      }
+
 
 remap\_missing
 ^^^^^^^^^^^^^^
@@ -838,31 +895,34 @@ remap\_missing
 Given a text, numeric or datetime variable. return a new variable of the
 same type with its missing values mapped to new codes
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "function": "remap_missing",
-      "args": [
-        {"variable": "varid"},
-        {"value": [
-            {
-                "reason": "Combined 1 and 2",
-                "code": 1,
-                "mapped_codes": [1, 2]
-            },
-            {
-                "reason": "Only 3",
-                "code": 2,
-                "mapped_codes": [3]
-            },
-            {
-                "reason": "No Data",
-                "code": -1,
-                "mapped_codes": [-1]
-            }
-        ]}
-      ]
-    }
+      {
+        "function": "remap_missing",
+        "args": [
+          {"variable": "varid"},
+          {"value": [
+              {
+                  "reason": "Combined 1 and 2",
+                  "code": 1,
+                  "mapped_codes": [1, 2]
+              },
+              {
+                  "reason": "Only 3",
+                  "code": 2,
+                  "mapped_codes": [3]
+              },
+              {
+                  "reason": "No Data",
+                  "code": -1,
+                  "mapped_codes": [-1]
+              }
+          ]}
+        ]
+      }
+
 
 The example above will return a copy of the variable with id ``varid``
 with the new ``missing_reasons`` grouping and mapping following the
@@ -879,18 +939,22 @@ variable and new rows will be filled with No Data ``{"?": -1}``.
 To integrate a variable it is necessary to PATCH to the variable entity
 with the ``derived`` attribute set to ``false`` as so:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    PATCH /api/dataset/abc/variables/123/
+      PATCH /api/dataset/abc/variables/123/
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-        "derived": false
+      {
+        "element": "shoji:entity",
+        "body": {
+          "derived": false
+        }
       }
-    }
+
 
 Will effectively integrate the variable and make its ``derivation``
 attribute contain ``null`` from now in. Note that it is only possible to
@@ -907,19 +971,10 @@ with the derivation expression, but also include ``derived: false``
 attribute to it. So the variable will be created with the values of the
 expression but will be unlinked from the original variable.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/dataset/abc/variables/
+      POST /api/dataset/abc/variables/
 
-.. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-        "derivation": {
-          "function": "copy_variable",
-          "args": [{"variable": "https://app.crunch.io/api/datasets/abc/variables/123/"}]
-        },
-        "derived": false
-      }
-    }

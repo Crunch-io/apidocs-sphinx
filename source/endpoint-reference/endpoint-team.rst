@@ -13,45 +13,52 @@ Catalog
 GET
 ^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /teams/ HTTP/1.1
-    Host: app.crunch.io
-    --------
-    200 OK
-    Content-Type: application/json
+      GET /teams/ HTTP/1.1
+      Host: app.crunch.io
+      --------
+      200 OK
+      Content-Type: application/json
+
 
 ::
 
     // Example team catalog:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/teams/",
-        "description": "List of all the teams where the current user is member",
-        "index": {
-            "https://app.crunch.io/api/teams/d07edb/": {
-                "name": "The A-Team",
-                "permissions": {
-                  "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/teams/67fe89/": {
-                "name": "Palo Alto Data Science",
-                "permissions": {
-                  "team_admin": false
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/teams/",
+          "description": "List of all the teams where the current user is member",
+          "index": {
+              "https://app.crunch.io/api/teams/d07edb/": {
+                  "name": "The A-Team",
+                  "permissions": {
+                    "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/teams/67fe89/": {
+                  "name": "Palo Alto Data Science",
+                  "permissions": {
+                    "team_admin": false
+                  }
+              }
+          }
+      }
 
-.. code:: r
+   --R
+   .. code:: r
 
-    teams <- getTeams()
-    names(teams)
-    ## [1] "The A-Team" "Palo Alto Data Science"
+      teams <- getTeams()
+      names(teams)
+      ## [1] "The A-Team" "Palo Alto Data Science"
+
 
 POST
 ^^^^
@@ -60,33 +67,37 @@ To create a new team, POST a Shoji Entity with a team "name" in the
 body. No other attributes are required, and you will be automatically
 assigned as a "team\_admin".
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /teams/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "My new team with ytpo"
-        }
-    }
-    --------
-    201 Created
-    Location: /teams/03df2a/
+      POST /teams/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "My new team with ytpo"
+          }
+      }
+      --------
+      201 Created
+      Location: /teams/03df2a/
 
-.. code:: r
+   --R
+   .. code:: r
 
-    # Create a new team by assigning into the teams catalog
-    teams[["My new team with ytpo"]] <- list()
-    names(teams) # Let's see that it was created
-    ## [1] "The A-Team" "Palo Alto Data Science"
-    ## [3] "My new team with ytpo"
+      # Create a new team by assigning into the teams catalog
+      teams[["My new team with ytpo"]] <- list()
+      names(teams) # Let's see that it was created
+      ## [1] "The A-Team" "Palo Alto Data Science"
+      ## [3] "My new team with ytpo"
 
-    # You can also assign members to the team when you create it,
-    # even though the POST /teams/ API does not support it.
-    teams[["New team with members"]] <- list(members="fake.user@example.com")
+      # You can also assign members to the team when you create it,
+      # even though the POST /teams/ API does not support it.
+      teams[["New team with members"]] <- list(members="fake.user@example.com")
+
 
 Entity
 ~~~~~~
@@ -96,43 +107,50 @@ Entity
 GET
 ^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /teams/d07edb/ HTTP/1.1
-    Host: app.crunch.io
-    --------
-    200 OK
-    Content-Type: application/json
+      GET /teams/d07edb/ HTTP/1.1
+      Host: app.crunch.io
+      --------
+      200 OK
+      Content-Type: application/json
+
 
 ::
 
     // Example team entity
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://app.crunch.io/api/teams/d07edb/",
-        "description": "Details for a specific team",
-        "body": {
-            "creator": "https://app.crunch.io/api/users/41c69d/",
-            "id": "d07edb",
-            "name": "The A-Team"
-        },
-        "catalogs": {
-            "datasets": "https://app.crunch.io/api/teams/d07edb/datasets/",
-            "members": "https://app.crunch.io/api/teams/d07edb/members/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://app.crunch.io/api/teams/d07edb/",
+          "description": "Details for a specific team",
+          "body": {
+              "creator": "https://app.crunch.io/api/users/41c69d/",
+              "id": "d07edb",
+              "name": "The A-Team"
+          },
+          "catalogs": {
+              "datasets": "https://app.crunch.io/api/teams/d07edb/datasets/",
+              "members": "https://app.crunch.io/api/teams/d07edb/members/"
+          }
+      }
 
-.. code:: r
+   --R
+   .. code:: r
 
-    # Access a team by name using $ or [[ from the team catalog
-    a.team <- teams[["The A-Team"]]
-    name(a.team)
-    ## [1] "The A-Team"
-    self(a.team)
-    ## [1] "https://app.crunch.io/api/teams/d07edb/"
+      # Access a team by name using $ or [[ from the team catalog
+      a.team <- teams[["The A-Team"]]
+      name(a.team)
+      ## [1] "The A-Team"
+      self(a.team)
+      ## [1] "https://app.crunch.io/api/teams/d07edb/"
+
 
 A GET request on a team entity URL returns the same "name", "id" and
 "creator" attributes as shown in the team catalog, as well as references
@@ -147,26 +165,30 @@ Team names are editable by PATCHing the team entity. Authorization is
 required: only team members with "team\_admin" permission may edit the
 team's name; other team members will receive a 403 response on PATCH.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    PATCH /teams/03df2a/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "My new team without typo"
-        }
-    }
-    --------
-    204 No Content
+      PATCH /teams/03df2a/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "My new team without typo"
+          }
+      }
+      --------
+      204 No Content
 
-.. code:: r
+   --R
+   .. code:: r
 
-    name(teams[["My new team with ytpo"]]) <- "My new team without typo"
-    names(teams) # Check that it was updated
-    ## [1] "The A-Team" "Palo Alto Data Science"
-    ## [3] "My new team without typo"
+      name(teams[["My new team with ytpo"]]) <- "My new team without typo"
+      names(teams) # Check that it was updated
+      ## [1] "The A-Team" "Palo Alto Data Science"
+      ## [3] "My new team without typo"
+
 
 Team members catalog
 ~~~~~~~~~~~~~~~~~~~~
@@ -184,39 +206,44 @@ PATCH.
 GET
 ^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /teams/d07edb/members/ HTTP/1.1
-    Host: app.crunch.io
-    --------
-    200 OK
-    Content-Type: application/json
+      GET /teams/d07edb/members/ HTTP/1.1
+      Host: app.crunch.io
+      --------
+      200 OK
+      Content-Type: application/json
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/teams/d07edb/members/",
-        "description": "Catalog of users that belong to this team",
-        "index": {
-            "https://app.crunch.io/api/users/47193a/": {
-                "name": "B. A. Baracus",
-                "permissions": {
-                    "team_admin": false
-                }
-            },
-            "https://app.crunch.io/api/users/41c69d/": {
-                "name": "Hannibal",
-                "permissions": {
-                    "team_admin": true
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/teams/d07edb/members/",
+          "description": "Catalog of users that belong to this team",
+          "index": {
+              "https://app.crunch.io/api/users/47193a/": {
+                  "name": "B. A. Baracus",
+                  "permissions": {
+                      "team_admin": false
+                  }
+              },
+              "https://app.crunch.io/api/users/41c69d/": {
+                  "name": "Hannibal",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              }
+          }
+      }
 
-.. code:: r
+   --R
+   .. code:: r
 
-    members(team)
+      members(team)
+
 
 Tuple values include:
 
@@ -263,31 +290,34 @@ exist.
 Add and modify members
 ''''''''''''''''''''''
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    PATCH /teams/d07edb/members/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    {
-        "element": "shoji:catalog",
-        "index": {
-            "https://app.crunch.io/api/users/47193a/": {
-                "permissions": {
-                    "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/users/e3211a/": {},
-            "templeton.peck@army.gov": {
-                "permissions": {
-                    "team_admin": true
-                }
-            }
-        },
-        "send_notification": true,
-        "url_base": "https://app.crunch.io/password/change/${token}/"
-    }
-    --------
-    204 No Content
+      PATCH /teams/d07edb/members/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      {
+          "element": "shoji:catalog",
+          "index": {
+              "https://app.crunch.io/api/users/47193a/": {
+                  "permissions": {
+                      "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/users/e3211a/": {},
+              "templeton.peck@army.gov": {
+                  "permissions": {
+                      "team_admin": true
+                  }
+              }
+          },
+          "send_notification": true,
+          "url_base": "https://app.crunch.io/password/change/${token}/"
+      }
+      --------
+      204 No Content
+
 
 If the index object keys correspond to users that already appear in the
 member catalog, their permissions will be updated with the corresponding
@@ -315,47 +345,51 @@ Crunch web application, this template is
 
 A GET on the members catalog shows the updated catalog.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /teams/d07edb/members/ HTTP/1.1
-    Host: app.crunch.io
-    --------
-    200 OK
-    Content-Type: application/json
+      GET /teams/d07edb/members/ HTTP/1.1
+      Host: app.crunch.io
+      --------
+      200 OK
+      Content-Type: application/json
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/teams/d07edb/members/",
-        "description": "Catalog of users that belong to this team",
-        "index": {
-            "https://app.crunch.io/api/users/47193a/": {
-                "name": "B. A. Baracus",
-                "permissions": {
-                    "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/users/41c69d/": {
-                "name": "Hannibal",
-                "permissions": {
-                    "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/users/e3211a/": {
-                "name": "Howling Mad Murdock",
-                "permissions": {
-                    "team_admin": false
-                }
-            },
-            "https://app.crunch.io/api/users/89eb3a/": {
-                "name": "templeton.peck@army.gov",
-                "permissions": {
-                    "team_admin": true
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/teams/d07edb/members/",
+          "description": "Catalog of users that belong to this team",
+          "index": {
+              "https://app.crunch.io/api/users/47193a/": {
+                  "name": "B. A. Baracus",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/users/41c69d/": {
+                  "name": "Hannibal",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/users/e3211a/": {
+                  "name": "Howling Mad Murdock",
+                  "permissions": {
+                      "team_admin": false
+                  }
+              },
+              "https://app.crunch.io/api/users/89eb3a/": {
+                  "name": "templeton.peck@army.gov",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              }
+          }
+      }
+
 
 Removing members
 ''''''''''''''''
@@ -368,41 +402,45 @@ value:
 "https://app.crunch.io/api/users/e3211a/": null } } -------- 204 No
 Content \`\`\`
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /teams/d07edb/members/ HTTP/1.1
-    Host: app.crunch.io
-    --------
-    200 OK
-    Content-Type: application/json
+      GET /teams/d07edb/members/ HTTP/1.1
+      Host: app.crunch.io
+      --------
+      200 OK
+      Content-Type: application/json
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/teams/d07edb/members/",
-        "description": "Catalog of users that belong to this team",
-        "index": {
-            "https://app.crunch.io/api/users/47193a/": {
-                "name": "B. A. Baracus",
-                "permissions": {
-                    "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/users/41c69d/": {
-                "name": "Hannibal",
-                "permissions": {
-                    "team_admin": true
-                }
-            },
-            "https://app.crunch.io/api/users/89eb3a/": {
-                "name": "templeton.peck@army.gov",
-                "permissions": {
-                    "team_admin": false
-                }
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/teams/d07edb/members/",
+          "description": "Catalog of users that belong to this team",
+          "index": {
+              "https://app.crunch.io/api/users/47193a/": {
+                  "name": "B. A. Baracus",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/users/41c69d/": {
+                  "name": "Hannibal",
+                  "permissions": {
+                      "team_admin": true
+                  }
+              },
+              "https://app.crunch.io/api/users/89eb3a/": {
+                  "name": "templeton.peck@army.gov",
+                  "permissions": {
+                      "team_admin": false
+                  }
+              }
+          }
+      }
+
 
 Team datasets catalog
 ~~~~~~~~~~~~~~~~~~~~~

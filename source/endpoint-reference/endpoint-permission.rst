@@ -13,25 +13,28 @@ delete: all action is achieved directly on the permissions catalog.
 GET Catalog
 ~~~~~~~~~~~
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://app.crunch.io/api/datasets/1/permissions/",
-        "description": "Lists all the users that have access to this dataset",
-        "index": {
-            "https://app.crunch.io/api/users/42/": {
-                "dataset_permissions": {
-                    "edit": true,
-                    "change_permissions": true,
-                    "view": true
-                },
-                "is_owner": true,
-                "name": "Lauren Ipsum",
-                "email": "lipsum@crunch.io"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://app.crunch.io/api/datasets/1/permissions/",
+          "description": "Lists all the users that have access to this dataset",
+          "index": {
+              "https://app.crunch.io/api/users/42/": {
+                  "dataset_permissions": {
+                      "edit": true,
+                      "change_permissions": true,
+                      "view": true
+                  },
+                  "is_owner": true,
+                  "name": "Lauren Ipsum",
+                  "email": "lipsum@crunch.io"
+              }
+          }
+      }
+
 
 If authorized to view the dataset, a successful GET returns a Shoji
 Catalog indicating the users who have access to this dataset and their
@@ -89,18 +92,21 @@ Modify existing
 To change the permissions a user has, PATCH new dataset\_permissions,
 like:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "https://app.crunch.io/api/users/42/": {
-            "dataset_permissions": {
-                "edit": false,
-                "view": true
-            }
-        },
-        "send_notification": true,
-        "dataset_url": "https://app.crunch.io/dataset/1"
-     }
+      {
+          "https://app.crunch.io/api/users/42/": {
+              "dataset_permissions": {
+                  "edit": false,
+                  "view": true
+              }
+          },
+          "send_notification": true,
+          "dataset_url": "https://app.crunch.io/dataset/1"
+       }
+
 
 Only the "dataset\_permissions" key in the tuple can be modified by
 PATCHing this catalog. Other keys, such as "name", are included only for
@@ -134,21 +140,24 @@ To add a user (i.e. share with them), there are two cases. First, if the
 user to be added is a member of the current user's account, PATCH
 similar to above, using this user's URL as key:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "/users/id/": {
-            "dataset_permissions": {
-                "edit": false,
-                "view": true
-            },
-            "profile": {
-                "weight": null, 
-                "applied_filters": []
+      {
+          "/users/id/": {
+              "dataset_permissions": {
+                  "edit": false,
+                  "view": true
+              },
+              "profile": {
+                  "weight": null,
+                  "applied_filters": []
 
-            }
-        }
-    }
+              }
+          }
+      }
+
 
 This payload may include a "profile" member, which are initial values
 with which to populate the sharee's user-dataset-profile.
@@ -172,11 +181,14 @@ Revoking access
 To revoke users' access to this dataset (aka "unshare" with them), PATCH
 a null tuple for their user URLs:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "/users/id/": null
-    }
+      {
+          "/users/id/": null
+      }
+
 
 Note that all of these PATCHes for add/edit/remove access to the dataset
 can be done in a single request that combines them all.
@@ -203,23 +215,26 @@ It is possible to share a dataset with people that are not users of
 Crunch yet. To do so, it is necessary to send in an email address
 instead of a user URL as a sharing key.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "somebody@email.com": {
-            "dataset_permissions": {
-                "edit": false,
-                "view": true
-            },
-            "profile": {
-                "weight": null, 
-                "applied_filters": []
-            }
-        },
-        "send_notifications": true,
-        "url_base": "https://app.crunch.io/password/change/${token}/",
-        "dataset_url": "https://app.crunch.io/dataset/1/"
-    }
+      {
+          "somebody@email.com": {
+              "dataset_permissions": {
+                  "edit": false,
+                  "view": true
+              },
+              "profile": {
+                  "weight": null,
+                  "applied_filters": []
+              }
+          },
+          "send_notifications": true,
+          "url_base": "https://app.crunch.io/password/change/${token}/",
+          "dataset_url": "https://app.crunch.io/dataset/1/"
+      }
+
 
 A new user with such email address will be created and added to the
 account of the user that is making the request. The new user will

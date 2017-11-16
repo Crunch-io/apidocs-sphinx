@@ -26,16 +26,19 @@ Regular Shoji POST payloads are also supported to create new sources
 from remote source URLs. A ``location`` attribute should be included in
 the Shoji:entity body POSTed.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      "element": "shoji:entity",
-      "body": {
-        "location": "<url>",
-        "name": "Optional name",
-        "description": "Optional description"
+      {
+        "element": "shoji:entity",
+        "body": {
+          "location": "<url>",
+          "name": "Optional name",
+          "description": "Optional description"
+        }
       }
-    }
+
 
 Entity
 ~~~~~~

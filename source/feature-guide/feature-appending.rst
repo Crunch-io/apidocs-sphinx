@@ -63,27 +63,30 @@ cases!).
 
 GET the new Batch:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    GET /api/datasets/{dataset_id}/batches/{batch_id}/ HTTP/1.1
-    ...
-    --------
-    200 OK
-    Content-Type: application/shoji
+      GET /api/datasets/{dataset_id}/batches/{batch_id}/ HTTP/1.1
+      ...
+      --------
+      200 OK
+      Content-Type: application/shoji
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "conflicts": {
-              "cdbd11/": {
-                "metadata": {},
-                "conflicts": [{
-                  "message": "Types do not match and cannot be converted",
-                }]
+      {
+          "element": "shoji:entity",
+          "body": {
+              "conflicts": {
+                "cdbd11/": {
+                  "metadata": {},
+                  "conflicts": [{
+                    "message": "Types do not match and cannot be converted",
+                  }]
+                }
               }
-            }
-        }
-    }
+          }
+      }
+
 
 If any variable conflicts, it will possess one or more "conflicts"
 members. For example, if the new variable "cdbd11" had a different type
@@ -115,19 +118,23 @@ lines of `line-delimited
 JSON <https://en.wikipedia.org/wiki/Line_Delimited_JSON>`__ to the
 dataset's ``stream`` endpoint:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {"var_id_1": 1, "var_id_2": "a"}
+      {"var_id_1": 1, "var_id_2": "a"}
 
-.. code:: python
+   --Python
+   .. code:: python
 
-    by_alias = ds.variables.by('alias')
-    while True:
-        row = my_system.read_a_row()
-        importing.importer.stream_rows(ds, {
-            'gender': row['gender'],
-            'age': row['age']
-        })
+      by_alias = ds.variables.by('alias')
+      while True:
+          row = my_system.read_a_row()
+          importing.importer.stream_rows(ds, {
+              'gender': row['gender'],
+              'age': row['age']
+          })
+
 
 Streamed values must be keyed either by id or by alias. The variable
 ids/aliases must correspond to existing variables in the dataset. The
@@ -171,23 +178,27 @@ to the dataset. When you're ready, POST to ``/datasets/{id}/batches/``
 and provide the "stream" member, plus any extra metadata the new Source
 should possess:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "stream": null,
-        "type": "ldjson",
-        "name": "My streamed rows",
-        "description": "Yet Another batch from the stream"
-    }
+      {
+          "stream": null,
+          "type": "ldjson",
+          "name": "My streamed rows",
+          "description": "Yet Another batch from the stream"
+      }
 
-.. code:: python
+   --Python
+   .. code:: python
 
-    ds.batches.create({"body": {
-        "stream": None,
-        "type": "ldjson",
-        "name": "My streamed rows",
-        "description": "Yet Another batch from the stream"
-    }})
+      ds.batches.create({"body": {
+          "stream": None,
+          "type": "ldjson",
+          "name": "My streamed rows",
+          "description": "Yet Another batch from the stream"
+      }})
+
 
 The "stream" member tells Crunch to acquire the data from the stream to
 form this Batch. The "stream" member must be ``null``, then the system
@@ -223,23 +234,25 @@ the datasets catalog indicating a ``combine_datasets`` expression:
 
     POST /api/datasets/
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-
-    {
-      "element": "shoji:entity",
-      "body": {
-        "name": "My combined dataset",
-        "description": "Consists on dsA and dsB",
-        "derivation": {
-          "function": "combine_datasets",
-          "args": [
-            {"dataset": "https://app.crunch.io/api/datasets/dsabc/"},
-            {"dataset": "https://app.crunch.io/api/datasets/ds123/"}
-          ]
+      {
+        "element": "shoji:entity",
+        "body": {
+          "name": "My combined dataset",
+          "description": "Consists on dsA and dsB",
+          "derivation": {
+            "function": "combine_datasets",
+            "args": [
+              {"dataset": "https://app.crunch.io/api/datasets/dsabc/"},
+              {"dataset": "https://app.crunch.io/api/datasets/ds123/"}
+            ]
+          }
         }
       }
-    }
+
 
 The server will verify that the authenticated user has view permission
 to all datasets, else will raise a 400 error.
@@ -264,27 +277,30 @@ Each ``{"dataset"}`` argument allows for an extra ``frame`` key that can
 contain a function expression on the desired dataset transformation, for
 example:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "dataset": "<dataset_url>",
-        "frame": {
-            "function": "select",
-            "args": [{
-                "map": {
-                    "*": {"variable": "*"},
-                    "dataset_id": {
-                        "value": "<dataset_id>",
-                        "type": "text",
-                        "references": {
-                            "name": "Dataset ID",
-                            "alias": "dataset_id"
-                        }
-                    }
-                }
-            }]
-        }
-    }
+      {
+          "dataset": "<dataset_url>",
+          "frame": {
+              "function": "select",
+              "args": [{
+                  "map": {
+                      "*": {"variable": "*"},
+                      "dataset_id": {
+                          "value": "<dataset_id>",
+                          "type": "text",
+                          "references": {
+                              "name": "Dataset ID",
+                              "alias": "dataset_id"
+                          }
+                      }
+                  }
+              }]
+          }
+      }
+
 
 Selecting a subset of variables to combine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -298,29 +314,32 @@ expressions which instructs the server to include all variables.
 Omitting that would cause to only include the selected variables, for
 example:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "dataset": "<dataset_url>",
-        "frame": {
-            "function": "select",
-            "args": [{
-                "map": {
-                    "A": {"variable": "A"},
-                    "B": {"variable": "B"},
-                    "C": {"variable": "C"},
-                    "dataset_id": {
-                        "value": "<dataset_id>",
-                        "type": "text",
-                        "references": {
-                            "name": "Dataset ID",
-                            "alias": "dataset_id"
-                        }
-                    }
-                }
-            }]
-        }
-    }
+      {
+          "dataset": "<dataset_url>",
+          "frame": {
+              "function": "select",
+              "args": [{
+                  "map": {
+                      "A": {"variable": "A"},
+                      "B": {"variable": "B"},
+                      "C": {"variable": "C"},
+                      "dataset_id": {
+                          "value": "<dataset_id>",
+                          "type": "text",
+                          "references": {
+                              "name": "Dataset ID",
+                              "alias": "dataset_id"
+                          }
+                      }
+                  }
+              }]
+          }
+      }
+
 
 On this example, the expression indicates to only include variables with
 IDs ``A``, ``B`` and ``C`` from the referenced dataset as well as add

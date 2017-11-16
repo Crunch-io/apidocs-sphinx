@@ -6,32 +6,35 @@ variable that maps rows from one to the other. To add a snapshot of
 those variables to the dataset, POST an ``adapt`` function expression to
 its variables catalog.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
+      POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
 
-    {
-        "function": "adapt",
-        "args": [{
-            "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
-        }, {
-            "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
-        }, {
-            "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
-        }]
-    }
+      {
+          "function": "adapt",
+          "args": [{
+              "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
+          }, {
+              "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
+          }, {
+              "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
+          }]
+      }
 
-    -----
-    HTTP/1.1 202 Accepted
+      -----
+      HTTP/1.1 202 Accepted
 
 
-    {
-        "element": "shoji:view",
-        "self": "https://app.crunch.io/api/datasets/{dataset_id}/variables/",
-        "value": "https://app.crunch.io/api/progress/5be82a/"
-    }
+      {
+          "element": "shoji:view",
+          "self": "https://app.crunch.io/api/datasets/{dataset_id}/variables/",
+          "value": "https://app.crunch.io/api/progress/5be82a/"
+      }
+
 
 A successful request returns 202 Continue status with a progress
 resource in the response body; poll that to track the status of the
@@ -54,48 +57,51 @@ To select certain variables to bring over from the right dataset,
 include ``select`` function expression around the ``adapt`` function
 described above:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
+      POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
 
-    {
-        "function": "select",
-        "args": [{
-            "map": {
-                "{right_var1_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var1_id}/"
-                },
-                "{right_var2_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var2_id}/"
-                },
-                "{right_var3_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var3_id}/"
-                }
-            }
-        }],
-        "frame": {
-            "function": "adapt",
-            "args": [{
-                "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
-            }, {
-                "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
-            }, {
-                "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
-            }]
-        }
-    }
+      {
+          "function": "select",
+          "args": [{
+              "map": {
+                  "{right_var1_id}/": {
+                      "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var1_id}/"
+                  },
+                  "{right_var2_id}/": {
+                      "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var2_id}/"
+                  },
+                  "{right_var3_id}/": {
+                      "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var3_id}/"
+                  }
+              }
+          }],
+          "frame": {
+              "function": "adapt",
+              "args": [{
+                  "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
+              }, {
+                  "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
+              }, {
+                  "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
+              }]
+          }
+      }
 
-    -----
-    HTTP/1.1 202 Accepted
+      -----
+      HTTP/1.1 202 Accepted
 
 
-    {
-        "element": "shoji:view",
-        "self": "https://app.crunch.io/api/datasets/{dataset_id}/variables/",
-        "value": "https://app.crunch.io/api/progress/5be82a/"
-    }
+      {
+          "element": "shoji:view",
+          "self": "https://app.crunch.io/api/datasets/{dataset_id}/variables/",
+          "value": "https://app.crunch.io/api/progress/5be82a/"
+      }
+
 
 Joining a subset of rows
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,69 +112,37 @@ filter expression, wrapped under ``{"expression": <expr>}``, or an
 existing filter entity URL (from the right-side dataset), wrapped as
 ``{"filter": <url>}``.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
+      POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
 
-    {
-        "function": "adapt",
-        "args": [{
-            "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
-        }, {
-            "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
-        }, {
-            "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
-        }],
-        "filter": {
-            "expression": {
-                "function": "==",
-                "args": [
-                    {"variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{variable_id}/"},
-                    {"value": "<value>"}
-                ]
-            }
-        }
-    }
+      {
+          "function": "adapt",
+          "args": [{
+              "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
+          }, {
+              "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
+          }, {
+              "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
+          }],
+          "filter": {
+              "expression": {
+                  "function": "==",
+                  "args": [
+                      {"variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{variable_id}/"},
+                      {"value": "<value>"}
+                  ]
+              }
+          }
+      }
+
 
 You can filter both rows and variables in the same request. Note that
 the "filter" parameter remains at the top-level function in the
 expression, which when specifying a variable subset is "select" instead
 of "adapt":
 
-.. code:: http
-
-    POST /api/datasets/{dataset_id}/variables/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-
-    {
-        "function": "select",
-        "args": [{
-            "map": {
-                "{right_var1_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var1_id}/"
-                },
-                "{right_var2_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var2_id}/"
-                },
-                "{right_var3_id}/": {
-                    "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_var3_id}/"
-                }
-            }
-        }],
-        "frame": {
-            "function": "adapt",
-            "args": [{
-                "dataset": "https://app.crunch.io/api/datasets/{other_id}/"
-            }, {
-                "variable": "https://app.crunch.io/api/datasets/{other_id}/variables/{right_key_id}/"
-            }, {
-                "variable": "https://app.crunch.io/api/datasets/{dataset_id}/variables/{left_key_id}/"
-            }]
-        },
-        "filter": {
-            "filter": "https://app.crunch.io/api/datasets/{other_id}/filters/{filter_id}/"
-        }
-    }

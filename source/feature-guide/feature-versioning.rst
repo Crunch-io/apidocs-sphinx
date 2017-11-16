@@ -40,120 +40,124 @@ The ``dataset/{id}/actions/since_forking`` endpoint will return the
 state of the fork and the upstream and the the list of actions that were
 performed on the fork since the two diverged.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    >>> forkds.actions.since_forking
-    pycrunch.shoji.View(**{
-        "self": "https://app.crunch.io/api/datasets/051ebb979db44523822ffe29236a6670/actions/since_forking/",
-        "value": {
-            "dataset": {
-                "modification_time": "2017-02-16T11:01:41.807000+00:00",
-                "revision": "58a586950183667486130f0c",
-                "id": "051ebb979db44523822ffe29236a6670",
-                "name": "My fork"
-            },
-            "actions": [
-                {
-                    "hash": "2a863871-c809-4cad-a20c-9fea86b9e763",
-                    "state": {
-                        "failed": false,
-                        "completed": true,
-                        "played": true
-                    },
-                    "params": {
-                        "variable": "fab0c81d16b442089cc50019cf610961",
-                        "definition": {
-                            "alias": "var1",
-                            "type": "text",
-                            "name": "var1",
-                            "id": "fab0c81d16b442089cc50019cf610961"
-                        },
-                        "dataset": {
-                            "id": "051ebb979db44523822ffe29236a6670",
-                            "branch": "master"
-                        },
-                        "values": [
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence"
-                        ],
-                        "owner_id": null
-                    },
-                    "key": "Variable.create"
-                }
-            ],
-            "upstream": {
-                "modification_time": "2017-02-16T11:01:40.131000+00:00",
-                "revision": "58a586940183667486130efc",
-                "id": "2730c0744cba4d7c9acc9f3551380e49",
-                "name": "My Dataset"
-            }
-        },
-        "element": "shoji:view"
-    })
+      >>> forkds.actions.since_forking
+      pycrunch.shoji.View(**{
+          "self": "https://app.crunch.io/api/datasets/051ebb979db44523822ffe29236a6670/actions/since_forking/",
+          "value": {
+              "dataset": {
+                  "modification_time": "2017-02-16T11:01:41.807000+00:00",
+                  "revision": "58a586950183667486130f0c",
+                  "id": "051ebb979db44523822ffe29236a6670",
+                  "name": "My fork"
+              },
+              "actions": [
+                  {
+                      "hash": "2a863871-c809-4cad-a20c-9fea86b9e763",
+                      "state": {
+                          "failed": false,
+                          "completed": true,
+                          "played": true
+                      },
+                      "params": {
+                          "variable": "fab0c81d16b442089cc50019cf610961",
+                          "definition": {
+                              "alias": "var1",
+                              "type": "text",
+                              "name": "var1",
+                              "id": "fab0c81d16b442089cc50019cf610961"
+                          },
+                          "dataset": {
+                              "id": "051ebb979db44523822ffe29236a6670",
+                              "branch": "master"
+                          },
+                          "values": [
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence"
+                          ],
+                          "owner_id": null
+                      },
+                      "key": "Variable.create"
+                  }
+              ],
+              "upstream": {
+                  "modification_time": "2017-02-16T11:01:40.131000+00:00",
+                  "revision": "58a586940183667486130efc",
+                  "id": "2730c0744cba4d7c9acc9f3551380e49",
+                  "name": "My Dataset"
+              }
+          },
+          "element": "shoji:view"
+      })
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    GET /api/datasets/5de96a/actions/since_forking HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    Content-Length: 1769
+      GET /api/datasets/5de96a/actions/since_forking HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      Content-Length: 1769
 
-    {
-        "element": "shoji:view",
-        "value": {
-            "dataset": {
-                "modification_time": "2017-02-16T11:01:41.807000+00:00",
-                "revision": "58a586950183667486130f0c",
-                "id": "051ebb979db44523822ffe29236a6670",
-                "name": "My fork"
-            },
-            "actions": [
-                {
-                    "hash": "2a863871-c809-4cad-a20c-9fea86b9e763",
-                    "state": {
-                        "failed": false,
-                        "completed": true,
-                        "played": true
-                    },
-                    "params": {
-                        "variable": "fab0c81d16b442089cc50019cf610961",
-                        "definition": {
-                            "alias": "var1",
-                            "type": "text",
-                            "name": "var1",
-                            "id": "fab0c81d16b442089cc50019cf610961"
-                        },
-                        "dataset": {
-                            "id": "051ebb979db44523822ffe29236a6670",
-                            "branch": "master"
-                        },
-                        "values": [
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence",
-                            "sample sentence"
-                        ],
-                        "owner_id": null
-                    },
-                    "key": "Variable.create"
-                }
-            ],
-            "upstream": {
-                "modification_time": "2017-02-16T11:01:40.131000+00:00",
-                "revision": "58a586940183667486130efc",
-                "id": "2730c0744cba4d7c9acc9f3551380e49",
-                "name": "My Dataset"
-            }
-        }
-    }
+      {
+          "element": "shoji:view",
+          "value": {
+              "dataset": {
+                  "modification_time": "2017-02-16T11:01:41.807000+00:00",
+                  "revision": "58a586950183667486130f0c",
+                  "id": "051ebb979db44523822ffe29236a6670",
+                  "name": "My fork"
+              },
+              "actions": [
+                  {
+                      "hash": "2a863871-c809-4cad-a20c-9fea86b9e763",
+                      "state": {
+                          "failed": false,
+                          "completed": true,
+                          "played": true
+                      },
+                      "params": {
+                          "variable": "fab0c81d16b442089cc50019cf610961",
+                          "definition": {
+                              "alias": "var1",
+                              "type": "text",
+                              "name": "var1",
+                              "id": "fab0c81d16b442089cc50019cf610961"
+                          },
+                          "dataset": {
+                              "id": "051ebb979db44523822ffe29236a6670",
+                              "branch": "master"
+                          },
+                          "values": [
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence",
+                              "sample sentence"
+                          ],
+                          "owner_id": null
+                      },
+                      "key": "Variable.create"
+                  }
+              ],
+              "upstream": {
+                  "modification_time": "2017-02-16T11:01:40.131000+00:00",
+                  "revision": "58a586940183667486130efc",
+                  "id": "2730c0744cba4d7c9acc9f3551380e49",
+                  "name": "My Dataset"
+              }
+          }
+      }
+
 
 The ``dataset/{id}/actions/upstream_delta`` endpoint usage and response
 matches the one of the other endpoint, but the returned actions are
@@ -177,23 +181,26 @@ response will be issued and the creation will proceed in background. In
 case of a 202 response the body will be a Shoji:view containing a
 progress URL where you may query the progress.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    >>> svp = ds.savepoints.create({"body": {"description": "TestSVP"}})
-    pycrunch.shoji.Entity(**{
-        "body": {
-            "creation_time": "2017-05-09T14:18:07.761000+00:00", 
-            "version": "master__000003", 
-            "user_name": "captain-68305620", 
-            "description": "", 
-            "last_update": "2017-05-09T14:18:07.761000+00:00"
-        }, 
-        "self": "http://local.crunch.io:19404/api/datasets/5283e3f4e3d645c0a750c09e854bdcb1/savepoints/6fbe47c97d8e4290a0c09227d6d6b63a/", 
-        "views": {
-            "revert": "http://local.crunch.io:19404/api/datasets/5283e3f4e3d645c0a750c09e854bdcb1/savepoints/6fbe47c97d8e4290a0c09227d6d6b63a/revert/"
-        }, 
-        "element": "shoji:entity"
-    })
+      >>> svp = ds.savepoints.create({"body": {"description": "TestSVP"}})
+      pycrunch.shoji.Entity(**{
+          "body": {
+              "creation_time": "2017-05-09T14:18:07.761000+00:00",
+              "version": "master__000003",
+              "user_name": "captain-68305620",
+              "description": "",
+              "last_update": "2017-05-09T14:18:07.761000+00:00"
+          },
+          "self": "http://local.crunch.io:19404/api/datasets/5283e3f4e3d645c0a750c09e854bdcb1/savepoints/6fbe47c97d8e4290a0c09227d6d6b63a/",
+          "views": {
+              "revert": "http://local.crunch.io:19404/api/datasets/5283e3f4e3d645c0a750c09e854bdcb1/savepoints/6fbe47c97d8e4290a0c09227d6d6b63a/revert/"
+          },
+          "element": "shoji:entity"
+      })
+
 
 There is no guarantee that creating a savepoint will lead to a savepoint
 that points to the exact revision the dataset was when the POST was
@@ -226,15 +233,18 @@ then "merge" any changes made to it back to the original dataset.
 To fork a dataset, POST a new fork entity to the dataset's forks
 catalog.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    >>> ds.forks.index
-    {}
-    >>> forked_ds = ds.forks.create({"body": {"name": "My fork"}}).refresh()
-    >>> ds.forks.index.keys() == [forked_ds.self]
-    True
-    >>> ds.forks.index[forked_ds.self]["name"]
-    "My fork"
+      >>> ds.forks.index
+      {}
+      >>> forked_ds = ds.forks.create({"body": {"name": "My fork"}}).refresh()
+      >>> ds.forks.index.keys() == [forked_ds.self]
+      True
+      >>> ds.forks.index[forked_ds.self]["name"]
+      "My fork"
+
 
 The response will be a 201 response if the fork could happen in the
 allotted time limit for the request or a 202 if the fork requires too
@@ -242,91 +252,102 @@ much time and is going to continue in background. Both cases will
 include a Location header with the URL of the new dataset that has been
 forked from the current one.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/{id}/forks/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    Content-Length: 231
+      POST /api/datasets/{id}/forks/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      Content-Length: 231
 
-    {
-        "element": "shoji:entity",
-        "body": {"name": "My fork"}
-    }
+      {
+          "element": "shoji:entity",
+          "body": {"name": "My fork"}
+      }
 
-    ----
+      ----
 
-    HTTP/1.1 201 Created
-    Location: https://app.crunch.io/api/datasets/{forked_id}/
+      HTTP/1.1 201 Created
+      Location: https://app.crunch.io/api/datasets/{forked_id}/
+
 
 In case of a 202, in addition to the Location headers with the URL of
 the fork that is going to be created, the response will contain a Shoji
 view with the url of the endpoint that can be polled to track fork
 completion
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/{id}/forks/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    Content-Length: 231
+      POST /api/datasets/{id}/forks/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      Content-Length: 231
 
-    {
-        "element": "shoji:entity",
-        "body": {"name": "My fork"}
-    }
+      {
+          "element": "shoji:entity",
+          "body": {"name": "My fork"}
+      }
 
-    ----
+      ----
 
-    HTTP/1.1 202 Accepted
-    Location: https://app.crunch.io/api/datasets/{forked_id}/
-    ...
-    {
-        "element": "shoji:view",
-        "value": "/progress/{progress_id}/"
-    }
+      HTTP/1.1 202 Accepted
+      Location: https://app.crunch.io/api/datasets/{forked_id}/
+      ...
+      {
+          "element": "shoji:view",
+          "value": "/progress/{progress_id}/"
+      }
+
 
 The forked dataset can then be viewed and altered like the original;
 however, those changes do not alter the original until you merge them
 back with a POST to ``datasets/{id}/actions/``.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    ds.actions.post({
-        "element": "shoji:entity",
-        "body": {"dataset": forked_ds.self, "autorollback": True}
-    })
+      ds.actions.post({
+          "element": "shoji:entity",
+          "body": {"dataset": forked_ds.self, "autorollback": True}
+      })
 
-.. code:: http
+   --HTTP
+   .. code:: http
 
-    POST /api/datasets/5de96a/actions/ HTTP/1.1
-    Host: app.crunch.io
-    Content-Type: application/json
-    Content-Length: 231
+      POST /api/datasets/5de96a/actions/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+      Content-Length: 231
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "dataset": {forked ds URL},
-            "autorollback": true
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "dataset": {forked ds URL},
+              "autorollback": true
+          }
+      }
 
-    ----
+      ----
 
-    HTTP/1.1 204 No Content
+      HTTP/1.1 204 No Content
 
-    *or*
+      *or*
 
-    HTTP/1.1 202 Accepted
+      HTTP/1.1 202 Accepted
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:view",
-        "self": "https://app.crunch.io/api/datasets/5de96a/actions/",
-        "value": "https://app.crunch.io/api/progress/912ab3/"
-    }
+      {
+          "element": "shoji:view",
+          "self": "https://app.crunch.io/api/datasets/5de96a/actions/",
+          "value": "https://app.crunch.io/api/progress/912ab3/"
+      }
+
 
 The POST to the actions catalog tells the original dataset to replay a
 set of actions; since we specify a "dataset" url, we are telling it to
@@ -366,24 +387,30 @@ possible to filter them by ``key`` and by ``hash``.
 
 When filtering by ``hash``, only the provided actions will be merged:
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    ds.actions.post({
-        "element": "shoji:entity",
-        "body": {"dataset": forked_ds.self,
-                 "filter": {"hash": ["000003"]}}
-    })
+      ds.actions.post({
+          "element": "shoji:entity",
+          "body": {"dataset": forked_ds.self,
+                   "filter": {"hash": ["000003"]}}
+      })
+
 
 When filtering by ``key``, only the actions that are part of that
 category will be merged:
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    ds.actions.post({
-        "element": "shoji:entity",
-        "body": {"dataset": forked_ds.self,
-                 "filter": {"key": ["Variable.create"]}}
-    })
+      ds.actions.post({
+          "element": "shoji:entity",
+          "body": {"dataset": forked_ds.self,
+                   "filter": {"key": ["Variable.create"]}}
+      })
+
 
 Recording the filtered actions
 ''''''''''''''''''''''''''''''
@@ -398,14 +425,17 @@ the filter, which means that the filtered actions will be recorded and a
 subsequent merge won't try to apply them to the target if they are not
 explicitly filtered again.
 
-.. code:: python
+.. language_specific::
+   --Python
+   .. code:: python
 
-    ds.actions.post({
-        "element": "shoji:entity",
-        "body": {"dataset": forked_ds.self,
-                 "remember": True,
-                 "filter": {"key": ["Variable.create"]}}
-    })
+      ds.actions.post({
+          "element": "shoji:entity",
+          "body": {"dataset": forked_ds.self,
+                   "remember": True,
+                   "filter": {"key": ["Variable.create"]}}
+      })
+
 
 Note that only the actions skipped during this merge are recorded, so
 the previous example won't skipp all the ``Variable.create`` actions

@@ -9,23 +9,26 @@ Catalog
 GET
 ^^^
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "/api/datasets/123/multitables/",
-        "specification": "/api/specifications/multitables/",
-        "description": "List of multitable definitions for this dataset",
-        "index": {
-            "/api/datasets/123/multitables/7ab1e/": {
-                "is_public": false,
-                "owner_id": "/api/users/b055/",
-                "name": "Basic Demographics",
-                "id": "7ab1e",
-                "team": "/api/teams/56789/"
-            }
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "/api/datasets/123/multitables/",
+          "specification": "/api/specifications/multitables/",
+          "description": "List of multitable definitions for this dataset",
+          "index": {
+              "/api/datasets/123/multitables/7ab1e/": {
+                  "is_public": false,
+                  "owner_id": "/api/users/b055/",
+                  "name": "Basic Demographics",
+                  "id": "7ab1e",
+                  "team": "/api/teams/56789/"
+              }
+          }
+      }
+
 
 GET on this resource returns a Shoji Catalog with the list of
 Multitables that the current user can use on this Dataset.
@@ -71,15 +74,18 @@ default.
 POST a shoji entity to the catalog with indicating the URL of the
 multitable to copy:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Name of my copy",
-            "multitable": "/api/datasets/123/multitables/7ab1e/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Name of my copy",
+              "multitable": "/api/datasets/123/multitables/7ab1e/"
+          }
+      }
+
 
 As shown in the example, it is possible to assign a new name to the
 copy. By default all copies will be private unless specified in the
@@ -98,33 +104,36 @@ Entity
 GET
 ^^^
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "datasets/123/multitables/7ab1e/",
-        "views": {
-            "tabbook": "/datasets/123/multitables/7ab1e/tabbook/"
-        },
-        "specification": "https://app.crunch.io/api/specifications/multitables/",
-        "description": "Detail information for one multitable definition",
-        "body": {
-            "name": "Basic Demographics",
-            "user": "/api/users/b055/",
-            "template": [{
-                "query": [{
-                    "variable": "/datasets/123/variables/abc/"
-                }]
-            }, {
-                "query": [{
-                    "variable": "/datasets/123/variables/def/"
-                }]
-            }],
-            "is_public": false,
-            "id": "7ab1e",
-            "team": "/api/teams/56789/"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "datasets/123/multitables/7ab1e/",
+          "views": {
+              "tabbook": "/datasets/123/multitables/7ab1e/tabbook/"
+          },
+          "specification": "https://app.crunch.io/api/specifications/multitables/",
+          "description": "Detail information for one multitable definition",
+          "body": {
+              "name": "Basic Demographics",
+              "user": "/api/users/b055/",
+              "template": [{
+                  "query": [{
+                      "variable": "/datasets/123/variables/abc/"
+                  }]
+              }, {
+                  "query": [{
+                      "variable": "/datasets/123/variables/def/"
+                  }]
+              }],
+              "is_public": false,
+              "id": "7ab1e",
+              "team": "/api/teams/56789/"
+          }
+      }
+
 
 GET on this resource returns a Shoji entity containing the requested
 multitable definition.

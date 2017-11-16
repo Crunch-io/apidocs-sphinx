@@ -30,39 +30,42 @@ The respondent may only select one rating in each row. To represent that
 answer data in Crunch, you would define an array. For example, you might
 POST a Variable Entity with the payload:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Soft Drinks",
-            "type": "categorical_array",
-            "subvariables": [
-                "./subvariables/001/", 
-                "./subvariables/002/",
-                "./subvariables/003/"
-             ],
-            "subreferences": {
-                "./subvariables/002/": {"name": "Coke", "alias": "coke"},
-                "./subvariables/003/": {"name": "Pepsi", "alias": "pepsi"},
-                "./subvariables/001/": {"name": "RC", "alias": "rc"}
-            },
-            "categories": [
-                {"id": -1, "name": "No Data",    "numeric_value": null, "missing":  true},
-                {"id":  1, "name": "Not at all", "numeric_value": null, "missing": false},
-                {"id":  2, "name": "Not much",   "numeric_value": null, "missing": false},
-                {"id":  3, "name": "OK",         "numeric_value": null, "missing": false},
-                {"id":  4, "name": "A bit",      "numeric_value": null, "missing": false},
-                {"id":  5, "name": "A lot",      "numeric_value": null, "missing": false},
-                {"id": 99, "name": "Skipped",    "numeric_value": null, "missing":  true}
-            ],
-            "values": [
-                [1, 2, {"?": 99}],
-                [{"?": -1}, 4, 3],
-                [5, 2, {"?": -1}],
-            ]
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Soft Drinks",
+              "type": "categorical_array",
+              "subvariables": [
+                  "./subvariables/001/",
+                  "./subvariables/002/",
+                  "./subvariables/003/"
+               ],
+              "subreferences": {
+                  "./subvariables/002/": {"name": "Coke", "alias": "coke"},
+                  "./subvariables/003/": {"name": "Pepsi", "alias": "pepsi"},
+                  "./subvariables/001/": {"name": "RC", "alias": "rc"}
+              },
+              "categories": [
+                  {"id": -1, "name": "No Data",    "numeric_value": null, "missing":  true},
+                  {"id":  1, "name": "Not at all", "numeric_value": null, "missing": false},
+                  {"id":  2, "name": "Not much",   "numeric_value": null, "missing": false},
+                  {"id":  3, "name": "OK",         "numeric_value": null, "missing": false},
+                  {"id":  4, "name": "A bit",      "numeric_value": null, "missing": false},
+                  {"id":  5, "name": "A lot",      "numeric_value": null, "missing": false},
+                  {"id": 99, "name": "Skipped",    "numeric_value": null, "missing":  true}
+              ],
+              "values": [
+                  [1, 2, {"?": 99}],
+                  [{"?": -1}, 4, 3],
+                  [5, 2, {"?": -1}],
+              ]
+          }
+      }
+
 
 The "Soft Drinks" categorical array variable may now be included in
 analyses like any other variable, but has 2 dimensions instead of the
@@ -76,15 +79,18 @@ array variable by POSTing a Variable Entity for the array that instead
 of a "subreferences" attribute has a "subvariables" attribute, a list of
 URL's of the variables you'd like to bind together:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "body": {
-            "name": "Soft Drinks",
-            "type": "categorical_array",
-            "subvariables": [<URI of the "Coke" variable>, <URI of the "Pepsi" variable>, <URI of the "RC" variable>]
-        }
-    }
+      {
+          "body": {
+              "name": "Soft Drinks",
+              "type": "categorical_array",
+              "subvariables": [<URI of the "Coke" variable>, <URI of the "Pepsi" variable>, <URI of the "RC" variable>]
+          }
+      }
+
 
 The existing variables are removed from the normal order and become
 virtual subvariables of the new array. This approach will cast all
@@ -95,25 +101,28 @@ name and alias of each subvariable will be moved to the array's
 If you wish to analyze a set of categorical variables as an array
 *without* moving them, you need to build a derived array instead.
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "body": {
-            "name": "Soft Drinks",
-            "type": "categorical_array",
-            "derivation": {
-                "function": "array",
-                "args": [{
-                    "function": "select",
-                    "args": [{"map": {
-                        "000000": {"variable": <URI of the "Coke" variable>},
-                        "000001": {"variable": <URI of the "Pepsi" variable>},
-                        "000002": {"variable": <URI of the "RC" variable>}
-                    }}]
-                }]
-            }
-        }
-    }
+      {
+          "body": {
+              "name": "Soft Drinks",
+              "type": "categorical_array",
+              "derivation": {
+                  "function": "array",
+                  "args": [{
+                      "function": "select",
+                      "args": [{"map": {
+                          "000000": {"variable": <URI of the "Coke" variable>},
+                          "000001": {"variable": <URI of the "Pepsi" variable>},
+                          "000002": {"variable": <URI of the "RC" variable>}
+                      }}]
+                  }]
+              }
+          }
+      }
+
 
 Your client library may have helper functions to construct the above
 more easily. This is a bit more advanced, but consequently more
@@ -143,34 +152,37 @@ The respondent may check the box or not for each row. To represent that
 answer data in Crunch, you would define an array Variable with separate
 subreferences for "USA", "Germany", "Japan", and "None of the above":
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Countries Visited",
-            "type": "multiple_response",
-            "subvariables": [
-                "./subvariables/001/", 
-                "./subvariables/002/",
-                "./subvariables/003/",
-                "./subvariables/004/"
-             ],
-            "subreferences": {
-                "./subvariables/002/": {"name": "USA", "alias": "visited_usa"},
-                "./subvariables/004/": {"name": "Germany", "alias": "visited_germany"},
-                "./subvariables/001/": {"name": "Japan", "alias": "visited_japan"},
-                "./subvariables/003/": {"name": "None of the above", "alias": "visited_none_of_the_above"}
-            },
-            "categories": [
-                {"id": -1, "name": "No Data",     "numeric_value": null, "missing":  true},
-                {"id":  1, "name": "Checked",     "numeric_value": null, "missing": false, "selected": true},
-                {"id":  2, "name": "Not checked", "numeric_value": null, "missing": false},
-                {"id": 98, "name": "Not shown",   "numeric_value": null, "missing":  true},
-                {"id": 99, "name": "Skipped",     "numeric_value": null, "missing":  true}
-            ]
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Countries Visited",
+              "type": "multiple_response",
+              "subvariables": [
+                  "./subvariables/001/",
+                  "./subvariables/002/",
+                  "./subvariables/003/",
+                  "./subvariables/004/"
+               ],
+              "subreferences": {
+                  "./subvariables/002/": {"name": "USA", "alias": "visited_usa"},
+                  "./subvariables/004/": {"name": "Germany", "alias": "visited_germany"},
+                  "./subvariables/001/": {"name": "Japan", "alias": "visited_japan"},
+                  "./subvariables/003/": {"name": "None of the above", "alias": "visited_none_of_the_above"}
+              },
+              "categories": [
+                  {"id": -1, "name": "No Data",     "numeric_value": null, "missing":  true},
+                  {"id":  1, "name": "Checked",     "numeric_value": null, "missing": false, "selected": true},
+                  {"id":  2, "name": "Not checked", "numeric_value": null, "missing": false},
+                  {"id": 98, "name": "Not shown",   "numeric_value": null, "missing":  true},
+                  {"id": 99, "name": "Skipped",     "numeric_value": null, "missing":  true}
+              ]
+          }
+      }
+
 
 Aside from the new type name, the primary difference from the basic
 categorical array is that one or more categories are marked as
@@ -241,14 +253,17 @@ dataset and have the same type as the subvariables ("categorical").
 Send a PATCH request containing the url of the new subvariable with an
 empty object as its tuple:
 
-.. code:: json
+.. language_specific::
+   --JSON
+   .. code:: json
 
-    {
-      ...
-      "index": {
-          "http://.../url/new/subvariable/": {}
+      {
+        ...
+        "index": {
+            "http://.../url/new/subvariable/": {}
+        }
       }
-    }
+
 
 A 204 response will indicate that the catalog was updated, and the new
 subvariable now is part of the array variable.

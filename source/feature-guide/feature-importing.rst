@@ -16,28 +16,31 @@ then attach them to datasets by following these steps.
 1. Create a Dataset entity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
+      POST /datasets/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 974
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "my survey",
+              ...
+          }
+      }
+      --------
+      201 Created
+      Location: /datasets/{dataset_id}/
 
-    POST /datasets/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 974
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "my survey",
-            ...
-        }
-    }
-    --------
-    201 Created
-    Location: /datasets/{dataset_id}/
+   --R
+   .. code:: r
 
-.. code:: r
+      ds <- newDatasetFromFile("my.csv", name="my survey")
+      # All three steps are handled within newDatasetFromFile
 
-    ds <- newDatasetFromFile("my.csv", name="my survey")
-    # All three steps are handled within newDatasetFromFile
 
 POST a Dataset Entity to the datasets catalog. See the documentation for
 `POST /datasets/ <#post>`__ for details on valid attributes to include
@@ -46,24 +49,26 @@ in the POST.
 2. Upload the file
 ^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
+      POST /sources/ HTTP/1.1
+      Content-Length: 8874357
+      Content-Type: multipart/form-data; boundary=df5b17ff463a4cb3aa61cf02224c7303
 
-    POST /sources/ HTTP/1.1
-    Content-Length: 8874357
-    Content-Type: multipart/form-data; boundary=df5b17ff463a4cb3aa61cf02224c7303
+      --df5b17ff463a4cb3aa61cf02224c7303
+      Content-Disposition: form-data; name="uploaded_file"; filename="my.csv"
+      Content-Type: text/csv
 
-    --df5b17ff463a4cb3aa61cf02224c7303
-    Content-Disposition: form-data; name="uploaded_file"; filename="my.csv"
-    Content-Type: text/csv
+      "case_id","q1","q2"
+      234375,3,"sometimes"
+      234376,2,"always"
+      ...
+      --------
+      201 Created
+      Location: /sources/{source_id}/
 
-    "case_id","q1","q2"
-    234375,3,"sometimes"
-    234376,2,"always"
-    ...
-    --------
-    201 Created
-    Location: /sources/{source_id}/
 
 POST the file to the sources catalog.
 
@@ -73,37 +78,42 @@ uploading it to a file-sharing service, like Dropbox.
 To import from a URL (rather than a local file), use a JSON body with a
 ``location`` property giving the URL.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
+      POST /sources/ HTTP/1.1
+      Content-Length: 71
+      Content-Type: application/json
 
-    POST /sources/ HTTP/1.1
-    Content-Length: 71
-    Content-Type: application/json
+      {"location": "https://www.dropbox.com/s/znpoawnhg0rdzhw/iris.csv?dl=1"}
 
-    {"location": "https://www.dropbox.com/s/znpoawnhg0rdzhw/iris.csv?dl=1"}
 
 3. Add the Source to the Dataset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/{dataset_id}/batches/ HTTP/1.1
-    Content-Type: application/json
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "source": "/sources/{source_id}/"
-        }
-    }
-    --------
-    202 Continue
-    Location: /datasets/{dataset_id}/batches/{batch_id}/
-    ...
-    {
-        "element": "shoji:view",
-        "value": "/progress/{progress_id}/"
-    }
+      POST /datasets/{dataset_id}/batches/ HTTP/1.1
+      Content-Type: application/json
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "source": "/sources/{source_id}/"
+          }
+      }
+      --------
+      202 Continue
+      Location: /datasets/{dataset_id}/batches/{batch_id}/
+      ...
+      {
+          "element": "shoji:view",
+          "value": "/progress/{progress_id}/"
+      }
+
 
 POST the URL of the just-created source entity (the Location in the 201
 response from the previous step) to the batches catalog of the dataset
@@ -126,31 +136,34 @@ without requiring much back-and-forth with the API.
 1. Create a Dataset entity with variable definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 974
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "my survey",
-            ...,
-            "table": {
-                "element": "crunch:table",
-                "metadata": {
-                    "educ": {"name": "Education", "alias": "educ", "type": "categorical", "categories": [...], ...},
-                    "color": {"name": "Favorite color", "alias": "color", "type": "text", ...},
-                    "state": {"name": "State", "alias": "state", "view": {"geodata": [{"geodatum": <uri>, "feature_key": "properties.postal-code"}]}}
-                },
-                "order": ["educ", {'my group": "color"}]
-            },
-        }
-    }
-    --------
-    201 Created
-    Location: /datasets/{dataset_id}/
+      POST /datasets/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 974
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "my survey",
+              ...,
+              "table": {
+                  "element": "crunch:table",
+                  "metadata": {
+                      "educ": {"name": "Education", "alias": "educ", "type": "categorical", "categories": [...], ...},
+                      "color": {"name": "Favorite color", "alias": "color", "type": "text", ...},
+                      "state": {"name": "State", "alias": "state", "view": {"geodata": [{"geodatum": <uri>, "feature_key": "properties.postal-code"}]}}
+                  },
+                  "order": ["educ", {'my group": "color"}]
+              },
+          }
+      }
+      --------
+      201 Created
+      Location: /datasets/{dataset_id}/
+
 
 POST a Dataset Entity to the datasets catalog, and in the "body",
 include a Crunch Table object with variable definitions and order.
@@ -173,200 +186,203 @@ request when creating the dataset along its metadata. The variable
 references inside the derivation expressions must point to declared
 aliases of variables or subvariables.
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 3294
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-          "name": "Dataset with derived arrays",
-          "settings": {
-            "viewers_can_export": true,
-            "viewers_can_change_weight": false,
-            "min_base_size": 3,
-            "weight": "weight_variable",
-            "dashboard_deck": null
-          },
-          "table": {
-            "metadata": {
-               "element": "crunch:table"
-               "weight_variable": {
-                    "name": "weight variable",
-                    "alias": "weight_variable",
-                    "type": "numeric"
-               },
-               "combined": {
-                  "name": "combined CA", 
-                  "derivation": {
-                    "function": "combine_categories", 
-                    "args": [
-                      {
-                        "variable": "CA1"
-                      }, 
-                      {
-                        "value": [
-                          {
-                            "combined_ids": [2], 
-                            "numeric_value": 2, 
-                            "missing": false, 
-                            "name": "even", 
-                            "id": 1
-                          }, 
-                          {
-                            "combined_ids": [1], 
-                            "numeric_value": 1, 
-                            "missing": false, 
-                            "name": "odd", 
-                            "id": 2
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                },
-              "numeric": {
-                "name": "numeric variable",
-                "type": "numeric"
-              },
-              "numeric_copy": {
-                "name": "Copy of numeric",
-                "derivation": {
-                    "function": "copy_variable",
-                    "args": [{"variable": "numeric"}]
-                }
-              },
-              "MR1": {
-                  "name": "multiple response", 
-                  "derivation": {
-                    "function": "select_categories", 
-                    "args": [
-                      {
-                        "variable": "CA3"
-                      }, 
-                      {
-                        "value": [
-                          1
-                        ]
-                      }
-                    ]
-                  }
-                },
-              "CA3": {
-                "name": "cat array 3", 
-                "derivation": {
-                  "function": "array", 
-                  "args": [
-                    {
-                      "function": "select", 
+      POST /datasets/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 3294
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+            "name": "Dataset with derived arrays",
+            "settings": {
+              "viewers_can_export": true,
+              "viewers_can_change_weight": false,
+              "min_base_size": 3,
+              "weight": "weight_variable",
+              "dashboard_deck": null
+            },
+            "table": {
+              "metadata": {
+                 "element": "crunch:table"
+                 "weight_variable": {
+                      "name": "weight variable",
+                      "alias": "weight_variable",
+                      "type": "numeric"
+                 },
+                 "combined": {
+                    "name": "combined CA",
+                    "derivation": {
+                      "function": "combine_categories",
                       "args": [
                         {
-                          "map": {
-                            "var1": {
-                              "variable": "ca2-subvar-2", 
-                              "references": {
-                                "alias": "subvar2", 
-                                "name": "Subvar 2"
-                              }
-                            }, 
-                            "var0": {
-                              "variable": "ca1-subvar-1", 
-                              "references": {
-                                "alias": "subvar1", 
-                                "name": "Subvar 1"
-                              }
-                            }
-                          }
-                        }, 
+                          "variable": "CA1"
+                        },
                         {
-                          "value": ["var1", "var0"]
+                          "value": [
+                            {
+                              "combined_ids": [2],
+                              "numeric_value": 2,
+                              "missing": false,
+                              "name": "even",
+                              "id": 1
+                            },
+                            {
+                              "combined_ids": [1],
+                              "numeric_value": 1,
+                              "missing": false,
+                              "name": "odd",
+                              "id": 2
+                            }
+                          ]
                         }
                       ]
                     }
+                  },
+                "numeric": {
+                  "name": "numeric variable",
+                  "type": "numeric"
+                },
+                "numeric_copy": {
+                  "name": "Copy of numeric",
+                  "derivation": {
+                      "function": "copy_variable",
+                      "args": [{"variable": "numeric"}]
+                  }
+                },
+                "MR1": {
+                    "name": "multiple response",
+                    "derivation": {
+                      "function": "select_categories",
+                      "args": [
+                        {
+                          "variable": "CA3"
+                        },
+                        {
+                          "value": [
+                            1
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                "CA3": {
+                  "name": "cat array 3",
+                  "derivation": {
+                    "function": "array",
+                    "args": [
+                      {
+                        "function": "select",
+                        "args": [
+                          {
+                            "map": {
+                              "var1": {
+                                "variable": "ca2-subvar-2",
+                                "references": {
+                                  "alias": "subvar2",
+                                  "name": "Subvar 2"
+                                }
+                              },
+                              "var0": {
+                                "variable": "ca1-subvar-1",
+                                "references": {
+                                  "alias": "subvar1",
+                                  "name": "Subvar 1"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "value": ["var1", "var0"]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "CA2": {
+                  "subvariables": [
+                    {
+                      "alias": "ca2-subvar-1",
+                      "name": "ca2-subvar-1"
+                    },
+                    {
+                      "alias": "ca2-subvar-2",
+                      "name": "ca2-subvar-2"
+                    }
+                  ],
+                  "type": "categorical_array",
+                  "name": "cat array 2",
+                  "categories": [
+                    {
+                      "numeric_value": null,
+                      "missing": false,
+                      "id": 1,
+                      "name": "yes"
+                    },
+                    {
+                      "numeric_value": null,
+                      "missing": false,
+                      "id": 2,
+                      "name": "no"
+                    },
+                    {
+                      "numeric_value": null,
+                      "missing": true,
+                      "id": -1,
+                      "name": "No Data"
+                    }
+                  ]
+                },
+                "CA1": {
+                  "subvariables": [
+                    {
+                      "alias": "ca1-subvar-1",
+                      "name": "ca1-subvar-1"
+                    },
+                    {
+                      "alias": "ca1-subvar-2",
+                      "name": "ca1-subvar-2"
+                    },
+                    {
+                      "alias": "ca1-subvar-3",
+                      "name": "ca1-subvar-3"
+                    }
+                  ],
+                  "type": "categorical_array",
+                  "name": "cat array 1",
+                  "categories": [
+                    {
+                      "numeric_value": null,
+                      "missing": false,
+                      "id": 1,
+                      "name": "yes"
+                    },
+                    {
+                      "numeric_value": null,
+                      "missing": false,
+                      "id": 2,
+                      "name": "no"
+                    },
+                    {
+                      "numeric_value": null,
+                      "missing": true,
+                      "id": -1,
+                      "name": "No Data"
+                    }
                   ]
                 }
-              }, 
-              "CA2": {
-                "subvariables": [
-                  {
-                    "alias": "ca2-subvar-1", 
-                    "name": "ca2-subvar-1"
-                  }, 
-                  {
-                    "alias": "ca2-subvar-2", 
-                    "name": "ca2-subvar-2"
-                  }
-                ], 
-                "type": "categorical_array", 
-                "name": "cat array 2", 
-                "categories": [
-                  {
-                    "numeric_value": null, 
-                    "missing": false, 
-                    "id": 1, 
-                    "name": "yes"
-                  }, 
-                  {
-                    "numeric_value": null, 
-                    "missing": false, 
-                    "id": 2, 
-                    "name": "no"
-                  }, 
-                  {
-                    "numeric_value": null, 
-                    "missing": true, 
-                    "id": -1, 
-                    "name": "No Data"
-                  }
-                ]
-              }, 
-              "CA1": {
-                "subvariables": [
-                  {
-                    "alias": "ca1-subvar-1", 
-                    "name": "ca1-subvar-1"
-                  }, 
-                  {
-                    "alias": "ca1-subvar-2", 
-                    "name": "ca1-subvar-2"
-                  }, 
-                  {
-                    "alias": "ca1-subvar-3", 
-                    "name": "ca1-subvar-3"
-                  }
-                ], 
-                "type": "categorical_array", 
-                "name": "cat array 1", 
-                "categories": [
-                  {
-                    "numeric_value": null, 
-                    "missing": false, 
-                    "id": 1, 
-                    "name": "yes"
-                  }, 
-                  {
-                    "numeric_value": null, 
-                    "missing": false, 
-                    "id": 2, 
-                    "name": "no"
-                  }, 
-                  {
-                    "numeric_value": null, 
-                    "missing": true, 
-                    "id": -1, 
-                    "name": "No Data"
-                  }
-                ]
               }
             }
           }
-        }
-     }
-    --------
-    201 Created
-    Location: /datasets/{dataset_id}/
+       }
+      --------
+      201 Created
+      Location: /datasets/{dataset_id}/
+
 
 The example above does a number of things:
 
@@ -397,48 +413,49 @@ passed in.
 
     By file:
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/{dataset_id}/batches/ HTTP/1.1
-    Content-Type: text/csv
-    Content-Length: 8874357
-    Content-Disposition: form-data; name="file"; filename="thedata.csv"
-    ...
-    "educ","color"
-    3,"red"
-    2,"yellow"
-    ...
-    --------
-    202 Continue
-    Location: /datasets/{dataset_id}/batches/{batch_id}/
-    ...
-    {
-        "element": "shoji:view",
-        "value": "/progress/{progress_id}/"
-    }
+      POST /datasets/{dataset_id}/batches/ HTTP/1.1
+      Content-Type: text/csv
+      Content-Length: 8874357
+      Content-Disposition: form-data; name="file"; filename="thedata.csv"
+      ...
+      "educ","color"
+      3,"red"
+      2,"yellow"
+      ...
+      --------
+      202 Continue
+      Location: /datasets/{dataset_id}/batches/{batch_id}/
+      ...
+      {
+          "element": "shoji:view",
+          "value": "/progress/{progress_id}/"
+      }
 
-    By S3 URL:
+      By S3 URL:
 
-.. code:: http
+      POST /datasets/{dataset_id}/batches/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 341
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "url": "s3://bucket_name/dir/subdir/?accessKey=ASILC6CBA&secretKey=KdJy7ZRK8fDIBQ&token=AQoDYXdzECAa%3D%3D"
+          }
+      }
+      --------
+      202 Continue
+      Location: /datasets/{dataset_id}/batches/{batch_id}/
+      ...
+      {
+          "element": "shoji:view",
+          "value": "/progress/{progress_id}/"
+      }
 
-    POST /datasets/{dataset_id}/batches/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 341
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "url": "s3://bucket_name/dir/subdir/?accessKey=ASILC6CBA&secretKey=KdJy7ZRK8fDIBQ&token=AQoDYXdzECAa%3D%3D"
-        }
-    }
-    --------
-    202 Continue
-    Location: /datasets/{dataset_id}/batches/{batch_id}/
-    ...
-    {
-        "element": "shoji:view",
-        "value": "/progress/{progress_id}/"
-    }
 
 POST a CSV file or URL to the new dataset's batches catalog. The CSV
 must include a header row of variable identifiers, which should be the
@@ -563,26 +580,30 @@ efficient way to import data.
 1. Create a Dataset entity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 974
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "my survey",
-            ...
-        }
-    }
-    --------
-    201 Created
-    Location: /datasets/{dataset_id}/
+      POST /datasets/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 974
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "my survey",
+              ...
+          }
+      }
+      --------
+      201 Created
+      Location: /datasets/{dataset_id}/
 
-.. code:: r
+   --R
+   .. code:: r
 
-    ds <- createDataset("my suryey")
+      ds <- createDataset("my suryey")
+
 
 POST a Dataset Entity to the datasets catalog, just as in the first
 import method.
@@ -590,53 +611,57 @@ import method.
 2. Add Variable definitions and column data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /datasets/{dataset_id}/variables/ HTTP/1.1
-    Content-Type: application/shoji
-    Content-Length: 38475
-    ...
-    {
-        "element": "shoji:entity",
-        "body": {
-            "name": "Gender",
-            "alias": "gender",
-            "type": "categorical",
-            "categories": [
-                {
-                    "name": "Male",
-                    "id": 1,
-                    "numeric_value": null,
-                    "missing": false
-                },
-                {
-                    "name": "Female",
-                    "id": 2,
-                    "numeric_value": null,
-                    "missing": false
-                },
-                {
-                    "name": "Skipped",
-                    "id": 9,
-                    "numeric_value": null,
-                    "missing": true
-                }
-            ],
-            "values": [1, 9, 1, 2, 2, 1, 1, 1, 1, 2, 9, 1]
-        }
-    }
-    --------
-    201 Created
-    Location: /datasets/{dataset_id}/variables/{variable_id}/
+      POST /datasets/{dataset_id}/variables/ HTTP/1.1
+      Content-Type: application/shoji
+      Content-Length: 38475
+      ...
+      {
+          "element": "shoji:entity",
+          "body": {
+              "name": "Gender",
+              "alias": "gender",
+              "type": "categorical",
+              "categories": [
+                  {
+                      "name": "Male",
+                      "id": 1,
+                      "numeric_value": null,
+                      "missing": false
+                  },
+                  {
+                      "name": "Female",
+                      "id": 2,
+                      "numeric_value": null,
+                      "missing": false
+                  },
+                  {
+                      "name": "Skipped",
+                      "id": 9,
+                      "numeric_value": null,
+                      "missing": true
+                  }
+              ],
+              "values": [1, 9, 1, 2, 2, 1, 1, 1, 1, 2, 9, 1]
+          }
+      }
+      --------
+      201 Created
+      Location: /datasets/{dataset_id}/variables/{variable_id}/
 
-.. code:: r
+   --R
+   .. code:: r
 
-    # Here's a similar example. R's factor type becomes "categorical".
-    gender.names <- c("Male", "Female", "Skipped")
-    gen <- factor(gender.names[c(1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 3, 1)],
-        levels=gender.names)
-    # Assigning an R vector into a dataset will create a variable entity.
-    ds$gender <- gen
+      # Here's a similar example. R's factor type becomes "categorical".
+      gender.names <- c("Male", "Female", "Skipped")
+      gen <- factor(gender.names[c(1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 3, 1)],
+          levels=gender.names)
+      # Assigning an R vector into a dataset will create a variable entity.
+      ds$gender <- gen
+
 
 POST a Variable Entity to the newly created dataset's variables catalog,
 and include with that Entity definition a "values" key that contains the

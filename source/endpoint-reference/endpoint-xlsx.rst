@@ -11,31 +11,38 @@ correct content-disposition and type headers.
 POST
 ^^^^
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    POST /api/xlsx/ HTTP/1.1
+      POST /api/xlsx/ HTTP/1.1
+
 
 --------------
 
-.. code:: http
+.. language_specific::
+   --HTTP
+   .. code:: http
 
-    HTTP/1.1 200 OK
-    Content-Disposition: attachment; filename=Crunch-export.xlsx
-    Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      HTTP/1.1 200 OK
+      Content-Disposition: attachment; filename=Crunch-export.xlsx
+      Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
-.. code:: json
+   --JSON
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "body": {
-            "result": [
-                {
-                    "rows": [],
-                    "etc.": "described below"
-                }
-            ]
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "body": {
+              "result": [
+                  {
+                      "rows": [],
+                      "etc.": "described below"
+                  }
+              ]
+          }
+      }
+
 
 Endpoint Parameters
 ^^^^^^^^^^^^^^^^^^^
@@ -195,339 +202,3 @@ displaying. Some of these are enumerated below.
 Complete example
 ~~~~~~~~~~~~~~~~
 
-.. code:: json
-
-    {"element":"shoji:entity",
-    "body":{
-        "result": [
-      {
-        "filter_names": ["Name_of_filter"],
-        "rows": [
-          [
-            {
-              "value": 50,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 50,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 0,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 0,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-1"
-            }
-          ]
-        ],
-        "colLabels": [
-          {
-            "value": "All"
-          },
-          {
-            "value": "2014",
-            "class": "col-0"
-          },
-          {
-            "value": "2015",
-            "class": "col-1"
-          }
-        ],
-        "spans": [
-          2
-        ],
-        "rowLabels": [
-          {
-            "value": "a",
-            "class": "row-label"
-          },
-          {
-            "value": "b",
-            "class": "row-label"
-          },
-          {
-            "value": "c",
-            "class": "row-label"
-          },
-          {
-            "value": "d",
-            "class": "row-label"
-          }
-        ],
-        "rowTitle": "ca_subvar_1",
-        "rowVariableName": "categorical_array",
-        "colTitles": [
-          "quarter"
-        ]
-      },
-      {
-        "rows": [
-          [
-            {
-              "value": 16.666666666666664,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 25,
-              "pValue": 0.24821309601845032,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": -0.2482130960184501,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 50,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 50,
-              "pValue": 0,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 33.33333333333333,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 25,
-              "pValue": -0.5464935495198773,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 50,
-              "pValue": 0.5464935495198773,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 0,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-1"
-            }
-          ]
-        ],
-        "colLabels": [
-          {
-            "value": "All"
-          },
-          {
-            "value": "2014",
-            "class": "col-0"
-          },
-          {
-            "value": "2015",
-            "class": "col-1"
-          }
-        ],
-        "spans": [
-          2
-        ],
-        "rowLabels": [
-          {
-            "value": "a",
-            "class": "row-label"
-          },
-          {
-            "value": "b",
-            "class": "row-label"
-          },
-          {
-            "value": "c",
-            "class": "row-label"
-          },
-          {
-            "value": "d",
-            "class": "row-label"
-          }
-        ],
-        "rowTitle": "ca_subvar_2",
-        "rowVariableName": "categorical_array",
-        "colTitles": [
-          "quarter"
-        ]
-      },
-      {
-        "rows": [
-          [
-            {
-              "value": 0,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": null,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 33.33333333333333,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 50,
-              "pValue": 0.045500259780248964,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": -0.045500259780248964,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 16.666666666666664,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 25,
-              "pValue": 0.24821309601845032,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 0,
-              "pValue": -0.2482130960184501,
-              "class": "subtable-0 col-1"
-            }
-          ],
-          [
-            {
-              "value": 50,
-              "class": "marginal marginal-percentage"
-            },
-            {
-              "value": 25,
-              "pValue": -0.0005320055485602548,
-              "class": "subtable-0 col-0"
-            },
-            {
-              "value": 100,
-              "pValue": 0.0005320055485602548,
-              "class": "subtable-0 col-1"
-            }
-          ]
-        ],
-        "colLabels": [
-          {
-            "value": "All"
-          },
-          {
-            "value": "2014",
-            "class": "col-0"
-          },
-          {
-            "value": "2015",
-            "class": "col-1"
-          }
-        ],
-        "spans": [
-          2
-        ],
-        "rowLabels": [
-          {
-            "value": "a",
-            "class": "row-label"
-          },
-          {
-            "value": "b",
-            "class": "row-label"
-          },
-          {
-            "value": "c",
-            "class": "row-label"
-          },
-          {
-            "value": "d",
-            "class": "row-label"
-          }
-        ],
-        "rowTitle": "ca_subvar_3",
-        "rowVariableName": "categorical_array",
-        "colTitles": [
-          "quarter"
-        ]
-      }
-    ],
-    "display_settings":{
-            "valuesAreMeans": {"value": false},
-            "countsOrPercents": {"value": "percent"},
-            "percentageDirection": {"value": "colPct"},
-            "decimalPlaces": {"value": 1}
-        }
-    }
-    }
