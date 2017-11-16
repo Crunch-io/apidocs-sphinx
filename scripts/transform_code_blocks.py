@@ -19,6 +19,11 @@ import tempfile
 import docopt
 
 
+def get_line_indent(line):
+    # Tabs counted as one indent character, oh well
+    return len(line.rstrip()) - len(line.strip())
+
+
 class CodeBlockTransformer(object):
 
     def __init__(self, in_fileobj, out_fileobj):
@@ -60,15 +65,23 @@ class CodeBlockTransformer(object):
     def state_looking_for_non_blank_line(self, line):
         if not line.strip():
             return self.state_looking_for_non_blank_line
-        # Tabs counted as one indent character, oh well
+        indent = get_line_indent(line)
+        if indent == 0:
+            # If we reach this point, we encountered an empty code block.
+            # Throw away the info for the empty block and go back to
+            # scanning for the next code block.
+            self.buffered_line = line
+            self.language = None
+            self.code_lines = []
+            return self.state_looking_for_code_block
         assert self.starting_indent is None
-        self.starting_indent = len(line) - len(line.lstrip())
+        self.starting_indent = indent
         assert not self.code_lines
         self.code_lines.append(line[self.starting_indent:])
         return self.state_scanning_code_block
 
     def state_scanning_code_block(self, line):
-        indent = len(line) - len(line.lstrip())
+        indent = get_line_indent(line)
         if not line.strip() or indent >= self.starting_indent:
             self.code_lines.append(line[self.starting_indent:])
             return self.state_scanning_code_block
