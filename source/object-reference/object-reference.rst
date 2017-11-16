@@ -163,33 +163,36 @@ The variable definition includes more knowledge than just the type name
 (numeric, text, categorical, etc); we also learn details about range,
 precision, missing values and reasons, order, etc. For example:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "type": "categorical",
-        "name": "Party ID",
-        "description": "Do you consider yourself generally a Democrat, a Republican, or an Independent?",
-        "categories": [
-            {
-                "name": "Republican",
-                "numeric_value": 1,
-                "id": 1,
-                "missing": false
-            },
-            {
-                "name": "Democrat",
-                "numeric_value": -1,
-                "id": 2,
-                "missing": false
-            },
-            {
-                "name": "Independent",
-                "numeric_value": 0,
-                "id": 3,
-                "missing": false
-            }
-        ]
-    }
+      {
+          "type": "categorical",
+          "name": "Party ID",
+          "description": "Do you consider yourself generally a Democrat, a Republican, or an Independent?",
+          "categories": [
+              {
+                  "name": "Republican",
+                  "numeric_value": 1,
+                  "id": 1,
+                  "missing": false
+              },
+              {
+                  "name": "Democrat",
+                  "numeric_value": -1,
+                  "id": 2,
+                  "missing": false
+              },
+              {
+                  "name": "Independent",
+                  "numeric_value": 0,
+                  "id": 3,
+                  "missing": false
+              }
+          ]
+      }
+
 
 This section describes the metadata of a variable as exposed across
 HTTP, both expected response values and valid input values.
@@ -337,36 +340,39 @@ The shape of each subreferences member must contain a name and
 optionally an alias. Note that the subreferences is an unordered object.
 The order of the subvariables is read from the "subvariables" attribute.
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "type": "categorical_array",
-        "name": "Example array",
-        "categories": [
-            {
-                "name": "Category 1",
-                "numeric_value": 1,
-                "id": 1,
-                "missing": false
-            },
-            {
-                "name": "Category 2",
-                "numeric_value": 0,
-                "id": 2,
-                "missing": false
-            }
-        ],
-        "subvariables": [
-          "/api/datasets/abcdef/variables/abc/subvariables/1/",
-          "/api/datasets/abcdef/variables/abc/subvariables/2/",
-          "/api/datasets/abcdef/variables/abc/subvariables/3/"
-        ],
-        "subreferences": {
-            "/api/datasets/abcdef/variables/abc/subvariables/2/": {"name": "subvariable 2", "alias": "subvar2_alias"},
-            "/api/datasets/abcdef/variables/abc/subvariables/1/": {"name": "subvariable 1"},
-            "/api/datasets/abcdef/variables/abc/subvariables/3/": {"name": "subvariable 3"}
-        }
-    }
+      {
+          "type": "categorical_array",
+          "name": "Example array",
+          "categories": [
+              {
+                  "name": "Category 1",
+                  "numeric_value": 1,
+                  "id": 1,
+                  "missing": false
+              },
+              {
+                  "name": "Category 2",
+                  "numeric_value": 0,
+                  "id": 2,
+                  "missing": false
+              }
+          ],
+          "subvariables": [
+            "/api/datasets/abcdef/variables/abc/subvariables/1/",
+            "/api/datasets/abcdef/variables/abc/subvariables/2/",
+            "/api/datasets/abcdef/variables/abc/subvariables/3/"
+          ],
+          "subreferences": {
+              "/api/datasets/abcdef/variables/abc/subvariables/2/": {"name": "subvariable 2", "alias": "subvar2_alias"},
+              "/api/datasets/abcdef/variables/abc/subvariables/1/": {"name": "subvariable 1"},
+              "/api/datasets/abcdef/variables/abc/subvariables/3/": {"name": "subvariable 3"}
+          }
+      }
+
 
 resolution
 ''''''''''
@@ -451,15 +457,18 @@ receive positive integer codes. Zero is a reserved value.
 In the above example, the code of -1 would be looked up in a missing
 reasons map such as:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "missing reasons": {
-            "no data": -1,
-            "type mismatch": -2,
-            "my backup was corrupted": 1
-        }
-    }
+      {
+          "missing reasons": {
+              "no data": -1,
+              "type mismatch": -2,
+              "my backup was corrupted": 1
+          }
+      }
+
 
 See the Endpoint Reference for user-defined missing reasons.
 
@@ -731,20 +740,22 @@ Frame Functions
 Examples
         
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
+      {
+        "function": "select",
+        "args": [{
+          "map": {
+            <destination id>: {variable: <source frame id>},
+            <destination id>: {variable: <source frame id>},
+            ...
+          }
+        }]
 
-    {
-      "function": "select",
-      "args": [{
-        "map": {
-          <destination id>: {variable: <source frame id>},
-          <destination id>: {variable: <source frame id>},
-          ...
-        }
-      }]
+      }
 
-    }
 
 -  **select**: Receives an argument which is a map expression in the
    following shape:
@@ -753,19 +764,22 @@ Where ``destination id`` is the ID that the mapped variable will have on
 the resulting frame by selecting only the ``source frame id`` variables
 from the frame where this function is applied on.
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-      "function": "deselect",
-      "args": [{
-        "map": {
-          <destination id>: {variable: <source frame id>},
-          <destination id>: {variable: <source frame id>},
-          ...
-        }
-      }]
+      {
+        "function": "deselect",
+        "args": [{
+          "map": {
+            <destination id>: {variable: <source frame id>},
+            <destination id>: {variable: <source frame id>},
+            ...
+          }
+        }]
 
-    }
+      }
+
 
 -  **deselect**: Same as ``select`` but will exclude the variable ids
    mentioned from the source frame. On this usage the ``destination id``
@@ -836,21 +850,24 @@ represented by a Shoji Entity Document. Entities possess a "body"
 member: a JSON object where each key/value pair is an attribute name and
 value. For example:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "element": "shoji:entity",
-        "self": "https://.../api/users/1/",
-        "description": "Details for a User.",
-        "specification": "https://.../api/specifications/users/",
-        "fragments": {
-            "address": "address/"
-        },
-        "body": {
-            "first_name": "Genghis",
-            "last_name": "Khan"
-        }
-    }
+      {
+          "element": "shoji:entity",
+          "self": "https://.../api/users/1/",
+          "description": "Details for a User.",
+          "specification": "https://.../api/specifications/users/",
+          "fragments": {
+              "address": "address/"
+          },
+          "body": {
+              "first_name": "Genghis",
+              "last_name": "Khan"
+          }
+      }
+
 
 In general, an HTTP GET to the "self" URL will return the document, and
 a PUT of the same will update it. PUT should not be used for partial
@@ -867,23 +884,26 @@ Catalog
 Catalogs collect or contain entities. They act as an index to a
 collection, and indeed possess an "index" member for this:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "element": "shoji:catalog",
-        "self": "https://.../api/users/",
-        "description": "A list of all the users.",
-        "specification": "https://.../api/specifications/users/",
-        "orders": {
-            "default": "default_order/"
-        },
-        "index": {
-            "2/": {"active": true},
-            "1/": {"active": false},
-            "4/": {"active": true},
-            "3/": {"active": true}
-        }
-    }
+      {
+          "element": "shoji:catalog",
+          "self": "https://.../api/users/",
+          "description": "A list of all the users.",
+          "specification": "https://.../api/specifications/users/",
+          "orders": {
+              "default": "default_order/"
+          },
+          "index": {
+              "2/": {"active": true},
+              "1/": {"active": false},
+              "4/": {"active": true},
+              "3/": {"active": true}
+          }
+      }
+
 
 Each key in the index is a URL (possibly relative to "self") which
 refers to a different resource. Often, these are Shoji Entity documents,
@@ -932,17 +952,20 @@ an index of variables; the same URL's from the index keys are arranged
 in the Order. Given the Catalog above, for example, we might produce an
 Order like:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "element": "shoji:order",
-        "self": "https://.../api/users/order/",
-        "graph": [
-            "2/",
-            {"group A": ["1/", "3/", "2/"]},
-            {"group B": ["4/"]}
-        ]
-    }
+      {
+          "element": "shoji:order",
+          "self": "https://.../api/users/order/",
+          "graph": [
+              "2/",
+              {"group A": ["1/", "3/", "2/"]},
+              {"group B": ["4/"]}
+          ]
+      }
+
 
 This represents the tree:
 
@@ -985,21 +1008,24 @@ Table
 Tables collect columns of data and (optionally) their metadata into
 two-dimensional relations.
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "element": "crunch:table",
-        "self": "https://.../api/datasets/.../table/?limit=7",
-        "description": "The data belonging to this Dataset.",
-        "metadata": {
-            "1ef0455": {"name": "Education", "type": "categorical", "categories": [...], ...},
-            "588392a": {"name": "Favorite color", "type": "text", ...}
-        },
-        "data": {
-            "1ef0455": [6, 4, 7, 7, 3, 2, 1],
-            "588392a": ["green", "red", "blue", "Red", "RED", "pink", " red"]
-        }
-    }
+      {
+          "element": "crunch:table",
+          "self": "https://.../api/datasets/.../table/?limit=7",
+          "description": "The data belonging to this Dataset.",
+          "metadata": {
+              "1ef0455": {"name": "Education", "type": "categorical", "categories": [...], ...},
+              "588392a": {"name": "Favorite color", "type": "text", ...}
+          },
+          "data": {
+              "1ef0455": [6, 4, 7, 7, 3, 2, 1],
+              "588392a": ["green", "red", "blue", "Red", "RED", "pink", " red"]
+          }
+      }
+
 
 Each key in the "data" member is a variable identifier, and its
 corresponding value is a column of Crunch data values. The data values
@@ -1028,17 +1054,20 @@ involves the same basic ingredients.
 
 Example:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "dimensions": [
-            {"variable": "datasets/ab8832/variables/3ffd45/"},
-            {"function": "+", "args": [{"variable": "datasets/ab8832/variables/2098f1/"}, {"value": 5}]}
-        ],
-        "measures": {
-            "count": {"function": "cube_count", "args": []}
-        }
-    }
+      {
+          "dimensions": [
+              {"variable": "datasets/ab8832/variables/3ffd45/"},
+              {"function": "+", "args": [{"variable": "datasets/ab8832/variables/2098f1/"}, {"value": 5}]}
+          ],
+          "measures": {
+              "count": {"function": "cube_count", "args": []}
+          }
+      }
+
 
 dimensions
           
@@ -1084,34 +1113,37 @@ dimensions. Multiple measures in the same cube share dimensions,
 effectively overlaying each other. For example, a cube might contain a
 "count" measure and a "mean" measure with the same shape:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-        "element": "crunch:cube",
-        "n": 210,
-        "missing": 12,
-        "dimensions": [
-            {"references": {"name": "A", ...}, "type": {"class": "categorical", "categories": [{"id": 1, ...}, {"id": 2, ...}, {"id": 3, ...}]}},
-            {"references": {"name": "B", ...}, "type": {"class": "categorical", "categories": [{"id": 11, ...}, {"id": 12, ...}]}}
-        ],
-        "measures": {
-            "count": {
-                "metadata": {"references": {}, "type": {"class": "numeric", "integer": true, ...}},
-                "data": [10, 20, 30, 40, 50, 60],
-                "n_missing": 12
-            },
-            "mean": {
-                "metadata": {"references": {}, "type": {"class": "numeric", ...}},
-                "data": [3.5, 17.8, 9.9, 7.32, 0, 23.4],
-                "n_missing": 12
-            }
-        },
-        "margins": {
-            "data": [210],
-            "0": {"data": [30, 70, 110]},
-            "1": {"data": [90, 120]}
-        }
-    }
+      {
+          "element": "crunch:cube",
+          "n": 210,
+          "missing": 12,
+          "dimensions": [
+              {"references": {"name": "A", ...}, "type": {"class": "categorical", "categories": [{"id": 1, ...}, {"id": 2, ...}, {"id": 3, ...}]}},
+              {"references": {"name": "B", ...}, "type": {"class": "categorical", "categories": [{"id": 11, ...}, {"id": 12, ...}]}}
+          ],
+          "measures": {
+              "count": {
+                  "metadata": {"references": {}, "type": {"class": "numeric", "integer": true, ...}},
+                  "data": [10, 20, 30, 40, 50, 60],
+                  "n_missing": 12
+              },
+              "mean": {
+                  "metadata": {"references": {}, "type": {"class": "numeric", ...}},
+                  "data": [3.5, 17.8, 9.9, 7.32, 0, 23.4],
+                  "n_missing": 12
+              }
+          },
+          "margins": {
+              "data": [210],
+              "0": {"data": [30, 70, 110]},
+              "1": {"data": [90, 120]}
+          }
+      }
+
 
 dimensions
           
@@ -1172,39 +1204,42 @@ always include the "grand total" for all dimensions. Then, we include a
 branch for each axis we "unroll". So, for example, for a 3-dimensional
 cube of X, Y, and Z, the margins member might contain:
 
-.. code:: json
+.. language_specific::
+   --Json
+   .. code:: json
 
-    {
-    "margins": {
-        "data": [4526],
-        "0": {
-            "data": [1755, 2771],
-            "1": {"data": [
-                [601, 370, 322, 269, 147, 46],
-                [332, 215, 596, 523, 437, 668]
-            ]},
-            "2": {"data": [[1198, 557], [1493, 1278]]}
-        },
-        "1": {
-            "data": [933, 585, 918, 792, 584, 714],
-            "0": {"data": [
-                [601, 370, 322, 269, 147, 46],
-                [332, 215, 596, 523, 437, 668]
-            ]},
-            "2": {"data": [
-                [825, 108], [560, 25], [325, 593],
-                [417, 375], [191, 393], [373, 341]
-            ]}
-        },
-        "2": {
-            "data": [2691, 1835],
-            "0": {"data": [[1198, 557], [1493, 1278]]},
-            "1": {"data": [
-                [825, 108], [560, 25], [325, 593],
-                [417, 375], [191, 393], [373, 341]
-            ]}
-        }
-    }
+      {
+      "margins": {
+          "data": [4526],
+          "0": {
+              "data": [1755, 2771],
+              "1": {"data": [
+                  [601, 370, 322, 269, 147, 46],
+                  [332, 215, 596, 523, 437, 668]
+              ]},
+              "2": {"data": [[1198, 557], [1493, 1278]]}
+          },
+          "1": {
+              "data": [933, 585, 918, 792, 584, 714],
+              "0": {"data": [
+                  [601, 370, 322, 269, 147, 46],
+                  [332, 215, 596, 523, 437, 668]
+              ]},
+              "2": {"data": [
+                  [825, 108], [560, 25], [325, 593],
+                  [417, 375], [191, 393], [373, 341]
+              ]}
+          },
+          "2": {
+              "data": [2691, 1835],
+              "0": {"data": [[1198, 557], [1493, 1278]]},
+              "1": {"data": [
+                  [825, 108], [560, 25], [325, 593],
+                  [417, 375], [191, 393], [373, 341]
+              ]}
+          }
+      }
+
 
 Again, each branch in the tree is an axis we "unroll" from the grand
 total. So margins[0][2] contains the margin where X (axis 0) and Z (axis

@@ -2,9 +2,21 @@
 """
 Transform consecutive ".. code::" blocks into ".. language_specific::"
 blocks in reStructuredText.
+
+Usage:
+    transform_code_blocks.py [--inplace] <filename>...
+
+Options:
+    --inplace       Modify files in-place. Default is to write to stdout.
+
+Unless --inplace is given, only the first filename is used.
 """
 from __future__ import print_function
+import shutil
 import sys
+import tempfile
+
+import docopt
 
 
 class CodeBlockTransformer(object):
@@ -85,7 +97,7 @@ class CodeBlockTransformer(object):
             self.out_fileobj.write("{}{}\n".format(indent_str, s))
         _writeln('.. language_specific::')
         for language, code_lines in code_blocks:
-            if language == 'http':
+            if language in ('http', 'json'):
                 display_language = language.upper()
             else:
                 display_language = language.capitalize()
@@ -117,8 +129,21 @@ def _coalesce_code_blocks(code_blocks):
 
 
 def main():
-    with open(sys.argv[1]) as f:
-        CodeBlockTransformer(f, sys.stdout)()
+    args = docopt.docopt(__doc__)
+    if args['--inplace']:
+        for filename in args['<filename>']:
+            print("Transforming", filename, "...")
+            with tempfile.TemporaryFile() as out:
+                with open(filename) as f:
+                    CodeBlockTransformer(f, out)()
+                out.seek(0)
+                with open(filename, 'wb') as f:
+                    shutil.copyfileobj(out, f)
+        print("Done.")
+    else:
+        filename = args['<filename>'][0]
+        with open(filename) as f:
+            CodeBlockTransformer(f, sys.stdout)()
 
 
 if __name__ == '__main__':
