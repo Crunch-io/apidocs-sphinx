@@ -11,7 +11,6 @@ To build the docs::
     virtualenv env
     source env/bin/activate
     pip -r requirements.txt
-    cd source
     make html
 
-To view the docs point your web browser to: ``source/_build/html/index.html``
+To view the docs point your web browser to: ``build/html/index.html``

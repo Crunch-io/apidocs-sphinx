@@ -1,0 +1,18 @@
+{% extends "!layout.html" %}
+
+{# Include our new CSS file into existing ones. #}
+{% set bootswatch_css_custom = ['_static/jsonschema.css']%}
+
+{# Include some custom js #}
+{% set script_files = script_files + ['_static/jsonschema.js']%}
+
+
+
+{% block header %}
+  {{ super() }}
+  <a href="http://crunch.io/"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="http://crunch.io/img/crunch_logo_reversed.png"
+    alt="Sign up with Crunch"></a>
+{% endblock %}

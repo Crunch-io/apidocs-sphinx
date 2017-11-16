@@ -16,12 +16,14 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 
 # -- General configuration ------------------------------------------------
+
+import sphinx_bootstrap_theme
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
@@ -30,8 +32,11 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.ifconfig',
-    'sphinx.ext.githubpages']
+extensions = [
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.githubpages',
+    'sphinxext.language_specific',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -74,6 +79,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+# The default langauge for highlighting
+# The "understanding-json-schema" site had 'javascript' here.
+#highlight_language = 'javascript'
+
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
@@ -83,20 +92,34 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'default'
+#html_theme = 'default'
+html_theme = 'bootstrap'
 
 html_logo = 'images/logo.png'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#
-# html_theme_options = {}
+
+# See sphinx-bootstrap-theme for documentation of these options
+# https://github.com/ryan-roemer/sphinx-bootstrap-theme
+
+html_theme_options = {
+    'navbar_site_name': 'Document',
+    'navbar_pagenav': False
+}
+
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+# using the given strftime format.
+html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -109,6 +132,24 @@ html_sidebars = {
         'searchbox.html',
     ]
 }
+
+# If false, no module index is generated.
+html_domain_indices = False
+
+# If false, no index is generated.
+html_use_index = True
+
+# If true, the index is split into individual pages for each letter.
+#html_split_index = False
+
+# If true, links to the reST sources are added to the pages.
+html_show_sourcelink = False
+
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+html_show_sphinx = True
+
+# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
+html_show_copyright = True
 
 
 # -- Options for HTMLHelp output ------------------------------------------

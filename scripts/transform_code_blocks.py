@@ -77,15 +77,25 @@ class CodeBlockTransformer(object):
             return
         code_blocks = _coalesce_code_blocks(self.code_blocks)
         self.code_blocks = []
-        def _write(s, indent=0):
-            self.out_fileobj.write(' ' * indent)
-            self.out_fileobj.write(s)
-        _write('.. language_specific::\n')
+        def _writeln(s, indent=0):
+            if s.strip():
+                indent_str = ' ' * indent
+            else:
+                indent_str = ''
+            self.out_fileobj.write("{}{}\n".format(indent_str, s))
+        _writeln('.. language_specific::')
         for language, code_lines in code_blocks:
-            _write('--{}\n'.format(language.capitalize()), indent=3)
+            if language == 'http':
+                display_language = language.upper()
+            else:
+                display_language = language.capitalize()
+            _writeln('--{}'.format(display_language), indent=3)
+            _writeln('.. code:: {}'.format(language), indent=3)
+            _writeln('')
             for code_line in code_lines:
-                _write(code_line, indent=3)
-        _write('\n')
+                _writeln(code_line.rstrip(), indent=6)
+            _writeln('')
+        _writeln('')
 
 
 def _coalesce_code_blocks(code_blocks):

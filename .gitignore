@@ -1,4 +1,5 @@
 *.orig
+*.pyc
 coverage
 *.DS_STORE
 build/
