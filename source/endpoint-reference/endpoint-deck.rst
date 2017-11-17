@@ -52,49 +52,25 @@ the dataset.
 
 The decks catalog tuples contain the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| creat | times | Time when    |
-| ion\_ | tamp  | this deck    |
-| time  |       | was created  |
-+-------+-------+--------------+
-| id    | strin | Global       |
-|       | g     | unique       |
-|       |       | identifier   |
-|       |       | for this     |
-|       |       | deck         |
-+-------+-------+--------------+
-| is\_p | boole | Indicates    |
-| ublic | an    | whether this |
-|       |       | is a public  |
-|       |       | deck or not  |
-+-------+-------+--------------+
-| owner | url   | Points to    |
-| \_id  |       | the owner of |
-|       |       | this deck    |
-+-------+-------+--------------+
-| owner | strin | Name of the  |
-| \_nam | g     | owner of the |
-| e     |       | deck         |
-|       |       | (referred by |
-|       |       | ``owner_id`` |
-|       |       | )            |
-+-------+-------+--------------+
-| team  | url   | If the deck  |
-|       |       | is shared    |
-|       |       | through a    |
-|       |       | team, it     |
-|       |       | will point   |
-|       |       | to it.       |
-|       |       | ``null`` by  |
-|       |       | default      |
-+-------+-------+--------------+
+=============== =========== ====================================================
+Name            Type        Description
+=============== =========== ====================================================
+name            string      Human-friendly string identifier
+--------------- ----------- ----------------------------------------------------
+creation_time   timestamp   Time when this deck was created
+--------------- ----------- ----------------------------------------------------
+id              string      Global unique identifier for this deck
+--------------- ----------- ----------------------------------------------------
+is_public       boolean     Indicates whether this is a public deck or not
+--------------- ----------- ----------------------------------------------------
+owner_id        url         Points to the owner of this deck
+--------------- ----------- ----------------------------------------------------
+owner_name      string      Name of the owner of the deck (referred by
+                            ``owner_id``)
+--------------- ----------- ----------------------------------------------------
+team            url         If the deck is shared through a team, it will point
+                            to it. ``null`` by default
+=============== =========== ====================================================
 
 To determine if a deck belongs to the current user, check the
 ``owner_id`` attribute.
@@ -207,55 +183,27 @@ attributes:
           }
       }
 
-
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| id    | strin | Global       |
-|       | g     | unique       |
-|       |       | identifier   |
-|       |       | for this     |
-|       |       | deck         |
-+-------+-------+--------------+
-| creat | times | Time when    |
-| ion\_ | tamp  | this deck    |
-| time  |       | was created  |
-+-------+-------+--------------+
-| descr | strin | Longer       |
-| iptio | g     | annotations  |
-| n     |       | for this     |
-|       |       | deck         |
-+-------+-------+--------------+
-| is\_p | boole | Indicates    |
-| ublic | an    | whether this |
-|       |       | is a public  |
-|       |       | deck or not  |
-+-------+-------+--------------+
-| owner | url   | Points to    |
-| \_id  |       | the owner of |
-|       |       | this deck    |
-+-------+-------+--------------+
-| owner | strin | Name of the  |
-| \_nam | g     | owner of the |
-| e     |       | deck         |
-|       |       | (referred by |
-|       |       | ``owner_id`` |
-|       |       | )            |
-+-------+-------+--------------+
-| team  | url   | If the deck  |
-|       |       | is shared    |
-|       |       | through a    |
-|       |       | team, it     |
-|       |       | will point   |
-|       |       | to it.       |
-|       |       | ``null`` by  |
-|       |       | default      |
-+-------+-------+--------------+
+=============== =========== ====================================================
+Name            Type        Description
+=============== =========== ====================================================
+name            string      Human-friendly string identifier
+--------------- ----------- ----------------------------------------------------
+id              string      Global unique identifier for this deck
+--------------- ----------- ----------------------------------------------------
+creation_time   timestamp   Time when this deck was created
+--------------- ----------- ----------------------------------------------------
+description     string      Longer annotations for this deck
+--------------- ----------- ----------------------------------------------------
+is_public       boolean     Indicates whether this is a public deck or not
+--------------- ----------- ----------------------------------------------------
+owner_id        url         Points to the owner of this deck
+--------------- ----------- ----------------------------------------------------
+owner_name      string      Name of the owner of the deck (referred by
+                            ``owner_id``)
+--------------- ----------- ----------------------------------------------------
+team            url         If the deck is shared through a team, it will point
+                            to it. ``null`` by default
+=============== =========== ====================================================
 
 PATCH
 ^^^^^
@@ -408,31 +356,18 @@ Returns a ``shoji:catalog`` with the slides for this deck.
 
 Each tuple on the slides catalog contains the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| analy | url   | Points to    |
-| sis\_ |       | the first    |
-| url   |       | (and         |
-|       |       | typically    |
-|       |       | only)        |
-|       |       | analysis     |
-|       |       | contained on |
-|       |       | this slide   |
-+-------+-------+--------------+
-| title | strin | Optional     |
-|       | g     | title for    |
-|       |       | the slide    |
-+-------+-------+--------------+
-| subti | strin | Optional     |
-| tle   | g     | subtitle for |
-|       |       | the slide    |
-+-------+-------+--------------+
-| displ | objec | Stores       |
-| ay    | t     | settings     |
-|       |       | used to load |
-|       |       | the analysis |
-+-------+-------+--------------+
+=============== ======= =======================================================
+Name            Type    Description
+=============== ======= =======================================================
+analysis_url    url     Points to the first (and typically only) analysis
+                        contained on this slide
+--------------- ------- -------------------------------------------------------
+title           string  Optional title for the slide
+--------------- ------- -------------------------------------------------------
+subtitle        string  Optional subtitle for the slide
+--------------- ------- -------------------------------------------------------
+display         object  Stores settings used to load the analysis
+=============== ======= =======================================================
 
 POST
 ^^^^
@@ -485,43 +420,20 @@ Slide attributes:
 
 Analysis attributes:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| query | objec | Contains a   |
-|       | t     | valid        |
-|       |       | analysis     |
-|       |       | query,       |
-|       |       | required     |
-+-------+-------+--------------+
-| subti | strin | Optional     |
-| tle   | g     | subtitle for |
-|       |       | the slide    |
-+-------+-------+--------------+
-| displ | objec | Contains a   |
-| ay\_s | t     | set of       |
-| ettin |       | attribtues   |
-| gs    |       | to be        |
-|       |       | interpreted  |
-|       |       | by the       |
-|       |       | client to    |
-|       |       | render and   |
-|       |       | export the   |
-|       |       | analysis     |
-+-------+-------+--------------+
-| query | objec | Contains the |
-| \_env | t     | ``weight``   |
-| ironm |       | and          |
-| ent   |       | ``filter``   |
-|       |       | applied      |
-|       |       | during the   |
-|       |       | analysis,    |
-|       |       | they will be |
-|       |       | applied up   |
-|       |       | on future    |
-|       |       | evaluation/r |
-|       |       | ender/export |
-+-------+-------+--------------+
+=================== ======= ===================================================
+Name                Type    Description
+=================== ======= ===================================================
+query               object  Contains a valid analysis query, required
+------------------- ------- ---------------------------------------------------
+subtitle            string  Optional subtitle for the slide
+------------------- ------- ---------------------------------------------------
+display_settings    object  Contains a set of attributes to be interpreted
+                            by the client to render and export the analysis
+------------------- ------- ---------------------------------------------------
+query_environment   object  Contains the ``weight`` and ``filter`` applied
+                            during the analysis, they will be applied upon
+                            future evaluation/render/export
+=================== ======= ===================================================
 
 Old format
 ''''''''''
@@ -828,31 +740,17 @@ attributes as they see fit. Display settings should be objects with a
       }
 
 
-+--------+----------------+
-| Name   | Description    |
-+========+================+
-| query  | Includes the   |
-|        | query body for |
-|        | this analysis  |
-+--------+----------------+
-| query\ | An object with |
-| _envir | a ``weight``   |
-| onment | and            |
-|        | ``filters`` to |
-|        | be used for    |
-|        | rendering/eval |
-|        | uating         |
-|        | this analysis  |
-+--------+----------------+
-| displa | An object      |
-| y\_set | containing     |
-| tings  | client         |
-|        | specific       |
-|        | instructions   |
-|        | on how to      |
-|        | recreate the   |
-|        | analysis       |
-+--------+----------------+
+=================== ===========================================================
+Name                Description
+=================== ===========================================================
+query               Includes the query body for this analysis
+------------------- -----------------------------------------------------------
+query_environment   An object with a ``weight`` and ``filters`` to be used
+                    for rendering/evaluating this analysis
+------------------- -----------------------------------------------------------
+display_settings    An object containing client-specific instructions on how
+                    to recreate the analysis
+=================== ===========================================================
 
 PATCH
 ^^^^^
