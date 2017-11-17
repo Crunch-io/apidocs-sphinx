@@ -8,17 +8,9 @@ derived variables of their own–just as they can make filters. Dataset
 editors can also derive other types of variables as permanent additions
 to the dataset, available for all viewers.
 
-.. raw:: html
-
-   <aside class="notice">
-
-::
+.. note::
 
     In this section, sample variable documents have been trimmed to the attributes essential to the derivation examples. Actual variable documents in the wild will have more attributes than those shown here.
-
-.. raw:: html
-
-   </aside>
 
 Combining categories
 ~~~~~~~~~~~~~~~~~~~~

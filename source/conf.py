@@ -105,6 +105,7 @@ html_logo = 'images/logo.png'
 # https://github.com/ryan-roemer/sphinx-bootstrap-theme
 
 html_theme_options = {
+    # These options are only for the 'bootstrap' theme:
     'navbar_site_name': 'Document',
     'navbar_pagenav': False
 }
@@ -130,6 +131,8 @@ html_sidebars = {
     '**': [
         'relations.html',  # needs 'show_related': True theme option to display
         'searchbox.html',
+        'globaltoc.html',
+        #'localtoc.html',
     ]
 }
 
