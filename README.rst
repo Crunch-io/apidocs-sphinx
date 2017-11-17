@@ -1,0 +1,16 @@
+==================
+Crunch.io API docs
+==================
+
+The Crunch API docs are built using the Sphinx_ documentation system.
+
+.. _Sphinx: http://www.sphinx-doc.org/en/stable/index.html
+
+To build the docs::
+
+    virtualenv env
+    source env/bin/activate
+    pip install -r requirements.txt
+    make html
+
+To view the docs point your web browser to: ``build/html/index.html``

@@ -1,19 +1,20 @@
-publish:
-	rake build
-	git checkout gh-pages
-	git reset --hard
-	rm -rf fonts
-	rm -rf javascripts
-	rm -rf images
-	rm -rf stylesheets
-	rm -rf examples
-	mv build/* .
-	git add fonts
-	git add javascripts
-	git add images
-	git add stylesheets
-	git add examples
-	git add index.html
-	git commit -m "Updating gh-pages"
-	git push
-	git checkout master
+# Minimal makefile for Sphinx documentation
+#
+
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SPHINXPROJ    = CrunchioAPIDocs
+SOURCEDIR     = source
+BUILDDIR      = build
+
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+.PHONY: help Makefile
+
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
