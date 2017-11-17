@@ -524,9 +524,9 @@ independent variables; they are exposed as "virtual" variables in some
 places, and can be analyzed independently, but they do not have their
 own type or categories.
 
-Arrays are currently always categorical, so they sned and receive data
+Arrays are currently always categorical, so they send and receive data
 in the same format: category ids. The only difference is that regular
-categorical variables sned and receive one id per row, where arrays send
+categorical variables send and receive one id per row, where arrays send
 and receive a list of ids (of equal length to the number of subvariables
 in the array).
 
