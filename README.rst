@@ -10,7 +10,7 @@ To build the docs::
 
     virtualenv env
     source env/bin/activate
-    pip -r requirements.txt
+    pip install -r requirements.txt
     make html
 
 To view the docs point your web browser to: ``build/html/index.html``
