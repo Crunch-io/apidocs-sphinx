@@ -54,132 +54,132 @@ the values. Multiple tables can be placed on a single sheet.
 Result
 ''''''
 
-+---------+-------+----------+--------------+----------------+
-| Name    | Type  | Typical  | Description  |
-|         |       | element  |              |
-+=========+=======+==========+==============+================+
-| rows    | array | ``{"valu | Cells are    |
-|         |       | e": 30,  | objects with |
-|         |       | "class": | at least a   |
-|         |       |  "format | ``value``    |
-|         |       | ted"}``  | member, and  |
-|         |       |          | optional     |
-|         |       |          | ``class``,   |
-|         |       |          | where a      |
-|         |       |          | value of     |
-|         |       |          | ``"formatted |
-|         |       |          | "``          |
-|         |       |          | prevents the |
-|         |       |          | exporter     |
-|         |       |          | from         |
-|         |       |          | applying any |
-|         |       |          | number       |
-|         |       |          | format to    |
-|         |       |          | the result   |
-|         |       |          | cell         |
-+---------+-------+----------+--------------+----------------+
-| colLabe | array | ``{"valu | Array of     |
-| ls      |       | e": "All | objects with |
-|         |       | "}``     | a ``value``  |
-|         |       |          | member       |
-+---------+-------+----------+--------------+----------------+
-| colTitl | array | ``"Age"` | Array of     |
-| es      |       | `        | strings      |
-+---------+-------+----------+--------------+----------------+
-| spans   | array | ``4``    | array of     |
-|         |       |          | integers     |
-|         |       |          | matching the |
-|         |       |          | length of    |
-|         |       |          | colTitles,   |
-|         |       |          | indicating   |
-|         |       |          | the number   |
-|         |       |          | of cells to  |
-|         |       |          | be joined    |
-|         |       |          | for each     |
-|         |       |          | colTitle     |
-|         |       |          | after the    |
-|         |       |          | first one.   |
-|         |       |          | The first    |
-|         |       |          | colTitle is  |
-|         |       |          | assumed to   |
-|         |       |          | be only one  |
-|         |       |          | column wide. |
-+---------+-------+----------+--------------+----------------+
-| rowTitl | strin | ``"Dog f | A title,     |
-| e       | g     | ood bran | which is     |
-|         |       | ds"``    | formatted    |
-|         |       |          | bold above   |
-|         |       |          | the first    |
-|         |       |          | column of    |
-|         |       |          | the table    |
-|         |       |          | (the         |
-|         |       |          | rowLabels,   |
-|         |       |          | below)       |
-+---------+-------+----------+--------------+----------------+
-| rowLabe | array | ``{"valu | labels for   |
-| ls      |       | e": "Can | rows of the  |
-|         |       | ine Crun | table        |
-|         |       | ch"}``   |              |
-+---------+-------+----------+--------------+----------------+
-| rowVari | strin | ``"Prefe | title to     |
-| ableNam | g     | rred dog | display at   |
-| e       |       |  food"`` | the very top |
-|         |       |          | left of the  |
-|         |       |          | result sheet |
-+---------+-------+----------+--------------+----------------+
-| filter\ | array | ``"Breed | Names of any |
-| _names  |       | : Dachsh | filters to   |
-|         |       | und"``   | print        |
-|         |       |          | beneath the  |
-|         |       |          | table, will  |
-|         |       |          | be labeled   |
-|         |       |          | "Filters".   |
-|         |       |          | If multiple  |
-|         |       |          | result       |
-|         |       |          | objects are  |
-|         |       |          | included in  |
-|         |       |          | the payload, |
-|         |       |          | the filter   |
-|         |       |          | names from   |
-|         |       |          | the *first*  |
-|         |       |          | result are   |
-|         |       |          | used, and    |
-|         |       |          | placed at    |
-|         |       |          | the bottom   |
-|         |       |          | of the sheet |
-|         |       |          | beneath all  |
-|         |       |          | results.     |
-+---------+-------+----------+--------------+----------------+
++---------+-------+---------------------------------------------+--------------+
+| Name    | Type  | Typical                                     | Description  |
+|         |       | element                                     |              |
++=========+=======+=============================================+==============+
+| rows    | array | ``{"value": 30, "class": "formatted"}``     | Cells are    |
+|         |       |                                             | objects with |
+|         |       |                                             | at least a   |
+|         |       |                                             | ``value``    |
+|         |       |                                             | member, and  |
+|         |       |                                             | optional     |
+|         |       |                                             | ``class``,   |
+|         |       |                                             | where a      |
+|         |       |                                             | value of     |
+|         |       |                                             | ``"formatted |
+|         |       |                                             | "``          |
+|         |       |                                             | prevents the |
+|         |       |                                             | exporter     |
+|         |       |                                             | from         |
+|         |       |                                             | applying any |
+|         |       |                                             | number       |
+|         |       |                                             | format to    |
+|         |       |                                             | the result   |
+|         |       |                                             | cell         |
++---------+-------+---------------------------------------------+--------------+
+| colLabe | array | ``{"value": "All"}``                        | Array of     |
+| ls      |       |                                             | objects with |
+|         |       |                                             | a ``value``  |
+|         |       |                                             | member       |
++---------+-------+---------------------------------------------+--------------+
+| colTitl | array | ``"Age"``                                   | Array of     |
+| es      |       |                                             | strings      |
++---------+-------+---------------------------------------------+--------------+
+| spans   | array | ``4``                                       | array of     |
+|         |       |                                             | integers     |
+|         |       |                                             | matching the |
+|         |       |                                             | length of    |
+|         |       |                                             | colTitles,   |
+|         |       |                                             | indicating   |
+|         |       |                                             | the number   |
+|         |       |                                             | of cells to  |
+|         |       |                                             | be joined    |
+|         |       |                                             | for each     |
+|         |       |                                             | colTitle     |
+|         |       |                                             | after the    |
+|         |       |                                             | first one.   |
+|         |       |                                             | The first    |
+|         |       |                                             | colTitle is  |
+|         |       |                                             | assumed to   |
+|         |       |                                             | be only one  |
+|         |       |                                             | column wide. |
++---------+-------+---------------------------------------------+--------------+
+| rowTitl | strin | ``"Dog food brands"``                       | A title,     |
+| e       | g     |                                             | which is     |
+|         |       |                                             | formatted    |
+|         |       |                                             | bold above   |
+|         |       |                                             | the first    |
+|         |       |                                             | column of    |
+|         |       |                                             | the table    |
+|         |       |                                             | (the         |
+|         |       |                                             | rowLabels,   |
+|         |       |                                             | below)       |
++---------+-------+---------------------------------------------+--------------+
+| rowLabe | array | ``{"value": "Canine Crunch"}``              | labels for   |
+| ls      |       |                                             | rows of the  |
+|         |       |                                             | table        |
+|         |       |                                             |              |
++---------+-------+---------------------------------------------+--------------+
+| rowVari | strin | ``"Preferred dog food"``                    | title to     |
+| ableNam | g     |                                             | display at   |
+| e       |       |                                             | the very top |
+|         |       |                                             | left of the  |
+|         |       |                                             | result sheet |
++---------+-------+---------------------------------------------+--------------+
+| filter\ | array | ``"Breed: Dachshund"``                      | Names of any |
+| _names  |       |                                             | filters to   |
+|         |       |                                             | print        |
+|         |       |                                             | beneath the  |
+|         |       |                                             | table, will  |
+|         |       |                                             | be labeled   |
+|         |       |                                             | "Filters".   |
+|         |       |                                             | If multiple  |
+|         |       |                                             | result       |
+|         |       |                                             | objects are  |
+|         |       |                                             | included in  |
+|         |       |                                             | the payload, |
+|         |       |                                             | the filter   |
+|         |       |                                             | names from   |
+|         |       |                                             | the *first*  |
+|         |       |                                             | result are   |
+|         |       |                                             | used, and    |
+|         |       |                                             | placed at    |
+|         |       |                                             | the bottom   |
+|         |       |                                             | of the sheet |
+|         |       |                                             | beneath all  |
+|         |       |                                             | results.     |
++---------+-------+---------------------------------------------+--------------+
 
 Display Settings
 ''''''''''''''''
 
 Further customization for the resulting output.
 
-+---------+-------+----------+--------------+----------------+
-| Name    | Type  | Default  | Description  | Example        |
-+=========+=======+==========+==============+================+
-| decimal | objec | 0        | number of    | ``{"value": 0} |
-| Places  | t     |          | decimal      | ``             |
-|         |       |          | places to    |                |
-|         |       |          | diaplay      |                |
-+---------+-------+----------+--------------+----------------+
-| countsO | objec | percent  | use counts   | ``{"value": "p |
-| rPercen | t     |          | or percents  | ercent"}``     |
-| ts      |       |          |              |                |
-+---------+-------+----------+--------------+----------------+
-| percent | objec | {"value" | row or       | ``{"value": "c |
-| ageDire | t     | :        | column based | olPct"}``      |
-| ction   |       | "colPct" | percents     |                |
-|         |       | }        |              |                |
-+---------+-------+----------+--------------+----------------+
-| valuesA | objec | false    | are values   | ``{"value": fa |
-| reMeans | t     |          | means? (If   | lse}``         |
-|         |       |          | so, will be  |                |
-|         |       |          | formatted    |                |
-|         |       |          | with decimal |                |
-|         |       |          | places)      |                |
-+---------+-------+----------+--------------+----------------+
++---------+-------+----------+--------------+-------------------------------+
+| Name    | Type  | Default  | Description  | Example                       |
++=========+=======+==========+==============+===============================+
+| decimal | objec | 0        | number of    | ``{"value": 0}``              |
+| Places  | t     |          | decimal      |                               |
+|         |       |          | places to    |                               |
+|         |       |          | diaplay      |                               |
++---------+-------+----------+--------------+-------------------------------+
+| countsO | objec | percent  | use counts   | ``{"value": "percent"}``      |
+| rPercen | t     |          | or percents  |                               |
+| ts      |       |          |              |                               |
++---------+-------+----------+--------------+-------------------------------+
+| percent | objec | {"value" | row or       | ``{"value": "colPct"}``       |
+| ageDire | t     | :        | column based |                               |
+| ction   |       | "colPct" | percents     |                               |
+|         |       | }        |              |                               |
++---------+-------+----------+--------------+-------------------------------+
+| valuesA | objec | false    | are values   | ``{"value": false}``          |
+| reMeans | t     |          | means? (If   |                               |
+|         |       |          | so, will be  |                               |
+|         |       |          | formatted    |                               |
+|         |       |          | with decimal |                               |
+|         |       |          | places)      |                               |
++---------+-------+----------+--------------+-------------------------------+
 
 Quirks
 ''''''

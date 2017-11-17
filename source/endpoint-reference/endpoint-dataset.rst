@@ -119,118 +119,105 @@ When authenticated, GET returns 200 status with a Shoji Catalog of
 datasets to which the authenticated user has access. Catalog tuples
 contain the following attributes:
 
-+-------+-------+----------+--------------+
-| Name  | Type  | Default  | Description  |
-+=======+=======+==========+==============+
-| name  | strin |          | Required.    |
-|       | g     |          | The name of  |
-|       |       |          | the dataset  |
-+-------+-------+----------+--------------+
-| descr | strin | ""       | A longer     |
-| iptio | g     |          | description  |
-| n     |       |          | of the       |
-|       |       |          | dataset      |
-+-------+-------+----------+--------------+
-| id    | strin |          | The          |
-|       | g     |          | dataset's id |
-+-------+-------+----------+--------------+
-| archi | bool  | false    | Whether the  |
-| ved   |       |          | dataset is   |
-|       |       |          | "archived"   |
-|       |       |          | or active    |
-+-------+-------+----------+--------------+
-| permi | objec | ``{"edit | Authorizatio |
-| ssion | t     | ": false | ns           |
-| s     |       | }``      | on this      |
-|       |       |          | dataset; see |
-|       |       |          | `Permissions |
-|       |       |          |  <#permissio |
-|       |       |          | ns>`__       |
-+-------+-------+----------+--------------+
-| owner | URL   |          | URL of the   |
-| \_id  |       |          | user entity  |
-|       |       |          | of the       |
-|       |       |          | dataset's    |
-|       |       |          | owner        |
-+-------+-------+----------+--------------+
-| owner | strin | ""       | That user's  |
-| \_nam | g     |          | name, for    |
-| e     |       |          | display      |
-+-------+-------+----------+--------------+
-| size  | objec | ``{"rows | Dimensions   |
-|       | t     | ": 0, "c | of the       |
-|       |       | olumns": | dataset      |
-|       |       |  0, "unf |              |
-|       |       | iltered_ |              |
-|       |       | rows": 0 |              |
-|       |       | }``      |              |
-+-------+-------+----------+--------------+
-| creat | ISO-8 |          | Datetime at  |
-| ion\_ | 601   |          | which the    |
-| time  | strin |          | dataset was  |
-|       | g     |          | created in   |
-|       |       |          | Crunch       |
-+-------+-------+----------+--------------+
-| modif | ISO-8 |          | Datetime of  |
-| icati | 601   |          | the last     |
-| on\_t | strin |          | modification |
-| ime   | g     |          | for this     |
-|       |       |          | dataset      |
-|       |       |          | globally     |
-+-------+-------+----------+--------------+
-| start | ISO-8 |          | Date/time    |
-| \_dat | 601   |          | for which    |
-| e     | strin |          | the data in  |
-|       | g     |          | the dataset  |
-|       |       |          | corresponds  |
-+-------+-------+----------+--------------+
-| end\_ | ISO-8 |          | End          |
-| date  | 601   |          | date/time of |
-|       | strin |          | the          |
-|       | g     |          | dataset's    |
-|       |       |          | data,        |
-|       |       |          | defining a   |
-|       |       |          | start\_date: |
-|       |       |          | end\_date    |
-|       |       |          | range        |
-+-------+-------+----------+--------------+
-| strea | strin | Possible |
-| ming  | g     | values   |
-|       |       | "no",    |
-|       |       | "finishe |
-|       |       | d"       |
-|       |       | and      |
-|       |       | "streami |
-|       |       | ng"      |
-|       |       | to       |
-|       |       | enable/d |
-|       |       | isable   |
-|       |       | streamin |
-|       |       | g        |
-+-------+-------+----------+--------------+
-| curre | URL   |          | URL of the   |
-| nt\_e | or    |          | user entity  |
-| ditor | null  |          | that is      |
-|       |       |          | currently    |
-|       |       |          | editing the  |
-|       |       |          | dataset, or  |
-|       |       |          | ``null`` if  |
-|       |       |          | there is no  |
-|       |       |          | current      |
-|       |       |          | editor       |
-+-------+-------+----------+--------------+
-| curre | strin |          | That user's  |
-| nt\_e | g     |          | name, for    |
-| ditor | or    |          | display      |
-| \_nam | null  |          |              |
-| e     |       |          |              |
-+-------+-------+----------+--------------+
-| is\_p | boole | true     | Indicates if |
-| ublis | an    |          | the dataset  |
-| hed   |       |          | is published |
-|       |       |          | to viewers   |
-|       |       |          | or not       |
-+-------+-------+----------+--------------+
++-------+-------+-----------------------------------------------------+---------------------------------+
+| Name  | Type  | Default                                             | Description                     |
++=======+=======+=====================================================+=================================+
+| name  | strin |                                                     | Required.                       |
+|       | g     |                                                     | The name of                     |
+|       |       |                                                     | the dataset                     |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| descr | strin | ""                                                  | A longer                        |
+| iptio | g     |                                                     | description                     |
+| n     |       |                                                     | of the                          |
+|       |       |                                                     | dataset                         |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| id    | strin |                                                     | The                             |
+|       | g     |                                                     | dataset's id                    |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| archi | bool  | false                                               | Whether the                     |
+| ved   |       |                                                     | dataset is                      |
+|       |       |                                                     | "archived"                      |
+|       |       |                                                     | or active                       |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| permi | objec | ``{"edit": false}``                                 | Authorizations                  |
+| ssion | t     |                                                     | on this                         |
+| s     |       |                                                     | dataset; see                    |
+|       |       |                                                     | `Permissions <#permissions>`__  |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| owner | URL   |                                                     | URL of the                      |
+| \_id  |       |                                                     | user entity                     |
+|       |       |                                                     | of the                          |
+|       |       |                                                     | dataset's                       |
+|       |       |                                                     | owner                           |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| owner | strin | ""                                                  | That user's                     |
+| \_nam | g     |                                                     | name, for                       |
+| e     |       |                                                     | display                         |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| size  | objec | ``{"rows": 0, "columns": 0, "unfiltered_rows": 0}`` | Dimensions                      |
+|       | t     |                                                     | of the                          |
+|       |       |                                                     | dataset                         |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| creat | ISO-8 |                                                     | Datetime at                     |
+| ion\_ | 601   |                                                     | which the                       |
+| time  | strin |                                                     | dataset was                     |
+|       | g     |                                                     | created in                      |
+|       |       |                                                     | Crunch                          |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| modif | ISO-8 |                                                     | Datetime of                     |
+| icati | 601   |                                                     | the last                        |
+| on\_t | strin |                                                     | modification                    |
+| ime   | g     |                                                     | for this                        |
+|       |       |                                                     | dataset                         |
+|       |       |                                                     | globally                        |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| start | ISO-8 |                                                     | Date/time                       |
+| \_dat | 601   |                                                     | for which                       |
+| e     | strin |                                                     | the data in                     |
+|       | g     |                                                     | the dataset                     |
+|       |       |                                                     | corresponds                     |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| end\_ | ISO-8 |                                                     | End                             |
+| date  | 601   |                                                     | date/time of                    |
+|       | strin |                                                     | the                             |
+|       | g     |                                                     | dataset's                       |
+|       |       |                                                     | data,                           |
+|       |       |                                                     | defining a                      |
+|       |       |                                                     | start\_date:                    |
+|       |       |                                                     | end\_date                       |
+|       |       |                                                     | range                           |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| strea | strin |                                                     | Possible                        |
+| ming  | g     |                                                     | values "no",                    |
+|       |       |                                                     | "finished",                     |
+|       |       |                                                     | and "streaming"                 |
+|       |       |                                                     | to                              |
+|       |       |                                                     | enable/disable                  |
+|       |       |                                                     | streaming                       |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| curre | URL   |                                                     | URL of the                      |
+| nt\_e | or    |                                                     | user entity                     |
+| ditor | null  |                                                     | that is                         |
+|       |       |                                                     | currently                       |
+|       |       |                                                     | editing the                     |
+|       |       |                                                     | dataset, or                     |
+|       |       |                                                     | ``null`` if                     |
+|       |       |                                                     | there is no                     |
+|       |       |                                                     | current                         |
+|       |       |                                                     | editor                          |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| curre | strin |                                                     | That user's                     |
+| nt\_e | g     |                                                     | name, for                       |
+| ditor | or    |                                                     | display                         |
+| \_nam | null  |                                                     |                                 |
+| e     |       |                                                     |                                 |
++-------+-------+-----------------------------------------------------+---------------------------------+
+| is\_p | boole | true                                                | Indicates if                    |
+| ublis | an    |                                                     | the dataset                     |
+| hed   |       |                                                     | is published                    |
+|       |       |                                                     | to viewers                      |
+|       |       |                                                     | or not                          |
++-------+-------+-----------------------------------------------------+---------------------------------+
 
 .. raw:: html
 
@@ -657,139 +644,121 @@ URL Parameters
 Dataset attributes
 ''''''''''''''''''
 
-+-------+-------+----------+--------------+
-| Name  | Type  | Default  | Description  |
-+=======+=======+==========+==============+
-| name  | strin |          | Required.    |
-|       | g     |          | The name of  |
-|       |       |          | the dataset  |
-+-------+-------+----------+--------------+
-| descr | strin | ""       | A longer     |
-| iptio | g     |          | description  |
-| n     |       |          | of the       |
-|       |       |          | dataset      |
-+-------+-------+----------+--------------+
-| notes | strin | ""       | Additional   |
-|       | g     |          | information  |
-|       |       |          | you want to  |
-|       |       |          | associate    |
-|       |       |          | with this    |
-|       |       |          | dataset      |
-+-------+-------+----------+--------------+
-| id    | strin |          | The          |
-|       | g     |          | dataset's id |
-+-------+-------+----------+--------------+
-| archi | bool  | false    | Whether the  |
-| ved   |       |          | dataset is   |
-|       |       |          | "archived"   |
-|       |       |          | or active    |
-+-------+-------+----------+--------------+
-| permi | objec | ``{"edit | Authorizatio |
-| ssion | t     | ": false | ns           |
-| s     |       | }``      | on this      |
-|       |       |          | dataset; see |
-|       |       |          | `Permissions |
-|       |       |          |  <#permissio |
-|       |       |          | ns>`__       |
-+-------+-------+----------+--------------+
-| owner | URL   |          | URL of the   |
-| \_id  |       |          | user entity  |
-|       |       |          | of the       |
-|       |       |          | dataset's    |
-|       |       |          | owner        |
-+-------+-------+----------+--------------+
-| owner | strin | ""       | That user's  |
-| \_nam | g     |          | name, for    |
-| e     |       |          | display      |
-+-------+-------+----------+--------------+
-| size  | objec | ``{"rows | Dimensions   |
-|       | t     | ": 0, "u | of the       |
-|       |       | nfiltere | dataset      |
-|       |       | d_rows", |              |
-|       |       |  "column |              |
-|       |       | s": 0}`` |              |
-+-------+-------+----------+--------------+
-| creat | ISO-8 |          | Datetime at  |
-| ion\_ | 601   |          | which the    |
-| time  | strin |          | dataset was  |
-|       | g     |          | created in   |
-|       |       |          | Crunch       |
-+-------+-------+----------+--------------+
-| start | ISO-8 |          | Date/time    |
-| \_dat | 601   |          | for which    |
-| e     | strin |          | the data in  |
-|       | g     |          | the dataset  |
-|       |       |          | corresponds  |
-+-------+-------+----------+--------------+
-| end\_ | ISO-8 |          | End          |
-| date  | 601   |          | date/time of |
-|       | strin |          | the          |
-|       | g     |          | dataset's    |
-|       |       |          | data,        |
-|       |       |          | defining a   |
-|       |       |          | start\_date: |
-|       |       |          | end\_date    |
-|       |       |          | range        |
-+-------+-------+----------+--------------+
-| strea | strin | Possible |
-| ming  | g     | values   |
-|       |       | are      |
-|       |       | "no",    |
-|       |       | "finishe |
-|       |       | d"       |
-|       |       | and      |
-|       |       | "streami |
-|       |       | ng"      |
-|       |       | to       |
-|       |       | determin |
-|       |       | e        |
-|       |       | if a     |
-|       |       | dataset  |
-|       |       | is       |
-|       |       | streamed |
-|       |       | or not   |
-+-------+-------+----------+--------------+
-| curre | URL   |          | URL of the   |
-| nt\_e | or    |          | user entity  |
-| ditor | null  |          | that is      |
-|       |       |          | currently    |
-|       |       |          | editing the  |
-|       |       |          | dataset, or  |
-|       |       |          | ``null`` if  |
-|       |       |          | there is no  |
-|       |       |          | current      |
-|       |       |          | editor       |
-+-------+-------+----------+--------------+
-| curre | strin |          | That user's  |
-| nt\_e | g     |          | name, for    |
-| ditor | or    |          | display      |
-| \_nam | null  |          |              |
-| e     |       |          |              |
-+-------+-------+----------+--------------+
-| maint | URL   | The URL  |
-| ainer |       | of the   |
-|       |       | dataset  |
-|       |       | maintain |
-|       |       | er.      |
-|       |       | Will     |
-|       |       | always   |
-|       |       | point to |
-|       |       | a user   |
-+-------+-------+----------+--------------+
-| app\_ | objec | ``{}``   | A place for  |
-| setti | t     |          | API clients  |
-| ngs   |       |          | to store     |
-|       |       |          | values they  |
-|       |       |          | need per     |
-|       |       |          | dataset; It  |
-|       |       |          | is           |
-|       |       |          | recommended  |
-|       |       |          | that clients |
-|       |       |          | namespace    |
-|       |       |          | their keys   |
-|       |       |          | to avoid     |
-|       |       |          | collisions   |
-+-------+-------+----------+--------------+
++-------+-------+----------+-------------------------------------------------------------------------+
+| Name  | Type  | Default                                          | Description                     |
++=======+=======+==================================================+=================================+
+| name  | strin |                                                  | Required.                       |
+|       | g     |                                                  | The name of                     |
+|       |       |                                                  | the dataset                     |
++-------+-------+--------------------------------------------------+---------------------------------+
+| descr | strin | ""                                               | A longer                        |
+| iptio | g     |                                                  | description                     |
+| n     |       |                                                  | of the                          |
+|       |       |                                                  | dataset                         |
++-------+-------+--------------------------------------------------+---------------------------------+
+| notes | strin | ""                                               | Additional                      |
+|       | g     |                                                  | information                     |
+|       |       |                                                  | you want to                     |
+|       |       |                                                  | associate                       |
+|       |       |                                                  | with this                       |
+|       |       |                                                  | dataset                         |
++-------+-------+--------------------------------------------------+---------------------------------+
+| id    | strin |                                                  | The                             |
+|       | g     |                                                  | dataset's id                    |
++-------+-------+--------------------------------------------------+---------------------------------+
+| archi | bool  | false                                            | Whether the                     |
+| ved   |       |                                                  | dataset is                      |
+|       |       |                                                  | "archived"                      |
+|       |       |                                                  | or active                       |
++-------+-------+--------------------------------------------------+---------------------------------+
+| permi | objec | ``{"edit                                         | Authorizatio                    |
+| ssion | t     | ": false                                         | ns                              |
+| s     |       | }``                                              | on this                         |
+|       |       |                                                  | dataset; see                    |
+|       |       |                                                  | `Permissions <#permissions>`__  |
++-------+-------+--------------------------------------------------+---------------------------------+
+| owner | URL   |                                                  | URL of the                      |
+| \_id  |       |                                                  | user entity                     |
+|       |       |                                                  | of the                          |
+|       |       |                                                  | dataset's                       |
+|       |       |                                                  | owner                           |
++-------+-------+--------------------------------------------------+---------------------------------+
+| owner | strin | ""                                               | That user's                     |
+| \_nam | g     |                                                  | name, for                       |
+| e     |       |                                                  | display                         |
++-------+-------+--------------------------------------------------+---------------------------------+
+| size  | objec | ``{"rows": 0, "unfiltered_rows", "columns": 0}`` | Dimensions                      |
+|       | t     |                                                  | of the                          |
+|       |       |                                                  | dataset                         |
++-------+-------+--------------------------------------------------+---------------------------------+
+| creat | ISO-8 |                                                  | Datetime at                     |
+| ion\_ | 601   |                                                  | which the                       |
+| time  | strin |                                                  | dataset was                     |
+|       | g     |                                                  | created in                      |
+|       |       |                                                  | Crunch                          |
++-------+-------+--------------------------------------------------+---------------------------------+
+| start | ISO-8 |                                                  | Date/time                       |
+| \_dat | 601   |                                                  | for which                       |
+| e     | strin |                                                  | the data in                     |
+|       | g     |                                                  | the dataset                     |
+|       |       |                                                  | corresponds                     |
++-------+-------+--------------------------------------------------+---------------------------------+
+| end\_ | ISO-8 |                                                  | End                             |
+| date  | 601   |                                                  | date/time of                    |
+|       | strin |                                                  | the                             |
+|       | g     |                                                  | dataset's                       |
+|       |       |                                                  | data,                           |
+|       |       |                                                  | defining a                      |
+|       |       |                                                  | start\_date:                    |
+|       |       |                                                  | end\_date                       |
+|       |       |                                                  | range                           |
++-------+-------+--------------------------------------------------+---------------------------------+
+| strea | strin |                                                  | Possible                        |
+| ming  | g     |                                                  | values are                      |
+|       |       |                                                  | "no",                           |
+|       |       |                                                  | "finished",                     |
+|       |       |                                                  | and "streaming"                 |
+|       |       |                                                  | to determine if a dataset is    |
+|       |       |                                                  | streamed or not                 |
++-------+-------+--------------------------------------------------+---------------------------------+
+| curre | URL   |                                                  | URL of the                      |
+| nt\_e | or    |                                                  | user entity                     |
+| ditor | null  |                                                  | that is                         |
+|       |       |                                                  | currently                       |
+|       |       |                                                  | editing the                     |
+|       |       |                                                  | dataset, or                     |
+|       |       |                                                  | ``null`` if                     |
+|       |       |                                                  | there is no                     |
+|       |       |                                                  | current                         |
+|       |       |                                                  | editor                          |
++-------+-------+--------------------------------------------------+---------------------------------+
+| curre | strin |                                                  | That user's                     |
+| nt\_e | g     |                                                  | name, for                       |
+| ditor | or    |                                                  | display                         |
+| \_nam | null  |                                                  |                                 |
+| e     |       |                                                  |                                 |
++-------+-------+--------------------------------------------------+---------------------------------+
+| maint | URL   |                                                  | The URL of                      |
+| ainer |       |                                                  | the dataset                     |
+|       |       |                                                  | maintainer.                     |
+|       |       |                                                  | Will always                     |
+|       |       |                                                  | point to a                      |
+|       |       |                                                  | user                            |
++-------+-------+--------------------------------------------------+---------------------------------+
+| app\_ | objec | ``{}``                                           | A place for                     |
+| setti | t     |                                                  | API clients                     |
+| ngs   |       |                                                  | to store                        |
+|       |       |                                                  | values they                     |
+|       |       |                                                  | need per                        |
+|       |       |                                                  | dataset; It                     |
+|       |       |                                                  | is                              |
+|       |       |                                                  | recommended                     |
+|       |       |                                                  | that clients                    |
+|       |       |                                                  | namespace                       |
+|       |       |                                                  | their keys                      |
+|       |       |                                                  | to avoid                        |
+|       |       |                                                  | collisions                      |
++-------+-------+--------------------------------------------------+---------------------------------+
 
 Dataset catalogs
 ''''''''''''''''
@@ -818,146 +787,123 @@ collections of related objects. They are available under the
       }
 
 
-+---------------+-----------+
-| Catalog name  | Resource  |
-+===============+===========+
-| batches       | Returns   |
-|               | all the   |
-|               | batches   |
-|               | (successf |
-|               | ul        |
-|               | and       |
-|               | failed)   |
-|               | used for  |
-|               | this      |
-|               | dataset.  |
-|               | See       |
-|               | `Batches  |
-|               | <#batches |
-|               | >`__.     |
-+---------------+-----------+
-| joins         | Contains  |
-|               | the list  |
-|               | of all    |
-|               | datasets  |
-|               | joined to |
-|               | the       |
-|               | current   |
-|               | dataset.  |
-|               | See       |
-|               | `Joins <# |
-|               | joins>`__ |
-|               | .         |
-+---------------+-----------+
-| parent        | Indicates |
-|               | the       |
-|               | catalog   |
-|               | where     |
-|               | this      |
-|               | dataset   |
-|               | is found  |
-|               | (project  |
-|               | or main   |
-|               | dataset   |
-|               | catalog)  |
-+---------------+-----------+
-| variables     | Catalog   |
-|               | of all    |
-|               | public    |
-|               | variables |
-|               | of this   |
-|               | dataset.  |
-|               | See       |
-|               | `Variable |
-|               | s <#varia |
-|               | bles>`__. |
-+---------------+-----------+
-| actions       | All       |
-|               | actions   |
-|               | executed  |
-|               | on this   |
-|               | dataset   |
-+---------------+-----------+
-| savepoints    | Lists the |
-|               | saved     |
-|               | versions  |
-|               | for this  |
-|               | dataset.  |
-|               | See       |
-|               | `Versions |
-|               |  <#versio |
-|               | ns>`__.   |
-+---------------+-----------+
-| filters       | Makes     |
-|               | available |
-|               | the       |
-|               | public    |
-|               | and       |
-|               | user-crea |
-|               | ted       |
-|               | filters.  |
-|               | See       |
-|               | `Filters  |
-|               | <#filters |
-|               | >`__.     |
-+---------------+-----------+
-| multitables   | Similar   |
-|               | to        |
-|               | filters,  |
-|               | displays  |
-|               | all       |
-|               | available |
-|               | multitabl |
-|               | es.       |
-|               | See       |
-|               | `Multitab |
-|               | les <#mul |
-|               | itables>` |
-|               | __        |
-+---------------+-----------+
-| comparisons   | Contains  |
-|               | all       |
-|               | available |
-|               | compariso |
-|               | ns.       |
-|               | See       |
-|               | `Comparis |
-|               | ons <#com |
-|               | parisons> |
-|               | `__.      |
-+---------------+-----------+
-| forks         | Returns   |
-|               | all the   |
-|               | forks     |
-|               | created   |
-|               | from this |
-|               | dataset   |
-+---------------+-----------+
-| decks         | The list  |
-|               | of all    |
-|               | decks on  |
-|               | this      |
-|               | dataset   |
-|               | for the   |
-|               | authentic |
-|               | ated      |
-|               | user      |
-+---------------+-----------+
-| permissions   | Returns   |
-|               | the list  |
-|               | of all    |
-|               | users and |
-|               | teams     |
-|               | with      |
-|               | access to |
-|               | this      |
-|               | dataset.  |
-|               | See       |
-|               | `Permissi |
-|               | ons <#per |
-|               | missions> |
-|               | `__.      |
-+---------------+-----------+
++---------------+-----------------------------------------+
+| Catalog name  | Resource                                |
++===============+=========================================+
+| batches       | Returns                                 |
+|               | all the                                 |
+|               | batches                                 |
+|               | (successful                             |
+|               | and                                     |
+|               | failed)                                 |
+|               | used for                                |
+|               | this                                    |
+|               | dataset.                                |
+|               | See                                     |
+|               | `Batches <#batches>`__.                 |
++---------------+-----------------------------------------+
+| joins         | Contains                                |
+|               | the list                                |
+|               | of all                                  |
+|               | datasets                                |
+|               | joined to                               |
+|               | the                                     |
+|               | current                                 |
+|               | dataset.                                |
+|               | See                                     |
+|               | `Joins <#joins>`__.                     |
++---------------+-----------------------------------------+
+| parent        | Indicates                               |
+|               | the                                     |
+|               | catalog                                 |
+|               | where                                   |
+|               | this                                    |
+|               | dataset                                 |
+|               | is found                                |
+|               | (project                                |
+|               | or main                                 |
+|               | dataset                                 |
+|               | catalog)                                |
++---------------+-----------------------------------------+
+| variables     | Catalog                                 |
+|               | of all                                  |
+|               | public                                  |
+|               | variables                               |
+|               | of this                                 |
+|               | dataset.                                |
+|               | See                                     |
+|               | `Variables <#variables>`__.             |
++---------------+-----------------------------------------+
+| actions       | All                                     |
+|               | actions                                 |
+|               | executed                                |
+|               | on this                                 |
+|               | dataset                                 |
++---------------+-----------------------------------------+
+| savepoints    | Lists the                               |
+|               | saved                                   |
+|               | versions                                |
+|               | for this                                |
+|               | dataset.                                |
+|               | See                                     |
+|               | `Versions <#versions>`__.               |
++---------------+-----------------------------------------+
+| filters       | Makes                                   |
+|               | available                               |
+|               | the                                     |
+|               | public                                  |
+|               | and                                     |
+|               | user-created                            |
+|               | filters.                                |
+|               | See                                     |
+|               | `Filters <#filters>`__.                 |
++---------------+-----------------------------------------+
+| multitables   | Similar                                 |
+|               | to                                      |
+|               | filters,                                |
+|               | displays                                |
+|               | all                                     |
+|               | available                               |
+|               | multitables.                            |
+|               | See                                     |
+|               | `Multitables <#mulitables>`__           |
++---------------+-----------------------------------------+
+| comparisons   | Contains                                |
+|               | all                                     |
+|               | available                               |
+|               | comparisons.                            |
+|               | See                                     |
+|               | `Comparisons <#comparisons>`__.         |
++---------------+-----------------------------------------+
+| forks         | Returns                                 |
+|               | all the                                 |
+|               | forks                                   |
+|               | created                                 |
+|               | from this                               |
+|               | dataset                                 |
++---------------+-----------------------------------------+
+| decks         | The list                                |
+|               | of all                                  |
+|               | decks on                                |
+|               | this                                    |
+|               | dataset                                 |
+|               | for the                                 |
+|               | authentic                               |
+|               | ated                                    |
+|               | user                                    |
++---------------+-----------------------------------------+
+| permissions   | Returns                                 |
+|               | the list                                |
+|               | of all                                  |
+|               | users and                               |
+|               | teams                                   |
+|               | with                                    |
+|               | access to                               |
+|               | this                                    |
+|               | dataset.                                |
+|               | See                                     |
+|               | `Permissions <#permissions>`__.         |
++---------------+-----------------------------------------+
 
 PATCH
 ^^^^^

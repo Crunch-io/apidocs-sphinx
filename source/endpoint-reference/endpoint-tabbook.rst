@@ -700,11 +700,11 @@ limiting parameters.
 |         |       |          |              | ariables/00000 |
 |         |       |          |              | 3/"}}}]}       |
 +---------+-------+----------+--------------+----------------+
-| options | objec | {}       | further      |
-|         | t     |          | options      |
-|         |       |          | defining the |
-|         |       |          | tabbook      |
-|         |       |          | output.      |
+| options | objec | {}       | further      |                |
+|         | t     |          | options      |                |
+|         |       |          | defining the |                |
+|         |       |          | tabbook      |                |
+|         |       |          | output.      |                |
 +---------+-------+----------+--------------+----------------+
 | weight  | url   | null     | Provide a    | "http://app.cr |
 |         |       |          | weight for   | unch.io/api/da |
