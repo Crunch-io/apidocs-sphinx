@@ -16,13 +16,12 @@ and examples to guide development.
 .. _Python: https://github.com/Crunch-io/pycrunch
 .. _R: https://github.com/Crunch-io/rcrunch
 
-The documents are organized in three overlapping scopes: a :doc:`feature
-guide <feature-guide/index>`, which provide higher-level vignettes that
-illustrate key features; an :doc:`endpoint reference
-<endpoint-reference/index>`, which describes individual URIs in detail; and
-an :doc:`object reference <object-reference/index>`, which defines the
-building blocks of the Crunch platform, such as values, columns, types,
-variables, and datasets.
+The documents are organized in three overlapping scopes: a :doc:`feature guide
+<feature-guide/index>`, which provide higher-level vignettes that illustrate
+key features; an :doc:`endpoint reference <endpoint-reference/index>`, which
+describes individual URIs in detail; and an :doc:`object reference
+<object-reference/object-reference>`, which defines the building blocks of the
+Crunch platform, such as values, columns, types, variables, and datasets.
 
 .. toctree::
    :maxdepth: 2
@@ -30,4 +29,4 @@ variables, and datasets.
 
    feature-guide/index
    endpoint-reference/index
-   object-reference/index
+   object-reference/object-reference.rst
