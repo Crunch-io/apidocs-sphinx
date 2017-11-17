@@ -23,66 +23,30 @@ If authorization is lacking, response will instead be 404.
 
 Catalog tuples contain the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| title | strin | Human        |
-|       | g     | friendly     |
-|       |       | identifier   |
-+-------+-------+--------------+
-| notes | strin | Other        |
-|       | g     | information  |
-|       |       | relevent for |
-|       |       | this         |
-|       |       | CrunchBox    |
-+-------+-------+--------------+
-| heade | strin | header       |
-| r     | g     | information  |
-|       |       | for the      |
-|       |       | CrunchBox    |
-+-------+-------+--------------+
-| foote | strin | footer       |
-| r     | g     | information  |
-|       |       | for the      |
-|       |       | CrunchBox    |
-+-------+-------+--------------+
-| datas | strin | URL of the   |
-| et    | g     | dataset      |
-|       |       | associated   |
-|       |       | with the     |
-|       |       | CrunchBox    |
-+-------+-------+--------------+
-| filte | objec | A Crunch     |
-| rs    | t     | expression   |
-|       |       | indicating   |
-|       |       | which        |
-|       |       | filters to   |
-|       |       | include in   |
-|       |       | the          |
-|       |       | CrunchBox    |
-+-------+-------+--------------+
-| where | objec | A Crunch     |
-|       | t     | expression   |
-|       |       | indicating   |
-|       |       | which        |
-|       |       | variables to |
-|       |       | include in   |
-|       |       | the          |
-|       |       | CrunchBox.   |
-|       |       | An undefined |
-|       |       | value is     |
-|       |       | equavilent   |
-|       |       | to           |
-|       |       | specifying   |
-|       |       | all dataset  |
-|       |       | variables.   |
-+-------+-------+--------------+
-| creat | strin | A timestamp  |
-| ion\_ | g     | of the date  |
-| time  |       | when this    |
-|       |       | CrunchBox    |
-|       |       | was created  |
-+-------+-------+--------------+
+=============== ======= ================================================
+Name            Type    Description
+=============== ======= ================================================
+title           string  Human friendly identifier
+--------------- ------- ------------------------------------------------
+notes           string  Other information relevent for this CrunchBox
+--------------- ------- ------------------------------------------------
+header          string  header information for the CrunchBox
+--------------- ------- ------------------------------------------------
+footer          string  footer information for the CrunchBox
+--------------- ------- ------------------------------------------------
+dataset         string  URL of the dataset associated with the CrunchBox
+--------------- ------- ------------------------------------------------
+filters         object  A Crunch expression indicating which filters to
+                        include in the CrunchBox
+--------------- ------- ------------------------------------------------
+where           object  A Crunch expression indicating which variables
+                        to include in the CrunchBox.  An undefined value
+                        is equavilent to specifying all dataset
+                        variables.
+--------------- ------- ------------------------------------------------
+creation_time   string  A timestamp of the date when this CrunchBox was
+                        created
+=============== ======= ================================================
 
 .. language_specific::
    --JSON

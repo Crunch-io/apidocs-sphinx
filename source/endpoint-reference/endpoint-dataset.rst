@@ -119,121 +119,57 @@ When authenticated, GET returns 200 status with a Shoji Catalog of
 datasets to which the authenticated user has access. Catalog tuples
 contain the following attributes:
 
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| Name  | Type  | Default                                             | Description                     |
-+=======+=======+=====================================================+=================================+
-| name  | strin |                                                     | Required.                       |
-|       | g     |                                                     | The name of                     |
-|       |       |                                                     | the dataset                     |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| descr | strin | ""                                                  | A longer                        |
-| iptio | g     |                                                     | description                     |
-| n     |       |                                                     | of the                          |
-|       |       |                                                     | dataset                         |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| id    | strin |                                                     | The                             |
-|       | g     |                                                     | dataset's id                    |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| archi | bool  | false                                               | Whether the                     |
-| ved   |       |                                                     | dataset is                      |
-|       |       |                                                     | "archived"                      |
-|       |       |                                                     | or active                       |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| permi | objec | ``{"edit": false}``                                 | Authorizations                  |
-| ssion | t     |                                                     | on this                         |
-| s     |       |                                                     | dataset; see                    |
-|       |       |                                                     | `Permissions <#permissions>`__  |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| owner | URL   |                                                     | URL of the                      |
-| \_id  |       |                                                     | user entity                     |
-|       |       |                                                     | of the                          |
-|       |       |                                                     | dataset's                       |
-|       |       |                                                     | owner                           |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| owner | strin | ""                                                  | That user's                     |
-| \_nam | g     |                                                     | name, for                       |
-| e     |       |                                                     | display                         |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| size  | objec | ``{"rows": 0, "columns": 0, "unfiltered_rows": 0}`` | Dimensions                      |
-|       | t     |                                                     | of the                          |
-|       |       |                                                     | dataset                         |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| creat | ISO-8 |                                                     | Datetime at                     |
-| ion\_ | 601   |                                                     | which the                       |
-| time  | strin |                                                     | dataset was                     |
-|       | g     |                                                     | created in                      |
-|       |       |                                                     | Crunch                          |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| modif | ISO-8 |                                                     | Datetime of                     |
-| icati | 601   |                                                     | the last                        |
-| on\_t | strin |                                                     | modification                    |
-| ime   | g     |                                                     | for this                        |
-|       |       |                                                     | dataset                         |
-|       |       |                                                     | globally                        |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| start | ISO-8 |                                                     | Date/time                       |
-| \_dat | 601   |                                                     | for which                       |
-| e     | strin |                                                     | the data in                     |
-|       | g     |                                                     | the dataset                     |
-|       |       |                                                     | corresponds                     |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| end\_ | ISO-8 |                                                     | End                             |
-| date  | 601   |                                                     | date/time of                    |
-|       | strin |                                                     | the                             |
-|       | g     |                                                     | dataset's                       |
-|       |       |                                                     | data,                           |
-|       |       |                                                     | defining a                      |
-|       |       |                                                     | start\_date:                    |
-|       |       |                                                     | end\_date                       |
-|       |       |                                                     | range                           |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| strea | strin |                                                     | Possible                        |
-| ming  | g     |                                                     | values "no",                    |
-|       |       |                                                     | "finished",                     |
-|       |       |                                                     | and "streaming"                 |
-|       |       |                                                     | to                              |
-|       |       |                                                     | enable/disable                  |
-|       |       |                                                     | streaming                       |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| curre | URL   |                                                     | URL of the                      |
-| nt\_e | or    |                                                     | user entity                     |
-| ditor | null  |                                                     | that is                         |
-|       |       |                                                     | currently                       |
-|       |       |                                                     | editing the                     |
-|       |       |                                                     | dataset, or                     |
-|       |       |                                                     | ``null`` if                     |
-|       |       |                                                     | there is no                     |
-|       |       |                                                     | current                         |
-|       |       |                                                     | editor                          |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| curre | strin |                                                     | That user's                     |
-| nt\_e | g     |                                                     | name, for                       |
-| ditor | or    |                                                     | display                         |
-| \_nam | null  |                                                     |                                 |
-| e     |       |                                                     |                                 |
-+-------+-------+-----------------------------------------------------+---------------------------------+
-| is\_p | boole | true                                                | Indicates if                    |
-| ublis | an    |                                                     | the dataset                     |
-| hed   |       |                                                     | is published                    |
-|       |       |                                                     | to viewers                      |
-|       |       |                                                     | or not                          |
-+-------+-------+-----------------------------------------------------+---------------------------------+
+=========================== ================ ===================================================== ===================================================
+Name                        Type             Default                                               Description
+=========================== ================ ===================================================== ===================================================
+name                        string                                                                 Required. The name of the dataset
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+description                 string           ""                                                    A longer description of the dataset
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+id                          string                                                                 The dataset's id
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+archived                    bool             false                                                 Whether the dataset is "archived" or active
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+permissions                 object           ``{"edit": false}``                                   Authorizations on this dataset;
+                                                                                                   see `Permissions <#permissions>`__
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+owner_id                    URL                                                                    URL of the user entity of the dataset's owner
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+owner_name                  string           ""                                                    That user's name, for display
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+size                        object           ``{"rows": 0, "columns": 0, "unfiltered_rows": 0}``   Dimensions of the dataset
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+creation_time               ISO-8601 string                                                        Datetime at which the dataset was created in Crunch
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+modification_time           ISO-8601 string                                                        Datetime of the last modification for this dataset
+                                                                                                   globally
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+start_date                  ISO-8601 string                                                        Date/time for which the data in the dataset
+                                                                                                   corresponds
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+end_date                    ISO-8601 string                                                        End date/time of the dataset's data,
+                                                                                                   defining a start_date:end_date range
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+streaming                   string                                                                 Possible values "no", "finished", and "streaming"
+                                                                                                   to enable/disable streaming
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+current_editor              URL or null                                                            URL of the user entity that is currently editing
+                                                                                                   the dataset, or ``null`` if there is no current
+                                                                                                   editor
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+current_editor_name         string or null                                                         That user's name, for display
+--------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
+is_published                boolean          true                                                  Indicates if the dataset is published to viewers
+                                                                                                   or not
+=========================== ================ ===================================================== ===================================================
 
-.. raw:: html
-
-   <aside class="notice">
-
-::
+.. note::
 
     A user may have access to a dataset because someone has shared it directly
     with him, or because someone has shared it with a team of which he is a
     member. If a user has access to a dataset from different sources, be it by
     multiple teams or by direct sharing, the final permissions they have on the
     dataset will be the maximum of all the permissions granted.
-
-.. raw:: html
-
-   </aside>
 
 Drafts
 ^^^^^^
@@ -400,143 +336,55 @@ The body must contain a "name". You can also include a Crunch Table in a
 Guide <#metadata-document-csv>`__. The full set of possible attributes
 to include when POSTing to create a new dataset entity are:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| descr | strin | Optional     |
-| iptio | g     | longer       |
-| n     |       | string       |
-+-------+-------+--------------+
-| archi | boole | Whether the  |
-| ved   | an    | variable     |
-|       |       | should be    |
-|       |       | hidden from  |
-|       |       | most views;  |
-|       |       | default:     |
-|       |       | false        |
-+-------+-------+--------------+
-| owner | URL   | Provide a    |
-|       |       | project URL  |
-|       |       | to set the   |
-|       |       | owner to     |
-|       |       | that         |
-|       |       | project; if  |
-|       |       | omitted, the |
-|       |       | authenticate |
-|       |       | d            |
-|       |       | user will be |
-|       |       | the owner    |
-+-------+-------+--------------+
-| notes | strin | Blank if     |
-|       | g     | omitted.     |
-|       |       | Optional     |
-|       |       | notes for    |
-|       |       | the dataset  |
-+-------+-------+--------------+
-| start | date  | ISO-8601     |
-| \_dat |       | formatted    |
-| e     |       | date with    |
-|       |       | day          |
-|       |       | resolution   |
-+-------+-------+--------------+
-| end\_ | date  | ISO-8601     |
-| date  |       | formatted    |
-|       |       | date with    |
-|       |       | day          |
-|       |       | resolution   |
-+-------+-------+--------------+
-| strea | strin | Only         |
-| ming  | g     | "streaming", |
-|       |       | "finished"   |
-|       |       | and "no"     |
-|       |       | available    |
-|       |       | values to    |
-|       |       | define if a  |
-|       |       | dataset will |
-|       |       | accept       |
-|       |       | streaming    |
-|       |       | data or not  |
-+-------+-------+--------------+
-| is\_p | boole | If false,    |
-| ublis | an    | only project |
-| hed   |       | editors will |
-|       |       | have access  |
-|       |       | to this      |
-|       |       | dataset      |
-+-------+-------+--------------+
-| weigh | array | Contains     |
-| t\_va |       | aliases of   |
-| riabl |       | weight       |
-| es    |       | variables to |
-|       |       | start this   |
-|       |       | dataset      |
-|       |       | with;        |
-|       |       | variables    |
-|       |       | must be      |
-|       |       | numeric      |
-|       |       | type.        |
-+-------+-------+--------------+
-| table | objec | Metadata     |
-|       | t     | definition   |
-|       |       | for the      |
-|       |       | variables in |
-|       |       | the dataset  |
-+-------+-------+--------------+
-| maint | URL   | User URL     |
-| ainer |       | that will be |
-|       |       | the          |
-|       |       | maintainer   |
-|       |       | of this      |
-|       |       | dataset in   |
-|       |       | case of      |
-|       |       | system       |
-|       |       | notification |
-|       |       | s;           |
-|       |       | if omitted,  |
-|       |       | the          |
-|       |       | authenticate |
-|       |       | d            |
-|       |       | user will be |
-|       |       | the          |
-|       |       | maintainer   |
-+-------+-------+--------------+
-| setti | objec | `Settings    |
-| ngs   | t     | object <#set |
-|       |       | tings>`__    |
-|       |       | containing   |
-|       |       | ``weight``,  |
-|       |       | ``viewers_ca |
-|       |       | n_export``,  |
-|       |       | ``viewers_ca |
-|       |       | n_change_wei |
-|       |       | ght``,       |
-|       |       | ``viewers_ca |
-|       |       | n_share``,   |
-|       |       | ``dashboard_ |
-|       |       | deck``,      |
-|       |       | and/or       |
-|       |       | ``min_base_s |
-|       |       | ize``        |
-|       |       | attributes.  |
-|       |       | If a         |
-|       |       | "weight" is  |
-|       |       | specified,   |
-|       |       | it will be   |
-|       |       | automaticall |
-|       |       | y            |
-|       |       | added to     |
-|       |       | "weight\_var |
-|       |       | iables"      |
-|       |       | if not       |
-|       |       | already      |
-|       |       | specified    |
-|       |       | there.       |
-+-------+-------+--------------+
+================== ======== ===============================================
+Name               Type     Description
+================== ======== ===============================================
+name               string   Human-friendly string identifier
+------------------ -------- -----------------------------------------------
+description        string   Optional longer string
+------------------ -------- -----------------------------------------------
+archived           boolean  Whether the variable should be hidden from
+                            most views; default: false
+------------------ -------- -----------------------------------------------
+owner              URL      Provide a project URL to set the owner to that
+                            project; if omitted, the authenticated user
+                            will be the owner
+------------------ -------- -----------------------------------------------
+notes              string   Blank if omitted. Optional notes for the
+                            dataset
+------------------ -------- -----------------------------------------------
+start_date         date     ISO-8601 formatted date with day resolution
+------------------ -------- -----------------------------------------------
+end_date           date     ISO-8601 formatted date with day resolution
+------------------ -------- -----------------------------------------------
+streaming          string   Only "streaming", "finished" and "no" available
+                            values to define if a dataset will accept
+                            streaming data or not
+------------------ -------- -----------------------------------------------
+is_published       boolean  If false, only project editors will have access
+                            to this dataset
+------------------ -------- -----------------------------------------------
+weight_variables   array    Contains aliases of weight variables to start
+                            this dataset with; variables must be numeric
+                            type.
+------------------ -------- -----------------------------------------------
+table              object   Metadata definition for the variables in
+                            the dataset
+------------------ -------- -----------------------------------------------
+maintainer         URL      User URL that will be the maintainer of this
+                            dataset in case of system notifications;
+                            if omitted, the authenticated user will be the
+                            maintainer
+------------------ -------- -----------------------------------------------
+settings           object   `Settings object <#settings>`__ containing
+                            ``weight``, ``viewers_can_export``,
+                            ``viewers_can_change_weight``,
+                            ``viewers_can_share``, ``dashboard_deck``,
+                            and/or ``min_base_size`` attributes. If a
+                            "weight" is specified, it will be automatically
+                            added to "weight\_variables" if not already
+                            specified there.
+================== ======== ===============================================
 
 Other catalogs
 ~~~~~~~~~~~~~~
@@ -644,121 +492,51 @@ URL Parameters
 Dataset attributes
 ''''''''''''''''''
 
-+-------+-------+----------+-------------------------------------------------------------------------+
-| Name  | Type  | Default                                          | Description                     |
-+=======+=======+==================================================+=================================+
-| name  | strin |                                                  | Required.                       |
-|       | g     |                                                  | The name of                     |
-|       |       |                                                  | the dataset                     |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| descr | strin | ""                                               | A longer                        |
-| iptio | g     |                                                  | description                     |
-| n     |       |                                                  | of the                          |
-|       |       |                                                  | dataset                         |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| notes | strin | ""                                               | Additional                      |
-|       | g     |                                                  | information                     |
-|       |       |                                                  | you want to                     |
-|       |       |                                                  | associate                       |
-|       |       |                                                  | with this                       |
-|       |       |                                                  | dataset                         |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| id    | strin |                                                  | The                             |
-|       | g     |                                                  | dataset's id                    |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| archi | bool  | false                                            | Whether the                     |
-| ved   |       |                                                  | dataset is                      |
-|       |       |                                                  | "archived"                      |
-|       |       |                                                  | or active                       |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| permi | objec | ``{"edit                                         | Authorizatio                    |
-| ssion | t     | ": false                                         | ns                              |
-| s     |       | }``                                              | on this                         |
-|       |       |                                                  | dataset; see                    |
-|       |       |                                                  | `Permissions <#permissions>`__  |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| owner | URL   |                                                  | URL of the                      |
-| \_id  |       |                                                  | user entity                     |
-|       |       |                                                  | of the                          |
-|       |       |                                                  | dataset's                       |
-|       |       |                                                  | owner                           |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| owner | strin | ""                                               | That user's                     |
-| \_nam | g     |                                                  | name, for                       |
-| e     |       |                                                  | display                         |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| size  | objec | ``{"rows": 0, "unfiltered_rows", "columns": 0}`` | Dimensions                      |
-|       | t     |                                                  | of the                          |
-|       |       |                                                  | dataset                         |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| creat | ISO-8 |                                                  | Datetime at                     |
-| ion\_ | 601   |                                                  | which the                       |
-| time  | strin |                                                  | dataset was                     |
-|       | g     |                                                  | created in                      |
-|       |       |                                                  | Crunch                          |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| start | ISO-8 |                                                  | Date/time                       |
-| \_dat | 601   |                                                  | for which                       |
-| e     | strin |                                                  | the data in                     |
-|       | g     |                                                  | the dataset                     |
-|       |       |                                                  | corresponds                     |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| end\_ | ISO-8 |                                                  | End                             |
-| date  | 601   |                                                  | date/time of                    |
-|       | strin |                                                  | the                             |
-|       | g     |                                                  | dataset's                       |
-|       |       |                                                  | data,                           |
-|       |       |                                                  | defining a                      |
-|       |       |                                                  | start\_date:                    |
-|       |       |                                                  | end\_date                       |
-|       |       |                                                  | range                           |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| strea | strin |                                                  | Possible                        |
-| ming  | g     |                                                  | values are                      |
-|       |       |                                                  | "no",                           |
-|       |       |                                                  | "finished",                     |
-|       |       |                                                  | and "streaming"                 |
-|       |       |                                                  | to determine if a dataset is    |
-|       |       |                                                  | streamed or not                 |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| curre | URL   |                                                  | URL of the                      |
-| nt\_e | or    |                                                  | user entity                     |
-| ditor | null  |                                                  | that is                         |
-|       |       |                                                  | currently                       |
-|       |       |                                                  | editing the                     |
-|       |       |                                                  | dataset, or                     |
-|       |       |                                                  | ``null`` if                     |
-|       |       |                                                  | there is no                     |
-|       |       |                                                  | current                         |
-|       |       |                                                  | editor                          |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| curre | strin |                                                  | That user's                     |
-| nt\_e | g     |                                                  | name, for                       |
-| ditor | or    |                                                  | display                         |
-| \_nam | null  |                                                  |                                 |
-| e     |       |                                                  |                                 |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| maint | URL   |                                                  | The URL of                      |
-| ainer |       |                                                  | the dataset                     |
-|       |       |                                                  | maintainer.                     |
-|       |       |                                                  | Will always                     |
-|       |       |                                                  | point to a                      |
-|       |       |                                                  | user                            |
-+-------+-------+--------------------------------------------------+---------------------------------+
-| app\_ | objec | ``{}``                                           | A place for                     |
-| setti | t     |                                                  | API clients                     |
-| ngs   |       |                                                  | to store                        |
-|       |       |                                                  | values they                     |
-|       |       |                                                  | need per                        |
-|       |       |                                                  | dataset; It                     |
-|       |       |                                                  | is                              |
-|       |       |                                                  | recommended                     |
-|       |       |                                                  | that clients                    |
-|       |       |                                                  | namespace                       |
-|       |       |                                                  | their keys                      |
-|       |       |                                                  | to avoid                        |
-|       |       |                                                  | collisions                      |
-+-------+-------+--------------------------------------------------+---------------------------------+
+====================== ================ ================================================== ==========================================================
+Name                   Type             Default                                            Description
+====================== ================ ================================================== ==========================================================
+name                   string                                                              Required. The name of the dataset
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+description            string           ""                                                 A longer description of the dataset
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+notes                  string           ""                                                 Additional information you want to associate with this
+                                                                                           dataset
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+id                     string                                                              The dataset's id
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+archived               bool             false                                              Whether the dataset is "archived" or active
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+permissions            object           ``{"edit": false}``                                Authorizations on this dataset;
+                                                                                           see `Permissions <#permissions>`__
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+owner_id               URL                                                                 URL of the user entity of the dataset's owner
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+owner_name             string           ""                                                 That user's name, for display
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+size                   object           ``{"rows": 0, "unfiltered_rows", "columns": 0}``   Dimensions of the dataset
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+creation_time          ISO-8601 string                                                     Datetime at which the dataset was created in Crunch
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+start_date             ISO-8601 string                                                     Date/time for which the data in the dataset corresponds
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+end_date               ISO-8601 string                                                     End date/time of the dataset's data, defining a
+                                                                                           start_date:end_date range
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+streaming              string                                                              Possible values "no", "finished", and "streaming"
+                                                                                           to determine if a dataset is streamed or not
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+current_editor         URL or null                                                         URL of the user entity that is currently editing the
+                                                                                           dataset, or ``null`` if there is no current editor
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+current_editor_name    string or null                                                      That user's name, for display
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+maintainer             URL                                                                 The URL of the dataset maintener. Will always point to
+                                                                                           a user
+---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
+app_settings           object           ``{}``                                             A place for API clients to store values they need per
+                                                                                           dataset; It is recommended that clients namespace their
+                                                                                           keys to avoid collisions
+====================== ================ ================================================== ==========================================================
 
 Dataset catalogs
 ''''''''''''''''
@@ -1092,13 +870,10 @@ for status on the completion of the export. When complete, GET the
 Location URL from the original response to download the file.
 
 .. language_specific::
-   --HTTP
-   .. code:: http
+    --HTTP
+    .. code:: http
 
       POST `/api/datasets/f2364cc66e604d63a3be3e8811fc902f/export/spss/` HTTP/1.1
-
-   --JSON
-   .. code:: json
 
       {
         "where": {
@@ -1115,9 +890,6 @@ Location URL from the original response to download the file.
         }
       }
 
-   --HTTP
-   .. code:: http
-
       HTTP/1.1 202 Accepted
       Content-Length: 176
       Access-Control-Allow-Methods: OPTIONS, AUTH, POST, GET, HEAD, PUT, PATCH, DELETE
@@ -1130,41 +902,23 @@ To export a subset of the dataset, instead perform a POST request and
 include a JSON body with an optional "filter" expression for the rows
 and a "where" attribute to specify variables to include.
 
-+------------+--------------+---------------------------------------+
-| Attribute  | Description  | Example                               |
-+============+==============+=======================================+
-| filter     | A Crunch     | ``{"function": "==", "args": [{"varia |
-|            | filter       | ble": "000000"}, {"value": 1}]}``     |
-|            | expression   |                                       |
-|            | defining a   |                                       |
-|            | filter for   |                                       |
-|            | the given    |                                       |
-|            | export       |                                       |
-+------------+--------------+---------------------------------------+
-| where      | A Crunch     | ``{"function": "select", "args": [{"m |
-|            | expression   | ap": {"000000": {"variable": 000000"} |
-|            | defining     | }}]}``                                |
-|            | which        |                                       |
-|            | variables to |                                       |
-|            | export.      |                                       |
-|            | Refer to     |                                       |
-|            | `Frame       |                                       |
-|            | functions <# |                                       |
-|            | frame-functi |                                       |
-|            | ons>`__      |                                       |
-|            | for the      |                                       |
-|            | available    |                                       |
-|            | functions to |                                       |
-|            | here.        |                                       |
-+------------+--------------+---------------------------------------+
-| options    | An object of | ``{"use_category_ids": true}``        |
-|            | extra        |                                       |
-|            | settings,    |                                       |
-|            | which may be |                                       |
-|            | format-speci |                                       |
-|            | fic.         |                                       |
-|            | See below.   |                                       |
-+------------+--------------+---------------------------------------+
+============= ================================= ================================================================================
+Attribute     Description                       Example
+============= ================================= ================================================================================
+filter        A Crunch filter expression        ``{"function": "==", "args": [{"variable": "000000"}, {"value": 1}]}``
+              defining a filter for the given
+              export
+------------- --------------------------------- --------------------------------------------------------------------------------
+where         A Crunch expression defining      ``{"function": "select", "args": [{"map": {"000000": {"variable": 000000"}}}]}``
+              which variables to export.
+              Refer to `Frame functions
+              <#frame-functions>`__ for the
+              available functions here.
+------------- --------------------------------- --------------------------------------------------------------------------------
+options       An object of extra settings,      ``{"use_category_ids": true}``
+              which may be format specific.
+              See below.
+============= ================================= ================================================================================
 
 See `"Expressions" <#expressions>`__ for more on Crunch expressions.
 
@@ -1185,30 +939,29 @@ The following rules apply for all formats:
 
 Some format-specific properties and options:
 
-+-------+------------+--------------------------------------------+---------------+
-| Forma | Attribute  | Description                                | Default       |
-| t     |            |                                            |               |
-+=======+============+============================================+===============+
-| csv   | use\_categ | Export categorical data as its numeric IDs | false         |
-|       | ory\_ids   | instead of category names?                 |               |
-+-------+------------+--------------------------------------------+---------------+
-| csv   | missing\_v | If present, will use the specified string  | *omitted*     |
-|       | alues      | to indicate missing values. If omitted,    |               |
-|       |            | will use the missing reason strings        |               |
-+-------+------------+--------------------------------------------+---------------+
-| csv   | header\_fi | Use the variable's alias/name/description  | "alias"       |
-|       | eld        | in the CSV header row, or ``null`` for no  |               |
-|       |            | header row                                 |               |
-+-------+------------+--------------------------------------------+---------------+
-| spss  | var\_label | Use the variable's name/description as     | "description" |
-|       | \_field    | SPSS variable label                        |               |
-+-------+------------+--------------------------------------------+---------------+
-| spss  | prefix\_su | Prefix subvariable labels with the parent  | false         |
-|       | bvariables | array variable's label?                    |               |
-+-------+------------+--------------------------------------------+---------------+
-| all   | include\_p | Include the user's personal variables in   | false         |
-|       | ersonal    | the exported file?                         |               |
-+-------+------------+--------------------------------------------+---------------+
++--------+----------------------+--------------------------------------------+---------------+
+| Format | Attribute            | Description                                | Default       |
++========+======================+============================================+===============+
+| csv    | use_category_ids     | Export categorical data as its numeric IDs | false         |
+|        |                      | instead of category names?                 |               |
++--------+----------------------+--------------------------------------------+---------------+
+| csv    | missing_values       | If present, will use the specified string  | *omitted*     |
+|        |                      | to indicate missing values. If omitted,    |               |
+|        |                      | will use the missing reason strings        |               |
++--------+----------------------+--------------------------------------------+---------------+
+| csv    | header_field         | Use the variable's alias/name/description  | "alias"       |
+|        |                      | in the CSV header row, or ``null`` for no  |               |
+|        |                      | header row                                 |               |
++--------+----------------------+--------------------------------------------+---------------+
+| spss   | var_label_field      | Use the variable's name/description as     | "description" |
+|        |                      | SPSS variable label                        |               |
++--------+----------------------+--------------------------------------------+---------------+
+| spss   | prefix_subvariables  | Prefix subvariable labels with the parent  | false         |
+|        |                      | array variable's label?                    |               |
++--------+----------------------+--------------------------------------------+---------------+
+| all    | include_personal     | Include the user's personal variables in   | false         |
+|        |                      | the exported file?                         |               |
++--------+----------------------+--------------------------------------------+---------------+
 
 SPSS
     
@@ -1504,35 +1257,18 @@ body:
       }
 
 
-+-----------+---------------+
-| Attribute | Description   |
-+===========+===============+
-| pending\_ | The number of |
-| messages  | messages the  |
-|           | stream has    |
-|           | that have yet |
-|           | to be         |
-|           | appended to   |
-|           | the dataset   |
-|           | (note: a      |
-|           | message might |
-|           | contain more  |
-|           | than one row, |
-|           | each POST     |
-|           | that is made  |
-|           | to            |
-|           | ``/datasets/{ |
-|           | id}/stream/`` |
-|           | will result   |
-|           | in a single   |
-|           | message).     |
-+-----------+---------------+
-| received\ | The total     |
-| _messages | number of     |
-|           | messages that |
-|           | this stream   |
-|           | has received. |
-+-----------+---------------+
+================== =======================================================
+Attribute          Description
+================== =======================================================
+pending_messages   The number of messages the stream has that have yet to
+                   be appended to the dataset (note: a message might
+                   contain more than one row, each POST that is made to
+                   ``/datasets/{id}/stream/`` will result in a single
+                   message).
+------------------ -------------------------------------------------------
+received_messages  The total number of messages that this stream has
+                   received.
+================== =======================================================
 
 POST to this endpoint to add rows. The payload should be a multi line
 string where each line contains a json representation of objects
@@ -1575,74 +1311,29 @@ To make changes, clients should PATCH the settings they wish to change
 with new values. Additional settings are not allowed, the server will
 return a 400 response.
 
-+-----------+---------------+
-| Setting   | Description   |
-+===========+===============+
-| viewers\_ | When false,   |
-| can\_expo | only editor   |
-| rt        | can export;   |
-|           | else, all     |
-|           | users with    |
-|           | view access   |
-|           | can export    |
-|           | the data      |
-+-----------+---------------+
-| viewers\_ | When true,    |
-| can\_chan | all users     |
-| ge\_weigh | with access   |
-| t         | can set their |
-|           | own personal  |
-|           | weight; else, |
-|           | the editor    |
-|           | configured    |
-|           | ``weight``    |
-|           | will be       |
-|           | applied to    |
-|           | all without   |
-|           | option to     |
-|           | change        |
-+-----------+---------------+
-| viewers\_ | When true,    |
-| can\_shar | all users     |
-| e         | with access   |
-|           | can share the |
-|           | dataset with  |
-|           | other users   |
-|           | or teams;     |
-|           | Defaults to   |
-|           | ``True``      |
-+-----------+---------------+
-| weight    | Default       |
-|           | initial       |
-|           | weight for    |
-|           | all new users |
-|           | on this       |
-|           | dataset, and  |
-|           | when          |
-|           | ``viewers_can |
-|           | _change_weigh |
-|           | t``           |
-|           | is false,     |
-|           | this variable |
-|           | will be the   |
-|           | always-applie |
-|           | d             |
-|           | weight for    |
-|           | all viewers   |
-|           | of the        |
-|           | dataset.      |
-+-----------+---------------+
-| dashboard | When set,     |
-| \_deck    | points to a   |
-|           | deck that     |
-|           | will become   |
-|           | publicly      |
-|           | visible and   |
-|           | be used as    |
-|           | dashboard by  |
-|           | the web       |
-|           | client        |
-+-----------+---------------+
+=========================== ===================================================
+Setting                     Description
+=========================== ===================================================
+viewers_can_export          When false, only editor can export; else, all
+                            users with view access can export the data
+--------------------------- ---------------------------------------------------
+viewers_can_change_weight   When true, all users with access can set their
+                            own personal weight; else, the editor configured
+                            ``weight`` will be applied to all without option to
+                            change
+--------------------------- ---------------------------------------------------
+viewers_can_share           When true, all users can share the dataset with
+                            other users or teams; Defaults to ``True``
+--------------------------- ---------------------------------------------------
+weight                      Default initial weight for all new users on this
+                            dataset, and when ``viewers_can_change_weight``
+                            is false, this variable will be the always-applied
+                            weight for all viewers of the dataset.
+--------------------------- ---------------------------------------------------
+dashboard_deck              When set, points to a deck that will become
+                            publicly visible and be used as dashboard by the
+                            web client
+=========================== ===================================================
 
 Preferences
 '''''''''''

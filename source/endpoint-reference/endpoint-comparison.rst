@@ -8,24 +8,17 @@ Entity
 
 A Shoji Entity with the following "body" attributes:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin |              |
-|       | g     |              |
-+-------+-------+--------------+
-| bases | array | one for each |
-|       | of    | analysis to  |
-|       | cube  | which the    |
-|       | input | comparison   |
-|       | objec | applies      |
-|       | ts    |              |
-+-------+-------+--------------+
-| overl | cube  | input object |
-| ay    |       | defining the |
-|       |       | comparison   |
-|       |       | data         |
-+-------+-------+--------------+
+========== ============================== ==================================
+Name       Type                           Description
+========== ============================== ==================================
+name       string
+---------- ------------------------------ ----------------------------------
+bases      array of cube input objects    one for each analysis to which the
+                                          comparison applies
+---------- ------------------------------ ----------------------------------
+overlay    cube                           input object defining the
+                                          comparison data
+========== ============================== ==================================
 
 See the Feature Guide for a discussion of the cube objects. POST one to
 the catalog (see below) to create a new comparison. GET to retrieve the
@@ -61,28 +54,17 @@ authorization is lacking, response will instead be 404.
 
 Catalog tuples contain the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| bases | array | References   |
-|       | of    | to the       |
-|       | cube  | dimensions   |
-|       | input | and measures |
-|       | objec | for which    |
-|       | ts    | the          |
-|       |       | comparison   |
-|       |       | is valid     |
-+-------+-------+--------------+
-| cube  | URL   | Link to      |
-|       |       | generate the |
-|       |       | comparison   |
-|       |       | data         |
-+-------+-------+--------------+
+======= ========================= ========================================
+Name    Type                      Description
+======= ========================= ========================================
+name    string                    Human-friendly string identifier
+------- ------------------------- ----------------------------------------
+bases   array of cube objects     References to the dimensions and
+                                  measures for which the comparison is
+                                  valid
+------- ------------------------- ----------------------------------------
+cube    URL                       Link to generate the comparison data
+======= ========================= ========================================
 
 The catalog looks something like this:
 
