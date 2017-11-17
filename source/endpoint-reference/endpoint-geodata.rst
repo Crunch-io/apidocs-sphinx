@@ -102,13 +102,13 @@ The geodata catalog tuples contain the following keys:
 |       |       | categories.  |
 +-------+-------+--------------+
 
-Catalog
-~~~~~~~
-
-``/geodata/id/``
+Entity
+~~~~~~
 
 GET
 ^^^
+
+``GET /geodata/{geodata_id}/``
 
 Crunch maintains a few geojson/topojson resources and publishes them on
 CDN. Most of their properties, with the exception of ``metadata``, are
@@ -149,6 +149,12 @@ resource.
           }
       }
 
+DELETE
+^^^^^^
+
+``DELETE /geodata/{geodata_id}/``
+
+Deletes the geodata entity. Returns 204.
 
 Geodata for common applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
