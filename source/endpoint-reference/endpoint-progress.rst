@@ -16,9 +16,6 @@ GET
 
       GET /progress/{id}/ HTTP/1.1
 
-   --JSON
-   .. code:: json
-
       {
           "element": "shoji:view",
           "self": "https:/app.crunch.io/api/progress/{id}/",

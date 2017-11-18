@@ -5,7 +5,6 @@ Endpoint Reference
    :maxdepth: 2
    :caption: Contents:
 
-   endpoint-intro
    endpoint-public
    endpoint-account
    endpoint-batch

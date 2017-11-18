@@ -43,28 +43,18 @@ making the request. Index tuples are keyed by User URL.
 
 Tuple values include:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Display name |
-|       | g     | of the user  |
-+-------+-------+--------------+
-| email | strin | Email        |
-|       | g     | address of   |
-|       |       | the user     |
-+-------+-------+--------------+
-| is\_o | boole | Whether this |
-| wner  | an    | user is the  |
-|       |       | dataset's    |
-|       |       | "owner"      |
-+-------+-------+--------------+
-| datas | objec | Attributes   |
-| et\_p | t     | governing    |
-| ermis |       | the user's   |
-| sions |       | authorizatio |
-|       |       | n;           |
-|       |       | see below    |
-+-------+-------+--------------+
+======================= =========== ===========================================
+Name                    Type        Description
+======================= =========== ===========================================
+name                    string      Display name of the user
+----------------------- ----------- -------------------------------------------
+email                   string      Email address of the user
+----------------------- ----------- -------------------------------------------
+is_owner                boolean     Whether this user is the dataset's "owner"
+----------------------- ----------- -------------------------------------------
+dataset_permissions     object      Attributes governing the user's
+                                    authorization; see below
+======================= =========== ===========================================
 
 Supported ``dataset_permissions``, all boolean, are:
 
@@ -253,26 +243,10 @@ server will insert the password-setting token. For the Crunch web
 application, this template is
 ``https://app.crunch.io/password/change/${token}/``.
 
-.. raw:: html
-
-   <aside class="success">
-
-::
+.. note::
 
     You may not know whether the email address you're sharing with already has a Crunch account. To be safe, you can always include "url_base" whenever you include `"send_notifications": true`. If it's needed, your invitees will thank you. If it's not needed, it will be ignored.
 
-.. raw:: html
-
-   </aside>
-
-.. raw:: html
-
-   <aside class="notice">
-
-::
+.. note::
 
     If you share with a new user and don't include `"send_notifications": true`, they won't receive an email inviting them to set a password for their new Crunch account. That's okay, though: they can always go to the web application and click "Forgot password" to send a new password reset token. 
-
-.. raw:: html
-
-   </aside>

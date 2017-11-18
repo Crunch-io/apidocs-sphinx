@@ -247,19 +247,13 @@ GET
 
 Tuple values include:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Display name |
-|       | g     | of the user  |
-+-------+-------+--------------+
-| permi | objec | Attributes   |
-| ssion | t     | governing    |
-| s     |       | the user's   |
-|       |       | authorizatio |
-|       |       | n            |
-|       |       | on the team  |
-+-------+-------+--------------+
+=========== ======= =========================================================
+Name        Type    Description
+=========== ======= =========================================================
+name        string  Display name of the user
+----------- ------- ---------------------------------------------------------
+permissions object  Attributes governing the user's authorization on the team
+=========== ======= =========================================================
 
 Supported ``permissions``, all boolean, include:
 

@@ -1,18 +1,12 @@
 Joins
 -----
 
-.. raw:: html
+.. warning::
 
-   <aside class="warning">
-
-Joins are an experimental feature. Beware when using it, and expect
-significant future changes. To instead add a snapshot of columns to a
-dataset, see the "Extend" feature guide. This feature is more stable
-than the dynamic join described here.
-
-.. raw:: html
-
-   </aside>
+    Joins are an experimental feature. Beware when using it, and expect
+    significant future changes. To instead add a snapshot of columns to a
+    dataset, see the "Extend" feature guide. This feature is more stable
+    than the dynamic join described here.
 
 Catalog
 ~~~~~~~

@@ -652,115 +652,56 @@ POST body parameters
 At the top level, the tab book endpoint can take filtering and variable
 limiting parameters.
 
-+---------+-------+----------+--------------+----------------+
-| Name    | Type  | Default  | Description  | Example        |
-+=========+=======+==========+==============+================+
-| filter  | objec | null     | Filter by    | [{"filter":"ht |
-|         | t     |          | Crunch       | tps://app.crun |
-|         |       |          | Expression.  | ch.io/api/data |
-|         |       |          | Variables    | sets/45fc0d5ca |
-|         |       |          | used in the  | 0a945dab7d0544 |
-|         |       |          | filter       | 4efa3310a/filt |
-|         |       |          | should be    | ers/5f14133582 |
-|         |       |          | fully-expres | f34b8b85b40883 |
-|         |       |          | sed          | 0f4b4a9b/"}]   |
-|         |       |          | urls.        |                |
-+---------+-------+----------+--------------+----------------+
-| where   | objec | null     | Crunch       | {"function":   |
-|         | t     |          | Expression   | "select","args |
-|         |       |          | signifying   | ":             |
-|         |       |          | which        | [{"map":       |
-|         |       |          | variables to | {"https://app. |
-|         |       |          | use          | crunch.io/api/ |
-|         |       |          |              | datasets/45fc0 |
-|         |       |          |              | d5ca0a945dab7d |
-|         |       |          |              | 05444efa3310a/ |
-|         |       |          |              | variables/0000 |
-|         |       |          |              | 04/":          |
-|         |       |          |              | {"variable":   |
-|         |       |          |              | "https://app.c |
-|         |       |          |              | runch.io/api/d |
-|         |       |          |              | atasets/45fc0d |
-|         |       |          |              | 5ca0a945dab7d0 |
-|         |       |          |              | 5444efa3310a/v |
-|         |       |          |              | ariables/00000 |
-|         |       |          |              | 4/"},"https:// |
-|         |       |          |              | app.crunch.io/ |
-|         |       |          |              | api/datasets/4 |
-|         |       |          |              | 5fc0d5ca0a945d |
-|         |       |          |              | ab7d05444efa33 |
-|         |       |          |              | 10a/variables/ |
-|         |       |          |              | 000003/":      |
-|         |       |          |              | {"variable":   |
-|         |       |          |              | "https://app.c |
-|         |       |          |              | runch.io/api/d |
-|         |       |          |              | atasets/45fc0d |
-|         |       |          |              | 5ca0a945dab7d0 |
-|         |       |          |              | 5444efa3310a/v |
-|         |       |          |              | ariables/00000 |
-|         |       |          |              | 3/"}}}]}       |
-+---------+-------+----------+--------------+----------------+
-| options | objec | {}       | further      |                |
-|         | t     |          | options      |                |
-|         |       |          | defining the |                |
-|         |       |          | tabbook      |                |
-|         |       |          | output.      |                |
-+---------+-------+----------+--------------+----------------+
-| weight  | url   | null     | Provide a    | "http://app.cr |
-|         |       |          | weight for   | unch.io/api/da |
-|         |       |          | the tabbook  | tasets/45fc0d5 |
-|         |       |          | generation,  | ca0a945dab7d05 |
-|         |       |          | if the       | 444efa3310a/va |
-|         |       |          | weight is    | riables/5f1413 |
-|         |       |          | omitted from | 3582f34b8b85b4 |
-|         |       |          | the request, | 08830f4b4a9b/" |
-|         |       |          | the          |                |
-|         |       |          | currently    |                |
-|         |       |          | selected     |                |
-|         |       |          | weight is    |                |
-|         |       |          | used. If     |                |
-|         |       |          | "null" is    |                |
-|         |       |          | provided,    |                |
-|         |       |          | then the     |                |
-|         |       |          | tabbook      |                |
-|         |       |          | generation   |                |
-|         |       |          | will be      |                |
-|         |       |          | unweighted.  |                |
-+---------+-------+----------+--------------+----------------+
+======= ====== ======== ============================= ================================================================================================================
+Name    Type   Default  Description                   Example
+======= ====== ======== ============================= ================================================================================================================
+filter  object null     Filter by Crunch Expression.  .. code:: json
+                        Variables used in the filter
+                        should be fully-expressed
+                        urls.                          [{"filter":
+                                                       "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/filters/5f14133582f34b8b85b408830f4b4a9b/"
+                                                       }]
+------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
+where   object null     Crunch Expression signifying  .. code:: json
+                        which variables to use
+                                                       {"function": "select",
+                                                        "args": [{"map": {
+                                                         "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000004/": {
+                                                          "variable": "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000004/"},
+                                                         "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000003/": {
+                                                          "variable": "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000003/"}}}]}
+------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
+options object {}       further options defining
+                        the tabbook output.
+------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
+weight  url    null     Provide a weight for the
+                        tabbook generation, if the
+                        weight is omitted from the
+                        request, the currently
+                        selected weight is used. If
+                        "null" is provided, then the
+                        tabbook generation will be
+                        unweighted.
+======= ====== ======== ============================= ================================================================================================================
 
 Options
 '''''''
 
 Options for generating tab books
 
-+---------+-------+----------+--------------+----------------+
-| Name    | Type  | Default  | Description  | Example        |
-+=========+=======+==========+==============+================+
-| display | objec | {}       | a set of     | See Below.     |
-| \_setti | t     |          | settings to  |                |
-| ngs     |       |          | define how   |                |
-|         |       |          | the output   |                |
-|         |       |          | should be    |                |
-|         |       |          | displayed    |                |
-+---------+-------+----------+--------------+----------------+
-| layout  | strin | many\_sh | "many\_sheet | single\_sheet  |
-|         | g     | eets     | s"           |                |
-|         |       |          | indicates    |                |
-|         |       |          | each         |                |
-|         |       |          | variable     |                |
-|         |       |          | should have  |                |
-|         |       |          | its own      |                |
-|         |       |          | Sheet in the |                |
-|         |       |          | xls          |                |
-|         |       |          | spreadsheet. |                |
-|         |       |          | "single\_she |                |
-|         |       |          | et"          |                |
-|         |       |          | indicates    |                |
-|         |       |          | all output   |                |
-|         |       |          | should be in |                |
-|         |       |          | the same     |                |
-|         |       |          | sheet.       |                |
-+---------+-------+----------+--------------+----------------+
+=================== ======= =========== =================================== ================
+Name                Type    Default     Description                         Example
+=================== ======= =========== =================================== ================
+display_settings    object  {}          define how the output should be     See Below.
+                                        displayed
+------------------- ------- ----------- ----------------------------------- ----------------
+layout              string  many_sheets "many_sheets" indicates each        single_sheet
+                                        variable should have its own
+                                        Sheet in the xls spreadsheet.
+                                        "single_sheet" indicates all
+                                        output should be in the same
+                                        sheet.
+=================== ======= =========== =================================== ================
 
 Display Settings
                 

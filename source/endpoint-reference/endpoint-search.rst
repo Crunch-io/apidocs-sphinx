@@ -17,55 +17,55 @@ the dataset field.
 
 Here are the parameters that can be passed to the search endpoint.
 
-+---------------------------+------------+--------------------------------------+
-| Parameter                 | Type       | Description                          |
-+===========================+============+======================================+
-| q                         | String     | query string                         |
-+---------------------------+------------+--------------------------------------+
-| f                         | Json       | used to filter the output of the     |
-|                           | Object     | search (see below)                   |
-+---------------------------+------------+--------------------------------------+
-| limit                     | Integer    | limit the number of dataset results  |
-|                           |            | returned by the api to less than     |
-|                           |            | this amount (default: 10)            |
-+---------------------------+------------+--------------------------------------+
-| offset                    | Integer    | offset into the search index to      |
-|                           |            | start gathering results from         |
-|                           |            | pre-filter                           |
-+---------------------------+------------+--------------------------------------+
-| max\_variables\_per\_data | Integer    | limit the number of variables that   |
-| set                       |            | match to this number (default: 100,  |
-|                           |            | max: 100) (deprecated, use           |
-|                           |            | variable\_limit)                     |
-+---------------------------+------------+--------------------------------------+
-| embedded\_variables       | Boolean    | embed the results within the dataset |
-|                           |            | results (this will become the        |
-|                           |            | default in the future)               |
-+---------------------------+------------+--------------------------------------+
-| projection                | Json       | used to limit the fields that should |
-|                           | Object     | be returned in the search results.   |
-|                           |            | ID is always provided.               |
-+---------------------------+------------+--------------------------------------+
-| scope                     | Json       | used to limit the fields that the    |
-|                           | Object     | search should look at.               |
-+---------------------------+------------+--------------------------------------+
-| grouping                  | String     | One of ``datasets`` or               |
-|                           |            | ``variables``. Tells if search       |
-|                           |            | results should be grouped by         |
-|                           |            | datasets or variables.               |
-+---------------------------+------------+--------------------------------------+
-| variable\_limit           | Integer    | Limit the number of variables        |
-|                           |            | returned per dataset to this value,  |
-|                           |            | (default: 100, max: 100)             |
-+---------------------------+------------+--------------------------------------+
-| variable\_offset          | Integer    | Offset into the variables returned   |
-|                           |            | per dataset, default 0               |
-+---------------------------+------------+--------------------------------------+
-| max\_subfield\_entries\_p | Integer    | Number of items in the subfields of  |
-| er\_variable              |            | a variable (such as categories or    |
-|                           |            | subvariables), (default: 10, max:    |
-|                           |            | 100)                                 |
-+---------------------------+------------+--------------------------------------+
++--------------------------------------+------------+--------------------------------------+
+| Parameter                            | Type       | Description                          |
++======================================+============+======================================+
+| q                                    | String     | query string                         |
++--------------------------------------+------------+--------------------------------------+
+| f                                    | Json       | used to filter the output of the     |
+|                                      | Object     | search (see below)                   |
++--------------------------------------+------------+--------------------------------------+
+| limit                                | Integer    | limit the number of dataset results  |
+|                                      |            | returned by the api to less than     |
+|                                      |            | this amount (default: 10)            |
++--------------------------------------+------------+--------------------------------------+
+| offset                               | Integer    | offset into the search index to      |
+|                                      |            | start gathering results from         |
+|                                      |            | pre-filter                           |
++--------------------------------------+------------+--------------------------------------+
+| max_variables_per_dataset            | Integer    | limit the number of variables that   |
+|                                      |            | match to this number (default: 100,  |
+|                                      |            | max: 100) (deprecated, use           |
+|                                      |            | variable\_limit)                     |
++--------------------------------------+------------+--------------------------------------+
+| embedded_variables                   | Boolean    | embed the results within the dataset |
+|                                      |            | results (this will become the        |
+|                                      |            | default in the future)               |
++--------------------------------------+------------+--------------------------------------+
+| projection                           | Json       | used to limit the fields that should |
+|                                      | Object     | be returned in the search results.   |
+|                                      |            | ID is always provided.               |
++--------------------------------------+------------+--------------------------------------+
+| scope                                | Json       | used to limit the fields that the    |
+|                                      | Object     | search should look at.               |
++--------------------------------------+------------+--------------------------------------+
+| grouping                             | String     | One of ``datasets`` or               |
+|                                      |            | ``variables``. Tells if search       |
+|                                      |            | results should be grouped by         |
+|                                      |            | datasets or variables.               |
++--------------------------------------+------------+--------------------------------------+
+| variable_limit                       | Integer    | Limit the number of variables        |
+|                                      |            | returned per dataset to this value,  |
+|                                      |            | (default: 100, max: 100)             |
++--------------------------------------+------------+--------------------------------------+
+| variable_offset                      | Integer    | Offset into the variables returned   |
+|                                      |            | per dataset, default 0               |
++--------------------------------------+------------+--------------------------------------+
+| max_subfield_entries_per_variable    | Integer    | Number of items in the subfields of  |
+|                                      |            | a variable (such as categories or    |
+|                                      |            | subvariables), (default: 10, max:    |
+|                                      |            | 100)                                 |
++--------------------------------------+------------+--------------------------------------+
 
 .. raw:: html
 
@@ -120,62 +120,56 @@ dataset info.
 
 Allowable filter parameters:
 
-+-----------------+-----------------+------------------------------------------+
-| Parameter       | Type            | Description                              |
-+=================+=================+==========================================+
-| dataset\_ids    | array of        | limit results to particular dataset\_ids |
-|                 | strings         | or urls (user must have read access to   |
-|                 |                 | that dataset)                            |
-+-----------------+-----------------+------------------------------------------+
-| team            | string          | url or id of the team to limit results   |
-|                 |                 | (user must have read access to the team) |
-+-----------------+-----------------+------------------------------------------+
-| project         | string          | url or id of the project to limit        |
-|                 |                 | results (user must have access to the    |
-|                 |                 | project)                                 |
-+-----------------+-----------------+------------------------------------------+
-| organization    | string          | if you are the owner for a given         |
-|                 |                 | organization, you can filter all of the  |
-|                 |                 | search results pertaining to the         |
-|                 |                 | datasets in your organization.           |
-+-----------------+-----------------+------------------------------------------+
-| user            | string          | url or id of the user that has read      |
-|                 |                 | access to the datasets to limit results  |
-|                 |                 | (user must match with the provided one)  |
-+-----------------+-----------------+------------------------------------------+
-| owner           | string          | url or id of the dataset owner to limit  |
-|                 |                 | results                                  |
-+-----------------+-----------------+------------------------------------------+
-| label           | string          | The dataset must be in a folder or       |
-|                 |                 | subfolder with the given name.           |
-+-----------------+-----------------+------------------------------------------+
-| start\_date     | array of        | array of ``[begin, end]`` range of       |
-|                 | strings         | values in ISO8601 format. Provide same   |
-|                 |                 | for exact matching.                      |
-+-----------------+-----------------+------------------------------------------+
-| end\_date       | array of        | array of ``[begin, end]`` range of       |
-|                 | strings         | values in ISO8601 format. Provide same   |
-|                 |                 | for exact matching.                      |
-+-----------------+-----------------+------------------------------------------+
-| modification\_t | array of        | array of ``[begin, end]`` range of       |
-| ime             | strings         | values in ISO8601 format. Provide same   |
-|                 |                 | for exact matching.                      |
-+-----------------+-----------------+------------------------------------------+
-| creation\_time  | array of        | array of ``[begin, end]`` range of       |
-|                 | strings         | values in ISO8601 format. Provide same   |
-|                 |                 | for exact matching.                      |
-+-----------------+-----------------+------------------------------------------+
++--------------------+-----------------+------------------------------------------+
+| Parameter          | Type            | Description                              |
++====================+=================+==========================================+
+| dataset\_ids       | array of        | limit results to particular dataset\_ids |
+|                    | strings         | or urls (user must have read access to   |
+|                    |                 | that dataset)                            |
++--------------------+-----------------+------------------------------------------+
+| team               | string          | url or id of the team to limit results   |
+|                    |                 | (user must have read access to the team) |
++--------------------+-----------------+------------------------------------------+
+| project            | string          | url or id of the project to limit        |
+|                    |                 | results (user must have access to the    |
+|                    |                 | project)                                 |
++--------------------+-----------------+------------------------------------------+
+| organization       | string          | if you are the owner for a given         |
+|                    |                 | organization, you can filter all of the  |
+|                    |                 | search results pertaining to the         |
+|                    |                 | datasets in your organization.           |
++--------------------+-----------------+------------------------------------------+
+| user               | string          | url or id of the user that has read      |
+|                    |                 | access to the datasets to limit results  |
+|                    |                 | (user must match with the provided one)  |
++--------------------+-----------------+------------------------------------------+
+| owner              | string          | url or id of the dataset owner to limit  |
+|                    |                 | results                                  |
++--------------------+-----------------+------------------------------------------+
+| label              | string          | The dataset must be in a folder or       |
+|                    |                 | subfolder with the given name.           |
++--------------------+-----------------+------------------------------------------+
+| start\_date        | array of        | array of ``[begin, end]`` range of       |
+|                    | strings         | values in ISO8601 format. Provide same   |
+|                    |                 | for exact matching.                      |
++--------------------+-----------------+------------------------------------------+
+| end\_date          | array of        | array of ``[begin, end]`` range of       |
+|                    | strings         | values in ISO8601 format. Provide same   |
+|                    |                 | for exact matching.                      |
++--------------------+-----------------+------------------------------------------+
+| modification\_time | array of        | array of ``[begin, end]`` range of       |
+|                    | strings         | values in ISO8601 format. Provide same   |
+|                    |                 | for exact matching.                      |
++--------------------+-----------------+------------------------------------------+
+| creation\_time     | array of        | array of ``[begin, end]`` range of       |
+|                    | strings         | values in ISO8601 format. Provide same   |
+|                    |                 | for exact matching.                      |
++--------------------+-----------------+------------------------------------------+
 
-.. raw:: html
+.. note::
 
-   <aside class="notice">
-
-The query string can only be alpha-numeric characters (including
-underscores) logical operators are not allowed at this time.
-
-.. raw:: html
-
-   </aside>
+    The query string can only be alpha-numeric characters (including
+    underscores) logical operators are not allowed at this time.
 
 Fields Searched
 '''''''''''''''
@@ -183,51 +177,51 @@ Fields Searched
 Here is a list of the fields that are searched by the Crunch search
 endpoint
 
-+------------+------------+-----------------------------------------------------+
-| Field      | Type       | Description                                         |
-+============+============+=====================================================+
-| category\_ | List of    | Category names (associated with categorical         |
-| names      | Strings    | variables)                                          |
-+------------+------------+-----------------------------------------------------+
-| dataset\_i | String     | ID of the dataset                                   |
-| d          |            |                                                     |
-+------------+------------+-----------------------------------------------------+
-| descriptio | String     | description of the variable                         |
-| n          |            |                                                     |
-+------------+------------+-----------------------------------------------------+
-| id         | String     | ID of the variable                                  |
-+------------+------------+-----------------------------------------------------+
-| name       | String     | name of the variable                                |
-+------------+------------+-----------------------------------------------------+
-| owner      | String     | owner's ID of the variable                          |
-+------------+------------+-----------------------------------------------------+
-| subvar\_na | List of    | Names of the subvariables associated with the       |
-| mes        | Strings    | variable                                            |
-+------------+------------+-----------------------------------------------------+
-| users      | List of    | User IDs having read-access to the variable         |
-|            | Strings    |                                                     |
-+------------+------------+-----------------------------------------------------+
-| group\_nam | List of    | group names (from the variable ordering) associated |
-| es         | Strings    | with the variable                                   |
-+------------+------------+-----------------------------------------------------+
-| dataset\_l | List of    | dataset\_labels associated with the user associated |
-| abels      | Objects    | with the variable                                   |
-+------------+------------+-----------------------------------------------------+
-| dataset\_n | String     | dataset\_name associated with this variable         |
-| ame        |            |                                                     |
-+------------+------------+-----------------------------------------------------+
-| dataset\_o | String     | ID of the owner of the dataset associated with the  |
-| wner       |            | variable                                            |
-+------------+------------+-----------------------------------------------------+
-| dataset\_u | List of    | User IDs having read-access to the dataset          |
-| sers       | Strings    | associated with the variable                        |
-+------------+------------+-----------------------------------------------------+
-| dataset\_t | List of    | Team IDs having read-access to the dataset          |
-| eams       | Strings    | associated with the variable                        |
-+------------+------------+-----------------------------------------------------+
-| dataset\_p | List of    | Project IDs having read-access to the dataset       |
-| rojects    | Strings    | associated with the variable                        |
-+------------+------------+-----------------------------------------------------+
++-------------------+------------+-----------------------------------------------------+
+| Field             | Type       | Description                                         |
++===================+============+=====================================================+
+| category\_names   | List of    | Category names (associated with categorical         |
+|                   | Strings    | variables)                                          |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_id       | String     | ID of the dataset                                   |
+|                   |            |                                                     |
++-------------------+------------+-----------------------------------------------------+
+| description       | String     | description of the variable                         |
+|                   |            |                                                     |
++-------------------+------------+-----------------------------------------------------+
+| id                | String     | ID of the variable                                  |
++-------------------+------------+-----------------------------------------------------+
+| name              | String     | name of the variable                                |
++-------------------+------------+-----------------------------------------------------+
+| owner             | String     | owner's ID of the variable                          |
++-------------------+------------+-----------------------------------------------------+
+| subvar\_names     | List of    | Names of the subvariables associated with the       |
+|                   | Strings    | variable                                            |
++-------------------+------------+-----------------------------------------------------+
+| users             | List of    | User IDs having read-access to the variable         |
+|                   | Strings    |                                                     |
++-------------------+------------+-----------------------------------------------------+
+| group\_names      | List of    | group names (from the variable ordering) associated |
+|                   | Strings    | with the variable                                   |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_labels   | List of    | dataset\_labels associated with the user associated |
+|                   | Objects    | with the variable                                   |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_name     | String     | dataset\_name associated with this variable         |
+|                   |            |                                                     |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_owner    | String     | ID of the owner of the dataset associated with the  |
+|                   |            | variable                                            |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_users    | List of    | User IDs having read-access to the dataset          |
+|                   | Strings    | associated with the variable                        |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_teams    | List of    | Team IDs having read-access to the dataset          |
+|                   | Strings    | associated with the variable                        |
++-------------------+------------+-----------------------------------------------------+
+| dataset\_projects | List of    | Project IDs having read-access to the dataset       |
+|                   | Strings    | associated with the variable                        |
++-------------------+------------+-----------------------------------------------------+
 
 Grouping by datasets:
 
@@ -236,18 +230,6 @@ Grouping by datasets:
    .. code:: http
 
       GET /search/?q={query}&f={filter}&limit={limit}&offset={offset}&projection={projection}&grouping=datasets  HTTP/1.1
-
-
-\`\`\` import pycrunch site = pycrunch.connect("me@mycompany.com",
-"yourpassword", "https://app.crunch.io/api/") results =
-site.follow('search', 'q=findme&embedded\_variables=True').value
-datasets\_found = results['groups'][0]['datasets']
-variables\_by\_dataset = {k, v.get('variables', []) for k, v in
-datasets\_found.iteritems()}
-
-.. language_specific::
-   --JSON
-   .. code:: json
 
       {
          "element": "shoji:view",
@@ -308,6 +290,17 @@ datasets\_found.iteritems()}
               ]
           }
       }
+
+   --Python
+   .. code:: python
+
+       import pycrunch
+       site = pycrunch.connect("me@mycompany.com", "yourpassword", "https://app.crunch.io/api/")
+       results = site.follow('search', 'q=findme&embedded_variables=True').value
+       datasets_found = results['groups'][0]['datasets']
+       variables_by_dataset = {
+           k, v.get('variables', []) for k, v in datasets_found.iteritems()
+       }
 
 
 Search results are limited to 1000 variables per dataset.

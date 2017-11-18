@@ -38,69 +38,27 @@ download the actual geojson or topojson.
 
 The geodata catalog tuples contain the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| creat | times | Time when    |
-| ed    | tamp  | the item was |
-|       |       | created      |
-+-------+-------+--------------+
-| id    | strin | Global       |
-|       | g     | unique       |
-|       |       | identifier   |
-|       |       | for this     |
-|       |       | deck         |
-+-------+-------+--------------+
-| locat | uri   | Location of  |
-| ion   |       | crunch-curat |
-|       |       | ed           |
-|       |       | geojson/topo |
-|       |       | json         |
-|       |       | file. Users  |
-|       |       | may need to  |
-|       |       | inspect this |
-|       |       | actual file  |
-|       |       | to learn     |
-|       |       | about        |
-|       |       | details of   |
-|       |       | the          |
-|       |       | FeatureColle |
-|       |       | ction        |
-|       |       | and          |
-|       |       | individual   |
-|       |       | Features.    |
-+-------+-------+--------------+
-| descr | strin | Any          |
-| iptio | g     | additional   |
-| n     |       | information  |
-|       |       | about the    |
-|       |       | geodatum     |
-+-------+-------+--------------+
-| metad | objec | Information  |
-| ata   | t     | regarding    |
-|       |       | the actual   |
-|       |       | data         |
-|       |       | provided by  |
-|       |       | the          |
-|       |       | location.    |
-|       |       | For now, the |
-|       |       | properties   |
-|       |       | in the       |
-|       |       | geodata      |
-|       |       | features are |
-|       |       | extracted    |
-|       |       | for the      |
-|       |       | purpose of   |
-|       |       | matching     |
-|       |       | geodata to   |
-|       |       | variable     |
-|       |       | categories.  |
-+-------+-------+--------------+
+=============== =========== ===================================================
+Name            Type        Description
+=============== =========== ===================================================
+name            string      Human-friendly string identifier
+--------------- ----------- ---------------------------------------------------
+created         timestamp   Time when the item was created
+--------------- ----------- ---------------------------------------------------
+id              string      Global unique identifer for this deck
+--------------- ----------- ---------------------------------------------------
+location        uri         Location of crunch-curated geojson/topojson file.
+                            Users may need to inspect this actual file to
+                            learn about details of the FeatureCollection
+                            and individual Features.
+--------------- ----------- ---------------------------------------------------
+description     string      Any additional information about the geodatum
+--------------- ----------- ---------------------------------------------------
+metadata        object      Information regarding the actual data provided by
+                            the location. For now, the properties in the
+                            geodata features are extracted for the purpose
+                            of matching geodata to variable categories.
+=============== =========== ===================================================
 
 Entity
 ~~~~~~
