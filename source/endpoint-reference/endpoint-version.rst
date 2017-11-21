@@ -16,45 +16,24 @@ When authenticated, GET returns 200 status with a (paginated) Shoji
 Catalog of versions to which the dataset can be reverted. Catalog tuples
 contain the following attributes:
 
-+-------+-------+----------+--------------+
-| Name  | Type  | Default  | Description  |
-+=======+=======+==========+==============+
-| user\ | strin | ""       | The name of  |
-| _disp | g     |          | the user who |
-| lay\_ |       |          | saved this   |
-| name  |       |          | version      |
-+-------+-------+----------+--------------+
-| descr | strin |          | An           |
-| iptio | g     |          | informative  |
-| n     |       |          | note about   |
-|       |       |          | the version, |
-|       |       |          | as in a      |
-|       |       |          | commit       |
-|       |       |          | message      |
-+-------+-------+----------+--------------+
-| versi | strin |          | An internal  |
-| on    | g     |          | identifier   |
-|       |       |          | for the      |
-|       |       |          | saved        |
-|       |       |          | version      |
-+-------+-------+----------+--------------+
-| creat | datet |          | Timestamp    |
-| ion\_ | ime   |          | for when the |
-| time  |       |          | version was  |
-|       |       |          | created      |
-+-------+-------+----------+--------------+
-| last\ | datet |          | Timestamp    |
-| _upda | ime   |          | for when the |
-| te    |       |          | version was  |
-|       |       |          | last updated |
-+-------+-------+----------+--------------+
-| rever | url   |          | URL to POST  |
-| t     |       |          | to in order  |
-|       |       |          | to roll back |
-|       |       |          | to this      |
-|       |       |          | version; see |
-|       |       |          | below        |
-+-------+-------+----------+--------------+
+================= ======== ======= ============================================
+Name              Type     Default Description                                 
+================= ======== ======= ============================================
+user_display_name string   ""      The name of the user who saved this version 
+----------------- -------- ------- --------------------------------------------
+description       string           An informative note about the version, as in
+                                   a commit message                            
+----------------- -------- ------- --------------------------------------------
+version           string           An internal identifier for the saved version
+----------------- -------- ------- --------------------------------------------
+creation_time     datetime         Timestamp for when the version was created  
+----------------- -------- ------- --------------------------------------------
+last_update       datetime         Timestamp for when the version was last     
+                                   updated                                     
+----------------- -------- ------- --------------------------------------------
+revert            url              URL to POST to in order to roll back to this
+                                   version; see below                          
+================= ======== ======= ============================================
 
 Query parameters:
 
@@ -78,17 +57,12 @@ POST
 To create a new version, POST a JSON object to the versions catalog.
 Object attributes may contain:
 
-+-------+-------+-----------+--------------+
-| Name  | Type  | Required  | Description  |
-+=======+=======+===========+==============+
-| descr | strin | No        | An           |
-| iptio | g     |           | informative  |
-| n     |       |           | note about   |
-|       |       |           | the version, |
-|       |       |           | as in a      |
-|       |       |           | commit       |
-|       |       |           | message      |
-+-------+-------+-----------+--------------+
+=========== ====== ======== ===================================================
+Name        Type   Required Description                                        
+=========== ====== ======== ===================================================
+description string No       An informative note about the version, as in a     
+                            commit message                                     
+=========== ====== ======== ===================================================
 
 A successful POST will return 201 status with the URL of the newly
 created version entity in the Location header. If the current user is
@@ -111,28 +85,16 @@ GET
 Version entities expose a subset of attributes found in the catalog
 tuples:
 
-+-------+-------+----------+--------------+
-| Name  | Type  | Default  | Description  |
-+=======+=======+==========+==============+
-| user\ | strin | ""       | The name of  |
-| _disp | g     |          | the user who |
-| lay\_ |       |          | saved this   |
-| name  |       |          | version      |
-+-------+-------+----------+--------------+
-| descr | strin |          | An           |
-| iptio | g     |          | informative  |
-| n     |       |          | note about   |
-|       |       |          | the version, |
-|       |       |          | as in a      |
-|       |       |          | commit       |
-|       |       |          | message      |
-+-------+-------+----------+--------------+
-| versi | strin |          | An internal  |
-| on    | g     |          | identifier   |
-|       |       |          | for the      |
-|       |       |          | saved        |
-|       |       |          | version      |
-+-------+-------+----------+--------------+
+================= ====== ======= ==============================================
+Name              Type   Default Description                                   
+================= ====== ======= ==============================================
+user_display_name string ""      The name of the user who saved this version   
+----------------- ------ ------- ----------------------------------------------
+description       string         An informative note about the version, as in a
+                                 commit message                                
+----------------- ------ ------- ----------------------------------------------
+version           string         An internal identifier for the saved version  
+================= ====== ======= ==============================================
 
 PATCH
 ^^^^^

@@ -140,7 +140,7 @@ attributes:
 +---------------------+-----------------------------------------------------------------+
 | where               | A Crunch expression indicating which **variables** to include   |
 +---------------------+-----------------------------------------------------------------+
-| display\_settings   | Options to customize how it looks and behaves                   |
+| display_settings    | Options to customize how it looks and behaves                   |
 +---------------------+-----------------------------------------------------------------+
 
 .. language_specific::

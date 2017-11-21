@@ -1539,18 +1539,18 @@ and information about the type of access:
 |                        | user belongs |
 |                        | to           |
 +------------------------+--------------+
-| last\_accessed         | Timestamp of |
+| last_accessed          | Timestamp of |
 |                        | last access  |
 |                        | to dataset   |
 |                        | via web app  |
 +------------------------+--------------+
-| project\_member        | If dataset   |
+| project_member         | If dataset   |
 |                        | is part of a |
 |                        | project and  |
 |                        | this user    |
 |                        | too          |
 +------------------------+--------------+
-| coalesced\_permissions | Permissions  |
+| coalesced_permissions  | Permissions  |
 |                        | this user    |
 |                        | has to this  |
 |                        | access,      |

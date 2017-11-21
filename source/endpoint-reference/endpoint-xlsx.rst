@@ -54,132 +54,78 @@ the values. Multiple tables can be placed on a single sheet.
 Result
 ''''''
 
-+---------+-------+---------------------------------------------+--------------+
-| Name    | Type  | Typical                                     | Description  |
-|         |       | element                                     |              |
-+=========+=======+=============================================+==============+
-| rows    | array | ``{"value": 30, "class": "formatted"}``     | Cells are    |
-|         |       |                                             | objects with |
-|         |       |                                             | at least a   |
-|         |       |                                             | ``value``    |
-|         |       |                                             | member, and  |
-|         |       |                                             | optional     |
-|         |       |                                             | ``class``,   |
-|         |       |                                             | where a      |
-|         |       |                                             | value of     |
-|         |       |                                             | ``"formatted |
-|         |       |                                             | "``          |
-|         |       |                                             | prevents the |
-|         |       |                                             | exporter     |
-|         |       |                                             | from         |
-|         |       |                                             | applying any |
-|         |       |                                             | number       |
-|         |       |                                             | format to    |
-|         |       |                                             | the result   |
-|         |       |                                             | cell         |
-+---------+-------+---------------------------------------------+--------------+
-| colLabe | array | ``{"value": "All"}``                        | Array of     |
-| ls      |       |                                             | objects with |
-|         |       |                                             | a ``value``  |
-|         |       |                                             | member       |
-+---------+-------+---------------------------------------------+--------------+
-| colTitl | array | ``"Age"``                                   | Array of     |
-| es      |       |                                             | strings      |
-+---------+-------+---------------------------------------------+--------------+
-| spans   | array | ``4``                                       | array of     |
-|         |       |                                             | integers     |
-|         |       |                                             | matching the |
-|         |       |                                             | length of    |
-|         |       |                                             | colTitles,   |
-|         |       |                                             | indicating   |
-|         |       |                                             | the number   |
-|         |       |                                             | of cells to  |
-|         |       |                                             | be joined    |
-|         |       |                                             | for each     |
-|         |       |                                             | colTitle     |
-|         |       |                                             | after the    |
-|         |       |                                             | first one.   |
-|         |       |                                             | The first    |
-|         |       |                                             | colTitle is  |
-|         |       |                                             | assumed to   |
-|         |       |                                             | be only one  |
-|         |       |                                             | column wide. |
-+---------+-------+---------------------------------------------+--------------+
-| rowTitl | strin | ``"Dog food brands"``                       | A title,     |
-| e       | g     |                                             | which is     |
-|         |       |                                             | formatted    |
-|         |       |                                             | bold above   |
-|         |       |                                             | the first    |
-|         |       |                                             | column of    |
-|         |       |                                             | the table    |
-|         |       |                                             | (the         |
-|         |       |                                             | rowLabels,   |
-|         |       |                                             | below)       |
-+---------+-------+---------------------------------------------+--------------+
-| rowLabe | array | ``{"value": "Canine Crunch"}``              | labels for   |
-| ls      |       |                                             | rows of the  |
-|         |       |                                             | table        |
-|         |       |                                             |              |
-+---------+-------+---------------------------------------------+--------------+
-| rowVari | strin | ``"Preferred dog food"``                    | title to     |
-| ableNam | g     |                                             | display at   |
-| e       |       |                                             | the very top |
-|         |       |                                             | left of the  |
-|         |       |                                             | result sheet |
-+---------+-------+---------------------------------------------+--------------+
-| filter\ | array | ``"Breed: Dachshund"``                      | Names of any |
-| _names  |       |                                             | filters to   |
-|         |       |                                             | print        |
-|         |       |                                             | beneath the  |
-|         |       |                                             | table, will  |
-|         |       |                                             | be labeled   |
-|         |       |                                             | "Filters".   |
-|         |       |                                             | If multiple  |
-|         |       |                                             | result       |
-|         |       |                                             | objects are  |
-|         |       |                                             | included in  |
-|         |       |                                             | the payload, |
-|         |       |                                             | the filter   |
-|         |       |                                             | names from   |
-|         |       |                                             | the *first*  |
-|         |       |                                             | result are   |
-|         |       |                                             | used, and    |
-|         |       |                                             | placed at    |
-|         |       |                                             | the bottom   |
-|         |       |                                             | of the sheet |
-|         |       |                                             | beneath all  |
-|         |       |                                             | results.     |
-+---------+-------+---------------------------------------------+--------------+
+=============== ====== ============================= ==========================
+Name            Type   Typical element               Description               
+=============== ====== ============================= ==========================
+rows            array  ``{"value": 30, "class":      Cells are objects with at 
+                       "formatted"}``                least a ``value`` member, 
+                                                     and optional ``class``,   
+                                                     where a value of          
+                                                     ``"formatted "`` prevents 
+                                                     the exporter from applying
+                                                     any number format to the  
+                                                     result cell               
+--------------- ------ ----------------------------- --------------------------
+colLabels       array  ``{"value": "All"}``          Array of objects with a   
+                                                     ``value`` member          
+--------------- ------ ----------------------------- --------------------------
+colTitles       array  ``"Age"``                     Array of strings          
+--------------- ------ ----------------------------- --------------------------
+spans           array  ``4``                         array of integers matching
+                                                     the length of colTitles,  
+                                                     indicating the number of  
+                                                     cells to be joined for    
+                                                     each colTitle after the   
+                                                     first one. The first      
+                                                     colTitle is assumed to be 
+                                                     only one column wide.     
+--------------- ------ ----------------------------- --------------------------
+rowTitle        string ``"Dog food brands"``         A title, which is         
+                                                     formatted bold above the  
+                                                     first column of the table 
+                                                     (the rowLabels, below)    
+--------------- ------ ----------------------------- --------------------------
+rowLabels       array  ``{"value": "Canine           labels for rows of the    
+                       Crunch"}``                    table                     
+--------------- ------ ----------------------------- --------------------------
+rowVariableName string ``"Preferred dog food"``      title to display at the   
+                                                     very top left of the      
+                                                     result sheet              
+--------------- ------ ----------------------------- --------------------------
+filter_names    array  ``"Breed: Dachshund"``        Names of any filters to   
+                                                     print beneath the table,  
+                                                     will be labeled "Filters".
+                                                     If multiple result objects
+                                                     are included in the       
+                                                     payload, the filter names 
+                                                     from the *first* result   
+                                                     are used, and placed at   
+                                                     the bottom of the sheet   
+                                                     beneath all results.      
+=============== ====== ============================= ==========================
 
 Display Settings
 ''''''''''''''''
 
 Further customization for the resulting output.
 
-+---------+-------+----------+--------------+-------------------------------+
-| Name    | Type  | Default  | Description  | Example                       |
-+=========+=======+==========+==============+===============================+
-| decimal | objec | 0        | number of    | ``{"value": 0}``              |
-| Places  | t     |          | decimal      |                               |
-|         |       |          | places to    |                               |
-|         |       |          | diaplay      |                               |
-+---------+-------+----------+--------------+-------------------------------+
-| countsO | objec | percent  | use counts   | ``{"value": "percent"}``      |
-| rPercen | t     |          | or percents  |                               |
-| ts      |       |          |              |                               |
-+---------+-------+----------+--------------+-------------------------------+
-| percent | objec | {"value" | row or       | ``{"value": "colPct"}``       |
-| ageDire | t     | :        | column based |                               |
-| ction   |       | "colPct" | percents     |                               |
-|         |       | }        |              |                               |
-+---------+-------+----------+--------------+-------------------------------+
-| valuesA | objec | false    | are values   | ``{"value": false}``          |
-| reMeans | t     |          | means? (If   |                               |
-|         |       |          | so, will be  |                               |
-|         |       |          | formatted    |                               |
-|         |       |          | with decimal |                               |
-|         |       |          | places)      |                               |
-+---------+-------+----------+--------------+-------------------------------+
+=================== ====== =============== ================= ==================
+Name                Type   Default         Description       Example           
+=================== ====== =============== ================= ==================
+decimal Places      object 0               number of decimal ``{"value": 0}``  
+                                           places to diaplay                   
+------------------- ------ --------------- ----------------- ------------------
+countsOrPercents    object percent         use counts or     ``{"value":       
+                                           percents          "percent"}``      
+------------------- ------ --------------- ----------------- ------------------
+percentageDirection object {"value" :      row or column     ``{"value":       
+                           "colPct" }      based percents    "colPct"}``       
+------------------- ------ --------------- ----------------- ------------------
+valuesAreMeans      object false           are values means? ``{"value":       
+                                           (If so, will be   false}``          
+                                           formatted with                      
+                                           decimal places)                     
+=================== ====== =============== ================= ==================
 
 Quirks
 ''''''
@@ -202,3 +148,341 @@ displaying. Some of these are enumerated below.
 Complete example
 ~~~~~~~~~~~~~~~~
 
+.. language_specific::
+   --JSON
+   .. code:: json
+
+      {"element":"shoji:entity",
+      "body":{
+          "result": [
+        {
+          "filter_names": ["Name_of_filter"],
+          "rows": [
+            [
+              {
+                "value": 50,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 50,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 0,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 0,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-1"
+              }
+            ]
+          ],
+          "colLabels": [
+            {
+              "value": "All"
+            },
+            {
+              "value": "2014",
+              "class": "col-0"
+            },
+            {
+              "value": "2015",
+              "class": "col-1"
+            }
+          ],
+          "spans": [
+            2
+          ],
+          "rowLabels": [
+            {
+              "value": "a",
+              "class": "row-label"
+            },
+            {
+              "value": "b",
+              "class": "row-label"
+            },
+            {
+              "value": "c",
+              "class": "row-label"
+            },
+            {
+              "value": "d",
+              "class": "row-label"
+            }
+          ],
+          "rowTitle": "ca_subvar_1",
+          "rowVariableName": "categorical_array",
+          "colTitles": [
+            "quarter"
+          ]
+        },
+        {
+          "rows": [
+            [
+              {
+                "value": 16.666666666666664,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 25,
+                "pValue": 0.24821309601845032,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": -0.2482130960184501,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 50,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 50,
+                "pValue": 0,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 33.33333333333333,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 25,
+                "pValue": -0.5464935495198773,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 50,
+                "pValue": 0.5464935495198773,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 0,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-1"
+              }
+            ]
+          ],
+          "colLabels": [
+            {
+              "value": "All"
+            },
+            {
+              "value": "2014",
+              "class": "col-0"
+            },
+            {
+              "value": "2015",
+              "class": "col-1"
+            }
+          ],
+          "spans": [
+            2
+          ],
+          "rowLabels": [
+            {
+              "value": "a",
+              "class": "row-label"
+            },
+            {
+              "value": "b",
+              "class": "row-label"
+            },
+            {
+              "value": "c",
+              "class": "row-label"
+            },
+            {
+              "value": "d",
+              "class": "row-label"
+            }
+          ],
+          "rowTitle": "ca_subvar_2",
+          "rowVariableName": "categorical_array",
+          "colTitles": [
+            "quarter"
+          ]
+        },
+        {
+          "rows": [
+            [
+              {
+                "value": 0,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": null,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 33.33333333333333,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 50,
+                "pValue": 0.045500259780248964,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": -0.045500259780248964,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 16.666666666666664,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 25,
+                "pValue": 0.24821309601845032,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 0,
+                "pValue": -0.2482130960184501,
+                "class": "subtable-0 col-1"
+              }
+            ],
+            [
+              {
+                "value": 50,
+                "class": "marginal marginal-percentage"
+              },
+              {
+                "value": 25,
+                "pValue": -0.0005320055485602548,
+                "class": "subtable-0 col-0"
+              },
+              {
+                "value": 100,
+                "pValue": 0.0005320055485602548,
+                "class": "subtable-0 col-1"
+              }
+            ]
+          ],
+          "colLabels": [
+            {
+              "value": "All"
+            },
+            {
+              "value": "2014",
+              "class": "col-0"
+            },
+            {
+              "value": "2015",
+              "class": "col-1"
+            }
+          ],
+          "spans": [
+            2
+          ],
+          "rowLabels": [
+            {
+              "value": "a",
+              "class": "row-label"
+            },
+            {
+              "value": "b",
+              "class": "row-label"
+            },
+            {
+              "value": "c",
+              "class": "row-label"
+            },
+            {
+              "value": "d",
+              "class": "row-label"
+            }
+          ],
+          "rowTitle": "ca_subvar_3",
+          "rowVariableName": "categorical_array",
+          "colTitles": [
+            "quarter"
+          ]
+        }
+      ],
+      "display_settings":{
+              "valuesAreMeans": {"value": false},
+              "countsOrPercents": {"value": "percent"},
+              "percentageDirection": {"value": "colPct"},
+              "decimalPlaces": {"value": 1}
+          }
+      }
+      }

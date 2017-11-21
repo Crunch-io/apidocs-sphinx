@@ -25,129 +25,59 @@ Variables for an index of those.
 
 Catalog tuples contain the following keys:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| alias | strin | More         |
-|       | g     | machine-frie |
-|       |       | ndly,        |
-|       |       | traditional  |
-|       |       | name for a   |
-|       |       | variable     |
-+-------+-------+--------------+
-| descr | strin | Optional     |
-| iptio | g     | longer       |
-| n     |       | string       |
-+-------+-------+--------------+
-| id    | strin | Immutable    |
-|       | g     | internal     |
-|       |       | identifier   |
-+-------+-------+--------------+
-| notes | strin | Optional     |
-|       | g     | annotations  |
-|       |       | for a        |
-|       |       | variable     |
-+-------+-------+--------------+
-| disca | boole | Whether the  |
-| rded  | an    | variable     |
-|       |       | should be    |
-|       |       | hidden from  |
-|       |       | most views;  |
-|       |       | default:     |
-|       |       | false        |
-+-------+-------+--------------+
-| deriv | boole | Whether the  |
-| ed    | an    | variable is  |
-|       |       | a function   |
-|       |       | of another;  |
-|       |       | default:     |
-|       |       | false        |
-+-------+-------+--------------+
-| type  | strin | The string   |
-|       | g     | type name,   |
-|       |       | one of       |
-|       |       | "numeric",   |
-|       |       | "text",      |
-|       |       | "categorical |
-|       |       | ",           |
-|       |       | "datetime",  |
-|       |       | "categorical |
-|       |       | \_array",    |
-|       |       | or           |
-|       |       | "multiple\_r |
-|       |       | esponse"     |
-+-------+-------+--------------+
-| subva | array | For arrays,  |
-| riabl | of    | array of     |
-| es    | URLs  | (ordered)    |
-|       |       | references   |
-|       |       | to           |
-|       |       | subvariables |
-+-------+-------+--------------+
-| subva | URL   | For arrays,  |
-| riabl |       | link to a    |
-| es\_c |       | Shoji        |
-| atalo |       | Catalog of   |
-| g     |       | subvariables |
-+-------+-------+--------------+
-| resol | strin | Present in   |
-| ution | g     | datetime     |
-|       |       | variables;   |
-|       |       | current      |
-|       |       | resolution   |
-|       |       | of data      |
-+-------+-------+--------------+
-| rollu | strin | Present in   |
-| p\_re | g     | datetime     |
-| solut |       | variables;   |
-| ion   |       | resolution   |
-|       |       | used for     |
-|       |       | rolled up    |
-|       |       | summaries    |
-+-------+-------+--------------+
-| geoda | URL   | Present only |
-| ta    |       | in variables |
-|       |       | that have    |
-|       |       | geodata      |
-|       |       | associated;  |
-|       |       | points to    |
-|       |       | the catalog  |
-|       |       | of geodata   |
-|       |       | related to   |
-|       |       | this         |
-|       |       | variable     |
-+-------+-------+--------------+
-| unifo | boole | Whether each |
-| rm\_b | an    | subvariable  |
-| asis  |       | should be    |
-|       |       | considered   |
-|       |       | the same     |
-|       |       | length as    |
-|       |       | the total    |
-|       |       | array. Only  |
-|       |       | on           |
-|       |       | ``multiple_r |
-|       |       | esponse``    |
-+-------+-------+--------------+
+==================== ============= ============================================
+Name                 Type          Description                                 
+==================== ============= ============================================
+name                 string        Human-friendly string identifier            
+-------------------- ------------- --------------------------------------------
+alias                string        More machine-friendly, traditional name for 
+                                   a variable                                  
+-------------------- ------------- --------------------------------------------
+description          string        Optional longer string                      
+-------------------- ------------- --------------------------------------------
+id                   string        Immutable internal identifier               
+-------------------- ------------- --------------------------------------------
+notes                string        Optional annotations for a variable         
+-------------------- ------------- --------------------------------------------
+discarded            boolean       Whether the variable should be hidden from  
+                                   most views; default: false                  
+-------------------- ------------- --------------------------------------------
+derived              boolean       Whether the variable is a function of       
+                                   another; default: false                     
+-------------------- ------------- --------------------------------------------
+type                 string        The string type name, one of "numeric",     
+                                   "text", "categorical", "datetime",          
+                                   "categorical_array", or "multiple_response" 
+-------------------- ------------- --------------------------------------------
+subvariables         array of URLs For arrays, array of (ordered) references to
+                                   subvariables                                
+-------------------- ------------- --------------------------------------------
+subvariables_catalog URL           For arrays, link to a Shoji Catalog of      
+                                   subvariables                                
+-------------------- ------------- --------------------------------------------
+resolution           string        Present in datetime variables; current      
+                                   resolution of data                          
+-------------------- ------------- --------------------------------------------
+rollup_resolution    string        Present in datetime variables; resolution   
+                                   used for rolled up summaries                
+-------------------- ------------- --------------------------------------------
+geodata              URL           Present only in variables that have geodata 
+                                   associated; points to the catalog of geodata
+                                   related to this variable                    
+-------------------- ------------- --------------------------------------------
+uniform_basis        boolean       Whether each subvariable should be          
+                                   considered the same length as the total     
+                                   array. Only on ``multiple_response``        
+==================== ============= ============================================
 
 The catalog has two optional query parameters:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| relat | strin | If "on", all |
-| ive   | g     | URLs in the  |
-|       |       | "index" will |
-|       |       | be relative  |
-|       |       | to the       |
-|       |       | catalog's    |
-|       |       | "self"       |
-+-------+-------+--------------+
+======== ====== ===============================================================
+Name     Type   Description                                                    
+======== ====== ===============================================================
+relative string If "on", all URLs in the "index" will be relative to the       
+                catalog's "self"                                               
+======== ====== ===============================================================
 
 With the relative flag enabled, the variable catalog looks something
 like this:
@@ -487,16 +417,10 @@ return a 409 response.
       }
 
 
-.. raw:: html
+.. warning::
 
-   <aside class="warning">
-
-It is only possible to submit variables that belong to the main dataset.
-That is, variables from joined datasets cannot be set as weight.
-
-.. raw:: html
-
-   </aside>
+    It is only possible to submit variables that belong to the main dataset.
+    That is, variables from joined datasets cannot be set as weight.
 
 PUT
 ^^^
@@ -516,355 +440,138 @@ GET
 
 Variable entities' ``body`` attributes contain the following:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| name  | strin | Human-friend |
-|       | g     | ly           |
-|       |       | string       |
-|       |       | identifier   |
-+-------+-------+--------------+
-| alias | strin | More         |
-|       | g     | machine-frie |
-|       |       | ndly,        |
-|       |       | traditional  |
-|       |       | name for a   |
-|       |       | variable     |
-+-------+-------+--------------+
-| descr | strin | Optional     |
-| iptio | g     | longer       |
-| n     |       | string       |
-+-------+-------+--------------+
-| id    | strin | Immutable    |
-|       | g     | internal     |
-|       |       | identifier   |
-+-------+-------+--------------+
-| notes | strin | Optional     |
-|       | g     | annotations  |
-|       |       | for the      |
-|       |       | variable     |
-+-------+-------+--------------+
-| disca | boole | Whether the  |
-| rded  | an    | variable     |
-|       |       | should be    |
-|       |       | hidden from  |
-|       |       | most views;  |
-|       |       | default:     |
-|       |       | false        |
-+-------+-------+--------------+
-| priva | boole | If true, the |
-| te    | an    | variable is  |
-|       |       | only visible |
-|       |       | to the owner |
-|       |       | and is only  |
-|       |       | included in  |
-|       |       | the private  |
-|       |       | variables    |
-|       |       | catalog, not |
-|       |       | the common   |
-|       |       | catalog      |
-+-------+-------+--------------+
-| owner | url   | If the       |
-|       |       | variable is  |
-|       |       | private it   |
-|       |       | will point   |
-|       |       | to the url   |
-|       |       | of its       |
-|       |       | owner; null  |
-|       |       | for non      |
-|       |       | private      |
-|       |       | variables    |
-+-------+-------+--------------+
-| deriv | boole | Whether the  |
-| ed    | an    | variable is  |
-|       |       | a function   |
-|       |       | of another;  |
-|       |       | default:     |
-|       |       | false        |
-+-------+-------+--------------+
-| type  | strin | The string   |
-|       | g     | type name    |
-+-------+-------+--------------+
-| categ | array | If "type" is |
-| ories |       | "categorical |
-|       |       | ",           |
-|       |       | "multiple\_r |
-|       |       | esponse",    |
-|       |       | or           |
-|       |       | "categorical |
-|       |       | \_array",    |
-|       |       | an array of  |
-|       |       | category     |
-|       |       | definitions  |
-|       |       | (see below). |
-|       |       | Other types  |
-|       |       | have an      |
-|       |       | empty array  |
-+-------+-------+--------------+
-| subva | array | For array    |
-| riabl | of    | variables,   |
-| es    | URLs  | an ordered   |
-|       |       | array of     |
-|       |       | subvariable  |
-|       |       | ids          |
-+-------+-------+--------------+
-| subre | objec | For array    |
-| feren | t     | variables,   |
-| ces   | of    | an object of |
-|       | objec | {"name":     |
-|       | ts    | ...,         |
-|       |       | "alias":     |
-|       |       | ..., ...}    |
-|       |       | objects      |
-|       |       | keyed by     |
-|       |       | subvariable  |
-|       |       | url          |
-+-------+-------+--------------+
-| resol | strin | For datetime |
-| ution | g     | variables, a |
-|       |       | string, such |
-|       |       | as "Y", "M", |
-|       |       | "D", "h",    |
-|       |       | "m", "s",    |
-|       |       | "ms", that   |
-|       |       | indicates    |
-|       |       | the unit     |
-|       |       | size of the  |
-|       |       | datetime     |
-|       |       | data.        |
-+-------+-------+--------------+
-| deriv | objec | For derived  |
-| ation | t     | variables, a |
-|       |       | Crunch       |
-|       |       | expression   |
-|       |       | which was    |
-|       |       | used to      |
-|       |       | derive this  |
-|       |       | variable; or |
-|       |       | null         |
-+-------+-------+--------------+
-| forma | objec | An object    |
-| t     | t     | with various |
-|       |       | members to   |
-|       |       | control the  |
-|       |       | display of   |
-|       |       | Variable     |
-|       |       | data (see    |
-|       |       | below)       |
-+-------+-------+--------------+
-| view  | objec | An object    |
-|       | t     | with various |
-|       |       | members to   |
-|       |       | control the  |
-|       |       | display of   |
-|       |       | Variable     |
-|       |       | data (see    |
-|       |       | below)       |
-+-------+-------+--------------+
-| datas | strin | The id of    |
-| et\_i | g     | the Dataset  |
-| d     |       | to which     |
-|       |       | this         |
-|       |       | Variable     |
-|       |       | belongs      |
-+-------+-------+--------------+
-| missi | objec | An object    |
-| ng\_r | t     | whose keys   |
-| eason |       | are reason   |
-| s     |       | phrases and  |
-|       |       | whose values |
-|       |       | are missing  |
-|       |       | codes;       |
-|       |       | missing      |
-|       |       | entries in   |
-|       |       | Variable     |
-|       |       | data are     |
-|       |       | represented  |
-|       |       | by a {"?":   |
-|       |       | code}        |
-|       |       | missing      |
-|       |       | marker;      |
-|       |       | clients may  |
-|       |       | look up the  |
-|       |       | correspondin |
-|       |       | g            |
-|       |       | reason       |
-|       |       | phrase for   |
-|       |       | each code in |
-|       |       | this         |
-|       |       | one-to-one   |
-|       |       | map          |
-+-------+-------+--------------+
+=============== ================= =============================================
+Name            Type              Description                                  
+=============== ================= =============================================
+name            string            Human-friendly string identifier             
+--------------- ----------------- ---------------------------------------------
+alias           string            More machine-friendly, traditional name for a
+                                  variable                                     
+--------------- ----------------- ---------------------------------------------
+description     string            Optional longer string                       
+--------------- ----------------- ---------------------------------------------
+id              string            Immutable internal identifier                
+--------------- ----------------- ---------------------------------------------
+notes           string            Optional annotations for the variable        
+--------------- ----------------- ---------------------------------------------
+discarded       boolean           Whether the variable should be hidden from   
+                                  most views; default: false                   
+--------------- ----------------- ---------------------------------------------
+private         boolean           If true, the variable is only visible to the 
+                                  owner and is only included in the private    
+                                  variables catalog, not the common catalog    
+--------------- ----------------- ---------------------------------------------
+owner           url               If the variable is private it will point to  
+                                  the url of its owner; null for non private   
+                                  variables                                    
+--------------- ----------------- ---------------------------------------------
+derived         boolean           Whether the variable is a function of        
+                                  another; default: false                      
+--------------- ----------------- ---------------------------------------------
+type            string            The string type name                         
+--------------- ----------------- ---------------------------------------------
+categories      array             If "type" is "categorical",                  
+                                  "multiple_response", or "categorical_array", 
+                                  an array of category definitions (see below).
+                                  Other types have an empty array              
+--------------- ----------------- ---------------------------------------------
+subvariables    array of URLs     For array variables, an ordered array of     
+                                  subvariable ids                              
+--------------- ----------------- ---------------------------------------------
+subreferences   object of objects For array variables, an object of {"name":   
+                                  ..., "alias": ..., ...} objects keyed by     
+                                  subvariable url                              
+--------------- ----------------- ---------------------------------------------
+resolution      string            For datetime variables, a string, such as    
+                                  "Y", "M", "D", "h", "m", "s", "ms", that     
+                                  indicates the unit size of the datetime data.
+--------------- ----------------- ---------------------------------------------
+derivation      object            For derived variables, a Crunch expression   
+                                  which was used to derive this variable; or   
+                                  null                                         
+--------------- ----------------- ---------------------------------------------
+format          object            An object with various members to control the
+                                  display of Variable data (see below)         
+--------------- ----------------- ---------------------------------------------
+view            object            An object with various members to control the
+                                  display of Variable data (see below)         
+--------------- ----------------- ---------------------------------------------
+dataset_id      string            The id of the Dataset to which this Variable 
+                                  belongs                                      
+--------------- ----------------- ---------------------------------------------
+missing_reasons object            An object whose keys are reason phrases and  
+                                  whose values are missing codes; missing      
+                                  entries in Variable data are represented by a
+                                  {"?": code} missing marker; clients may look 
+                                  up the corresponding reason phrase for each  
+                                  code in this one-to-one map                  
+=============== ================= =============================================
 
 Category objects have the following members:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| id    | integ | identifier   |
-|       | er    | for the      |
-|       |       | category,    |
-|       |       | correspondin |
-|       |       | g            |
-|       |       | to values in |
-|       |       | the column   |
-|       |       | of data      |
-+-------+-------+--------------+
-| name  | strin | A unique     |
-|       | g     | label        |
-|       |       | identifying  |
-|       |       | the category |
-+-------+-------+--------------+
-| numer | numer | A quantity   |
-| ic\_v | ic    | assigned to  |
-| alue  |       | this         |
-|       |       | category for |
-|       |       | numeric      |
-|       |       | aggregation. |
-|       |       | May be       |
-|       |       | ``null``.    |
-+-------+-------+--------------+
-| missi | boole | If true, the |
-| ng    | an    | given        |
-|       |       | category is  |
-|       |       | marked as    |
-|       |       | "missing",   |
-|       |       | and is       |
-|       |       | omitted from |
-|       |       | most         |
-|       |       | calculations |
-|       |       | .            |
-+-------+-------+--------------+
-| selec | boole | For          |
-| ted   | an    | categories   |
-|       |       | in multiple  |
-|       |       | response     |
-|       |       | variables,   |
-|       |       | those with   |
-|       |       | ``"selected" |
-|       |       | : true``     |
-|       |       | which values |
-|       |       | correspond   |
-|       |       | to the       |
-|       |       | "response"   |
-|       |       | being        |
-|       |       | selected. If |
-|       |       | omitted, the |
-|       |       | category is  |
-|       |       | treated as   |
-|       |       | not          |
-|       |       | selected.    |
-|       |       | Multiple     |
-|       |       | response     |
-|       |       | variables    |
-|       |       | must have at |
-|       |       | least one    |
-|       |       | category     |
-|       |       | marked as    |
-|       |       | selected and |
-|       |       | may have     |
-|       |       | more than    |
-|       |       | one.         |
-+-------+-------+--------------+
+============= ======= =========================================================
+Name          Type    Description                                              
+============= ======= =========================================================
+id            integer identifier for the category, corresponding to values in  
+                      the column of data                                       
+------------- ------- ---------------------------------------------------------
+name          string  A unique label identifying the category                  
+------------- ------- ---------------------------------------------------------
+numeric_value numeric A quantity assigned to this category for numeric         
+                      aggregation. May be ``null``.                            
+------------- ------- ---------------------------------------------------------
+missing       boolean If true, the given category is marked as "missing", and  
+                      is omitted from most calculations.                       
+------------- ------- ---------------------------------------------------------
+selected      boolean For categories in multiple response variables, those with
+                      ``"selected" : true`` which values correspond to the     
+                      "response" being selected. If omitted, the category is   
+                      treated as not selected. Multiple response variables must
+                      have at least one category marked as selected and may    
+                      have more than one.                                      
+============= ======= =========================================================
 
-.. raw:: html
+.. note::
 
-   <aside class="notice">
-
-For variables with categories, you can get the "missing reasons" from
-the category definitions. You don't need the "missing\_reasons" body
-attribute.
-
-.. raw:: html
-
-   </aside>
+    For variables with categories, you can get the "missing reasons" from
+    the category definitions. You don't need the "missing\_reasons" body
+    attribute.
 
 Format objects may contain:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| data  | objec | An object    |
-|       | t     | with an      |
-|       |       | integer      |
-|       |       | "digits"     |
-|       |       | member,      |
-|       |       | stating how  |
-|       |       | many digits  |
-|       |       | to display   |
-|       |       | after the    |
-|       |       | decimal      |
-|       |       | point when   |
-|       |       | showing data |
-|       |       | values       |
-+-------+-------+--------------+
-| summa | objec | An object    |
-| ry    | t     | with an      |
-|       |       | integer      |
-|       |       | "digits"     |
-|       |       | member,      |
-|       |       | stating how  |
-|       |       | many digits  |
-|       |       | to display   |
-|       |       | after the    |
-|       |       | decimal      |
-|       |       | point when   |
-|       |       | showing      |
-|       |       | aggregates   |
-|       |       | values       |
-+-------+-------+--------------+
+======= ====== ================================================================
+Name    Type   Description                                                     
+======= ====== ================================================================
+data    object An object with an integer "digits" member, stating how many     
+               digits to display after the decimal point when showing data     
+               values                                                          
+------- ------ ----------------------------------------------------------------
+summary object An object with an integer "digits" member, stating how many     
+               digits to display after the decimal point when showing          
+               aggregates values                                               
+======= ====== ================================================================
 
 View objects may contain:
 
-+-------+-------+--------------+
-| Name  | Type  | Description  |
-+=======+=======+==============+
-| show\ | boole | For          |
-| _code | an    | categorical  |
-| s     |       | types only;  |
-|       |       | if true,     |
-|       |       | numeric      |
-|       |       | values are   |
-|       |       | shown        |
-+-------+-------+--------------+
-| show\ | boole | If true,     |
-| _coun | an    | show counts; |
-| ts    |       | if false,    |
-|       |       | show         |
-|       |       | percents     |
-+-------+-------+--------------+
-| inclu | boole | For          |
-| de\_m | an    | categorical  |
-| issin |       | types only;  |
-| g     |       | if true,     |
-|       |       | include      |
-|       |       | missing      |
-|       |       | categories   |
-+-------+-------+--------------+
-| inclu | boole | For multiple |
-| de\_n | an    | response     |
-| oneof |       | types only;  |
-| theab |       | if true,     |
-| ove   |       | display a    |
-|       |       | "none of the |
-|       |       | above"       |
-|       |       | category in  |
-|       |       | the          |
-|       |       | requested    |
-|       |       | summary or   |
-|       |       | analysis     |
-+-------+-------+--------------+
-| rollu | strin | For datetime |
-| p\_re | g     | variables, a |
-| solut |       | unit to      |
-| ion   |       | which data   |
-|       |       | should be    |
-|       |       | "rolled up"  |
-|       |       | by default.  |
-|       |       | See          |
-|       |       | "resolution" |
-|       |       | above.       |
-+-------+-------+--------------+
+====================== ======= ================================================
+Name                   Type    Description                                     
+====================== ======= ================================================
+show_codes             boolean For categorical types only; if true, numeric    
+                               values are shown                                
+---------------------- ------- ------------------------------------------------
+show_counts            boolean If true, show counts; if false, show percents   
+---------------------- ------- ------------------------------------------------
+include_missing        boolean For categorical types only; if true, include    
+                               missing categories                              
+---------------------- ------- ------------------------------------------------
+include_noneoftheabove boolean For multiple response types only; if true,      
+                               display a "none of the above" category in the   
+                               requested summary or analysis                   
+---------------------- ------- ------------------------------------------------
+rollup_resolution      string  For datetime variables, a unit to which data    
+                               should be "rolled up" by default. See           
+                               "resolution" above.                             
+====================== ======= ================================================
 
 PATCH
 ^^^^^
@@ -1184,17 +891,11 @@ Example:
       ]
 
 
-.. raw:: html
+.. warning::
 
-   <aside class="warning">
-
-Missing rules consist on filter expressions that can **only** refer to
-the same variable ID where they are defined. Marking values as missing
-based on the contents of another column is not supported.
-
-.. raw:: html
-
-   </aside>
+    Missing rules consist on filter expressions that can **only** refer to
+    the same variable ID where they are defined. Marking values as missing
+    based on the contents of another column is not supported.
 
 Subvariables
 ^^^^^^^^^^^^

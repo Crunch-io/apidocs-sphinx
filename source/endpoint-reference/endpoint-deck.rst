@@ -112,7 +112,7 @@ The ``shoji:entity`` POSTed accepts the following keys
 +---------------+-----------+------------+
 | description   | string    | No         |
 +---------------+-----------+------------+
-| is\_public    | boolean   | No         |
+| is_public     | boolean   | No         |
 +---------------+-----------+------------+
 | team          | url       | No         |
 +---------------+-----------+------------+
