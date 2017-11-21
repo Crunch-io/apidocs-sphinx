@@ -210,7 +210,10 @@ def calc_min_col_widths(table, never_wrap_first_col=True):
     def _calc_cell_min_width(i, cell_text):
         if never_wrap_first_col and i == 0:
             return len(cell_text)
-        return max([len(line) for line in tw.wrap(cell_text)])
+        line_lengths = [len(line) for line in tw.wrap(cell_text)]
+        if not line_lengths:
+            line_lengths = [0]
+        return max(line_lengths)
     min_col_widths = [_calc_cell_min_width(i, h) for i, h in
                       enumerate(table.headers)]
     for row in table.rows:
