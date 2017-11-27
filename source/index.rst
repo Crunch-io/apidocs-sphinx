@@ -25,7 +25,6 @@ Crunch platform, such as values, columns, types, variables, and datasets.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    feature-guide/index
    endpoint-reference/index

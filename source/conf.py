@@ -51,7 +51,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Crunch.io API Docs'
+project = u'API Docs'
 copyright = u'2017, Crunch.io'
 author = u'Crunch.io'
 
@@ -107,7 +107,8 @@ html_logo = 'images/logo.png'
 html_theme_options = {
     # These options are only for the 'bootstrap' theme:
     'navbar_site_name': 'Document',
-    'navbar_pagenav': False
+    'navbar_pagenav': False,
+    'globaltoc_depth': 2,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -129,7 +130,6 @@ html_last_updated_fmt = '%b %d, %Y'
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
     '**': [
-        'relations.html',  # needs 'show_related': True theme option to display
         'searchbox.html',
         'globaltoc.html',
         #'localtoc.html',
