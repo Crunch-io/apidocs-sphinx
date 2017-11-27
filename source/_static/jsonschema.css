@@ -76,3 +76,16 @@ code, pre {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.navbar-brand img {
+    height: auto;
+    margin-right: 3em;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.navbar-version {
+    display: none;
+}
