@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Overlock:900);
+@import url(https://s.crunch.io/public/fonts/proximanova.css);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
 
 div.admonition {
@@ -63,7 +63,7 @@ code, pre {
 }
 
 .navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Overlock","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "ProximaNova","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 900;
 }
 
