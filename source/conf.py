@@ -132,7 +132,7 @@ html_sidebars = {
     '**': [
         'searchbox.html',
         'globaltoc.html',
-        #'localtoc.html',
+        'signup.html'
     ]
 }
 
@@ -211,5 +211,5 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
-
+def setup(app):
+    app.add_stylesheet("jsonschema.css")

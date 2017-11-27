@@ -66,3 +66,13 @@ code, pre {
     font-family: "Overlock","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 900;
 }
+
+.toc-footer li {
+    font-size: 120%;
+    margin-top: 2ex;
+    padding: 0 20px 0 20px;
+    display: block;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
