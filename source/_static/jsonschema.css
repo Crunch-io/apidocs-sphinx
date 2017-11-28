@@ -69,8 +69,7 @@ code, pre {
 
 .toc-footer li {
     font-size: 120%;
-    margin-top: 2ex;
-    padding: 0 20px 0 20px;
+    padding: 2ex 20px 2ex 20px;
     display: block;
     overflow-x: hidden;
     white-space: nowrap;
@@ -88,4 +87,8 @@ code, pre {
 
 .navbar-version {
     display: none;
+}
+
+body .container {
+    overflow-y: hidden;
 }
