@@ -526,8 +526,8 @@ following its batch/ link.
 Example
 ^^^^^^^
 
-Here's an example `dataset metadata <examples/dataset.json>`__ and
-corresponding `csv <examples/dataset.csv>`__.
+Here's an example `dataset metadata <../_static/examples/dataset.json>`__ and
+corresponding `csv <../_static/examples/dataset.csv>`__.
 
 Several things to note:
 
