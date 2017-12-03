@@ -214,4 +214,4 @@ texinfo_documents = [
 ]
 
 def setup(app):
-    app.add_stylesheet("jsonschema.css")
+    app.add_stylesheet("crunch.css")
