@@ -1,0 +1,18 @@
+# Wire up travis to build the documentation
+
+language: python
+python:
+    - "3.6"
+sudo: false
+branches:
+    only:
+        - master
+        - dev
+install:
+    - git config user.email "systems+crunchbot@crunch.io"
+    - git config user.name "Crunchbot"
+script:
+    - ./build.sh
+env:
+  global:
+    secure: yMT9y8pUISRxr9wf2H8lNA9ZYjTjxNDig632Ualb6Kmic03g3svmq1zB3A/r1iT1yN0MkMiMmiubXExBZjJHTumvDKlkdax1QTKnpTASZkrkYKOW7NYdXqaCseBMrp/8BbVgSF7MMss85vmLplDT38cBtKQJhSnQniD6iRO7fJq1Ui/StJH6C/2HwX05gmrTl5n1N/pfcEPJYocPEi7HyrjTOzpEbfpjbwXBchgY2dpk4qjwjGQJp/P1bXTUdvztu25cTHayKKkFUbEbK/fuP70FoT53p/Krxbp8OJUZ5OU3C5AcdVpauWGTETepMco8ZJutR19QVkmGuheLNuhK+f5BeUaAtCZq5KLFC9vRhS4C7LnRV7pEDowOilX5JvWae4ukGYnuutXhsH0hBfHJ6P/MqzdSGx8MKBvXygLZJtYAB4YNpAuKqUb07J/CSHHfKb4bWjkPeKLCaRSktlYmIPet/h/goj4a8EHfyLowa/LeTAusw/FZwZwxYaAqxyhb/3vYzXbR2HfDr92pYn7BOTagV1+vvsFCbp5eAOd+7ot76+g/5+9JomUd9W25Qt1PsWD5h42NjiYhpHwz9BkZxzmxW+Jx+mYVuSwzJLqX64vXLY7CUFoZamP1X9EndwehvHfg4Qf702ktQJy6jGnxEM+gXTFHBQt3LuRPdWAQw2Y=
