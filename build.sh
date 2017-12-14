@@ -11,7 +11,7 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     else
         git clone --branch gh-pages https://${GH_TOKEN}@github.com/Crunch-io/crunchy.git ./OUTPUT
         mkdir -p ./OUTPUT/apidocs
-        OUTDIR=./output/apidocs
+        OUTDIR=./OUTPUT/apidocs
     fi
 
     rsync -av build/html/ $OUTDIR
