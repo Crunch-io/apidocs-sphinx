@@ -122,8 +122,11 @@ the subfolder. Note that subfolder names must be unique between them and
 variables included.
 
 Additionally a `graph` member can be included that must contain URLs of the
-folder and varibles that will be children of the new folder. The mentioned items
-will be __moved__ out of their current location into the new folder.
+varibles that will be children of the new folder. These variables cannot belong
+to another folder (must be ungrouped under root) else the server will return
+ a 400 response.
+To include variables that belong to other folder in the new folder they
+should be moved into the new folder after the fact via PATCH.
 
 .. language_specific::
    --JSON
