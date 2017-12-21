@@ -272,8 +272,8 @@ will 302 redirect to the destination for download.
 If there have been changes on the dataset attributes, a new tab book will be
 generated regardless of the status of any other pending exports.
 
-Note: You must provide an "Accept: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" header to
-create an downloadable excel document.
+Note: You can provide an "Accept: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" header to
+create an downloadable excel document.  If no Accept header is provided, the default download will be xlsx.
 
 json
 ^^^^^^
