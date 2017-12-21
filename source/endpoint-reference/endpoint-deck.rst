@@ -230,7 +230,7 @@ To edit a deck, PATCH it with a shoji:entity. The server will return a
           },
           "urls": {
               "xlsx_export_url": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/export_xlsx/",
-              "json_export_url": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/export_json/"
+              "export_url": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/export/"
           }
       }
 
