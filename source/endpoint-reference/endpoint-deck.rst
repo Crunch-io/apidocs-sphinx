@@ -224,6 +224,13 @@ To edit a deck, PATCH it with a shoji:entity. The server will return a
               "creation_time": "1987-10-15T11:45:00",
               "description": "Explanation about the deck",
               "team": "https://app.crunch.io/api/teams/58acf7/"
+          },
+          "catalogs": {
+              "slides": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/slides/"
+          },
+          "urls": {
+              "xlsx_export_url": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/export_xlsx/",
+              "export_url": "https://app.crunch.io/api/datasets/223fd4/decks/223fd4/export/"
           }
       }
 
@@ -242,6 +249,186 @@ DELETE
 
 To delete a deck, DELETE the deck's entity URL. On success, the server
 returns a 204 response.
+
+
+Deck Exports
+~~~~~~~~~~~~~~~
+
+xlsx
+^^^^^^
+
+A successful POST request to ``/datasets/{dataset_id}/decks/{deck_id}/export/`` will generate a download
+location to which the exporter will write this file when it is done computing
+(it may take some time for large datasets). The server will return a 202 response indicating that the export job started with
+a Location header indicating where the final exported file will be available. The response's body will contain the URL for the progress URL where to query
+the state of the export job. Clients should note the download URL,
+monitor progress, and when complete, GET the download location. See `Progress <endpoint-progress.html>`__ for details.
+If no header is provided, this endpoint will produce an xlsx file.
+
+Requesting the same job, if still in progress, will return the same 202 response
+indicating the original progress to check. If the export is finished, the server
+will 302 redirect to the destination for download.
+
+If there have been changes on the dataset attributes, a new tab book will be
+generated regardless of the status of any other pending exports.
+
+Note: You can provide an ``Accept: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`` header to
+create an downloadable excel document.  If no Accept header is provided, the default download will be xlsx.
+
+json
+^^^^^^
+
+This provides a json output for the analysis for each slide in the deck.
+Note that you _must_ provide an ``Accept: application/json`` header for this endpoint to work properly.
+
+.. language_specific::
+   --JSON
+   .. code:: json
+
+      {
+        "slides": [
+          {
+            "cube": {
+              "query": {
+                "measures": {
+                  "count": {
+                    "function": "cube_count",
+                    "args": []
+                  }
+                },
+                "dimensions": [
+                  {
+                    "function": "bin",
+                    "args": [
+                      {
+                        "variable": "000001"
+                      }
+                    ]
+                  },
+                  {
+                    "variable": "000000"
+                  }
+                ],
+                "weight": null
+              },
+              "query_environment": {
+                "filter": []
+              },
+              "result": {
+                "dimensions": [
+                  {
+                    "references": {
+                      "alias": "Age",
+                      "description": null,
+                      "name": "Age"
+                    },
+                    "derived": true,
+                    "type": {
+                      "subtype": {
+                        "missing_rules": {},
+                        "class": "numeric",
+                        "missing_reasons": {
+                          "No Data": -1
+                        }
+                      },
+                      "elements": [
+                        {
+                          "id": 1,
+                          "value": [10.0, 20.0],
+                          "missing": false
+                        },
+                        {
+                          "id": 2,
+                          "value": [20.0, 30.0],
+                          "missing": false
+                        },
+                        {
+                          "id": 3,
+                          "value": [30.0, 40.0],
+                          "missing": false
+                        },
+                        {
+                          "id": 4,
+                          "value": [40.0, 50.0],
+                          "missing": false
+                        }
+                      ],
+                      "class": "enum"
+                    }
+                  },
+                  {
+                    "references": {
+                      "alias": "Gender",
+                      "description": null,
+                      "name": "Gender"
+                    },
+                    "derived": false,
+                    "type": {
+                      "ordinal": false,
+                      "class": "categorical",
+                      "categories": [
+                        {
+                          "numeric_value": null,
+                          "id": 2,
+                          "name": "F",
+                          "missing": false
+                        },
+                        {
+                          "numeric_value": null,
+                          "id": 1,
+                          "name": "M",
+                          "missing": false
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "missing": 0,
+                "measures": {
+                  "count": {
+                    "data": [1, 3, 0, 0, 1, 0, 1, 1],
+                    "n_missing": 0,
+                    "metadata": {
+                      "references": {},
+                      "derived": true,
+                      "type": {
+                        "integer": true,
+                        "missing_rules": {},
+                        "class": "numeric",
+                        "missing_reasons": {
+                          "No Data": -1
+                        }
+                      }
+                    }
+                  }
+                },
+                "n": 7,
+                "counts": [1, 3, 0, 0, 1, 0, 1, 1],
+                "element": "crunch:cube"
+              }
+            },
+            "meta": {
+              "table_title": "",
+              "name": "Slide #1 ",
+              "weight": null,
+              "title": "Slide #1",
+              "filters": [],
+              "subtitle": "",
+              "display_settings": {
+                "decimalPlaces": {
+                  "value": 2
+                }
+              }
+            }
+          }
+        ],
+        "dataset": {
+          "notes": "",
+          "name": "New dataset"
+        }
+      }
+
+Note that the export_xlsx endpoint is deprecated, no longer supported in favor of /export and will be removed shortly.
 
 Order
 ~~~~~
