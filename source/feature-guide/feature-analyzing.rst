@@ -452,9 +452,10 @@ alongside the names of categories/elements. It may also contain
 ``"function": { "combine": []}``, where array arguments are the
 ``id``\ s of elements to combine as “subtotals”.
 
-Use an anchor of ``0`` to indicate an insertion before other results.
-Any anchor other than ``0`` that does not match an id in the
-elements/categories will be included at the end of results.
+Use an anchor of ``top`` to indicate an insertion before other results. Use an
+anchor of ``bottom`` to indicate an insertion after other results. Any anchor
+that does not match an id in the elements/categories will be included at the end
+of results.
 
 Examples
 ^^^^^^^^
@@ -652,4 +653,3 @@ against another variable "449b421":
 
 
 The result will be an array of output cubes:
-
