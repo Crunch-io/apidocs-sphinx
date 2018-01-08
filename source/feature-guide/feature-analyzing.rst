@@ -653,3 +653,79 @@ against another variable "449b421":
 
 
 The result will be an array of output cubes:
+
+.. language_specific::
+   --JSON
+   .. code:: json
+
+      {
+          "element": "shoji:view",
+          "value": [
+              {
+                  "query": {},
+                  "result": {
+                      "element": "crunch:cube",
+                      "dimensions": [
+                          {
+                              "references": "449b421",
+                              "type": "etc."
+                          },
+                          {
+                              "references": "de85b32",
+                              "type": "etc."
+                          }
+                      ],
+                      "measures": {
+                          "count": {
+                              "function": "cube_count",
+                              "args": []
+                          }
+                      }
+                  }
+              },
+              {
+                  "query": {},
+                  "result": {
+                      "element": "crunch:cube",
+                      "dimensions": [
+                          {
+                              "references": "449b421",
+                              "type": "etc."
+                          },
+                          {
+                              "references": "398620f",
+                              "type": "etc."
+                          }
+                      ],
+                      "measures": {
+                          "count": {
+                              "function": "cube_count",
+                              "args": []
+                          }
+                      }
+                  }
+              },
+              {
+                  "query": {},
+                  "result": {
+                      "element": "crunch:cube",
+                      "dimensions": [
+                          {
+                              "references": "449b421",
+                              "type": "etc."
+                          },
+                          {
+                              "references": "c116a77",
+                              "type": "etc."
+                          }
+                      ],
+                      "measures": {
+                          "count": {
+                              "function": "cube_count",
+                              "args": []
+                          }
+                      }
+                  }
+              }
+          ]
+      }
