@@ -124,7 +124,8 @@ variables included.
 Additionally a `graph` member can be included that must contain URLs of the
 varibles that will be children of the new folder. These variables cannot belong
 to another folder (must be ungrouped under root) else the server will return
- a 400 response.
+a 400 response.
+
 To include variables that belong to other folder in the new folder they
 should be moved into the new folder after the fact via PATCH.
 
