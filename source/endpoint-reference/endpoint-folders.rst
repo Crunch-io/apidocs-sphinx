@@ -85,6 +85,7 @@ JSON example:
                   "description": "In what year were you born?"
               },
               "https://app.crunch.io/datasets/abcdef/folders/qwe/": {
+                  "type": "folder",
                   "name": "Subfolder name"
               },
               "https://app.crunch.io/datasets/abcdef/variables/456/": {
