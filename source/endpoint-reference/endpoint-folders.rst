@@ -153,9 +153,6 @@ destination folder.
 The new elements will be moved out of their existing parents into the new folder
 location.
 
-If the tuple of a folder or variable included on the payload is `null`, then
-that element will be promoted to the root folder.
-
 Inside a folder, subfolders and variables must be unique by name. Trying to
 move a folder or a variable that conflicts with the existing children of it,
 will return a 409 response from the server.
