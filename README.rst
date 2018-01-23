@@ -15,7 +15,9 @@ To build the docs::
 
 To view the docs point your web browser to: ``build/html/index.html``
 
-Deploying docs to production:
+----------------------------
+Deploying docs to production
+----------------------------
 
 Most changes should go through the official release process. Not someone pushing MERGE manually on a PR.
 
