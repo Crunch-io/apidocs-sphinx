@@ -654,6 +654,15 @@ success, ``POST`` returns 200 status with a Shoji View, containing the
 URLs of the (formerly sub-)variables, which are promoted to regular
 variables.
 
+Trying to unbind a variable that is not an array will return a 400 response from
+the server.
+
+Derived arrays cannot be split on its subvariables. They need to first be
+integrated (by PATCHing `null` to its derivation expression, making them non
+derived for good) and then unbinding. Or just accessing the variables the
+derivation expression refers to since derived arrays do not remove its
+subvariable dependencies from the dataset.
+
 DELETE
 ^^^^^^
 
