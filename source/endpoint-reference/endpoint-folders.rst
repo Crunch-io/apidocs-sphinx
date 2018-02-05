@@ -123,7 +123,7 @@ the subfolder. Note that subfolder names must be unique between them and
 variables included.
 
 Additionally an `index` member can be included that must contain URLs of the
-varibles that will be children of the new folder. The tuples associated with
+variables that will be children of the new folder. The tuples associated with
 each variable should be an empty object.
 
 In case the variables mentioned belong in other folders, they will be moved
