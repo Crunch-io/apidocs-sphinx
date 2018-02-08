@@ -409,53 +409,82 @@ always be derived from the ``query`` part of the request
 (``{variable: $variableId})``,
 ``{function: f, args: [$variableId, …]}``, &c., after which clients
 should do what is necessary to arrive at the transformed result —
-changing element names, orders, etc.
+changing element names, re-ordering elements, adding aggregations like 
+subtotals, &c.
 
 Structure
 ^^^^^^^^^
 
-A ``transform`` can contain ``elements`` or ``categoriees``, which is an
-array of target transforms for output-dimension elements. Therefore to
+A ``transform`` can contain ``elements`` or ``categories``, which is a list 
+of target transforms for output-dimension elements. Therefore to
 create a valid element/category ``transform`` it is generally necessary
 to make a cube query, inspect the result dimension, and proceed from
 there. For categorical and multiple response variables, elements may
-also be obtained from the variable entity.
-
-Transforms are designed for variables that are more stable than not,
-with element ids that inhere in the underlying elements, such as
-category or subvariable ids. Dynamic elements such as results of
-``bin``\ ning a numeric variable, may not be transformed.
+also be obtained from the variable entity. 
 
 Transformations stored on a variable’s ``view`` are the default
 transforms for that variable. They may be shorter, alternate versions of
-category names, or contain insertions, described below.
+category names, or contain insertions, both of which are described below.
+
+Because transforms rely on category ids to identify categories to transform,
+the are designed for variables that are more stable than not,
+with element ids that inhere in the underlying elements, such as
+category or subvariable ids. Dynamic elements such as results of
+``bin``\ ning a numeric variable, should not attempt to be transformed.
+
+
+Elements or Categories
+^^^^^^^^^^^^^^^^^^^^^^
+
+An element or category transform can specify a new order of output elements
+(or categories), new names, and in the future, bases for hypothesis testing,
+result sorting. A ``transform`` has elements that 
+look generally like the dimension's extent, with some optional properties:
+
+-  **id**: (required) id of the target element/category
+-  **name**: name of new target element/category
+-  **sort**: ``-1`` or ``1`` indicating to sort results descending or
+   ascending by this element
+-  **compare**: ``neq``, ``leq``, ``geq`` indicating to test other
+   rows/columns against the hypothesis that they are ≠, ≤, or ≥ to the
+   present element
+-  **hide**: suppress this element's row/column from displaying at all.
+   Defaults to false for valid elements, true for missing, so that if an
+   element is added, it will be present until a transform with
+   ``hide: true`` is added to suppress it.
 
 Insertions
 ^^^^^^^^^^
 
 In addition to transforming the categories or elements already defined
-on a cube ‘dimension’, it is possible to insert headings and subtotals
-to the result. These ``insertions`` are attached after an ``anchor``
-element/category id.
+on a cube ‘dimension’, it is possible to insert new values like aggregations 
+to the result (currently supported aggregations are subtotals). These
+``insertions`` are attached after an ``anchor`` element/category id, or at 
+the top or the bottom of the result table.
 
 Insertions are processed **last**, after renaming, reordering, or
 sorting elements according to the elements/categories transform
-specification. They are “attached” to their anchor, always following it
-in the result; or, simply appended to the end of the result. If the
-result is sorted by some column’s value, it may make the most sense to
-choose to display insertions last, rather than inserting them into a
-result table because their values will not be considered when sorting
-the non-inserted elements themselves.
+specification. They are generally “attached” to their anchor (always following 
+it in the result), or they are pinned to the top or bottom of the result (see 
+below for exceptions to this, including pinning an insertion to the top or 
+bottom of the results). If the result is sorted by some column’s value, it 
+may make the most sense to choose to display insertions last, rather than 
+inserting them into a result table because their values will not be considered 
+when sorting the non-inserted elements themselves. If there is more than one 
+insertion  with the same anchor, the insertions should be presented in the 
+order they are given in the ``insertion`` list.
 
 An insertion is defined by an anchor and a name, which will be displayed
 alongside the names of categories/elements. It may also contain
 ``"function": "subtotal"`` and ``"args": []``, where the array of ``args`` are
-the category ``id``\ s of elements to combine as “subtotals”.
+the category ``id``\ s of elements to combine as “subtotals”. If there is 
+no ``function`` and ``args`` specified, the insertion is a header. It's name 
+will be displayed in the result table, but there will be no values in the cells. 
 
-Use an anchor of ``top`` to indicate an insertion before other results. Use an
-anchor of ``bottom`` to indicate an insertion after other results. Any anchor
-that does not match an id in the elements/categories will be included at the end
-of results.
+Use an anchor of ``top`` to indicate an insertion that should be placed
+before other results. Use an anchor of ``bottom`` to indicate an insertion 
+that should be placed after other results. Any anchor that does not match 
+an id in the elements/categories will be included at the end of results.
 
 Examples
 ^^^^^^^^
@@ -476,22 +505,7 @@ Consider the following example result dimension:
 | Not asked    | true      | 4    |
 +--------------+-----------+------+
 
-An element transform can specify a new order of output elements, new
-names, and in the future, bases for hypothesis testing, result sorting,
-and aggregation of results. A ``transform`` has elements that look
-generally like the dimension's extent, with some optional properties:
-
--  **id**: (required) id of the target element/category
--  **name**: name of new target element/category
--  **sort**: ``-1`` or ``1`` indicating to sort results descending or
-   ascending by this element
--  **compare**: ``neq``, ``leq``, ``geq`` indicating to test other
-   rows/columns against the hypothesis that they are ≠, ≤, or ≥ to the
-   present element
--  **hide**: suppress this element's row/column from displaying at all.
-   Defaults to false for valid elements, true for missing, so that if an
-   element is added, it will be present until a transform with
-   ``hide: true`` is added to suppress it.
+**Rearranging elements**
 
 A ``transform`` with object members can do lots of things. Suppose we
 want to put *Element C* first, hide the *Don’t know*, and more compactly
@@ -510,7 +524,31 @@ represent the result as just *C, A, B*:
           ]}
       }
 
+**Subtotals**
 
+``transform``\ s are not limited to just rearranging the elements. If we want to 
+insert subtotals into the results, we add those to ``insertions``. Say we want 
+a subtotal that is *Elements A and B* combined, anchored to sit below *Element B*; 
+a subtotal that is *Elements B and C* combined, anchored to sit below *Element C*; 
+and finally a subtotal that is all three elements pinned to the bottom. We can 
+accomplish this with the following ``insertions``:
+
+.. language_specific::
+   --JSON
+   .. code:: json
+
+      {
+          "transform": {"insertions": [
+              {"name": "A and B", "anchor": 1,
+               "function": "subtotal", "args": [0, 1]},
+              {"name": "B and C", "anchor": 2,
+               "function": "subtotal", "args": [1, 2]},
+              {"name": "A, B, and C", "anchor": "bottom",
+               "function": "subtotal", "args": [0, 1, 2]}
+          ]}
+      }
+      
+      
 Example transform in a saved analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
