@@ -384,7 +384,7 @@ settings           object   `Settings object <#settings>`__ containing
                             attributes. If a
                             "weight" is specified, it will be automatically
                             added to "weight\_variables" if not already
-                            specified there.  ``population`` is an object
+                            specified there. ``population`` is an
                             object with keys size and magnitude, both
                             integers: the total population represented by
                             a sample. magnitude is the default power-of-ten
@@ -392,6 +392,9 @@ settings           object   `Settings object <#settings>`__ containing
                             millions (“M”), etc. For example, if the total
                             population is 3000: set “size: 3000” and
                             “magnitude: 3”, rather than size 3 magnitude 3.
+                            ``min_base_size`` is an integer below which to
+                            suppress percentages in crosstabs if the sample
+                            size is too small to make sound inferences.
 ================== ======== ===============================================
 
 Other catalogs
