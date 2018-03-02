@@ -929,6 +929,13 @@ where         A Crunch expression defining      ``{"function": "select", "args":
               <#frame-functions>`__ for the
               available functions here.
 ------------- --------------------------------- --------------------------------------------------------------------------------
+variables     A list of variable or folder URLs
+              that indicate the variables to
+              include. Note that the case of
+              folders mentioned will include
+              all the variables of its
+              subfolders.
+------------- --------------------------------- --------------------------------------------------------------------------------
 options       An object of extra settings,      ``{"use_category_ids": true}``
               which may be format specific.
               See below.
