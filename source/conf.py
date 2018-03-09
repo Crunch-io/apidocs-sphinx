@@ -99,6 +99,8 @@ html_logo = 'images/logo.svg'
 
 html_add_permalinks = u' \U0001f517'
 
+html_favicon = 'images/favicon.ico'
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
