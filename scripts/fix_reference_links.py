@@ -18,8 +18,17 @@ import docopt
 class LinkProcessor(object):
 
     PATTERN = '|'.join((
+        # Sphinx link targets: .. _<label>:
         r'^\.\. _(?P<label>[^:]+):$',
+
+        # reStructuredText directives:
+        # .. directive_name:: (followed by indented lines)
+        r'^\.\. (?P<directive>[^:]+)::$',
+
+        # Inline code snippets: ``print(a + 2)``
         r'``(?P<inline_code>.*?)``',
+
+        # Link references: `Link text <#target>`__
         r'`(?P<link_text>[^<]*?)\s*?<(?P<link_ref>[^>]+?)>`_{1,2}',
     ))
 
@@ -34,15 +43,44 @@ class LinkProcessor(object):
         except IndexError:
             return None
 
+    @classmethod
+    def _skip_indented_lines(cls, text, pos):
+        """
+        Scan text starting at the first line after position pos.
+        Search for the first non-indented, non-blank line. Return the position
+        of the start of that line.  Return len(text) if no such line is found.
+        """
+        # Scan to end of current line or end of string, whichever is first.
+        m = re.search('$', text[pos:], flags=re.MULTILINE)
+        pos += m.end()
+        m = re.search(r'^\S', text[pos:], flags=re.MULTILINE)
+        if not m:
+            # Non-blank, non-indented line not found
+            return len(text)
+        pos += m.start()
+        return pos
+
     def __call__(self, f):
+        """
+        Process the reStructuredText in file object f
+        """
         # Just read in the entire RST file
         text = f.read()
-        line_num = 0  # XXX
+        skip_to_pos = None
         for m in re.finditer(self.PATTERN, text, re.MULTILINE):
+            pos = m.start()
+            if skip_to_pos is not None:
+                if pos < skip_to_pos:
+                    continue
+                skip_to_pos = None
             label = self._group(m, 'label')
             if label is not None:
                 self.num_defs += 1
-                print("Line:", line_num, "Label:", label)
+                print("Position:", pos, "Label:", label)
+                continue
+            directive = self._group(m, 'directive')
+            if directive is not None:
+                skip_to_pos = self._skip_indented_lines(text, pos)
                 continue
             inline_code = self._group(m, 'inline_code')
             if inline_code is not None:
@@ -53,12 +91,18 @@ class LinkProcessor(object):
                 link_text = m.group('link_text')
                 link_text = self.standardize_link_text(link_text)
                 refstr = '"{}" {}'.format(link_text, link_ref)
-                print("Line:", line_num, "Link:", refstr)
+                print("Position:", pos, "Link:", refstr)
                 continue
 
     @classmethod
     def standardize_link_text(cls, link_text):
-        return XXX
+        """
+        Remove leading and trailing whitespace from link text
+        Convert newlines to spaces
+        """
+        link_text = link_text.strip()
+        link_text = re.sub(r'\r?\n', ' ', link_text)
+        return link_text
 
     def close(self):
         print("Number of link target labels:", self.num_defs)

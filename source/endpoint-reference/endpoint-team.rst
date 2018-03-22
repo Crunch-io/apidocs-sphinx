@@ -391,23 +391,28 @@ Removing members
 To remove members from the team, PATCH the catalog with a ``null``
 value:
 
-``http PATCH /teams/d07edb/members/ HTTP/1.1 Host: app.crunch.io Content-Type: application/json``\ json
-{ "element": "shoji:catalog", "index": {
-"https://app.crunch.io/api/users/e3211a/": null } } -------- 204 No
-Content \`\`\`
-
 .. language_specific::
    --HTTP
    .. code:: http
+
+      PATCH /teams/d07edb/members/ HTTP/1.1
+      Host: app.crunch.io
+      Content-Type: application/json
+
+      {
+          "element": "shoji:catalog",
+          "index": {
+              "https://app.crunch.io/api/users/e3211a/": null
+          }
+      }
+      --------
+      204 No Content
 
       GET /teams/d07edb/members/ HTTP/1.1
       Host: app.crunch.io
       --------
       200 OK
       Content-Type: application/json
-
-   --JSON
-   .. code:: json
 
       {
           "element": "shoji:catalog",

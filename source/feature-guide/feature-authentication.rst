@@ -42,7 +42,7 @@ Authentication
           https://app.crunch.io/api/public/login/
 
       # The above command will perform a login and save the login cookie to a file called 'cookie-jar'.
-      # After this, you can access the endpoint via `curl' commands (POST, GET, PATCH), as long as the '-b cookie-jar' flag is present.  Note, -b not -c.  -c saves cookies, -b submits cookies from the existing file. It is good practice to delete this file when you are done.
+      # After this, you can access the endpoint via 'curl' commands (POST, GET, PATCH), as long as the '-b cookie-jar' flag is present.  Note, -b not -c.  -c saves cookies, -b submits cookies from the existing file. It is good practice to delete this file when you are done.
 
 
 Nearly all interactions with the Crunch API need to be authenticated.
