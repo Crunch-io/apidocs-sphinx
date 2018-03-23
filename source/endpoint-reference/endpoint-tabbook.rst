@@ -656,11 +656,11 @@ limiting parameters.
 Name       Type   Default  Description                   Example
 ========== ====== ======== ============================= ================================================================================================================
 filter     object null     Filter by Crunch Expression.  .. code:: json
-                        Variables used in the filter
-                        should be fully-expressed
-                        urls.                          [{"filter":
-                                                       "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/filters/5f14133582f34b8b85b408830f4b4a9b/"
-                                                       }]
+                           Variables used in the filter
+                           should be fully-expressed
+                           urls.                          [{"filter":
+                                                          "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/filters/5f14133582f34b8b85b408830f4b4a9b/"
+                                                          }]
 ---------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
 where      object null     Crunch Expression signifying  .. code:: json
                            which variables to use
@@ -672,11 +672,11 @@ where      object null     Crunch Expression signifying  .. code:: json
                                                              "variable": "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000003/"}}}]}
 ---------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
 variables  array  null     list of variables or folder   .. code:: json
-                           urls to include.              [
-                           Use this as a simpler way        "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000004/",
-                           to select the variables to       "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/folders/abcdef/"
-                           include instead of building   ]
-                           a `where` expression.
+                           urls to include.
+                           Use this as a simpler way      [
+                           to select the variables to        "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000004/",
+                           include instead of building       "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/folders/abcdef/"
+                           a `where` expression.          ]
                            The folders included on this
                            list will include all the
                            variables on its subfolders
@@ -714,7 +714,7 @@ layout              string  many_sheets "many_sheets" indicates each        sing
 =================== ======= =========== =================================== ================
 
 Display Settings
-                
+
 
 Further tab book viewing options.
 
