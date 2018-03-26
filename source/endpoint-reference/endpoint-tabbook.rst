@@ -671,15 +671,15 @@ where      object null     Crunch Expression signifying  .. code:: json
                                                             "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000003/": {
                                                              "variable": "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000003/"}}}]}
 ---------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
-variables  array  null     list of variables or folder   .. code:: json
+variables  array  null     List of variables or folder   .. code:: json
                            urls to include.
                            Use this as a simpler way      [
                            to select the variables to        "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/variables/000004/",
                            include instead of building       "https://app.crunch.io/api/datasets/45fc0d5ca0a945dab7d05444efa3310a/folders/abcdef/"
                            a `where` expression.          ]
-                           The folders included on this
+                           The folders included in this
                            list will include all the
-                           variables on its subfolders
+                           variables in its subfolders
 ---------- ------ -------- ----------------------------- ----------------------------------------------------------------------------------------------------------------
 options    object {}       further options defining
                            the tabbook output.
