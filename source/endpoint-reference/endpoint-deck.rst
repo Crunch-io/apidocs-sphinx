@@ -877,7 +877,7 @@ settings*. To save an analysis, ``POST`` these to a deck as a new slide.
    <aside class="notice">
 
 Analysis queries are described in detail in the `feature
-guide <#multidimensional-analysis>`__. `Filters <#filters>`__ may
+guide <#multidimensional-analysis>`__. :ref:`Filters <filters-main>` may
 contain a mix of stored filters or expressions. Expressions may contain
 an optional ``name`` which may be used to label results.
 

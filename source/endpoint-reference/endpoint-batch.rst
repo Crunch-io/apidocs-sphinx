@@ -1,3 +1,5 @@
+.. _batches-main:
+
 Batches
 -------
 

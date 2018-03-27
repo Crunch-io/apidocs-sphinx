@@ -1,6 +1,8 @@
 Variables
 ---------
 
+.. _variables-catalog:
+
 Catalog
 ~~~~~~~
 

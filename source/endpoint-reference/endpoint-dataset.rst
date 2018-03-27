@@ -1,3 +1,5 @@
+.. _datasets-main:
+
 Datasets
 --------
 
@@ -131,7 +133,7 @@ id                          string                                              
 archived                    bool             false                                                 Whether the dataset is "archived" or active
 --------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
 permissions                 object           ``{"edit": false}``                                   Authorizations on this dataset;
-                                                                                                   see `Permissions <#permissions>`__
+                                                                                                   see :ref:`Permissions <permissions-main>`
 --------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
 owner_id                    URL                                                                    URL of the user entity of the dataset's owner
 --------------------------- ---------------- ----------------------------------------------------- ---------------------------------------------------
@@ -284,6 +286,8 @@ new owner must have advanced permissions on Crunch.
 Other editors of the dataset can change the ownership of a dataset only
 to a Project as long as they andthe current owner of the dataset are
 both editors on such project.
+
+.. _datasets-post:
 
 POST
 ^^^^
@@ -518,7 +522,7 @@ id                     string                                                   
 archived               bool             false                                              Whether the dataset is "archived" or active
 ---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
 permissions            object           ``{"edit": false}``                                Authorizations on this dataset;
-                                                                                           see `Permissions <#permissions>`__
+                                                                                           see :ref:`Permissions <permissions-main>`
 ---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
 owner_id               URL                                                                 URL of the user entity of the dataset's owner
 ---------------------- ---------------- -------------------------------------------------- ----------------------------------------------------------
@@ -694,7 +698,7 @@ collections of related objects. They are available under the
 |               | this                                    |
 |               | dataset.                                |
 |               | See                                     |
-|               | `Permissions <#permissions>`__.         |
+|               | :ref:`Permissions <permissions-main>`.  |
 +---------------+-----------------------------------------+
 
 PATCH
@@ -1639,7 +1643,7 @@ Batches
 
 ``/datasets/{dataset_id}/batches/``
 
-See `Batches <#batches>`__ and the feature guides for
+See :ref:`Batches <batches-main>` and the feature guides for
 `importing <#importing-data>`__ and `appending <#appending-data>`__.
 
 Decks
@@ -1657,7 +1661,7 @@ Filters
 
 ``/datasets/{dataset_id}/filters/``
 
-See `Filters <#filters>`__.
+See :ref:`Filters <filters-main>`.
 
 Forks
 '''''
@@ -1673,7 +1677,7 @@ Permissions
 
 ``/datasets/{dataset_id}/permissions/``
 
-See `Permissions <#permissions>`__.
+See :ref:`Permissions <permissions-main>`.
 
 Savepoints
 ''''''''''
@@ -1687,7 +1691,7 @@ Variables
 
 ``/datasets/{dataset_id}/variables/``
 
-See `Variables <#variables>`__.
+See :ref:`Variables <variables-catalog>`.
 
 Weight variables
 ''''''''''''''''

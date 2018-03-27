@@ -95,7 +95,7 @@ the Batch resource would contain the above message. Only unresolvable
 conflicts will be shown; if a variable is not reported in the conflicts
 object, it appended cleanly.
 
-See `Batches <#batches>`__ for more details on batch entities and
+See :ref:`Batches <batches-main>` for more details on batch entities and
 conflicts.
 
 Streaming rows

@@ -43,7 +43,7 @@ then attach them to datasets by following these steps.
 
 
 POST a Dataset Entity to the datasets catalog. See the documentation for
-`POST /datasets/ <#post>`__ for details on valid attributes to include
+:ref:`POST /datasets/ <datasets-post>` for details on valid attributes to include
 in the POST.
 
 2. Upload the file
