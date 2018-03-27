@@ -9,16 +9,6 @@ Scan a directory for .rst files and process them, finding and fixing links.
 """
 # Plan:
 #
-# On scan():
-# DONE: save (filename, pos, name, title) of every inline link
-# DONE: save (filename, pos, name, title) of every Sphinx link reference
-# DONE: save (filename, pos, name, title) of every explicit link target (label)
-# DONE: save (filename, pos, name, title) of every section (implicit target)
-#
-# Report link refs without matching link target
-# Report link targets with duplicate names (including implicit targets)
-#
-# On fix():
 # For every referenced implicit target with unique generated name:
 # Create an explicit target label for cross-document links
 #
@@ -44,6 +34,9 @@ class LinkProcessor(object):
         # Sphinx link targets: .. _<label>:
         r'^\.\. _(?P<label>[^:]+):$',
 
+        # Possible section title marker
+        r'^(?P<section_mark>(?P<markchar>[^A-Za-z0-9 \t])(?P=markchar){2,})$',
+
         # reStructuredText directives:
         # .. directive_name:: (followed by indented lines)
         r'^\.\. (?P<directive>[^:]+)::$',
@@ -51,11 +44,12 @@ class LinkProcessor(object):
         # Inline code snippets: ``print(a + 2)``
         r'``(?P<inline_code>.*?)``',
 
+        # Inline markup
+        # http://www.sphinx-doc.org/en/stable/markup/inline.html#inline-markup
+        r':(?P<rolename>[A-Za-z0-9:-]+?):`(?P<content>.*?)`',
+
         # Link references: `Link text <#target>`__
         r'`(?P<link_text>[^<]*?)\s*?<(?P<link_ref>[^>]+?)>`_{1,2}',
-
-        # Possible section title marker
-        r'^(?P<section_mark>(?P<markchar>[^A-Za-z0-9 \t])(?P=markchar){2,})$',
     ))
 
     def __init__(self):
@@ -130,22 +124,52 @@ class LinkProcessor(object):
         skip_to_pos = None
         for m in re.finditer(self.PATTERN, text, re.MULTILINE):
             pos = m.start()
+            # Skip directive contents
             if skip_to_pos is not None:
                 if pos < skip_to_pos:
                     continue
                 skip_to_pos = None
+
+            # Labeled target
             label = self._group(m, 'label')
             if label is not None:
                 self.label_map[label].append(
                     LinkInfo(filename, pos, label, label))
                 continue
+
+            # Directive
             directive = self._group(m, 'directive')
             if directive is not None:
                 skip_to_pos = self._skip_indented_lines(text, pos)
                 continue
+
+            # Inline code snippet
             inline_code = self._group(m, 'inline_code')
             if inline_code is not None:
                 continue
+
+            # Sphinx role (inline markup)
+            # :rolename:`content`
+            # :ref:`title <target>`
+            rolename = self._group(m, 'rolename')
+            if rolename is not None:
+                if rolename not in ('ref', 'doc'):
+                    continue
+                content = self._group(m, 'content')
+                m = re.match(r'(.*?)\s*<(.*?)>', content)
+                if m:
+                    title = m.group(1).strip()
+                    name = m.group(2).strip()
+                else:
+                    name = title = content.strip()
+                if not name:
+                    continue
+                self.ref_map[name].append(
+                    LinkInfo(filename, pos, name, title))
+                continue
+
+            # Ordinary link reference
+            # `Link text <#target>`__
             link_ref = self._group(m, 'link_ref')
             if link_ref is not None:
                 link_text = m.group('link_text')
@@ -153,6 +177,8 @@ class LinkProcessor(object):
                 link_info = LinkInfo(filename, pos, link_ref, link_text)
                 self.link_map[link_ref].append(link_info)
                 continue
+
+            # reStructuredText section marker
             section_mark = self._group(m, 'section_mark')
             if section_mark:
                 pos, section_title = self._find_section_title(text, pos)
@@ -197,7 +223,7 @@ class LinkProcessor(object):
             return count
 
         print("Number of inline links:", _count(self.link_map))
-        print("Number of Sphinx references:", _count(self.ref_map))
+        print("Number of inline references:", _count(self.ref_map))
         print("Number of link target labels:", _count(self.label_map))
         print("Number of section names (implicit targets):",
               _count(self.section_map))
