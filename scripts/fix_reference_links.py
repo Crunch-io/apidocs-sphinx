@@ -58,6 +58,7 @@ class LinkProcessor(object):
         self.ref_map = defaultdict(list)
         self.label_map = defaultdict(list)
         self.section_map = defaultdict(list)
+        self.auto_fixable_links = None
 
     @classmethod
     def _group(cls, m, group_id):
@@ -122,7 +123,7 @@ class LinkProcessor(object):
         # Just read in the entire RST file
         text = f.read()
         skip_to_pos = None
-        for m in re.finditer(self.PATTERN, text, re.MULTILINE):
+        for m in re.finditer(self.PATTERN, text, re.DOTALL|re.MULTILINE):
             pos = m.start()
             # Skip directive contents
             if skip_to_pos is not None:
@@ -271,7 +272,7 @@ class LinkProcessor(object):
             print(link_info)
 
         # Report on fixable links
-        auto_fixable_links = []
+        self.auto_fixable_links = []
         manual_fixable_links = []
         for link_info in broken_links:
             name = link_info.name.lstrip('#')
@@ -279,11 +280,11 @@ class LinkProcessor(object):
             if not targets:
                 continue
             if len(targets) == 1:
-                auto_fixable_links.append((link_info, targets[0]))
+                self.auto_fixable_links.append((link_info, targets[0]))
             else:
                 manual_fixable_links.append((link_info, targets))
-        print(len(auto_fixable_links), "Automatically fixable links:")
-        for src, dst in auto_fixable_links:
+        print(len(self.auto_fixable_links), "Automatically fixable links:")
+        for src, dst in self.auto_fixable_links:
             print(src, '->', dst)
         print(len(manual_fixable_links), "Possible manually fixable links:")
         for src, dst in manual_fixable_links:
