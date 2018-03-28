@@ -5,17 +5,9 @@ Fix cross-reference links from before the conversion to Sphinx.
 Usage:
     scripts/fix_reference_links.py <directory-name>
 
-Scan a directory for .rst files and process them, finding and fixing links.
+Scan a directory for .rst files and process them, reporting broken links and
+other stats.
 """
-# Plan:
-#
-# For every referenced implicit target with unique generated name:
-# Create an explicit target label for cross-document links
-#
-# For every link reference with a non-ambiguous target:
-# Change the link from `title <#name>`__ format to :ref:`title <name>`
-#
-# Manually fix duplicate targets, then re-run this script till it runs clean.
 from __future__ import print_function
 from collections import defaultdict, namedtuple
 import os
