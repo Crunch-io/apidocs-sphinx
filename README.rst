@@ -48,8 +48,8 @@ To create a reference to this section from anywhere in the docs::
 The link title will be "this section", and it will point to the section labeled
 with ``my-link-label``.
 
-For further details, see: `Sphinx cross-referencing syntax
-<http://www.sphinx-doc.org/en/stable/markup/inline.html#cross-referencing-syntax>`__
+For further details, see: `Sphinx "cross-referencing anything" documentation
+<http://www.sphinx-doc.org/en/stable/markup/inline.html#cross-referencing-anything>`__
 
 (P.S. The source for the paragraph above in README.rst is an example of how to
 do external links.)
