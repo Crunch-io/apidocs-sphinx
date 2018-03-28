@@ -1,3 +1,5 @@
+.. _teams-main:
+
 Teams
 -----
 

@@ -1,3 +1,5 @@
+.. _appending-data:
+
 Appending Data
 --------------
 
@@ -218,7 +220,7 @@ appear in the dataset for the next time a user loads it, but if a user
 is actively working with the dataset, the system won't update their view
 of the data and disrupt their session.
 
-See `Stream <#stream>`__ for more details on streams.
+See :ref:`Stream <dataset-stream>` for more details on streams.
 
 Combining datasets
 ------------------

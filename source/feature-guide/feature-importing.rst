@@ -1,3 +1,5 @@
+.. _importing-data:
+
 Importing Data
 --------------
 
@@ -180,8 +182,8 @@ means the "metadata" object is explicitly unordered. If you wish the
 variables to have an order, you must supply an order object rather than
 relying on any order of the "metadata" object.
 
-It is possible to create derived variables using any of the `derivation
-functions available <#Deriving-Variables>`__ simulaneously in one
+It is possible to create derived variables using any of the :ref:`derivation
+functions available <deriving-variables>` simultaneously in one
 request when creating the dataset along its metadata. The variable
 references inside the derivation expressions must point to declared
 aliases of variables or subvariables.
@@ -569,6 +571,8 @@ Several things to note:
       a group named "ungrouped".
    -  Variables may appear in multiple groups.
    -  Groups may be nested within each other.
+
+.. _import-column-by-column:
 
 Column-by-column
 ~~~~~~~~~~~~~~~~

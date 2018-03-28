@@ -414,7 +414,7 @@ Team datasets
 
 A Shoji Catalog of datasets that have been shared with this team. These
 datasets are not included in the primary dataset catalog. See
-`teams <#teams>`__ for more.
+:ref:`teams <teams-main>` for more.
 
 Project datasets
 ^^^^^^^^^^^^^^^^
@@ -423,7 +423,7 @@ Project datasets
 
 A Shoji Catalog of datasets that belong to this project. These datasets
 are not included in the primary dataset catalog. See
-`projects <#projects>`__ for more.
+:ref:`projects <projects-main>` for more.
 
 Filter datasets by name
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -642,7 +642,7 @@ collections of related objects. They are available under the
 |               | for this                                |
 |               | dataset.                                |
 |               | See                                     |
-|               | `Versions <#versions>`__.               |
+|               | :ref:`Versions <versions-main>`.        |
 +---------------+-----------------------------------------+
 | filters       | Makes                                   |
 |               | available                               |
@@ -662,7 +662,7 @@ collections of related objects. They are available under the
 |               | available                               |
 |               | multitables.                            |
 |               | See                                     |
-|               | `Multitables <#mulitables>`__           |
+|               | :ref:`Multitables <multitables-main>`   |
 +---------------+-----------------------------------------+
 | comparisons   | Contains                                |
 |               | all                                     |
@@ -852,7 +852,7 @@ Cube
 
 ``/datasets/{id}/cube/?q``
 
-See `Multidimensional Analysis <#multidimensional-analysis>`__.
+See :ref:`Multidimensional Analysis <multidimensional-analysis>`.
 
 Export
 ''''''
@@ -945,7 +945,7 @@ options       An object of extra settings,      .. code:: json
               See below.                         {"use_category_ids": true}
 ============= ================================= ================================================================================
 
-See `"Expressions" <#expressions>`__ for more on Crunch expressions.
+See :ref:`"Expressions" <expressions-obj-ref>` for more on Crunch expressions.
 
 The following rules apply for all formats:
 
@@ -1209,6 +1209,8 @@ excluded from all views of the data.
 PATCH the "expression" attribute to modify. An empty "expression"
 object, like ``{"body": {"expression": {}}}``, is equivalent to "no
 exclusion", i.e. no rows are dropped.
+
+.. _dataset-stream:
 
 Stream
 ''''''
@@ -1644,7 +1646,7 @@ Batches
 ``/datasets/{dataset_id}/batches/``
 
 See :ref:`Batches <batches-main>` and the feature guides for
-`importing <#importing-data>`__ and `appending <#appending-data>`__.
+:ref:`importing <importing-data>` and :ref:`appending <appending-data>`.
 
 Decks
 '''''
@@ -1684,7 +1686,7 @@ Savepoints
 
 ``/datasets/{dataset_id}/savepoints/``
 
-See `Versions <#versions>`__.
+See :ref:`Versions <versions-main>`.
 
 Variables
 '''''''''
