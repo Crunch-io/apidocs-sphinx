@@ -329,7 +329,6 @@ The Shoji catalog should have empty objects as tuples.
           }
       }
 
-```
 
 
 Hierarchical Order
@@ -617,7 +616,7 @@ fragments.dataset      Points to the dataset this variable belongs to.
 fragments.variable     In the case of subvariable entities, they will contain
                        this reference pointing back to their parent variable
                        URL.
----------------------- ---------------------------------------------------------
+====================== =========================================================
 
 
 PATCH
