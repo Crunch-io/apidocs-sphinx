@@ -296,7 +296,7 @@ which includes:
    corresponding to this category should be interpreted as missing.
 -  **selected**: (optional) boolean indicating whether this category
    should be treated as a "true" value for logical operations. Defaults
-   to `false` if omitted. Multiple response variables are essentially
+   to ``false`` if omitted. Multiple response variables are essentially
    logical categorical arrays, and therefore must have at least one
    "selected" category. More than one Category may be marked "selected".
 
@@ -650,7 +650,7 @@ User interfaces may use the presence of a "selected" category to decide to reduc
 Any "logical" column can be used as a filter expression; rows which result in a "selected" value will match the filter, and those which are "missing" or "other" will not.
 
 -  ``==`` equals. Exact matches will return "selected". For non-matching values, if either input term is missing, the result is missing. Otherwise, the result is "other".
--  ``!=`` not equals. Exact matches will return "other". For non-matching values, if either input term is missing, the result is missing. Otherwise, the result is "selected". This is the same result as `not(==)`.
+-  ``!=`` not equals. Exact matches will return "other". For non-matching values, if either input term is missing, the result is missing. Otherwise, the result is "selected". This is the same result as ``not(==)``.
 -  ``=><=`` between
 -  ``between`` between
 -  ``<`` less than
@@ -668,10 +668,10 @@ Any "logical" column can be used as a filter expression; rows which result in a 
 -  ``contains`` "selected" for each row where text value A is a substring of text value B.
 -  ``icontains`` Case-insensitive version of 'contains'
 -  ``~=`` compare against regular expression (regex)
--  ``and`` logical and. A "selected" value `and` "selected" results in "selected".
+-  ``and`` logical and. A "selected" value ``and`` "selected" results in "selected".
    If either input term is missing, the result is missing. Otherwise, the result is "other".
 -  ``or`` logical or. If either input term is "selected", the result is "selected".
-   A "missing" value `or` "missing" results in "missing". Otherwise, the result is "other".
+   A "missing" value ``or`` "missing" results in "missing". Otherwise, the result is "other".
 -  ``not`` logical not; this is the "relative complement"--any missing values will remain missing.
 -  ``not_selected`` logical not; this is the "absolute complement"--any missing values will become "selected".
 -  ``selected`` returns "selected" only for "selected" categories; "other" and "missing" values will become "other".
