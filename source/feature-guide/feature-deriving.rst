@@ -480,6 +480,7 @@ What can you do with logical variables? A few things:
    "other" or "missing" do not match and are filtered out.
 -  You can reduce them to just three values with the ``as_selected``
    function. This lets you:
+
    +  Get "the right numbers" for Multiple Response analyses by
       properly representing and propagating missingness.
    +  Present views where only the "selected" slice is shown.
