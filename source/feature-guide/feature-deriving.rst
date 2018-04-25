@@ -481,8 +481,9 @@ What can you do with logical variables? A few things:
 -  You can reduce them to just three values with the ``as_selected``
    function. This lets you:
 
-   +  Get "the right numbers" for Multiple Response analyses by
-      properly representing and propagating missingness.
+   +  Calculate proportions and other statistics accurately for
+      Multiple Response analyses by properly representing and
+      propagating missingness.
    +  Present views where only the "selected" slice is shown.
    +  Represent the variable in clients as if it were true/false/NA;
       the "rcrunch" library for R does this, transforming three-valued
