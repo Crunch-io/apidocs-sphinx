@@ -1,5 +1,3 @@
-.. _deriving-variables:
-
 Deriving Variables
 ------------------
 
@@ -518,6 +516,8 @@ modifications.
 
    </aside>
 
+.. _feature-deriving-weights:
+
 Weights
 ~~~~~~~
 
@@ -760,7 +760,7 @@ case
 ^^^^
 
 Returns a categorical variable with its categories following the
-specified conditions from different variables on the dataset. :ref:`View Case
+specified conditions from different variables on the dataset. See :ref:`Case
 Statements <case-statements>`.
 
 cast

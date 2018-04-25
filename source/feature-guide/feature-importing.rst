@@ -123,9 +123,12 @@ entity created in step 1.
 
 The POST to the batches catalog will return 202 Continue status, and the
 response body contains a progress URL. Poll that URL to monitor the
-completion of the batch addition. See `Progress <../endpoint-reference/endpoint-progress.html>`__ for
+completion of the batch addition. See
+:doc:`Progress </endpoint-reference/endpoint-progress>` for
 more. The 202 response will also contain a Location header with the URL
 of the newly created batch.
+
+.. _metadata-document-csv:
 
 Metadata document + CSV
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,8 +185,8 @@ means the "metadata" object is explicitly unordered. If you wish the
 variables to have an order, you must supply an order object rather than
 relying on any order of the "metadata" object.
 
-It is possible to create derived variables using any of the :ref:`derivation
-functions available <deriving-variables>` simultaneously in one
+It is possible to create derived variables using any of the :doc:`derivation
+functions available </feature-guide/feature-deriving>` simultaneously in one
 request when creating the dataset along its metadata. The variable
 references inside the derivation expressions must point to declared
 aliases of variables or subvariables.

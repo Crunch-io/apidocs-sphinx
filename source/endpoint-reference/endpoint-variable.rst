@@ -1,8 +1,6 @@
 Variables
 ---------
 
-.. _variables-catalog:
-
 Catalog
 ~~~~~~~
 
@@ -281,9 +279,9 @@ attributes:
    the variable will be created on the root folder. Personal variables (with ``"private": true``) cannot be placed in a folder; attempting to do so returns 400 status.
    
 See :ref:`Variable Definitions <variable-definitions>` for more details
-and examples of valid attributes, and `Feature Guide:
-Arrays <#array-variables>`__ for more information on the various cases
-for creating array variables.
+and examples of valid attributes, and :doc:`Feature Guide:
+Array Variables </feature-guide/feature-arrays>` for more information on the
+various cases for creating array variables.
 
 It is encouraged, but not required, to include an "alias" in the body.
 If omitted, one will be generated from the required "name".
@@ -292,11 +290,11 @@ You may also include "values", which will create the column of data
 corresponding to this variable definition. See :ref:`Importing Data:
 Column-by-column <import-column-by-column>` for details and examples.
 
-You may instead also include an "derivation" to derive a variable as a
+You may instead also include a "derivation" to derive a variable as a
 function of other variables. In this case, "type" is not required
 because it depends on the output of the specified derivation function.
-For details and examples, see :ref:`Deriving
-Variables <deriving-variables>`.
+For details and examples, see :doc:`Deriving
+Variables </feature-guide/feature-deriving>`.
 
 A 201 indicates success and includes the URL of the newly-created
 variable in the Location header.
@@ -400,6 +398,8 @@ PUT
 ^^^
 
 Behaves sames as PATCH.
+
+.. _endpoint-variables-weights:
 
 Weights
 ~~~~~~~

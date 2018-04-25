@@ -1,5 +1,3 @@
-.. _permissions-main:
-
 Permissions
 -----------
 

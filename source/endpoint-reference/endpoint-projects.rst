@@ -1,5 +1,3 @@
-.. _projects-main:
-
 Projects
 --------
 

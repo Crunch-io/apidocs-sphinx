@@ -1,5 +1,3 @@
-.. _multidimensional-analysis:
-
 Multidimensional analysis
 -------------------------
 
@@ -14,6 +12,8 @@ supplies expressions for each, while the response has data (and
 metadata) for each. The request declares what variables to use and what
 to do with them, while the response includes and describes the results.
 See Object Reference:Cube for complete details.
+
+.. _analyzing-dimensions:
 
 Dimensions
 ~~~~~~~~~~
@@ -267,8 +267,9 @@ target data is interpreted with the same category metadata as our base
 analysis.
 
 We POST the above to datasets/{id}/comparisons/ and can obtain the
-overlay output at datasets/{id}/comparisons/{comparison\_id}/cube/. See
-the Endpoint Reference for details.
+overlay output at datasets/{id}/comparisons/{comparison_id}/cube/. See the
+:doc:`Comparisons endpoint reference </endpoint-reference/endpoint-comparison>`
+for details.
 
 Multitables
 ~~~~~~~~~~~
@@ -344,7 +345,7 @@ interest.
 
 Crunch provides a separate catalog where you can define and manage these
 common sets of variables. Like most catalogs, you can :ref:`GET
-it <multitables-catalog>` to see which multitables are defined.
+it <multitables-catalog-get>` to see which multitables are defined.
 
 .. _template-query:
 
@@ -355,7 +356,7 @@ A multitable is a set of queries that form groups of ‘columns’ for
 different later chosen ‘row’ variables. It is defined by a **name** and
 a **template**. At minimum the template must contain a ``query``
 fragment: this will be later inserted after some function of a row
-variable to form the `dimension <#dimensions>`__ of a result. Each
+variable to form the `dimension <analyzing-dimensions>` of a result. Each
 template dimension can currently only be a function of one variable.
 
 .. language_specific::
@@ -402,6 +403,8 @@ template dimension can currently only be a function of one variable.
 
 Each multi-table template may be a list of variable references and other
 information used to construct the dimension and transform its output.
+
+.. _transforming-analyses-for-presentation:
 
 Transforming analyses for presentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

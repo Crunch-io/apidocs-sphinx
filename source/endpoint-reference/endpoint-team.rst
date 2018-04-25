@@ -1,5 +1,3 @@
-.. _teams-main:
-
 Teams
 -----
 
@@ -198,12 +196,11 @@ Team members catalog
 ``/teams/{team_id}/members/``
 
 The team members catalog is a Shoji Catalog similar in nature to the
-:ref:`dataset permissions catalog <permissions-main>`. It collects references
-to users and defines the authorizations they have with respect to the
-team. All information about the member relationships is contained in the
-catalog--there are no "member entities"--and all changes to team
-membership, whether adding, modifying, or removing users, is done via
-PATCH.
+:doc:`dataset permissions catalog </endpoint-reference/endpoint-permission>`. It
+collects references to users and defines the authorizations they have with
+respect to the team. All information about the member relationships is contained
+in the catalog--there are no "member entities"--and all changes to team
+membership, whether adding, modifying, or removing users, is done via PATCH.
 
 GET
 ^^^
@@ -449,7 +446,8 @@ Team datasets catalog
 ``/teams/{team_id}/datasets/``
 
 The team datasets catalog only supports the GET verb. To add a dataset
-to a team, you must PATCH its :ref:`permissions catalog <permissions-main>`.
+to a team, you must PATCH its
+:doc:`permissions catalog </endpoint-reference/endpoint-permission>`.
 
 GET
 ^^^

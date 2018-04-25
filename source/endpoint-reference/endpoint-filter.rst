@@ -1,5 +1,3 @@
-.. _filters-main:
-
 Filters
 -------
 

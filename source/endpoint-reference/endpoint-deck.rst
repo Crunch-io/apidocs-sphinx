@@ -262,7 +262,8 @@ location to which the exporter will write this file when it is done computing
 (it may take some time for large datasets). The server will return a 202 response indicating that the export job started with
 a Location header indicating where the final exported file will be available. The response's body will contain the URL for the progress URL where to query
 the state of the export job. Clients should note the download URL,
-monitor progress, and when complete, GET the download location. See `Progress <endpoint-progress.html>`__ for details.
+monitor progress, and when complete, GET the download location. See
+:doc:`Progress </endpoint-reference/endpoint-progress>` for details.
 If no header is provided, this endpoint will produce an xlsx file.
 
 Requesting the same job, if still in progress, will return the same 202 response
@@ -878,10 +879,11 @@ settings*. To save an analysis, ``POST`` these to a deck as a new slide.
 
    <aside class="notice">
 
-Analysis queries are described in detail in the :ref:`feature
-guide <multidimensional-analysis>`. :ref:`Filters <filters-main>` may
-contain a mix of stored filters or expressions. Expressions may contain
-an optional ``name`` which may be used to label results.
+Analysis queries are described in detail in the :doc:`feature guide
+</feature-guide/feature-analyzing>`. :doc:`Filters
+</endpoint-reference/endpoint-filter>` may contain a mix of stored filters or
+expressions. Expressions may contain an optional ``name`` which may be used to
+label results.
 
 .. raw:: html
 

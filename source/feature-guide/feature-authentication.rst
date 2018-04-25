@@ -59,8 +59,9 @@ Failure will return 401 Unauthorized.
 
     Replace "fake.user@example.com" and "password" with your email and password, respectively. Refer to the password policy below for more information.
 
-Crunch also supports OAuth 2.0/OpenID Connect. See :ref:`the public endpoint
-reference <public-endpoint>` for more on how to authenticate with OAuth.
+Crunch also supports OAuth 2.0/OpenID Connect. See :doc:`the public endpoint
+reference </endpoint-reference/endpoint-public>` for more on how to authenticate
+with OAuth.
 
 If you'd like to add your auth provider to the set of supported
 providers, contact support@crunch.io
