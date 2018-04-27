@@ -113,6 +113,10 @@ html_theme_options = {
     'navbar_site_name': 'Document',
     'navbar_pagenav': False,
     'globaltoc_depth': 2,
+    # Chris F recommended this based on his research to fix the table of
+    # contents scrolling issue.
+    # https://github.com/ryan-roemer/sphinx-bootstrap-theme/issues/136
+    'navbar_fixed_top': False,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
