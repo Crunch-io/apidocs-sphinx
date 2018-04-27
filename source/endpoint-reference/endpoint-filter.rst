@@ -85,7 +85,7 @@ with, in case it isn't shared with any teams, it will default to
 
    <!-- Discuss valid crunch filter expressions -->
 
-See `expressions <#expressions>`__ in the Object Reference for more
+See :ref:`expressions <expressions-obj-ref>` in the Object Reference for more
 details.
 
 Applied filters
@@ -138,6 +138,8 @@ PATCH the order to change the order of the filters. The graph parameter
 indicates the order. Private filters are not included in the order. Any
 filters that are missing are appended to the end of the order.
 Successful PATCH requests return 204 status.
+
+.. _filtering-endpoints:
 
 Filtering endpoints
 ~~~~~~~~~~~~~~~~~~~
