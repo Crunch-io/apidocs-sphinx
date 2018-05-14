@@ -549,9 +549,8 @@ makes the output "missing":
 | M   | M | M | M |
 +-----+---+---+---+
 
-The ``or`` function does not. In most languages, any "missing" value
-makes the output of ``or`` missing, but in Crunch, any "selected"
-value wins. Any row *not matched by another case* where any of the
+The ``or`` function behaves like SQL and R: any "selected"
+value wins, but any row *not matched by another case* where any of the
 input variables are missing stays missing.
 
 +-----+---+---+---+
@@ -564,7 +563,7 @@ input variables are missing stays missing.
 | M   | S | M | M |
 +-----+---+---+---+
 
-Also contrary to lots of other languages (like SQL and R), ``eq``
+Contrary to lots of other languages (like SQL and R), ``eq``
 returns "selected" if the two values are the same code, even if missing.
 For example, when comparing whether variable A is equal to missing
 -8, we want a -8 value in A to evaluate to "selected", not "missing".
