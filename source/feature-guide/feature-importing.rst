@@ -1,3 +1,5 @@
+.. _importing-data:
+
 Importing Data
 --------------
 
@@ -43,7 +45,7 @@ then attach them to datasets by following these steps.
 
 
 POST a Dataset Entity to the datasets catalog. See the documentation for
-`POST /datasets/ <#post>`__ for details on valid attributes to include
+:ref:`POST /datasets/ <datasets-post>` for details on valid attributes to include
 in the POST.
 
 2. Upload the file
@@ -121,9 +123,12 @@ entity created in step 1.
 
 The POST to the batches catalog will return 202 Continue status, and the
 response body contains a progress URL. Poll that URL to monitor the
-completion of the batch addition. See `Progress <../endpoint-reference/endpoint-progress.html>`__ for
+completion of the batch addition. See
+:doc:`Progress </endpoint-reference/endpoint-progress>` for
 more. The 202 response will also contain a Location header with the URL
 of the newly created batch.
+
+.. _metadata-document-csv:
 
 Metadata document + CSV
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +161,8 @@ without requiring much back-and-forth with the API.
                       "color": {"name": "Favorite color", "alias": "color", "type": "text", ...},
                       "state": {"name": "State", "alias": "state", "view": {"geodata": [{"geodatum": <uri>, "feature_key": "properties.postal-code"}]}}
                   },
-                  "order": ["educ", {'my group": "color"}]
+                  "order": ["educ", {'my group": "color"}],
+                  "hidden": [{"My system variables": ["state"]}]
               },
           }
       }
@@ -180,8 +186,21 @@ means the "metadata" object is explicitly unordered. If you wish the
 variables to have an order, you must supply an order object rather than
 relying on any order of the "metadata" object.
 
-It is possible to create derived variables using any of the `derivation
-functions available <#Deriving-Variables>`__ simulaneously in one
+Additionally, an optional "hidden" member is allowed, which receives a Shoji
+Order object just like the "order" member. This structure will be used to
+construct the Hidden folder subfolders and the variables present inside it
+will be considered hidden variables. Any variable that has been defined
+by having `discarded: true` will be automatically placed at the top level
+of the hidden order structure.
+
+Following the Variable Folders rules, a variable cannot be in two folders
+simultaneously, so the server will raise validation errors if any variable is
+present in both the public order and the hidden order (Note, that discarded
+variables cannot be in the public order because they will be automatically
+added on the hidden order)
+
+It is possible to create derived variables using any of the :doc:`derivation
+functions available </feature-guide/feature-deriving>` simultaneously in one
 request when creating the dataset along its metadata. The variable
 references inside the derivation expressions must point to declared
 aliases of variables or subvariables.
@@ -408,6 +427,12 @@ attribute's default value instead.
 An empty ``order`` for the dataset will be handled as if no order was
 passed in.
 
+An empty ``hidden`` for the dataset, will assume a flat order for all the
+variables that have ``discarded: true`` in their definitions.
+
+All variables can only be part of one of the orders (``order`` or ``hidden``)
+
+
 2. Add row data
 ^^^^^^^^^^^^^^^
 
@@ -569,6 +594,8 @@ Several things to note:
       a group named "ungrouped".
    -  Variables may appear in multiple groups.
    -  Groups may be nested within each other.
+
+.. _import-column-by-column:
 
 Column-by-column
 ~~~~~~~~~~~~~~~~

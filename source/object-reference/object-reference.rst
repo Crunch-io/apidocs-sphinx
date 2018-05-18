@@ -49,6 +49,8 @@ A Shoji view is identified by its ``element`` key having value
 ``shoji:view`` with its principal attribute being ``value``. This can
 contain any arbitrary JSON object.
 
+.. _shoji-order:
+
 Shoji order
 ~~~~~~~~~~~
 
@@ -154,6 +156,8 @@ almost any data transfer. Because of this, it is common to:
    is shipped along with the enumerated data, the transfer size and
    therefore time is much smaller. Many cases do not even call for a
    complete elaboration of the entire column.
+
+.. _variable-definitions:
 
 Variable Definitions
 ~~~~~~~~~~~~~~~~~~~~
@@ -536,6 +540,8 @@ Variables
 A complete Variable, then, is simply a Definition combined with its data
 array.
 
+.. _expressions-obj-ref:
+
 Expressions
 ~~~~~~~~~~~
 
@@ -719,6 +725,8 @@ Miscellaneous functions
 -  ``unmissing`` Return the given column with user missing replaced by
    valid values.
 
+.. _date-functions:
+
 Date Functions
 ''''''''''''''
 
@@ -732,6 +740,8 @@ Date Functions
    string
 -  ``rollup`` Return column's values (which must be type datetime) into
    calendrical bins.
+
+.. _frame-functions:
 
 Frame Functions
 '''''''''''''''
