@@ -9,7 +9,7 @@ nested folders containing dataset variables. Unlike the hierarchical
 order, a variable can only exist in one folder at the time.
 
 Root
------
+~~~~
 
 ``/datasets/{id}/folders/``
 
@@ -24,7 +24,7 @@ showing any ungrouped variables in addition to the top-level folders.
 
 
 Subfolder endpoint
-------------------
+~~~~~~~~~~~~~~~~~~
 
 ``/datasets/{id}/folders/{folder_id}/``
 
@@ -32,7 +32,7 @@ All subfolder URLs follow straight from the root folder URL regardless
 of their nested location in the variable folders tree.
 
 Folder payload
---------------
+-~~~~~~~~~~~~~
 
 All folders types return a similar Shoji catalog with the following members:
 
@@ -109,7 +109,7 @@ JSON example:
 
 
 Creating folders
-----------------
+~~~~~~~~~~~~~~~~
 
 To create a subfolder, clients must POST to the target folder (which will be the
 parent of the new subfolder).
@@ -151,7 +151,7 @@ contains.
 
 
 Moving folders and variables
-----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to move folders or variables from one location to another, their URL
 must be included in the `index` catalog sent via a PATCH request to the
@@ -165,7 +165,7 @@ move a folder or a variable that conflicts with the existing children of it,
 will return a 409 response from the server.
 
 Reordering a folder's contents
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To reorder the elements inside a folder, it's necessary to make a PATCH request
 to the folder's endpoint containing the list with the elements from the index
@@ -177,7 +177,7 @@ them on the `graph`.
 
 
 Deleting folders
-----------------
+~~~~~~~~~~~~~~~~
 
 Subfolders can be deleted by performing a DELETE request on their endpoints.
 It will effectively move the folder to the trash folder.
@@ -193,7 +193,7 @@ folder, including all variables & related data contained in that folder.
 
 
 Trash
------
+~~~~~
 
 ``/datasets/{id}/folders/trash/``
 
@@ -212,7 +212,7 @@ Items in the trash folder may also be automatically hard-deleted after
 24-48 hours.
 
 Hidden
-------
+~~~~~~
 
 ``/datasets/{id}/folders/hidden/``
 
