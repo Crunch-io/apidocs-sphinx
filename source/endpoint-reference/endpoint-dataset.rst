@@ -283,7 +283,7 @@ can be done by PATCH request with the new owners' email of API URL. The
 new owner must have advanced permissions on Crunch.
 
 Other editors of the dataset can change the ownership of a dataset only
-to a Project as long as they andthe current owner of the dataset are
+to a Project as long as they and the current owner of the dataset are
 both editors on such project.
 
 .. _datasets-post:
@@ -849,9 +849,15 @@ Applied filters
 Cube
 ''''
 
-``/datasets/{id}/cube/?q``
+``/datasets/{id}/cube/``
 
-See :doc:`Multidimensional Analysis </feature-guide/feature-analyzing>`.
+Query parameters:
+
+* query: an expression containing "dimensions" and "measures"
+* filter: an expression that filters the rows considered in the cube. If omitted, all (non-excluded) rows in the dataset are considered
+* exclusion: boolean, which if false, will compute the cube with the dataset's exclusion filter removed. Only users with "edit" permissions on the dataset may query without the exclusion filter.
+
+See :doc:`Multidimensional Analysis </feature-guide/feature-analyzing>` for details.
 
 Export
 ''''''

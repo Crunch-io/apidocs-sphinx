@@ -45,7 +45,7 @@ All subfolder URLs follow straight from the root folder URL regardless
 of their nested location in the variable folders tree.
 
 Folder payload
--~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 All folders types return a similar Shoji catalog with the following members:
 
@@ -63,7 +63,9 @@ index    object  Behaves like a standard Shoji catalog containing the children
                  set of folder and variables URLs. Clients should differentiate
                  each of the objects by looking at the tuple's `type` attribute.
                  Folders will have type "folder" while variables will contain
-                 their variables type.
+                 their variables type. The `size` attribute for a folder type
+                 indicates the total number of variables stored under the folder
+                 and its subfolders.
 -------- ------- ---------------------------------------------------------------
 graph    list    A flat list containing the list of URLs of variables and
                  subfolders on the given folder.
@@ -95,7 +97,8 @@ JSON example:
               },
               "https://app.crunch.io/datasets/abcdef/folders/qwe/": {
                   "type": "folder",
-                  "name": "Subfolder name"
+                  "name": "Subfolder name",
+                  "size": 99,
               },
               "https://app.crunch.io/datasets/abcdef/variables/456/": {
                   "subvariables_catalog": "../variables/456/subvariables/",

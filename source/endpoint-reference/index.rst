@@ -12,6 +12,7 @@ Endpoint Reference
    endpoint-comparison
    endpoint-dataset
    endpoint-deck
+   endpoint-feature-flag
    endpoint-filter
    endpoint-folders
    endpoint-geodata

@@ -1,11 +1,7 @@
 Boxdata
 -------
 
-Boxdata is the data that Crunch provides to the CrunchBox for rendering
-web components that are made publicly available. This endpoint provides
-a catalog of data that has been precomputed to provide visualizations
-cubes of json data. Metadata associated with this raw computed data is
-accessed and manipulated through this endpoint.
+"Boxdata" are the records that correspond to published CrunchBoxes. These endpoints enable you to create new CrunchBoxes and view records for previously created boxes.
 
 Catalog
 ~~~~~~~
@@ -19,7 +15,7 @@ GET catalog
 
 When authenticated and authorized to view the given dataset, GET returns
 200 status with a Shoji Catalog of boxdata associated with the dataset.
-If authorization is lacking, response will instead be 404.
+Otherwise, the response status is 404.
 
 Catalog tuples contain the following keys:
 
@@ -28,7 +24,7 @@ Name            Type    Description
 =============== ======= ================================================
 title           string  Human friendly identifier
 --------------- ------- ------------------------------------------------
-notes           string  Other information relevent for this CrunchBox
+notes           string  Other information relevant for this CrunchBox
 --------------- ------- ------------------------------------------------
 header          string  header information for the CrunchBox
 --------------- ------- ------------------------------------------------
@@ -41,16 +37,12 @@ filters         object  A Crunch expression indicating which filters to
 --------------- ------- ------------------------------------------------
 where           object  A Crunch expression indicating which variables
                         to include in the CrunchBox.  An undefined value
-                        is equavilent to specifying all dataset
+                        is equivalent to specifying all dataset
                         variables.
 --------------- ------- ------------------------------------------------
-variables       array   A list of variable or folder URLs to indicate
-                        the variables to include. Use this as a simpler
-                        way to select the variables.
-                        The folders mentioned will include all the
-                        subvariables under its subfolders as well.
-                        Usage of `where` and `variables` at the same time
-                        isn't allowed.
+weight          string  URL of the weight to apply, or null for
+                        unweighted. If not specified, the server will
+                        use the user's currently applied weight.
 --------------- ------- ------------------------------------------------
 creation_time   string  A timestamp of the date when this CrunchBox was
                         created
@@ -62,56 +54,47 @@ creation_time   string  A timestamp of the date when this CrunchBox was
 
       {
           "element": "shoji:catalog",
-          "self": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/",
+          "self": "https://beta.crunch.io/api/datasets/e7834a/boxdata/",
           "index": {
-              "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/44a4d477d70c85da4b8298677e527ad8/": {
+              "https://beta.crunch.io/api/datasets/e7834a/boxdata/44a4d477d70c85da4b8298677e527ad8/": {
                   "user_id": "00002",
                   "footer": "This is for the footer",
                   "notes": "just a couple of variables",
                   "title": "z and str",
-                  "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+                  "dataset": "https://beta.crunch.io/api/datasets/e7834a/",
                   "header": "This is for the header",
                   "creation_time": "2017-03-14T00:13:42.024000+00:00",
-                  "filters": {
-                      "function": "identify",
-                      "args": [
-                          {
-                              "filter": [
-                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
-                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
-                              ]
-                          }
-                      ]
-                  },
                   "where": {
-                      "function": "identify",
-                      "args": [
-                          {
-                              "id": [
-                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
-                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
-                              ]
+                      "function": "select",
+                      "args": [{
+                          "map": {
+                            "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000002/"},
+                            "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000003/"}
                           }
-                      ]
+                      }]
                   },
+                  "filters": [
+                    {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/da9d86e43381443d9d708dc29c0c6308/"},
+                    {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/80638457c8bd4731990eebdc3baee839/"}
+                  ],
+                  "weight": "https://beta.crunch.io/api/datasets/e7834a/variables/000012/",
                   "id": "44a4d477d70c85da4b8298677e527ad8"
               },
-              "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/boxdata/75ff1d67ed698e0986f1c1c3daebf9a2/": {
+              "https://beta.crunch.io/api/datasets/e7834a/boxdata/75ff1d67ed698e0986f1c1c3daebf9a2/": {
                   "user_id": "00002",
                   "title": "xz",
-                  "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+                  "dataset": "https://beta.crunch.io/api/datasets/e7834a/",
                   "filters": null,
                   "creation_time": "2017-03-14T00:13:42.024000+00:00",
                   "where": {
-                      "function": "identify",
-                      "args": [
-                          {
-                              "id": [
-                                  "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000000/"
-                              ]
+                      "function": "select",
+                      "args": [{
+                          "map": {
+                            "000000": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000000/"}
                           }
-                      ]
+                      }]
                   },
+                  "weight": null,
                   "id": "75ff1d67ed698e0986f1c1c3daebf9a2"
               }
           }
@@ -121,9 +104,9 @@ creation_time   string  A timestamp of the date when this CrunchBox was
 POST catalog
 ^^^^^^^^^^^^
 
-Use POST to create a new datasource for CrunchBox. Note that new boxdata
+Use POST to create a new CrunchBox. Note that new boxdata
 is only created when there is a new combination of where and filter
-data. If the same variables and filteres are indicated by the POST data,
+data. If the same variables and filters are indicated by the POST data,
 the existing combination will result in a modification of metadata
 associated with the cube data. This is to keep avoid recomputing
 analysis needlessly.
@@ -136,17 +119,17 @@ attributes:
 +=====================+=================================================================+
 | title               | Human friendly identifier                                       |
 +---------------------+-----------------------------------------------------------------+
-| notes               | Other information relevent for this CrunchBox                   |
+| notes               | Other information relevant for this CrunchBox                   |
 +---------------------+-----------------------------------------------------------------+
 | header              | header information for the CrunchBox                            |
 +---------------------+-----------------------------------------------------------------+
 | footer              | footer information for the CrunchBox                            |
 +---------------------+-----------------------------------------------------------------+
-| dataset             | URL of the dataset associated with the CrunchBox                |
-+---------------------+-----------------------------------------------------------------+
 | filters             | A Crunch expression indicating which **filters** to include     |
 +---------------------+-----------------------------------------------------------------+
 | where               | A Crunch expression indicating which **variables** to include   |
++---------------------+-----------------------------------------------------------------+
+| weight              | URL of a weight variable; cubes are unweighted if omitted       |
 +---------------------+-----------------------------------------------------------------+
 | display_settings    | Options to customize how it looks and behaves                   |
 +---------------------+-----------------------------------------------------------------+
@@ -162,14 +145,14 @@ attributes:
                   "function": "select",
                   "args": [{
                       "map": {
-                        "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/"},
-                        "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"}
+                        "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000002/"},
+                        "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000003/"}
                       }
                   }]
               },
               "filters": [
-                {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/"},
-                {"filter": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"}
+                {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/da9d86e43381443d9d708dc29c0c6308/"},
+                {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/80638457c8bd4731990eebdc3baee839/"}
               ],
               "force": false,
               "title": "z and str",
@@ -281,30 +264,23 @@ Returns the body of the boxdata entity
           "footer": "This is for the footer",
           "notes": "just a couple of variables",
           "title": "z and str",
-          "dataset": "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/",
+          "dataset": "https://beta.crunch.io/api/datasets/e7834a/",
+          "revision": "77d70a",
           "header": "This is for the header",
-          "filters": {
-              "function": "identify",
-              "args": [
-                  {
-                      "filter": [
-                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/da9d86e43381443d9d708dc29c0c6308/",
-                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/filters/80638457c8bd4731990eebdc3baee839/"
-                      ]
-                  }
-              ]
-          },
           "where": {
-              "function": "identify",
-              "args": [
-                  {
-                      "id": [
-                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000002/",
-                          "https://beta.crunch.io/api/datasets/e7834a8b5aa84c50bcb868fc3b44fd22/variables/000003/"
-                      ]
+              "function": "select",
+              "args": [{
+                  "map": {
+                    "000002": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000002/"},
+                    "000003": {"variable": "https://beta.crunch.io/api/datasets/e7834a/variables/000003/"}
                   }
-              ]
+              }]
           },
+          "filters": [
+            {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/da9d86e43381443d9d708dc29c0c6308/"},
+            {"filter": "https://beta.crunch.io/api/datasets/e7834a/filters/80638457c8bd4731990eebdc3baee839/"}
+          ],
+          "weight": "https://beta.crunch.io/api/datasets/e7834a/variables/000012/",
           "id": "44a4d477d70c85da4b8298677e527ad8"
       }
 
@@ -312,4 +288,4 @@ Returns the body of the boxdata entity
 DELETE
 ^^^^^^
 
-Deletes the boxdata entity. Returns 204.
+Deletes the entity and remove all published CrunchBox files for this box. Returns 204.
