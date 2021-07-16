@@ -1,0 +1,38 @@
+Filters
+-------
+
+See `API Reference - List filters <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/filters/>`_.
+
+See `API Reference - Batch rename filters <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/filters/>`_.
+
+See `API Reference - Create filter <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/filters/>`_.
+
+Entity
+~~~~~~
+
+See `API Reference - Filter details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/filters/-filter_id-/>`_.
+
+See `API Reference - Update filter <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/filters/-filter_id-/>`_.
+
+Views
+~~~~~
+
+Applied filter
+''''''''''''''
+
+See `API Reference - View applied filter details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/filters/-filter_id-/applied/>`_.
+
+User Applied filters
+~~~~~~~~~~~~~~~~~~~~
+
+See `API Reference - List user-applied filters <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/filters/applied/>`_.
+
+See `API Reference - Update user-applied filters <https://crunch.io/api/reference/#put-/datasets/-dataset_id-/filters/applied/>`_.
+
+Filter Order
+~~~~~~~~~~~~
+
+See `API Reference - Filters display order <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/filters/order/>`_.
+
+See `API Reference - Update filter order <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/filters/order/>`_.
+

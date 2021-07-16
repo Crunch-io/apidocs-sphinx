@@ -1,0 +1,4 @@
+Authentication
+--------------
+
+* See `our latest documentation about Authentication <https://help.crunch.io/hc/en-us/articles/360052418111-Authentication>`_.

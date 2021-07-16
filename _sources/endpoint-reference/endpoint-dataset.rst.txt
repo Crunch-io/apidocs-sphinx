@@ -1,0 +1,156 @@
+Datasets
+--------
+
+A *Dataset* is the primary container of statistical data in Crunch. Each dataset
+contains a collection of :doc:`variables </endpoint-reference/endpoint-variable>`, from
+which analyses can be composed and then saved and exported. These analyses may include
+filters, which a user can define and save. A user can also share a dataset with
+another user.
+
+Data is added to a dataset as a *batch*. A new dataset may be created empty (have *zero*
+data batches), or dataset creation and adding the first data batch may be combined in
+certain import operations. In either case, additional batches can be appended to
+datasets. Similarly, variables from other datasets can be joined onto a dataset.
+
+As with other Crunch objects, references to the dataset entities available to a user are
+provided in a catalog. Multiple endpoint-methods described below return a dataset
+catalog, which may be filtered and/or organized in a hiearchy, depending on the method.
+
+See `API Reference - Create dataset <https://crunch.io/api/reference/#post-/datasets/>`_.
+
+Other catalogs
+~~~~~~~~~~~~~~
+
+In addition to ``/datasets/``, there are a few other catalogs of
+datasets in the API:
+
+Project datasets
+^^^^^^^^^^^^^^^^
+
+See `API Reference - List datasets in project <https://crunch.io/api/reference/#get-/projects/-project_id-/datasets/>`_.
+
+Filter datasets by name
+^^^^^^^^^^^^^^^^^^^^^^^
+
+See `API Reference - Filter datasets by name <https://crunch.io/api/reference/#get-/datasets/by_name/-datasetName-/>`_.
+
+Entity
+~~~~~~
+
+GET
+^^^
+
+See `API Reference - Dataset details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/>`_.
+
+PATCH
+^^^^^
+
+See `API Reference - Update dataset <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/>`_.
+
+DELETE
+^^^^^^
+
+See `API Reference - Delete dataset <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/>`_.
+
+Views
+^^^^^
+
+Applied filters
+'''''''''''''''
+
+Cube
+''''
+
+See `API Reference - Calculate data cube <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/cube/>`_.
+
+Export
+''''''
+
+See `API Reference - List available export formats <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/export/>`_.
+
+See `API Reference - Export dataset <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/export/-format-/>`_.
+
+Match
+'''''
+
+See `API Reference - Request matching variable analysis <https://crunch.io/api/reference/#post-/datasets/match/>`_.
+
+See `API Reference - View matching variable analysis <https://crunch.io/api/reference/#get-/datasets/match/-analysis_id-/>`_.
+
+Summary
+'''''''
+
+See `API Reference - Row and column count <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/summary/>`_.
+
+Fragments
+^^^^^^^^^
+
+Table
+'''''
+
+See `API Reference - List variable definitions <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/table/>`_.
+
+State
+'''''
+
+See `API Reference - List dataset's current state <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/state/>`_.
+
+Exclusion
+'''''''''
+
+See `API Reference - View the current row exclusion filter <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/exclusion/>`_.
+
+See `API Reference - Update row exclusions <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/exclusion/>`_.
+
+Publishing
+''''''''''
+
+See `API Reference - Is dataset published <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/publish/>`_.
+
+See `API Reference - Publish/unpublish dataset <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/publish/>`_.
+
+Stream
+''''''
+
+See `API Reference - Streaming status <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/stream/>`_.
+
+See `API Reference - Insert streamed data <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/stream/>`_.
+
+Settings
+''''''''
+
+See `API Reference - List settings <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/settings/>`_.
+
+See `API Reference - Update settings <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/settings/>`_.
+
+
+Preferences
+'''''''''''
+
+See `API Reference - List user preferences <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/preferences/>`_.
+
+See `API Reference - Update settings <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/preferences/>`_.
+
+Primary key
+'''''''''''
+
+See `API Reference - List primary key <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/pk/>`_.
+
+See `API Reference - Set primary key <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/pk/>`_.
+
+See `API Reference - Unset primary key <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/pk/>`_.
+
+Catalogs
+^^^^^^^^
+
+Users
+'''''
+
+See `API Reference - List dataset users <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/users/>`_.
+
+See `API Reference - Add/remove dataset users <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/users/>`_.
+
+Teams
+'''''
+
+See `API Reference - List dataset teams <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/teams/>`_.

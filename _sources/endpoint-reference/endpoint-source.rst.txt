@@ -1,0 +1,24 @@
+Sources
+-------
+
+A *source* is a file that can be ingested by Crunch, either to define a dataset or to
+add data to it (or both). When used in an import operation, the file becomes the
+*source* for part or all of a dataset. *Sources* is not a general-purpose file-store; it
+is intended only for files used for Crunch imports.
+
+An uploaded file is *registered* as a source for a particular dataset when it is used in
+an import operation. Once a source has been "registered" as part of an import, it cannot
+be deleted unless the target dataset has been deleted.
+
+Each source belongs to a specific user. A sources catalog response will contain only
+those sources belonging to the requesting user and a newly added source will be assigned
+to the requesting user. Sources are unordered.
+
+Access to sources is limited to users with `create_datasets` permissions.
+
+See `API Reference - List data sources <https://crunch.io/api/reference/#get-/sources/>`_.
+
+See `API Reference - Upload data to Crunch <https://crunch.io/api/reference/#post-/sources/>`_.
+
+See `API Reference - Data source details <https://crunch.io/api/reference/#get-/sources/-source_id-/>`_.
+

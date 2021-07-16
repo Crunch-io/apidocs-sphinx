@@ -1,0 +1,5 @@
+General API Conventions
+-----------------------
+
+* See `our latest documentation about API Conventions <https://help.crunch.io/hc/en-us/articles/360052404911-API-Conventions>`_.
+* See `our latest documentation about API Response Envelopes <https://help.crunch.io/hc/en-us/articles/360052405191-API-Response-Envelopes>`_.

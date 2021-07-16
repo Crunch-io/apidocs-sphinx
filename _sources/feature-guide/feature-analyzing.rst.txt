@@ -1,0 +1,4 @@
+Multidimensional analysis
+-------------------------
+
+* See `our latest documentation about Multidimensional Analysis <https://help.crunch.io/hc/en-us/articles/360044737751-Multidimensional-Analysis>`_.

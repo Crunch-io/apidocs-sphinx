@@ -1,0 +1,4 @@
+Integration with third party APIs
+=================================
+
+* See `our latest documentation about Integrating with Third-Party APIs <https://help.crunch.io/hc/en-us/articles/360044288172-Integration-with-Third-Party-APIs>`_.

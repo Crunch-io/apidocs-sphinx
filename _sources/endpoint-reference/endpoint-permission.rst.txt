@@ -1,0 +1,6 @@
+Permissions
+-----------
+
+See `API Reference - List user access <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/permissions/>`_.
+
+See `API Reference - Add/change/revoke user access <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/permissions/>`_.

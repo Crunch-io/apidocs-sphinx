@@ -1,0 +1,91 @@
+Decks
+-----
+
+A *Deck* allows an ordered collection of analyses to be stored for
+future use or for export. Each deck belongs to a dataset and its analyses are drawn from
+that single dataset. A deck is personal to the user that created it unless the deck has
+been set "public". Each deck contains a sequence of slides, and each slide contains
+an analysis. Additional analyses can be associated with a slide, but only the first one
+appears in the UI or on export.
+
+Catalog
+~~~~~~~
+
+See `API Reference - List decks <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/>`_.
+
+See `API Reference - Create deck <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/decks/>`_.
+
+PATCH
+^^^^^
+
+See `API Reference - Bulk-edit multiple decks <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/>`_.
+
+Entity
+~~~~~~
+
+See `API Reference - Deck details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/-deck_id-/>`_.
+
+See `API Reference - Edit deck <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/-deck_id-/>`_.
+
+See `API Reference - Delete deck <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/decks/-deck_id-/>`_.
+
+Deck Exports
+~~~~~~~~~~~~
+
+See `API Reference - Export deck <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/decks/-deck_id-/export/>`_.
+
+Order
+~~~~~
+
+See `API Reference - List deck order <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/order/>`_.
+
+See `API Reference - Update deck order <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/order/>`_.
+
+Slides
+------
+
+Each deck contains a catalog of slides in which analyses are saved.
+
+Catalog
+~~~~~~~
+
+See `API Reference - List slides <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/-deck_id-/slides/>`_.
+
+See `API Reference - Create slide <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/decks/-deck_id-/slides/>`_.
+
+Entity
+~~~~~~
+
+Each slide in the Slide Catalog contains a reference to its first analysis.
+
+See `API Reference - Slide details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/-deck_id-/slides/-slide_id-/>`_.
+
+See `API Reference - Delete slide <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/decks/-deck_id-/slides/-slide_id-/>`_.
+
+See `API Reference - Update slide <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/-deck_id-/slides/-slide_id-/>`_.
+
+Order
+~~~~~
+
+The owner of the deck can specify the order of its slides. As with deck
+order, the slide order must be a flat list of slide URLs.
+
+See `API Reference - List slide order <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/-deck_id-/slides/flat/>`_.
+
+See `API Reference - Update slide order <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/-deck_id-/slides/flat/>`_.
+
+Analysis
+--------
+
+Each slide contains one or more analyses. An analysis -- a table or
+graph with some specific combination of variables defining measures,
+rows, columns, and tabs; and settings such as percentage direction and
+decimal places -- can be saved to a *deck*, which can then be exported,
+or the analysis can be reloaded in whole in the application or even
+exported as a standalone embeddable result. Note that while a slide can
+have multiple analyses, only the first analysis for each slide is used
+when exporting to Excel or PowerPoint.
+
+See `API Reference - Analysis details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/decks/-deck_id-/slides/-slide_id-/analyses/-analysis_id-/>`_.
+
+See `API Reference - Change analysis <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/decks/-deck_id-/slides/-slide_id-/analyses/-analysis_id-/>`_.

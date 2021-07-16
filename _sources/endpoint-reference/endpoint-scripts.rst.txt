@@ -1,0 +1,15 @@
+Scripts
+-------
+
+See `API Reference - List scripts <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/scripts/>`_.
+
+See `API Reference - Create script <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/scripts/>`_.
+
+See `API Reference - Script details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/scripts/-script_id-/>`_.
+
+See `API Reference - Undo <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/scripts/output/>`_.
+
+See `API Reference - Undo <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/scripts/output/>`_.
+
+See `API Reference - Restore <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/scripts/revert/>`_.
+

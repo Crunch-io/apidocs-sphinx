@@ -1,0 +1,6 @@
+
+Schema
+======
+
+See `API Reference - View dataset schema <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/schema/>`_.
+

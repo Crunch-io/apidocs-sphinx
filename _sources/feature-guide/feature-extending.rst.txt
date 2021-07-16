@@ -1,0 +1,4 @@
+Merging and Joining Datasets
+----------------------------
+
+* See `our latest documentation about Merging and Joining Datasets <https://help.crunch.io/hc/en-us/articles/360044732771-Working-with-Data-and-Datasets#toc28>`_.

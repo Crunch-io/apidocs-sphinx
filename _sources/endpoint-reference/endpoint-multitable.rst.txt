@@ -1,0 +1,25 @@
+Multitables
+-----------
+
+If a "table" is a rows-variable crosstabbed with a columns-variable, a *multitable* is
+a rows-variable crosstabbed with *multiple* columns-variables. The crosstab for each
+columns-variable is "tiled" side-by-side with the other columns-variable crosstabs such
+that a single contiguous visual table results.
+
+This analysis format allows the relationship between multiple variables and the
+rows-variable to be conveniently compared, side-by-side.
+
+A *tabbook* is an (Excel) export format where one or more rows-variables are selected to
+be cross-tabulated against the set of columns-variables defined in a multitable. By
+default, each resulting table is displayed in a separate Excel "tab" (worksheet),
+producing a workbook of crosstabs, hence the name *tabbook*.
+
+See `API Reference - List multitables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/multitables/>`_.
+
+See `API Reference - Create multitable <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/multitables/>`_.
+
+See `API Reference - Multitable details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/multitables/-multitable_id-/>`_.
+
+See `API Reference - Update multitable <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/multitables/-multitable_id-/>`_.
+
+See `API Reference - Export multitable <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/multitables/-multitable_id-/export/>`_.

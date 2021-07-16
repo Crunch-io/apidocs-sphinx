@@ -1,0 +1,76 @@
+.. _endpoint-folders:
+
+Variable Folders
+----------------
+
+In order to organize a large number of variables in a dataset, Crunch
+provides a hierarchical structure to group variables called "Folders".
+
+Basic concepts
+~~~~~~~~~~~~~~
+
+Variables are in one and only one folder at all times.
+
+There are a number of system folders that exist with every dataset created.
+These system folders cannot be renamed, moved, or deleted.
+
+* **Root folder**: The root folder is the top level folder where all
+  other subfolders will be created by dataset editors. All the variables
+  and subfolders here will be publicly accessible for all users with
+  access to the dataset.
+* **Hidden folder**: This folder is a parallel top level folder separate
+  from the root folder, which allows dataset editors to hide variables
+  out of the public Root folder. "Hiddenness" is about display concerns,
+  not authorization rules. API clients choose not to display hidden
+  variables to users with view-only access, though they may use hidden
+  variables in queries and may use filters and other assets derived from
+  hidden variables.
+* **Secure folder**: Like the hidden folder, the secure folder is a
+  special top-level folder. Secure variables are not shown in any form
+  to users with view-only access to a dataset, and it is not possible
+  for viewers to make queries with secure variables or access filters or
+  other assets that reference secure variables.
+
+Root
+~~~~
+
+See `API Reference - List contents of root folder <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/folders/>`_.
+
+Subfolder endpoint
+~~~~~~~~~~~~~~~~~~
+
+See `API Reference - List sub-folder contents <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/folders/-folder_id-/>`_.
+
+Creating folders
+~~~~~~~~~~~~~~~~
+
+See `API Reference - Create sub-folder under root folder <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/folders/>`_.
+
+Moving folders and variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See `API Reference - Move elements to root folder <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/folders/>`_.
+
+Deleting folders
+~~~~~~~~~~~~~~~~
+
+See `API Reference - Delete sub-folder <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/folders/-folder_id-/>`_.
+
+Hidden
+~~~~~~
+
+See `API Reference - List hidden elements <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/folders/hidden/>`_.
+
+See `API Reference - Hide elements <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/folders/hidden/>`_.
+
+Secure
+~~~~~~
+
+See `API Reference - List private variables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/folders/secure/>`_.
+
+See `API Reference - Move elements to private folder <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/folders/secure/>`_.
+
+Folders parents structure
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See `API Reference - Folder parents <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/folders/parents/>`_.
