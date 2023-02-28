@@ -1,0 +1,4 @@
+Search
+------
+
+See `API Reference - Cross-dataset search <https://crunch.io/api/reference/#get-/search/>`_.

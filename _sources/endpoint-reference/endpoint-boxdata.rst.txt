@@ -1,0 +1,40 @@
+Boxdata
+-------
+
+"Boxdata" are the records that correspond to published CrunchBoxes. These endpoints enable you to create new CrunchBoxes and view records for previously created boxes.
+
+Catalog
+~~~~~~~
+
+GET catalog
+^^^^^^^^^^^
+
+See `API Reference - List Crunchboxes <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/boxdata/>`_.
+
+POST catalog
+^^^^^^^^^^^^
+
+See `API Reference - Create Crunchbox <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/boxdata/>`_.
+
+Entity
+~~~~~~
+
+GET
+^^^
+
+See `API Reference - Crunchbox details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/boxdata/-boxdata_id-/>`_.
+
+PUT
+^^^
+
+See `API Reference - Overwrite Crunchbox <https://crunch.io/api/reference/#put-/datasets/-dataset_id-/boxdata/-boxdata_id-/>`_.
+
+PATCH
+^^^^^
+
+See `API Reference - Selectively update Crunchbox <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/boxdata/-boxdata_id-/>`_.
+
+DELETE
+^^^^^^
+
+See `API Reference - Delete Crunchbox <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/boxdata/-boxdata_id-/>`_.

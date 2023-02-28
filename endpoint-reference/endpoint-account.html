@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Accounts &#8212; API Docs 0.4.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/crunch.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/crunch.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Batches" href="endpoint-batch.html" />
+    <link rel="prev" title="Public" href="endpoint-public.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.svg"></span>
+          API Docs</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+
+    <li><a href="https://crunch.io/" target="_blank">Go to Crunch.io</a></li>
+    <li><a href="http://status.crunch.io/" target="_blank">Status</a></li>
+    <li><a href="https://app.crunch.io/" target="_blank">Sign In</a></li>
+
+
+            
+              
+                
+  <li>
+    <a href="endpoint-public.html" title="Previous Chapter: Public"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Public</span>
+    </a>
+  </li>
+  <li>
+    <a href="endpoint-batch.html" title="Next Chapter: Batches"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Batches &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary">
+<form action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form><ul class="sidebar-toc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../feature-guide/index.html">Feature Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Endpoint Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="endpoint-public.html">Public</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Accounts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#permissions">Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#account-entity">Account entity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get">GET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patch">PATCH</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#change-account-logo">Change account logo</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#remove-account-logo">Remove account logo</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#change-account-templates">Change account templates</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#remove-account-templates">Remove account templates</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#applications">Applications</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#application-entity">Application entity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#change-application-logo">Change application logo</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#remove-application-logo">Remove application logo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#account-users">Account users</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-1">GET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post">POST</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patch-1">PATCH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#account-projects">Account projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#account-teams">Account teams</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-batch.html">Batches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-boxdata.html">Boxdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-dataset.html">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-deck.html">Decks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-deck.html#slides">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-deck.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-dashboards.html">Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-feature-flag.html">Feature Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-filter.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-folders.html">Variable Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-geodata.html">Geodata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-multitable.html">Multitables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-permission.html">Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-progress.html">Progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-projects.html">Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-schema.html">Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-search.html">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-source.html">Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-tabbook.html">Tab books</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-team.html">Teams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-user.html">Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-variable.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-tag.html">Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoint-version.html">Versions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../object-reference/object-reference.html">Object Reference</a></li>
+</ul>
+</ul><ul class="toc-footer">
+  <li><a href="http://crunch.io/">Sign Up</a></li>
+</ul>
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="section" id="accounts">
+<h1>Accounts<a class="headerlink" href="#accounts" title="Permalink to this headline"> 🔗</a></h1>
+<p>Accounts provide an organization-level scope for Crunch.io customers.
+All Users belong to one and only one Account. Account managers can
+administer their various users and entities and have visibility on them.</p>
+<div class="section" id="permissions">
+<h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline"> 🔗</a></h2>
+<p>A user is an “account manager” if their <code class="docutils literal"><span class="pre">account_permissions</span></code> have
+<code class="docutils literal"><span class="pre">admin_account</span></code> set to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+</div>
+<div class="section" id="account-entity">
+<h2>Account entity<a class="headerlink" href="#account-entity" title="Permalink to this headline"> 🔗</a></h2>
+<p>The account entity is available on the API root following the Shoji
+<code class="docutils literal"><span class="pre">views.account</span></code> path, which will point to the authenticated user’s
+account.</p>
+<p>If the account has a name, it will be available here, as well as the
+path to the account’s users.</p>
+<p>Branding configuration for the account is also exposed here, through
+the <code class="docutils literal"><span class="pre">palette</span></code> and <code class="docutils literal"><span class="pre">logo</span></code> attributes.</p>
+<p>If the authenticated user is an account manager, the response will
+include paths to these additional catalogs:</p>
+<ul class="simple">
+<li>Account projects</li>
+<li>Account teams</li>
+<li>Account datasets</li>
+</ul>
+<div class="section" id="get">
+<h3>GET<a class="headerlink" href="#get" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/">API Reference - My account details</a>.</p>
+</div>
+<div class="section" id="patch">
+<h3>PATCH<a class="headerlink" href="#patch" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/">API Reference - Update account color palette</a>.</p>
+<div class="section" id="change-account-logo">
+<h4>Change account logo<a class="headerlink" href="#change-account-logo" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#post-/account/logo/">API Reference - Update account logos</a>.</p>
+</div>
+<div class="section" id="remove-account-logo">
+<h4>Remove account logo<a class="headerlink" href="#remove-account-logo" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/logo/">API Reference - Remove account logos</a>.</p>
+</div>
+<div class="section" id="change-account-templates">
+<h4>Change account templates<a class="headerlink" href="#change-account-templates" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#post-/account/templates/">API Reference - Update Powerpoint template</a>.</p>
+</div>
+<div class="section" id="remove-account-templates">
+<h4>Remove account templates<a class="headerlink" href="#remove-account-templates" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/templates/">API Reference - Remove Powerpoint template</a>.</p>
+</div>
+</div>
+<div class="section" id="applications">
+<h3>Applications<a class="headerlink" href="#applications" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/applications/">API Reference - List subdomains</a>.</p>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/applications/">API Reference - Create subdomain</a>.</p>
+<div class="section" id="application-entity">
+<h4>Application entity<a class="headerlink" href="#application-entity" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/applications/-subdomain-/">API Reference - Subdomain details</a>.</p>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/applications/-subdomain-/">API Reference - Update subdomain details</a>.</p>
+</div>
+<div class="section" id="change-application-logo">
+<h4>Change application logo<a class="headerlink" href="#change-application-logo" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#post-/account/applications/-subdomain-/logo/">API Reference - Update subdomain logos</a>.</p>
+</div>
+<div class="section" id="remove-application-logo">
+<h4>Remove application logo<a class="headerlink" href="#remove-application-logo" title="Permalink to this headline"> 🔗</a></h4>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/applications/-subdomain-/logo/">API Reference - Remove subdomain logos</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="account-users">
+<h2>Account users<a class="headerlink" href="#account-users" title="Permalink to this headline"> 🔗</a></h2>
+<p>Provides a catalog of all the users that belong to this account. Any
+account member can GET, but only account managers can POST/PATCH on it.</p>
+<div class="section" id="get-1">
+<h3>GET<a class="headerlink" href="#get-1" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/users/">API Reference - List account users</a>.</p>
+</div>
+<div class="section" id="post">
+<h3>POST<a class="headerlink" href="#post" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#post-/account/users/">API Reference - Create account user</a>.</p>
+</div>
+<div class="section" id="patch-1">
+<h3>PATCH<a class="headerlink" href="#patch-1" title="Permalink to this headline"> 🔗</a></h3>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#patch-/account/users/">API Reference - Update account user</a>.</p>
+</div>
+</div>
+<div class="section" id="account-projects">
+<h2>Account projects<a class="headerlink" href="#account-projects" title="Permalink to this headline"> 🔗</a></h2>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/projects/">API Reference - List projects</a>.</p>
+</div>
+<div class="section" id="account-teams">
+<h2>Account teams<a class="headerlink" href="#account-teams" title="Permalink to this headline"> 🔗</a></h2>
+<p>See <a class="reference external" href="https://crunch.io/api/reference/#get-/account/teams/">API Reference - List account teams</a>.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Crunch.io.<br/>
+      Last updated on Feb 28, 2023.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

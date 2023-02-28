@@ -1,0 +1,29 @@
+.. _public-endpoint:
+
+Public
+------
+
+See `API Reference - Unauthenticated URLs <https://crunch.io/api/reference/#get-/public/>`_.
+
+Application configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See `API Reference - Subdomain configuration <https://crunch.io/api/reference/#get-/public/config/>`_.
+
+CrunchBox
+~~~~~~~~~
+
+A CrunchBox represents a snapshot of a crunch dataset. These snapshots
+are intended for public proliferation and therefore the endpoints for
+interacting with this data is housed under the unauthed API path.
+
+Share
+^^^^^
+
+See `API Reference - Share Crunchbox html <https://crunch.io/api/reference/#get-/public/crunchbox/share/>`_.
+
+Preview
+^^^^^^^
+
+See `API Reference - Generate Crunchbox preview <https://crunch.io/api/reference/#post-/public/crunchbox/preview/>`_.
+

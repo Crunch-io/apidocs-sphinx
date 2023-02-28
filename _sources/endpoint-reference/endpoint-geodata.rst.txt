@@ -1,0 +1,10 @@
+Geodata
+-------
+
+Geodata allow you to associate a variable with features in a
+FeatureCollection of geojson or topojson.
+
+See `API Reference - List available geodata <https://crunch.io/api/reference/#get-/geodata/>`_.
+
+See `API Reference - List geodata details <https://crunch.io/api/reference/#get-/geodata/-geodata_id-/>`_.
+

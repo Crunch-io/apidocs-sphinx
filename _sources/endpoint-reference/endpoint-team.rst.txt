@@ -1,0 +1,22 @@
+Teams
+-----
+
+Teams contain references to users and datasets. By sharing a dataset
+with a team, you can grant access to a set of users at once, and by
+adding a user to a team, you can grant them access to a set of datasets.
+
+See `API Reference - Create team <https://crunch.io/api/reference/#post-/teams/>`_.
+
+See `API Reference - List user teams <https://crunch.io/api/reference/#get-/teams/>`_.
+
+See `API Reference - Delete team <https://crunch.io/api/reference/#delete-/teams/-team_id-/>`_.
+
+See `API Reference - Team details <https://crunch.io/api/reference/#get-/teams/-team_id-/>`_.
+
+See `API Reference - Update team name <https://crunch.io/api/reference/#patch-/teams/-team_id-/>`_.
+
+See `API Reference - List team datasets <https://crunch.io/api/reference/#get-/teams/-team_id-/datasets/>`_.
+
+See `API Reference - Add/remove team members <https://crunch.io/api/reference/#patch-/teams/-team_id-/members/>`_.
+
+See `API Reference - List team members <https://crunch.io/api/reference/#get-/teams/-team_id-/members/>`_.

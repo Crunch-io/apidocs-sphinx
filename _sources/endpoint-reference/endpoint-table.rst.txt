@@ -1,0 +1,7 @@
+Table
+-----
+
+Each dataset has a ``table/`` endpoint providing access to both the variable definitions
+and column data of that dataset.
+
+See `API Reference - List variable definitions <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/table/>`_.

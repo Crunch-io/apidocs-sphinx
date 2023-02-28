@@ -1,0 +1,17 @@
+Dashboards
+----------
+
+A dashboard is a deck that has been configured to be displayed in presentation
+mode by default. They can be accessed directly by a client URL where only
+the Deck ID is made available.
+
+This endpoint works as a helper to obtain a direct reference to the deck without
+necessarily knowing under which Dataset is located.
+
+Catalog
+~~~~~~~
+
+See `API Reference - List dashboards <https://crunch.io/api/reference/#get-/dashboards/>`_.
+
+See `API Reference - Create dashboard <https://crunch.io/api/reference/#get-/dashboards/>`_.
+

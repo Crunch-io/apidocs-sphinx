@@ -1,0 +1,20 @@
+Projects
+--------
+
+Projects represent groups of users that share a common set of datasets.
+Any user can belong to none or many projects.
+
+See `API Reference - List available projects <https://crunch.io/api/reference/#get-/projects/>`_.
+
+See `API Reference - Create project <https://crunch.io/api/reference/#post-/projects/>`_.
+
+See `API Reference - List personal projects <https://crunch.io/api/reference/#get-/projects/personal/>`_.
+
+See `API Reference - Move projects to the personal project <https://crunch.io/api/reference/#patch-/projects/personal/>`_.
+
+See `API Reference - List project details <https://crunch.io/api/reference/#get-/projects/-project_id-/>`_.
+
+See `API Reference - Update project logo <https://crunch.io/api/reference/#post-/projects/-project_id-/logo/>`_.
+
+See `API Reference - Remove project logo <https://crunch.io/api/reference/#patch-/projects/-project_id-/logo/>`_.
+

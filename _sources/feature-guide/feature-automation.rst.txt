@@ -1,0 +1,4 @@
+Crunch Automation
+=================
+
+* See `our latest documentation about Crunch Automation <https://help.crunch.io/hc/en-us/categories/360004356012-Crunch-Automation>`_.

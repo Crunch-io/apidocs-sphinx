@@ -1,0 +1,30 @@
+Batches
+-------
+
+Catalog
+~~~~~~~
+
+GET
+^^^
+
+See `API Reference - List dataset batches <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/batches/>`_.
+
+POST
+^^^^
+
+See `API Reference - Add data to a dataset <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/batches/>`_.
+
+Checking if an append will cause problems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See `API Reference - Test append before executing <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/batches/compare/>`_.
+
+Lining up datasets for append/combine
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See `API Reference - Preview alignment conflicts before append <https://crunch.io/api/reference/#post-/datasets/align/>`_.
+
+Entity
+~~~~~~
+
+See `API Reference - Batch details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/batches/-batch_id-/>`_.

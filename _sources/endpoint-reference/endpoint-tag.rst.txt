@@ -1,0 +1,12 @@
+Tags
+----
+
+See `API Reference - List variable tags <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/tags/>`_.
+
+See `API Reference - Create variable tag <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/tags/>`_.
+
+See `API Reference - List variables attached to tag <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/tags/-tag_name-/>`_.
+
+See `API Reference - Edit variable tag <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/tags/-tag_name-/>`_.
+
+See `API Reference - Delete variable tag <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/tags/-tag_name-/>`_.

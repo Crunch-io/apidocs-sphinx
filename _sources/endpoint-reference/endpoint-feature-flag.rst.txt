@@ -1,0 +1,9 @@
+Feature Flags
+-------------
+
+Crunch uses feature flags to enable and disable system-wide features
+under development.
+
+See `API Reference - List feature flags <https://crunch.io/api/reference/#get-/feature_flag/>`_.
+
+See `API Reference - Feature flag status <https://crunch.io/api/reference/#get-/feature_flag/-flag_id-/>`_.

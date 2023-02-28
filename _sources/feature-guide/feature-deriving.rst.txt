@@ -1,0 +1,4 @@
+Deriving Variables
+------------------
+
+* See `our latest documentation about Deriving Variables <https://help.crunch.io/hc/en-us/articles/360044735351-Working-with-Variables#toc0>`_.

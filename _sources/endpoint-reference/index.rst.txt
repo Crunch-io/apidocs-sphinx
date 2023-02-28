@@ -1,0 +1,33 @@
+Endpoint Reference
+==================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   endpoint-public
+   endpoint-account
+   endpoint-batch
+   endpoint-boxdata
+   endpoint-dataset
+   endpoint-deck
+   endpoint-dashboards
+   endpoint-feature-flag
+   endpoint-filter
+   endpoint-folders
+   endpoint-geodata
+   endpoint-multitable
+   endpoint-permission
+   endpoint-progress
+   endpoint-projects
+   endpoint-schema
+   endpoint-search
+   endpoint-source
+   endpoint-scripts
+   endpoint-tabbook
+   endpoint-table
+   endpoint-team
+   endpoint-user
+   endpoint-variable
+   endpoint-tag
+   endpoint-version

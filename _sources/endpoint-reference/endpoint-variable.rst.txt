@@ -1,0 +1,61 @@
+.. _variables:
+
+Variables
+---------
+
+See `API Reference - Create dataset variable <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/variables/>`_.
+
+See `API Reference - List dataset variables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/>`_.
+
+See `API Reference - Update dataset variables <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/>`_.
+
+See `API Reference - Delete variable <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/variables/-variable_id-/>`_.
+
+See `API Reference - Unbind array sub-variables <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/variables/-variable_id-/>`_.
+
+See `API Reference - Update variable <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/-variable_id-/>`_.
+
+See `API Reference - Variable details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/>`_.
+
+See `API Reference - Update variable data type <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/variables/-variable_id-/cast/>`_.
+
+See `API Reference - Update variable data type (preview) <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/cast/>`_.
+
+See `API Reference - Univariate frequencies <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/frequencies/>`_.
+
+See `API Reference - Add a missing value rule <https://crunch.io/api/reference/#post-/datasets/-dataset_id-/variables/-variable_id-/missing_rules/>`_.
+
+See `API Reference - List missing value rules <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/missing_rules/>`_.
+
+See `API Reference - List subvariables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/subvariables/>`_.
+
+See `API Reference - Update subvariables <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/-variable_id-/subvariables/>`_.
+
+See `API Reference - Delete subvariable <https://crunch.io/api/reference/#delete-/datasets/-dataset_id-/variables/-variable_id-/subvariables/-subvariable_id-/>`_.
+
+See `API Reference - Subvariable details <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/subvariables/-subvariable_id-/>`_.
+
+See `API Reference - Summarize variable <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/summary/>`_.
+
+See `API Reference - List variable user settings <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/user_settings/>`_.
+
+See `API Reference - Replace variable user settings <https://crunch.io/api/reference/#put-/datasets/-dataset_id-/variables/-variable_id-/user_settings/>`_.
+
+See `API Reference - Update variable user settings <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/-variable_id-/user_settings/>`_.
+
+See `API Reference - List variable values <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/-variable_id-/values/>`_.
+
+See `API Reference - List hierarchical order <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/hier/>`_.
+
+See `API Reference - List favorites order <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/favorites/>`_.
+
+See `API Reference - List favorites <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/favorites/variables/>`_.
+
+See `API Reference - List personal variables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/private/>`_.
+
+See `API Reference - Update personal variables <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/private/>`_.
+
+See `API Reference - List weight variables <https://crunch.io/api/reference/#get-/datasets/-dataset_id-/variables/weights/>`_.
+
+See `API Reference - Update weight variables <https://crunch.io/api/reference/#patch-/datasets/-dataset_id-/variables/weights/>`_.
+

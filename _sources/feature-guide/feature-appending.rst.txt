@@ -1,0 +1,6 @@
+.. _appending-data:
+
+Appending Data
+--------------
+
+* See `our latest documentation about Appending Data <https://help.crunch.io/hc/en-us/articles/360044732771-Working-with-Data-and-Datasets#toc19>`_.

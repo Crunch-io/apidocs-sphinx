@@ -1,0 +1,13 @@
+.. _progress:
+
+Progress
+--------
+
+Progress resources provide information about the current state of a
+long-running server process in Crunch. Some requests at certain
+endpoints may return 202 status containing a progress URL in the body,
+at which one can monitor the progress of the request that was accepted
+and not yet completed.
+
+See `API Reference - Task progress <https://crunch.io/api/reference/#get-/progress/-task_id-/>`_.
+

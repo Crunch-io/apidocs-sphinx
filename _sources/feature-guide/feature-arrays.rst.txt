@@ -1,0 +1,4 @@
+Array Variables
+---------------
+
+* See `our latest documentation about Array Variables <https://help.crunch.io/hc/en-us/articles/360044735351-Working-with-Variables#toc25>`_.
